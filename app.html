@@ -555,82 +555,65 @@ body.reading-mode .main {
       <button>Office</button>
     </div>
 <div class="grid" id="appGrid" role="list" aria-label="Application grid">
-  <!-- App: Home -->
-  <div class="app-card" role="listitem" data-name="home" tabindex="0" onclick="abrirPagina('home.html')" onkeydown="if(event.key==='Enter'){abrirPagina('home.html')}">
-    <span class="material-icons" aria-hidden="true">home</span> 🏠
-    <div>Home</div>
+   <!-- Externo: Google Sheets -->
+  <div class="app-card" role="listitem" data-name="sheets" tabindex="0" onclick="window.open('https://docs.google.com/spreadsheets', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://docs.google.com/spreadsheets', '_blank')}">
+    <span class="material-icons" aria-hidden="true">table_chart</span> 📊
+    <div>Sheets</div>
   </div>
 
-  <!-- App: Light -->
-  <div class="app-card" role="listitem" data-name="light" tabindex="0" onclick="abrirPagina('light.html')" onkeydown="if(event.key==='Enter'){abrirPagina('light.html')}">
-    <span class="material-icons" aria-hidden="true">lightbulb</span> 💡
-    <div>Light</div>
+  <!-- Externo: Google Docs -->
+  <div class="app-card" role="listitem" data-name="docs" tabindex="0" onclick="window.open('https://docs.google.com/document', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://docs.google.com/document', '_blank')}">
+    <span class="material-icons" aria-hidden="true">description</span> 📄
+    <div>Docs</div>
   </div>
 
-  <!-- App: Air -->
-  <div class="app-card" role="listitem" data-name="air" tabindex="0" onclick="abrirPagina('air.html')" onkeydown="if(event.key==='Enter'){abrirPagina('air.html')}">
-    <span class="material-icons" aria-hidden="true">air</span> 🌬️
-    <div>Air</div>
+  <!-- Externo: Twitter -->
+  <div class="app-card" role="listitem" data-name="twitter" tabindex="0" onclick="window.open('https://twitter.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://twitter.com', '_blank')}">
+    <span class="material-icons" aria-hidden="true">alternate_email</span> 🐦
+    <div>Twitter</div>
   </div>
 
-  <!-- App: Energy -->
-  <div class="app-card" role="listitem" data-name="energy" tabindex="0" onclick="abrirPagina('energy.html')" onkeydown="if(event.key==='Enter'){abrirPagina('energy.html')}">
-    <span class="material-icons" aria-hidden="true">electric_bolt</span> ⚡
-    <div>Energy</div>
+  <!-- Externo: Instagram -->
+  <div class="app-card" role="listitem" data-name="instagram" tabindex="0" onclick="window.open('https://instagram.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://instagram.com', '_blank')}">
+    <span class="material-icons" aria-hidden="true">photo_camera</span> 📸
+    <div>Instagram</div>
   </div>
 
-  <!-- Externo: YouTube Music -->
-  <div class="app-card" role="listitem" data-name="music" tabindex="0" onclick="window.open('https://music.youtube.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://music.youtube.com', '_blank')}">
-    <span class="material-icons" aria-hidden="true">music_note</span> 🎵
-    <div>Music</div>
+  <!-- Externo: Spotify -->
+  <div class="app-card" role="listitem" data-name="spotify" tabindex="0" onclick="window.open('https://open.spotify.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://open.spotify.com', '_blank')}">
+    <span class="material-icons" aria-hidden="true">headphones</span> 🎶
+    <div>Spotify</div>
   </div>
 
-  <!-- Externo: WhatsApp Web -->
-  <div class="app-card" role="listitem" data-name="messages" tabindex="0" onclick="window.open('https://web.whatsapp.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://web.whatsapp.com', '_blank')}">
-    <span class="material-icons" aria-hidden="true">message</span> 💬
-    <div>Messages</div>
+  <!-- Externo: Google Fotos -->
+  <div class="app-card" role="listitem" data-name="photos" tabindex="0" onclick="window.open('https://photos.google.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://photos.google.com', '_blank')}">
+    <span class="material-icons" aria-hidden="true">photo_library</span> 🖼️
+    <div>Fotos</div>
   </div>
 
-  <!-- Externo: Gmail -->
-  <div class="app-card" role="listitem" data-name="mail" tabindex="0" onclick="window.open('https://mail.google.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://mail.google.com', '_blank')}">
-    <span class="material-icons" aria-hidden="true">mail</span> 📧
-    <div>Mail</div>
-  </div>
-
-  <!-- Externo: Google Agenda com evento preenchido -->
-  <div class="app-card" role="listitem" data-name="calendar" tabindex="0" onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Reunião+ORIS+OS&dates=20250701T150000Z/20250701T160000Z&details=Reunião+de+alinhamento+ORIS&location=Online&sf=true&output=xml', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Reunião+ORIS+OS&dates=20250701T150000Z/20250701T160000Z&details=Reunião+de+alinhamento+ORIS&location=Online&sf=true&output=xml', '_blank')}">
-    <span class="material-icons" aria-hidden="true">calendar_today</span> 📅
-    <div>Agenda</div>
-  </div>
-
-  <!-- Externo: OneDrive (altere o link para o seu) -->
-  <div class="app-card" role="listitem" data-name="files" tabindex="0" onclick="window.open('https://onedrive.live.com/YOUR_SHARE_LINK', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://onedrive.live.com/YOUR_SHARE_LINK', '_blank')}">
-    <span class="material-icons" aria-hidden="true">folder</span> 📁
-    <div>OneDrive</div>
-  </div>
-
-  <!-- App: Settings -->
-  <div class="app-card" role="listitem" data-name="settings" tabindex="0" onclick="abrirPagina('configuracoes.html')" onkeydown="if(event.key==='Enter'){abrirPagina('configuracoes.html')}">
-    <span class="material-icons" aria-hidden="true">settings</span> ⚙️
-    <div>Settings</div>
-  </div>
-
-  <!-- App: Store -->
-  <div class="app-card" role="listitem" data-name="store" tabindex="0" onclick="abrirPagina('akiles.html')" onkeydown="if(event.key==='Enter'){abrirPagina('akiles.html')}">
-    <span class="material-icons" aria-hidden="true">store</span> 🛒
-    <div>Store</div>
-  </div>
-
-  <!-- App: Meta Rabbit -->
-  <div class="app-card" role="listitem" data-name="meta rabbit" tabindex="0" onclick="abrirPagina('rabbit.html')" onkeydown="if(event.key==='Enter'){abrirPagina('rabbit.html')}">
-    <span class="material-icons" aria-hidden="true">pets</span> 🐇
-    <div>Meta Rabbit</div>
-  </div>
-</div>
-
-<footer class="footer" role="contentinfo" aria-label="Rodapé">
-  <p>&copy; 2025 Lucas Januário — Todos os direitos reservados · ORIS OS v14</p>
-</footer>
+  <!-- Rodapé atualizado -->
+  <footer class="footer" role="contentinfo" aria-label="Rodapé">
+    <style>
+      .footer {
+        background: #111;
+        color: #ccc;
+        padding: 12px;
+        text-align: center;
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 14px;
+        border-top: 1px solid #333;
+      }
+      .footer p {
+        margin: 6px 0;
+      }
+      .footer strong {
+        color: #fff;
+      }
+    </style>
+    <p><strong>&copy; 2025 Lucas Januário</strong> — Todos os direitos reservados</p>
+    <p>ORIS OS v14 · <em>Powered by HoloFi</em></p>
+    <p>Apps: YouTube · WhatsApp · Gmail · Calendar · Drive · Docs · Sheets · Spotify · Instagram · Twitter</p>
+  </footer>
 
   </main>
 
