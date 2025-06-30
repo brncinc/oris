@@ -171,10 +171,37 @@
     <h1>Meta Rabbit</h1>
     <img src="a.png" alt="Meta Rabbit Logo" />
   </div>
-  <div id="balanceBox" class="input-box" aria-label="Saldo atual">
+<div id="balanceContainer" style="font-family: Arial, sans-serif; color: white; max-width: 300px;">
+  <div id="balanceBox" class="input-box" aria-label="Saldo atual" style="margin-bottom: 8px;">
     <label for="balance">Saldo Atual:</label>
-    <input type="text" id="balance" readonly value="0 FRACTIO" />
+    <input type="text" id="balance" readonly value="0 FRACTIO" style="width: 100%; padding: 6px; font-size: 16px; background-color: #222; border: 1px solid #444; color: #fff;" />
   </div>
+
+  <!-- Barra de variação do dólar -->
+  <div id="dollarVariationBar" style="background-color: #000; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-family: monospace; animation: blink 1s infinite; width: fit-content;">
+    <span id="variationText" style="color: red;">+0.00%</span>
+  </div>
+
+  <style>
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+  </style>
+
+  <script>
+    const variationText = document.getElementById("variationText");
+
+    function atualizarVariacao() {
+      const variacao = (Math.random() * 2 - 1).toFixed(2);
+      variationText.textContent = `${variacao > 0 ? '+' : ''}${variacao}%`;
+      variationText.style.color = variacao < 0 ? 'limegreen' : 'red';
+    }
+
+    setInterval(atualizarVariacao, 3000);
+  </script>
+</div>
+
 
   <div class="buttons-container">
     <button type="button" class="btn" onclick="createWallet()">Criar Fração</button>
