@@ -7,7 +7,6 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-  /* Reset básico */
   * {
     box-sizing: border-box;
   }
@@ -31,7 +30,7 @@
     box-shadow: 0 8px 24px rgba(29,185,84,0.6);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
   }
   h1 {
     font-weight: 700;
@@ -82,39 +81,27 @@
     margin-bottom: 25px;
     user-select: text;
   }
-  .pairs {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 30px;
-  }
-  .pair-box {
-    background-color: #282828;
-    border-radius: 12px;
-    padding: 14px 16px;
-    box-shadow: 0 0 6px #1DB954aa;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .pair-item .title {
-    font-weight: 700;
-    font-size: 1rem;
-    color: #1DB954;
+  label {
+    font-weight: 600;
     margin-bottom: 6px;
-    text-align: center;
+    display: block;
+    color: #1DB954;
     user-select: none;
   }
-  .pair-item .value {
-    font-weight: 600;
-    font-size: 1.3rem;
-    color: #fff;
-    user-select: text;
-  }
-  .pair-item {
+  select, input[type="text"] {
     width: 100%;
-    text-align: center;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: none;
+    margin-bottom: 20px;
+    background-color: #282828;
+    color: #fff;
+    font-weight: 600;
+  }
+  select:focus, input[type="text"]:focus {
+    outline: 2px solid #1DB954;
+    background-color: #1a1a1a;
   }
   .drax-tech {
     width: 100%;
@@ -143,9 +130,6 @@
     filter: drop-shadow(0 0 6px #14833bcc);
   }
   @media (max-width: 400px) {
-    .pairs {
-      grid-template-columns: 1fr;
-    }
     .buttons-container {
       flex-direction: column;
     }
@@ -168,108 +152,32 @@
     <button type="button" class="btn" onclick="showPublicKey()">Mostrar Chave Pública</button>
   </div>
 
+  <label for="assetSelect">Selecione seu ativo:</label>
+  <select id="assetSelect" name="assetSelect" aria-label="Selecione ativo">
+    <option value="fractioLux">Fractio Lux — 1000 HF</option>
+    <option value="fractioFlexus">Fractio Flexus — 500 QFX</option>
+    <option value="fractioScala">Fractio Scala — 500 JBXF</option>
+    <option value="fractioVox">Fractio Vox — 400 QOOP</option>
+    <option value="fractioValoris">Fractio Valoris — 300 QVALFX</option>
+    <option value="fractioMens">Fractio Mens — 100 NBH</option>
+    <option value="fractioYenensis">Fractio Yenensis — ¥850,000</option>
+    <option value="fractioEurox">Fractio Eurox — €3,000</option>
+    <option value="fractioDomus">Fractio Domus — R$20,000</option>
+    <option value="fractioAurum">Fractio Aurum — R$4,500</option>
+    <option value="fractioAdamantis">Fractio Adamantis — R$15,000</option>
+    <option value="fractioBrasilis">Fractio Brasilis — 2,500 BRDL</option>
+    <option value="fractioBosco">Fractio Bosco — 1,000 BJF</option>
+    <option value="fractioStellarum">Fractio Stellarum — 150 STG</option>
+    <option value="fractioFibonaccii">Fractio Fibonaccii — 13,000 FIB</option>
+    <option value="fractioSymmetrica">Fractio Symmetrica — 9,999 SSM</option>
+    <option value="fractioHeroica">Fractio Heroica — 980 MPLAN24</option>
+    <option value="fractioNBHDarkBTC">Fractio NBH DarkBTC Supreme — 1,000 NBH-S</option>
+  </select>
+
+  <label for="couponInput">Cupom de desconto:</label>
+  <input type="text" id="couponInput" name="couponInput" placeholder="Digite seu cupom aqui" value="omegalul100" aria-label="Cupom de desconto" autocomplete="off" />
+
   <div id="output" aria-live="polite" aria-atomic="true" tabindex="0"></div>
-
-  <section class="pairs" aria-label="Pares Geminiositas Maxima">
-    <div class="pair-box" role="group" aria-labelledby="pair1-label">
-      <div class="pair-item" id="pair1-label">
-        <div class="title">Fractio Lux</div>
-        <div class="value" id="fractioLux">1000 HF</div>
-      </div>
-      <div class="pair-item">
-        <div class="title">Fractio Flexus</div>
-        <div class="value">500 QFX</div>
-      </div>
-    </div>
-
-    <div class="pair-box" role="group" aria-labelledby="pair2-label">
-      <div class="pair-item" id="pair2-label">
-        <div class="title">Fractio Scala</div>
-        <div class="value">500 JBXF</div>
-      </div>
-      <div class="pair-item">
-        <div class="title">Fractio Vox</div>
-        <div class="value">400 QOOP</div>
-      </div>
-    </div>
-
-    <div class="pair-box" role="group" aria-labelledby="pair3-label">
-      <div class="pair-item" id="pair3-label">
-        <div class="title">Fractio Valoris</div>
-        <div class="value">300 QVALFX</div>
-      </div>
-      <div class="pair-item">
-        <div class="title">Fractio Mens</div>
-        <div class="value">100 NBH</div>
-      </div>
-    </div>
-
-    <div class="pair-box" role="group" aria-labelledby="pair4-label">
-      <div class="pair-item" id="pair4-label">
-        <div class="title">Fractio Yenensis</div>
-        <div class="value">¥850,000</div>
-      </div>
-      <div class="pair-item">
-        <div class="title">Fractio Eurox</div>
-        <div class="value">€3,000</div>
-      </div>
-    </div>
-
-    <div class="pair-box" role="group" aria-labelledby="pair5-label">
-      <div class="pair-item" id="pair5-label">
-        <div class="title">Fractio Domus</div>
-        <div class="value">R$20,000</div>
-      </div>
-      <div class="pair-item">
-        <div class="title">Fractio Aurum</div>
-        <div class="value">R$4,500</div>
-      </div>
-    </div>
-
-    <div class="pair-box" role="group" aria-labelledby="pair6-label">
-      <div class="pair-item" id="pair6-label">
-        <div class="title">Fractio Adamantis</div>
-        <div class="value">R$15,000</div>
-      </div>
-      <div class="pair-item">
-        <div class="title">Fractio Brasilis</div>
-        <div class="value">2,500 BRDL</div>
-      </div>
-    </div>
-
-    <div class="pair-box" role="group" aria-labelledby="pair7-label">
-      <div class="pair-item" id="pair7-label">
-        <div class="title">Fractio Bosco</div>
-        <div class="value">1,000 BJF</div>
-      </div>
-      <div class="pair-item">
-        <div class="title">Fractio Stellarum</div>
-        <div class="value">150 STG</div>
-      </div>
-    </div>
-
-    <div class="pair-box" role="group" aria-labelledby="pair8-label">
-      <div class="pair-item" id="pair8-label">
-        <div class="title">Fractio Fibonaccii</div>
-        <div class="value">13,000 FIB</div>
-      </div>
-      <div class="pair-item">
-        <div class="title">Fractio Symmetrica</div>
-        <div class="value">9,999 SSM</div>
-      </div>
-    </div>
-
-    <div class="pair-box" role="group" aria-labelledby="pair9-label">
-      <div class="pair-item" id="pair9-label">
-        <div class="title">Fractio Heroica</div>
-        <div class="value">980 MPLAN24</div>
-      </div>
-      <div class="pair-item">
-        <div class="title">Fractio NBH DarkBTC Supreme</div>
-        <div class="value" id="nbhSupremeValue">1,000 NBH-S</div>
-      </div>
-    </div>
-  </section>
 
   <section class="drax-tech" aria-label="Tecnologia Drax - Dark BTC Geminado Maximo">
     <h2>Drax Technology</h2>
@@ -296,7 +204,7 @@
       publicKey: 'MRW-' + Math.random().toString(36).substring(2, 10).toUpperCase(),
       privateKey: Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2)
     };
-    document.getElementById('output').innerText = 'Fractiones creatae!\nChave Pública: ' + wallet.publicKey;
+    document.getElementById('output').innerText = 'Fractiones criadas!\nChave Pública: ' + wallet.publicKey;
   }
 
   function importWallet() {
