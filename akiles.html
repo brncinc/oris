@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="logo.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akiles OS Store</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(145deg, #0b0f0e, #141d17, #1c2e24);
+      color: #d6f5e1;
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00ff99;
+    }
+
+    .search-bar input {
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: none;
+      background: #1a2a24;
+      color: #ccffdd;
+      width: 250px;
+    }
+
+    /* Container para jogos e filmes lado a lado */
+    .content-row {
+      display: flex;
+      gap: 40px; /* espaço entre jogos e filmes */
+    }
+
+    /* Cada uma das seções ocupa metade da largura do container pai */
+    section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin: 20px 0 10px;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 20px;
+    }
+
+    .game-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid #224432;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .game-card:hover {
+      background: rgba(0, 255, 153, 0.08);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .game-card .info {
+      padding: 10px;
+    }
+
+    .game-card .info h4 {
+      margin: 5px 0;
+      color: #ffffff;
+      font-size: 16px;
+    }
+
+    .game-card .info button {
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: #00ff99;
+      border: none;
+      color: #000;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #66ffbb;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Akiles OS Store</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search games..." id="searchInput" onkeyup="searchGames()">
+    </div>
+  </header>
+
+  <!-- Container que coloca jogos e filmes lado a lado -->
+  <div class="content-row">
+    <section>
+      <h2>Featured Games</h2>
+      <div class="game-grid" id="gameGrid">
+        <div class="game-card">
+          <img src="A.PNG" />
+          <div class="info">
+            <h4>SPACE DICKERS SHONEM</h4>
+            <a href="https://nscsuport.github.io/boscojones/WALLET.HTML">
+              <button>ORDER NOW</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <img src="B.png" />
+          <div class="info">
+            <h4>SPACE DICKERS K.O</h4>
+            <a href="https://nscsuport.github.io/boscojones/WALLET.HTML">
+              <button>ORDER NOW</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <img src="C.png" />
+          <div class="info">
+            <h4>SURVIVAL SPACE</h4>
+            <a href="https://nscsuport.github.io/boscojones/WALLET.HTML">
+              <button>ORDER NOW</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Featured Movies</h2>
+      <div class="game-grid" id="movieGrid">
+        <div class="game-card">
+          <img src="movie1.jpg" alt="Movie 1" />
+          <div class="info">
+            <h4>GALAXY QUEST</h4>
+            <a href="https://example.com/galaxyquest">
+              <button>WATCH NOW</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <img src="movie2.jpg" alt="Movie 2" />
+          <div class="info">
+            <h4>STAR VOYAGERS</h4>
+            <a href="https://example.com/starvoyagers">
+              <button>WATCH NOW</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <img src="movie3.jpg" alt="Movie 3" />
+          <div class="info">
+            <h4>SPACE ODYSSEY</h4>
+            <a href="https://example.com/spaceodyssey">
+              <button>WATCH NOW</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2025 Akiles STORE. All rights reserved.
+  </footer>
+
+  <script>
+    function searchGames() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.querySelectorAll(".game-card");
+
+      cards.forEach(card => {
+        const title = card.querySelector("h4").textContent.toLowerCase();
+        card.style.display = title.includes(input) ? "block" : "none";
+      });
+    }
+  </script>
+
+</body>
+</html>
