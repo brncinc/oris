@@ -1,1 +1,309 @@
+<!DOCTYPE html>
+<html lang="la">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meta Rabbit Wallet - Geminiositas Maxima</title>
+  <link rel="icon" href="logo.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap');
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #121212, #1b2735);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px 80px;
+    }
+    h1 {
+      color: #00ffa2;
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      text-align: center;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 10px #00ffa2;
+    }
+    .wallet {
+      background: rgba(255 255 255 / 0.05);
+      border-radius: 18px;
+      box-shadow: 0 0 30px #00ffa2aa;
+      width: 100%;
+      max-width: 700px;
+      padding: 25px 30px 40px;
+      backdrop-filter: blur(14px);
+      text-align: center;
+    }
+    .pairs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 22px;
+      margin-top: 25px;
+    }
+    .pair-box {
+      background: rgba(0,255,162,0.05);
+      border: 2px solid #00ffa2;
+      border-radius: 15px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 14px #00ffa2aa;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+    }
+    .pair-item {
+      flex: 1;
+      padding: 0 10px;
+      text-align: center;
+      color: #00ffa2;
+    }
+    .pair-item .title {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      text-shadow: 0 0 6px #00ffa2;
+    }
+    .pair-item .value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .nbh-supreme {
+      margin-top: 40px;
+      padding: 28px;
+      background: linear-gradient(45deg, #2b0033, #5f006e);
+      border-radius: 25px;
+      box-shadow: 0 0 25px #ff00ffcc;
+      text-align: center;
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    .nbh-supreme h2 {
+      font-size: 2rem;
+      color: #ff00ff;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px #ff00ff;
+    }
+    .nbh-supreme .desc {
+      font-size: 1rem;
+      color: #eeaaff;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    #qrcode {
+      margin: 0 auto;
+      width: 180px;
+      height: 180px;
+    }
+
+    /* Buttons */
+    .btn {
+      background: #00ffa2;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 12px;
+      color: #111;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.25s ease;
+      margin: 0 8px 18px;
+      user-select: none;
+    }
+    .btn:hover {
+      background: #00cc7a;
+    }
+    .buttons-container {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .output {
+      color: #99ffaa;
+      margin-top: 10px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 25px #ff00ffcc;
+      }
+      50% {
+        box-shadow: 0 0 40px #ff77ffdd;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🐰 Meta Rabbit Wallet — Geminiositas Maxima</h1>
+
+  <div class="wallet" role="main" aria-label="Meta Rabbit Wallet">
+
+    <div class="buttons-container">
+      <button class="btn" onclick="createWallet()">Crea Fractionem</button>
+      <button class="btn" onclick="importWallet()">Importa Secretum</button>
+      <button class="btn" onclick="showPublicKey()">Ostende Clavem Publicam</button>
+    </div>
+
+    <div id="output" class="output" aria-live="polite" aria-atomic="true"></div>
+
+    <section class="pairs" aria-label="Pares Geminiositas Maxima">
+      <div class="pair-box" role="group" aria-labelledby="pair1-label">
+        <div class="pair-item" id="pair1-label">
+          <div class="title">Fractio Lux</div>
+          <div class="value" id="fractioLux">1000 HF</div>
+        </div>
+        <div class="pair-item">
+          <div class="title">Fractio Flexus</div>
+          <div class="value">500 QFX</div>
+        </div>
+      </div>
+
+      <div class="pair-box" role="group" aria-labelledby="pair2-label">
+        <div class="pair-item" id="pair2-label">
+          <div class="title">Fractio Scala</div>
+          <div class="value">500 JBXF</div>
+        </div>
+        <div class="pair-item">
+          <div class="title">Fractio Vox</div>
+          <div class="value">400 QOOP</div>
+        </div>
+      </div>
+
+      <div class="pair-box" role="group" aria-labelledby="pair3-label">
+        <div class="pair-item" id="pair3-label">
+          <div class="title">Fractio Valoris</div>
+          <div class="value">300 QVALFX</div>
+        </div>
+        <div class="pair-item">
+          <div class="title">Fractio Mens</div>
+          <div class="value">100 NBH</div>
+        </div>
+      </div>
+
+      <div class="pair-box" role="group" aria-labelledby="pair4-label">
+        <div class="pair-item" id="pair4-label">
+          <div class="title">Fractio Yenensis</div>
+          <div class="value">¥850,000</div>
+        </div>
+        <div class="pair-item">
+          <div class="title">Fractio Eurox</div>
+          <div class="value">€3,000</div>
+        </div>
+      </div>
+
+      <div class="pair-box" role="group" aria-labelledby="pair5-label">
+        <div class="pair-item" id="pair5-label">
+          <div class="title">Fractio Domus</div>
+          <div class="value">R$20,000</div>
+        </div>
+        <div class="pair-item">
+          <div class="title">Fractio Aurum</div>
+          <div class="value">R$4,500</div>
+        </div>
+      </div>
+
+      <div class="pair-box" role="group" aria-labelledby="pair6-label">
+        <div class="pair-item" id="pair6-label">
+          <div class="title">Fractio Adamantis</div>
+          <div class="value">R$15,000</div>
+        </div>
+        <div class="pair-item">
+          <div class="title">Fractio Brasilis</div>
+          <div class="value">2,500 BRDL</div>
+        </div>
+      </div>
+
+      <div class="pair-box" role="group" aria-labelledby="pair7-label">
+        <div class="pair-item" id="pair7-label">
+          <div class="title">Fractio Bosco</div>
+          <div class="value">1,000 BJF</div>
+        </div>
+        <div class="pair-item">
+          <div class="title">Fractio Stellarum</div>
+          <div class="value">150 STG</div>
+        </div>
+      </div>
+
+      <div class="pair-box" role="group" aria-labelledby="pair8-label">
+        <div class="pair-item" id="pair8-label">
+          <div class="title">Fractio Fibonaccii</div>
+          <div class="value">13,000 FIB</div>
+        </div>
+        <div class="pair-item">
+          <div class="title">Fractio Symmetrica</div>
+          <div class="value">9,999 SSM</div>
+        </div>
+      </div>
+
+      <div class="pair-box" role="group" aria-labelledby="pair9-label">
+        <div class="pair-item" id="pair9-label">
+          <div class="title">Fractio Heroica</div>
+          <div class="value">980 MPLAN24</div>
+        </div>
+        <div class="pair-item">
+          <div class="title">Fractio NBH DarkBTC Supreme</div>
+          <div class="value" id="nbhSupremeValue">1,000 NBH-S</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="nbh-supreme" aria-label="NBH DarkBTC Supreme - Ovo Geminado">
+      <h2>NBH DarkBTC Supreme</h2>
+      <p class="desc">
+        Sistema de Ovo Geminado em Top Nature Scale — a essência máxima da Geminiositas.
+      </p>
+      <div id="qrcode"></div>
+      <p style="color:#ff77ffcc; font-style: italic; margin-top: 15px;">
+        Paga aqui para ativar seus bônus!
+      </p>
+    </section>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  let wallet = {};
+
+  function createWallet() {
+    wallet = {
+      publicKey: 'MRW-' + Math.random().toString(36).substring(2, 10).toUpperCase(),
+      privateKey: Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2)
+    };
+    document.getElementById('output').innerText = 'Fractiones creatae!\nClavis Publica: ' + wallet.publicKey;
+  }
+
+  function importWallet() {
+    const input = prompt("Inserere clavem privatam:");
+    if (input) {
+      wallet = {
+        publicKey: 'MRW-' + input.slice(0, 8).toUpperCase(),
+        privateKey: input
+      };
+      document.getElementById('output').innerText = 'Secretum importatum!\nClavis Publica: ' + wallet.publicKey;
+    }
+  }
+
+  function showPublicKey() {
+    if (wallet.publicKey) {
+      document.getElementById('output').innerText = 'Clavis Publica: ' + wallet.publicKey;
+    } else {
+      document.getElementById('output').innerText = 'Nulla clavis inventa.';
+    }
+  }
+
+  // QR Code para pagamento (exemplo)
+  const qrcode = new QRCode(document.getElementById("qrcode"), {
+    text: "bitcoin:bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh", // substitua pelo endereço real
+    width: 180,
+    height: 180,
+    colorDark : "#ff00ff",
+    colorLight : "#121212",
+    correctLevel : QRCode.CorrectLevel.H
+  });
+</script>
+</body>
+</html>
 v
