@@ -1,5 +1,4 @@
 
-
 ```markdown
 # ORIS OS - Neon Glass UI
 
@@ -76,4 +75,5 @@ Lucas Januário do Nascimento
 
 Se precisar de ajuda ou quiser sugerir melhorias, entre em contato!
 
+```
 
