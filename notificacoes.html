@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="logo.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notificações - ORIS OS</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* Mesmos estilos do dashboard para manter consistência */
+    body {
+      margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212; color: #fff; display: flex; min-height: 100vh; user-select: none;
+    }
+    .sidebar {
+      width: 260px; background: #040404; padding: 32px 24px;
+      display: flex; flex-direction: column; gap: 24px;
+      border-right: 1px solid #282828; position: relative; z-index: 10;
+    }
+    .sidebar h2 {
+      color: #1DB954; font-size: 32px; font-weight: 900; letter-spacing: 1.5px;
+      cursor: default;
+    }
+    .sidebar button {
+      background: transparent; border: none; color: #b3b3b3;
+      padding: 16px 20px; text-align: left; border-radius: 8px;
+      cursor: pointer; font-size: 16px; font-weight: 700;
+      display: flex; align-items: center; gap: 16px;
+      transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+      position: relative;
+      user-select: none;
+    }
+    .sidebar button::after {
+      content: '';
+      position: absolute; left: 0; bottom: 0; height: 3px; width: 0;
+      background: #1DB954; transition: width 0.2s ease;
+      border-radius: 2px 2px 0 0;
+    }
+    .sidebar button:hover::after,
+    .sidebar button.active::after {
+      width: 100%;
+    }
+    .sidebar button:hover,
+    .sidebar button.active {
+      background: #1DB954; color: #121212; transform: scale(1.03); z-index: 1;
+    }
+    .sidebar button .material-icons {
+      font-size: 22px; color: #1DB954; transition: color 0.2s ease;
+      user-select: none;
+    }
+    .sidebar button:hover .material-icons,
+    .sidebar button.active .material-icons {
+      color: #121212;
+    }
+    main {
+      flex: 1; padding: 48px 64px; background: linear-gradient(180deg, #121212 0%, #181818 100%);
+      color: #fff;
+    }
+    h1 {
+      font-size: 48px; font-weight: 900; color: #1DB954; user-select: none;
+    }
+    p {
+      font-size: 20px; margin-top: 24px; line-height: 1.5;
+      max-width: 700px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="sidebar" role="navigation" aria-label="Main Sidebar">
+    <h2>ORIS OS</h2>
+    <button onclick="location.href='dashboard.html'">
+      <span class="material-icons" aria-hidden="true">dashboard</span> Dashboard
+    </button>
+    <button class="active" onclick="location.href='notificacoes.html'" aria-current="page">
+      <span class="material-icons" aria-hidden="true">notifications</span> Notifications
+    </button>
+    <button onclick="location.href='perfil.html'">
+      <span class="material-icons" aria-hidden="true">person</span> Profile
+    </button>
+    <button onclick="location.href='configuracoes.html'">
+      <span class="material-icons" aria-hidden="true">settings</span> Settings
+    </button>
+    <button onclick="location.href='sobre.html'">
+      <span class="material-icons" aria-hidden="true">info</span> About
+    </button>
+    <button onclick="logout()">
+      <span class="material-icons" aria-hidden="true">logout</span> Logout
+    </button>
+  </nav>
+  <main>
+    <h1>Notificações</h1>
+    <p>Aqui você verá todas as suas notificações recentes e alertas do sistema.</p>
+  </main>
+
+  <script>
+    function logout() {
+      alert('Você saiu da sua conta.');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>
