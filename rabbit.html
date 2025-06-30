@@ -1,166 +1,167 @@
 <!DOCTYPE html>
 <html lang="la">
 <head>
-<meta charset="UTF-8" />
-    <link rel="icon" href="logo.png" />
-  
-<title>Meta Rabbit Wallet - Drax Geminiositas Maxima</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  <meta charset="UTF-8" />
+  <link rel="icon" href="logo.png" />
+  <title>Meta Rabbit Wallet - Drax Geminiositas Maxima</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0; padding: 0;
-    background-color: #121212;
-    font-family: 'Roboto', 'Segoe UI', sans-serif;
-    color: #FFFFFF;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 30px 15px 50px;
-  }
-  form.wallet {
-    background-color: #181818;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 440px;
-    padding: 25px 30px 40px;
-    box-shadow: 0 8px 24px rgba(29,185,84,0.6);
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .header {
-    text-align: center;
-    margin-bottom: 10px;
-    user-select: none;
-  }
-  .header h1 {
-    font-weight: 700;
-    font-size: 1.8rem;
-    color: #1DB954;
-    margin: 0 0 15px 0;
-  }
-  .header img {
-    width: 64px;
-    height: 64px;
-    object-fit: contain;
-    margin: 0 auto;
-    display: block;
-  }
-  .buttons-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  button.btn {
-    background-color: #1DB954;
-    border: none;
-    color: #121212;
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 12px 20px;
-    border-radius: 30px;
-    cursor: pointer;
-    flex: 1;
-    margin: 0 6px;
-    transition: background-color 0.3s ease;
-    user-select: none;
-  }
-  button.btn:first-child {
-    margin-left: 0;
-  }
-  button.btn:last-child {
-    margin-right: 0;
-  }
-  button.btn:hover {
-    background-color: #17a447;
-  }
-  #output {
-    background-color: #282828;
-    color: #b3b3b3;
-    font-family: monospace;
-    white-space: pre-wrap;
-    width: 100%;
-    min-height: 60px;
-    padding: 12px 15px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    user-select: text;
-  }
-
-  /* Box para inputs */
-  .input-box {
-    border: 2px solid #1DB954;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 30px;
-    background-color: #121212;
-    box-shadow: 0 0 15px #1DB954aa;
-  }
-  label {
-    font-weight: 600;
-    margin-bottom: 8px;
-    display: block;
-    color: #1DB954;
-    user-select: none;
-  }
-  select, input[type="text"], input[type="number"] {
-    width: 100%;
-    padding: 12px 16px;
-    font-size: 1rem;
-    border-radius: 12px;
-    border: none;
-    margin-top: 6px;
-    background-color: #282828;
-    color: #fff;
-    font-weight: 600;
-  }
-  select:focus, input[type="text"]:focus, input[type="number"]:focus {
-    outline: 2px solid #1DB954;
-    background-color: #1a1a1a;
-  }
-  .drax-tech {
-    width: 100%;
-    background: linear-gradient(45deg, #1DB954, #14833b);
-    border-radius: 15px;
-    padding: 22px;
-    box-shadow: 0 0 28px #1DB954cc;
-    color: #121212;
-    text-align: center;
-    user-select: none;
-  }
-  .drax-tech h2 {
-    font-weight: 700;
-    font-size: 1.7rem;
-    margin-bottom: 10px;
-  }
-  .drax-tech p {
-    font-style: italic;
-    font-size: 1rem;
-    margin-bottom: 20px;
-  }
-  #qrcode-pix {
-    margin: 0 auto;
-    width: 180px;
-    height: 180px;
-    filter: drop-shadow(0 0 6px #14833bcc);
-  }
-  @media (max-width: 400px) {
-    .buttons-container {
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      font-family: 'Roboto', 'Segoe UI', sans-serif;
+      color: #FFFFFF;
+      display: flex;
       flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    form.wallet {
+      background-color: #1c1c1c;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 440px;
+      padding: 25px 30px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      margin-top: 30px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 10px;
+      user-select: none;
+    }
+    .header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #2e7d32;
+      margin: 0 0 15px 0;
+    }
+    .header img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      margin: 0 auto;
+      display: block;
+    }
+    .buttons-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
     }
     button.btn {
-      margin: 6px 0;
-      width: 100%;
+      background-color: #2e7d32;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 12px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      flex: 1;
+      margin: 0 6px;
+      transition: background-color 0.3s ease;
+      user-select: none;
     }
-  }
-</style>
+    button.btn:hover {
+      background-color: #1b5e20;
+    }
+    button.btn:first-child {
+      margin-left: 0;
+    }
+    button.btn:last-child {
+      margin-right: 0;
+    }
+    #output {
+      background-color: #282828;
+      color: #b3b3b3;
+      font-family: monospace;
+      white-space: pre-wrap;
+      width: 100%;
+      min-height: 60px;
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      user-select: text;
+    }
+    .input-box {
+      border: 2px solid #2e7d32;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 30px;
+      background-color: #1c1c1c;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+      color: #2e7d32;
+      user-select: none;
+    }
+    select, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: none;
+      margin-top: 6px;
+      background-color: #282828;
+      color: #fff;
+      font-weight: 600;
+    }
+    select:focus, input[type="text"]:focus, input[type="number"]:focus {
+      outline: 2px solid #2e7d32;
+      background-color: #1a1a1a;
+    }
+    .drax-tech {
+      width: 100%;
+      background-color: #2e7d32;
+      border-radius: 15px;
+      padding: 22px;
+      color: #fff;
+      text-align: center;
+      user-select: none;
+    }
+    .drax-tech h2 {
+      font-weight: 700;
+      font-size: 1.7rem;
+      margin-bottom: 10px;
+    }
+    .drax-tech p {
+      font-style: italic;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    #qrcode-pix {
+      margin: 0 auto;
+      width: 180px;
+      height: 180px;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: auto;
+      padding: 20px 0;
+    }
+    @media (max-width: 400px) {
+      .buttons-container {
+        flex-direction: column;
+      }
+      button.btn {
+        margin: 6px 0;
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -179,7 +180,7 @@
 
   <div class="input-box" aria-label="Seleção de ativos e cupom">
     <label for="assetSelect">Selecione seu ativo:</label>
-    <select id="assetSelect" name="assetSelect" aria-describedby="assetDesc" aria-label="Selecione ativo">
+    <select id="assetSelect" name="assetSelect" aria-label="Selecione ativo">
       <option value="fractioLux">Fractio Lux — 1000 HF</option>
       <option value="fractioFlexus">Fractio Flexus — 500 QFX</option>
       <option value="fractioScala">Fractio Scala — 500 JBXF</option>
@@ -198,37 +199,39 @@
       <option value="fractioSymmetrica">Fractio Symmetrica — 9,999 SSM</option>
       <option value="fractioHeroica">Fractio Heroica — 980 MPLAN24</option>
       <option value="fractioNBHDarkBTC">Fractio NBH DarkBTC Supreme — 1,000 NBH-S</option>
-        <option value="spaceDickersShonem">SPACE DICKERS SHONEM — 10 USD</option>
-<option value="spaceDickersKO">SPACE DICKERS K.O — 10 USD</option>
-<option value="spaceSurvival">SPACE SURVIVAL — 10 USD</option>
+      <option value="spaceDickersShonem">SPACE DICKERS SHONEM — 10 USD</option>
+      <option value="spaceDickersKO">SPACE DICKERS K.O — 10 USD</option>
+      <option value="spaceSurvival">SPACE SURVIVAL — 10 USD</option>
     </select>
 
     <label for="couponInput">Cupom de desconto:</label>
-    <input type="text" id="couponInput" name="couponInput" placeholder="Digite seu cupom aqui" value="omegalul100" autocomplete="off" aria-label="Cupom de desconto" />
+    <input type="text" id="couponInput" value="omegalul100" placeholder="Digite seu cupom aqui" />
 
     <label for="valueInput">Valor (ex: 1000):</label>
-    <input type="number" id="valueInput" name="valueInput" placeholder="Digite o valor para pagamento" min="1" step="any" aria-label="Valor para pagamento" />
+    <input type="number" id="valueInput" placeholder="Digite o valor para pagamento" min="1" />
   </div>
 
   <button type="button" class="btn" onclick="generateQR()">Gerar QR Code</button>
 
   <div id="output" aria-live="polite" aria-atomic="true" tabindex="0"></div>
 
-  <section class="drax-tech" aria-label="Tecnologia Drax - Dark BTC Geminado Maximo">
+  <section class="drax-tech">
     <h2>Drax Technology</h2>
     <p>
-      Unitas NBH Nature Scale + Dark HoloFi <br />
-      Geminiositas Maxima — tri-gemas & ovo geminado, <br />
+      Unitas NBH Nature Scale + Dark HoloFi<br />
+      Geminiositas Maxima — geminado,<br />
       qubits fracti in scala quantum maximi.
     </p>
-    <div id="qrcode-pix" aria-label="QR Code para pagamento PIX"></div>
+    <div id="qrcode-pix"></div>
     <p style="font-style: italic; margin-top: 15px;">
-      Pague via PIX para ativar bônus exclusivos: <br />
-      <strong>11958849894</strong>
+      Pague via PIX para ativar bônus exclusivos.
     </p>
   </section>
-
 </form>
+
+<footer>
+  © 2025 lucasjanuario14. Todos os direitos reservados.
+</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
@@ -280,21 +283,18 @@
     let description = `Pagamento Meta Rabbit - ${selectedAsset}`;
     if(coupon) description += ` - Cupom: ${coupon}`;
 
-    const pixPayload = 
+    const pixPayload =
       `00020126360014BR.GOV.BCB.PIX0136${pixKey}` +
       `520400005303986540${Number(value).toFixed(2).replace('.', '')}5802BR` +
-      `5913Meta Rabbit6009Sao Paulo` +
-      `62070503***` +
-      `` +
-      `6304`;
+      `5913Meta Rabbit6009Sao Paulo62070503***6304`;
 
     qrCodeInstance = new QRCode(document.getElementById("qrcode-pix"), {
       text: pixPayload,
       width: 180,
       height: 180,
-      colorDark : "#1DB954",
-      colorLight : "#181818",
-      correctLevel : QRCode.CorrectLevel.H
+      colorDark: "#2e7d32",
+      colorLight: "#1c1c1c",
+      correctLevel: QRCode.CorrectLevel.H
     });
 
     document.getElementById('output').innerText = `QR Code gerado para:\nAtivo: ${selectedAsset}\nValor: ${value}\nCupom: ${coupon || "Nenhum"}`;
