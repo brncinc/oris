@@ -202,6 +202,12 @@
       <option value="spaceDickersShonem">SPACE DICKERS SHONEM — 10 USD</option>
       <option value="spaceDickersKO">SPACE DICKERS K.O — 10 USD</option>
       <option value="spaceSurvival">SPACE SURVIVAL — 10 USD</option>
+      <option value="fractioMonerium">Fractio Monerium — 5,000 XMR (Geminiosidade Máxima)</option>
+<option value="fractioZetherium">Fractio Zetherium — 5,000 ZEC (Geminiosidade Máxima)</option>
+<option value="fractioNoxBTC">Fractio Nox BTC — 5,000 NBTC (Geminiosidade Máxima)</option>
+<option value="fractioPhantom">Fractio Phantom — 5,000 FTM (Geminiosidade Máxima)</option>
+<option value="fractioDarkSol">Fractio DarkSol — 5,000 DSL (Geminiosidade Máxima)</option>
+
     </select>
 
     <label for="couponInput">Cupom de desconto:</label>
@@ -213,21 +219,25 @@
 
   <button type="button" class="btn" onclick="generateQR()">Gerar QR Code</button>
 
-  <div id="output" aria-live="polite" aria-atomic="true" tabindex="0"></div>
+<div id="output" aria-live="polite" aria-atomic="true" tabindex="0"></div>
 
-  <section class="drax-tech">
-    <h2>Drax Technology</h2>
-    <p>
-      Unitas NBH Nature Scale + Dark HoloFi<br />
-      Geminiositas Maxima — geminado,<br />
-      qubits fracti in scala quantum maximi.
-    </p>
-    <div id="qrcode-pix"></div>
-    <p style="font-style: italic; margin-top: 15px;">
-      Pague via PIX para ativar bônus exclusivos.
-    </p>
-  </section>
-</form>
+<div id="balanceBox" class="input-box" style="display:none;" aria-label="Saldo atual">
+  <label for="balance">Saldo Atual:</label>
+  <input type="text" id="balance" readonly value="0 FRACTIO" />
+</div>
+
+<section class="drax-tech">
+  <h2>Drax Technology</h2>
+  <p>
+    Unitas NBH Nature Scale + Dark HoloFi<br />
+    Geminiositas Maxima — geminado,<br />
+    qubits fracti in scala quantum maximi.
+  </p>
+  <div id="qrcode-pix"></div>
+  <p style="font-style: italic; margin-top: 15px;">
+    Pague via PIX para ativar bônus exclusivos.
+  </p>
+</section>
 
 <footer>
   © 2025 lucasjanuario14. Todos os direitos reservados.
