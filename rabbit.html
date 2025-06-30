@@ -25,20 +25,30 @@
     background-color: #181818;
     border-radius: 15px;
     width: 100%;
-    max-width: 420px;
-    padding: 25px 30px;
+    max-width: 440px;
+    padding: 25px 30px 40px;
     box-shadow: 0 8px 24px rgba(29,185,84,0.6);
     display: flex;
     flex-direction: column;
     align-items: stretch;
   }
-  h1 {
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    user-select: none;
+  }
+  .header img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+  }
+  .header h1 {
     font-weight: 700;
     font-size: 1.8rem;
     color: #1DB954;
-    margin-bottom: 25px;
-    text-align: center;
-    user-select: none;
+    margin: 0;
   }
   .buttons-container {
     width: 100%;
@@ -81,25 +91,35 @@
     margin-bottom: 25px;
     user-select: text;
   }
+
+  /* Box para inputs */
+  .input-box {
+    border: 2px solid #1DB954;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #121212;
+    box-shadow: 0 0 15px #1DB954aa;
+  }
   label {
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     display: block;
     color: #1DB954;
     user-select: none;
   }
-  select, input[type="text"] {
+  select, input[type="text"], input[type="number"] {
     width: 100%;
-    padding: 10px 14px;
+    padding: 12px 16px;
     font-size: 1rem;
     border-radius: 12px;
     border: none;
-    margin-bottom: 20px;
+    margin-top: 6px;
     background-color: #282828;
     color: #fff;
     font-weight: 600;
   }
-  select:focus, input[type="text"]:focus {
+  select:focus, input[type="text"]:focus, input[type="number"]:focus {
     outline: 2px solid #1DB954;
     background-color: #1a1a1a;
   }
@@ -144,7 +164,10 @@
 
 <form class="wallet" role="main" aria-label="Meta Rabbit Wallet" onsubmit="return false;">
 
-  <h1>🐰 Meta Rabbit Wallet — Drax Geminiositas Maxima</h1>
+  <div class="header">
+    <img src="meta-rabbit.png" alt="Meta Rabbit Logo" />
+    <h1>Meta Rabbit</h1>
+  </div>
 
   <div class="buttons-container">
     <button type="button" class="btn" onclick="createWallet()">Criar Fração</button>
@@ -152,30 +175,37 @@
     <button type="button" class="btn" onclick="showPublicKey()">Mostrar Chave Pública</button>
   </div>
 
-  <label for="assetSelect">Selecione seu ativo:</label>
-  <select id="assetSelect" name="assetSelect" aria-label="Selecione ativo">
-    <option value="fractioLux">Fractio Lux — 1000 HF</option>
-    <option value="fractioFlexus">Fractio Flexus — 500 QFX</option>
-    <option value="fractioScala">Fractio Scala — 500 JBXF</option>
-    <option value="fractioVox">Fractio Vox — 400 QOOP</option>
-    <option value="fractioValoris">Fractio Valoris — 300 QVALFX</option>
-    <option value="fractioMens">Fractio Mens — 100 NBH</option>
-    <option value="fractioYenensis">Fractio Yenensis — ¥850,000</option>
-    <option value="fractioEurox">Fractio Eurox — €3,000</option>
-    <option value="fractioDomus">Fractio Domus — R$20,000</option>
-    <option value="fractioAurum">Fractio Aurum — R$4,500</option>
-    <option value="fractioAdamantis">Fractio Adamantis — R$15,000</option>
-    <option value="fractioBrasilis">Fractio Brasilis — 2,500 BRDL</option>
-    <option value="fractioBosco">Fractio Bosco — 1,000 BJF</option>
-    <option value="fractioStellarum">Fractio Stellarum — 150 STG</option>
-    <option value="fractioFibonaccii">Fractio Fibonaccii — 13,000 FIB</option>
-    <option value="fractioSymmetrica">Fractio Symmetrica — 9,999 SSM</option>
-    <option value="fractioHeroica">Fractio Heroica — 980 MPLAN24</option>
-    <option value="fractioNBHDarkBTC">Fractio NBH DarkBTC Supreme — 1,000 NBH-S</option>
-  </select>
+  <div class="input-box" aria-label="Seleção de ativos e cupom">
+    <label for="assetSelect">Selecione seu ativo:</label>
+    <select id="assetSelect" name="assetSelect" aria-describedby="assetDesc" aria-label="Selecione ativo">
+      <option value="fractioLux">Fractio Lux — 1000 HF</option>
+      <option value="fractioFlexus">Fractio Flexus — 500 QFX</option>
+      <option value="fractioScala">Fractio Scala — 500 JBXF</option>
+      <option value="fractioVox">Fractio Vox — 400 QOOP</option>
+      <option value="fractioValoris">Fractio Valoris — 300 QVALFX</option>
+      <option value="fractioMens">Fractio Mens — 100 NBH</option>
+      <option value="fractioYenensis">Fractio Yenensis — ¥850,000</option>
+      <option value="fractioEurox">Fractio Eurox — €3,000</option>
+      <option value="fractioDomus">Fractio Domus — R$20,000</option>
+      <option value="fractioAurum">Fractio Aurum — R$4,500</option>
+      <option value="fractioAdamantis">Fractio Adamantis — R$15,000</option>
+      <option value="fractioBrasilis">Fractio Brasilis — 2,500 BRDL</option>
+      <option value="fractioBosco">Fractio Bosco — 1,000 BJF</option>
+      <option value="fractioStellarum">Fractio Stellarum — 150 STG</option>
+      <option value="fractioFibonaccii">Fractio Fibonaccii — 13,000 FIB</option>
+      <option value="fractioSymmetrica">Fractio Symmetrica — 9,999 SSM</option>
+      <option value="fractioHeroica">Fractio Heroica — 980 MPLAN24</option>
+      <option value="fractioNBHDarkBTC">Fractio NBH DarkBTC Supreme — 1,000 NBH-S</option>
+    </select>
 
-  <label for="couponInput">Cupom de desconto:</label>
-  <input type="text" id="couponInput" name="couponInput" placeholder="Digite seu cupom aqui" value="omegalul100" aria-label="Cupom de desconto" autocomplete="off" />
+    <label for="couponInput">Cupom de desconto:</label>
+    <input type="text" id="couponInput" name="couponInput" placeholder="Digite seu cupom aqui" value="omegalul100" autocomplete="off" aria-label="Cupom de desconto" />
+
+    <label for="valueInput">Valor (ex: 1000):</label>
+    <input type="number" id="valueInput" name="valueInput" placeholder="Digite o valor para pagamento" min="1" step="any" aria-label="Valor para pagamento" />
+  </div>
+
+  <button type="button" class="btn" onclick="generateQR()">Gerar QR Code</button>
 
   <div id="output" aria-live="polite" aria-atomic="true" tabindex="0"></div>
 
@@ -198,6 +228,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
   let wallet = {};
+  let qrCodeInstance = null;
 
   function createWallet() {
     wallet = {
@@ -226,20 +257,56 @@
     }
   }
 
-  // Gerar QR Code PIX para a chave fornecida
-  const pixKey = "11958849894";
+  // Função para limpar QR Code antigo
+  function clearQRCode() {
+    const qrContainer = document.getElementById("qrcode-pix");
+    qrContainer.innerHTML = "";
+  }
 
-  // Payload básico para o QRCode, formato PIX simplificado
-  const pixQRCodeText = `00020126360014BR.GOV.BCB.PIX0136${pixKey}52040000530398654051005802BR5913Meta Rabbit6009Sao Paulo62070503***6304`;
+  // Função para gerar QR Code conforme ativo e valor
+  function generateQR() {
+    clearQRCode();
+    const selectedAsset = document.getElementById('assetSelect').selectedOptions[0].text;
+    const coupon = document.getElementById('couponInput').value.trim();
+    const value = document.getElementById('valueInput').value.trim();
 
-  new QRCode(document.getElementById("qrcode-pix"), {
-    text: pixQRCodeText,
-    width: 180,
-    height: 180,
-    colorDark : "#1DB954",
-    colorLight : "#181818",
-    correctLevel : QRCode.CorrectLevel.H
-  });
+    if (!value || isNaN(value) || Number(value) <= 0) {
+      alert("Por favor, insira um valor válido para o pagamento.");
+      return;
+    }
+
+    // Montar string para QR Code PIX (formato simplificado)
+    const pixKey = "11958849894";
+    // Considerando que a descrição pode incluir ativo e cupom
+    let description = `Pagamento Meta Rabbit - ${selectedAsset}`;
+    if(coupon) description += ` - Cupom: ${coupon}`;
+
+    // Formato PIX payload (simplificado, sem CRC e etc)
+    // Para algo real, precisa usar formato completo e calcular CRC-16, aqui é exemplo ilustrativo
+    const pixPayload = 
+      `00020126360014BR.GOV.BCB.PIX0136${pixKey}` +
+      `520400005303986540${Number(value).toFixed(2).replace('.', '')}5802BR` +
+      `5913Meta Rabbit6009Sao Paulo` +
+      `62070503***` +
+      `` +
+      `6304`;
+
+    // Gerar QR code com o payload simplificado
+    qrCodeInstance = new QRCode(document.getElementById("qrcode-pix"), {
+      text: pixPayload,
+      width: 180,
+      height: 180,
+      colorDark : "#1DB954",
+      colorLight : "#181818",
+      correctLevel : QRCode.CorrectLevel.H
+    });
+
+    document.getElementById('output').innerText = `QR Code gerado para:\nAtivo: ${selectedAsset}\nValor: ${value}\nCupom: ${coupon || "Nenhum"}`;
+  }
+
+  // Gerar QR code inicial (PIX chave fixa)
+  generateQR();
+
 </script>
 
 </body>
