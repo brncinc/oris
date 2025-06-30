@@ -64,19 +64,19 @@
     }
     .github-btn {
       margin-top: 12px;
-      width: 100%;
-      padding: 12px;
+      width: auto;          /* largura automática */
+      padding: 8px 16px;    /* padding menor */
       border: none;
       border-radius: 8px;
       background-color: #333;
       color: #fff;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 14px;      /* fonte menor */
       cursor: pointer;
-      display: flex;
+      display: inline-flex; /* tamanho do botão ajustado ao conteúdo */
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       user-select: none;
       transition: background-color 0.2s ease;
     }
@@ -84,8 +84,8 @@
       background-color: #444;
     }
     .github-icon {
-      width: 20px;
-      height: 20px;
+      width: 16px;          /* ícone menor */
+      height: 16px;
       filter: invert(1);
     }
   </style>
