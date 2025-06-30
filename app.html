@@ -505,7 +505,7 @@ body.reading-mode .main {
 </head>
 <body>
 
-    <div class="sidebar" role="navigation" aria-label="Main Sidebar">
+  <div class="sidebar" role="navigation" aria-label="Main Sidebar">
     <h2>ORIS OS</h2>
     <button class="active" onclick="location.href='dashboard.html'" aria-current="page" aria-label="Dashboard">
       <span class="material-icons" aria-hidden="true">dashboard</span> Dashboard
@@ -538,63 +538,145 @@ body.reading-mode .main {
     </button>
   </div>
 
-    <div class="footer">
-      <button onclick="alert('Obrigado por usar ORIS OS!')">© 2024 ORIS OS</button>
+  <main class="main" role="main">
+    <div class="topbar">
+      <h1>Welcome to ORIS OS</h1>
+      <div class="controls" style="display:flex; gap:12px; align-items:center; flex-wrap: wrap;">
+        <input type="text" id="searchInput" placeholder="Search apps..." oninput="filtrarApps()" aria-label="Search apps"/>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode" aria-pressed="false" aria-label="Toggle Light/Dark Mode">🌓</button>
+        <button class="reading-toggle" onclick="toggleReadingMode()" title="Toggle Reading Mode" aria-pressed="false" aria-label="Toggle Reading Mode">📖</button>
+      </div>
     </div>
+
+    <div class="sections" role="region" aria-label="Sections">
+      <button>My Home</button>
+      <button>Living Room</button>
+      <button>Bathroom</button>
+      <button>Office</button>
+    </div>
+
+    <div class="grid" id="appGrid" role="list" aria-label="Application grid">
+      <div class="app-card" role="listitem" data-name="home" tabindex="0" onclick="abrirPagina('home.html')" onkeydown="if(event.key==='Enter'){abrirPagina('home.html')}">
+        <span class="material-icons" aria-hidden="true">home</span> 🏠
+        <div>Home</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="light" tabindex="0" onclick="abrirPagina('light.html')" onkeydown="if(event.key==='Enter'){abrirPagina('light.html')}">
+        <span class="material-icons" aria-hidden="true">lightbulb</span> 💡
+        <div>Light</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="air" tabindex="0" onclick="abrirPagina('air.html')" onkeydown="if(event.key==='Enter'){abrirPagina('air.html')}">
+        <span class="material-icons" aria-hidden="true">air</span> 🌬️
+        <div>Air</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="energy" tabindex="0" onclick="abrirPagina('energy.html')" onkeydown="if(event.key==='Enter'){abrirPagina('energy.html')}">
+        <span class="material-icons" aria-hidden="true">electric_bolt</span> ⚡
+        <div>Energy</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="music" tabindex="0" onclick="abrirPagina('music.html')" onkeydown="if(event.key==='Enter'){abrirPagina('music.html')}">
+        <span class="material-icons" aria-hidden="true">music_note</span> 🎵
+        <div>Music</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="messages" tabindex="0" onclick="abrirPagina('messages.html')" onkeydown="if(event.key==='Enter'){abrirPagina('messages.html')}">
+        <span class="material-icons" aria-hidden="true">message</span> 💬
+        <div>Messages</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="mail" tabindex="0" onclick="abrirPagina('mail.html')" onkeydown="if(event.key==='Enter'){abrirPagina('mail.html')}">
+        <span class="material-icons" aria-hidden="true">mail</span> 📧
+        <div>Mail</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="calendar" tabindex="0" onclick="abrirPagina('calendar.html')" onkeydown="if(event.key==='Enter'){abrirPagina('calendar.html')}">
+        <span class="material-icons" aria-hidden="true">calendar_today</span> 📅
+        <div>Calendar</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="files" tabindex="0" onclick="abrirPagina('files.html')" onkeydown="if(event.key==='Enter'){abrirPagina('files.html')}">
+        <span class="material-icons" aria-hidden="true">folder</span> 📁
+        <div>Files</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="settings" tabindex="0" onclick="abrirPagina('configuracoes.html')" onkeydown="if(event.key==='Enter'){abrirPagina('configuracoes.html')}">
+        <span class="material-icons" aria-hidden="true">settings</span> ⚙️
+        <div>Settings</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="store" tabindex="0" onclick="abrirPagina('akiles.html')" onkeydown="if(event.key==='Enter'){abrirPagina('akiles.html')}">
+        <span class="material-icons" aria-hidden="true">store</span> 🛒
+        <div>Store</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="meta rabbit" tabindex="0" onclick="abrirPagina('rabbit.html')" onkeydown="if(event.key==='Enter'){abrirPagina('rabbit.html')}">
+        <span class="material-icons" aria-hidden="true">pets</span> 🐇
+        <div>Meta Rabbit</div>
+      </div>
+    </div>
+
+    <section class="wallpaper-selector" aria-label="Wallpaper Selector">
+      <h3>Escolha o Wallpaper</h3>
+      <div class="wallpaper-options" role="list">
+        <div class="wallpaper-option selected" tabindex="0" style="background-image: url('wallpaper1.jpg');" aria-label="Wallpaper 1" onclick="changeWallpaper('wallpaper1.jpg')" onkeydown="if(event.key==='Enter'){changeWallpaper('wallpaper1.jpg')}"></div>
+        <div class="wallpaper-option" tabindex="0" style="background-image: url('wallpaper2.jpg');" aria-label="Wallpaper 2" onclick="changeWallpaper('wallpaper2.jpg')" onkeydown="if(event.key==='Enter'){changeWallpaper('wallpaper2.jpg')}"></div>
+        <div class="wallpaper-option" tabindex="0" style="background-image: url('wallpaper3.jpg');" aria-label="Wallpaper 3" onclick="changeWallpaper('wallpaper3.jpg')" onkeydown="if(event.key==='Enter'){changeWallpaper('wallpaper3.jpg')}"></div>
+      </div>
+    </section>
+
+    <footer class="footer" role="contentinfo">
+      <button onclick="logout()" aria-label="Logout">Logout</button>
+    </footer>
   </main>
 
   <script>
-    // Função para abrir página pelo clique ou tecla Enter
-    function abrirPagina(url) {
-      window.location.href = url;
+    function logout() {
+      alert('Logout realizado!');
+      // Aqui você pode adicionar sua lógica de logout real
     }
 
-    // Filtrar apps pelo input de busca
+    function abrirPagina(pagina) {
+      location.href = pagina;
+    }
+
+    // Filtra os apps do grid pelo texto digitado
     function filtrarApps() {
       const filtro = document.getElementById('searchInput').value.toLowerCase();
       const apps = document.querySelectorAll('.app-card');
       apps.forEach(app => {
-        const nome = app.dataset.name.toLowerCase();
-        app.style.display = nome.includes(filtro) ? 'flex' : 'none';
+        const nome = app.getAttribute('data-name').toLowerCase();
+        if (nome.includes(filtro)) {
+          app.style.display = 'flex';
+        } else {
+          app.style.display = 'none';
+        }
       });
     }
 
-    // Toggle tema claro/escuro
+    // Troca o wallpaper da página
+    function changeWallpaper(image) {
+      document.body.style.backgroundImage = `url('${image}')`;
+      document.querySelectorAll('.wallpaper-option').forEach(el => {
+        el.classList.remove('selected');
+      });
+      event.currentTarget.classList.add('selected');
+    }
+
+    // Alterna o tema claro/escuro
     function toggleTheme() {
       const body = document.body;
       const btn = document.querySelector('.theme-toggle');
-      body.classList.toggle('light-mode');
-      const pressed = btn.getAttribute('aria-pressed') === 'true';
-      btn.setAttribute('aria-pressed', !pressed);
+      if (body.classList.contains('light-mode')) {
+        body.classList.remove('light-mode');
+        btn.setAttribute('aria-pressed', 'false');
+      } else {
+        body.classList.add('light-mode');
+        btn.setAttribute('aria-pressed', 'true');
+      }
     }
 
-    // Toggle modo leitura
+    // Alterna o modo leitura
     function toggleReadingMode() {
       const body = document.body;
       const btn = document.querySelector('.reading-toggle');
-      body.classList.toggle('reading-mode');
-      const pressed = btn.getAttribute('aria-pressed') === 'true';
-      btn.setAttribute('aria-pressed', !pressed);
-    }
-
-    // Trocar wallpaper
-    function changeWallpaper(element) {
-      // Remove seleção atual
-      document.querySelectorAll('.wallpaper-option').forEach(el => {
-        el.classList.remove('selected');
-        el.setAttribute('aria-pressed', 'false');
-      });
-      element.classList.add('selected');
-      element.setAttribute('aria-pressed', 'true');
-      const bg = element.style.backgroundImage;
-      document.body.style.backgroundImage = bg;
-    }
-
-    // Função de logout placeholder
-    function logout() {
-      alert('Você saiu da sua conta.');
-      // Redirecionar para login
-      window.location.href = 'login.html';
+      if (body.classList.contains('reading-mode')) {
+        body.classList.remove('reading-mode');
+        btn.setAttribute('aria-pressed', 'false');
+      } else {
+        body.classList.add('reading-mode');
+        btn.setAttribute('aria-pressed', 'true');
+      }
     }
   </script>
 
