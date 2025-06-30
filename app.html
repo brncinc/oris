@@ -555,73 +555,83 @@ body.reading-mode .main {
       <button>Office</button>
     </div>
 <div class="grid" id="appGrid" role="list" aria-label="Application grid">
+  <!-- App: Home -->
   <div class="app-card" role="listitem" data-name="home" tabindex="0" onclick="abrirPagina('home.html')" onkeydown="if(event.key==='Enter'){abrirPagina('home.html')}">
     <span class="material-icons" aria-hidden="true">home</span> 🏠
     <div>Home</div>
   </div>
 
+  <!-- App: Light -->
   <div class="app-card" role="listitem" data-name="light" tabindex="0" onclick="abrirPagina('light.html')" onkeydown="if(event.key==='Enter'){abrirPagina('light.html')}">
     <span class="material-icons" aria-hidden="true">lightbulb</span> 💡
     <div>Light</div>
   </div>
 
+  <!-- App: Air -->
   <div class="app-card" role="listitem" data-name="air" tabindex="0" onclick="abrirPagina('air.html')" onkeydown="if(event.key==='Enter'){abrirPagina('air.html')}">
     <span class="material-icons" aria-hidden="true">air</span> 🌬️
     <div>Air</div>
   </div>
 
+  <!-- App: Energy -->
   <div class="app-card" role="listitem" data-name="energy" tabindex="0" onclick="abrirPagina('energy.html')" onkeydown="if(event.key==='Enter'){abrirPagina('energy.html')}">
     <span class="material-icons" aria-hidden="true">electric_bolt</span> ⚡
     <div>Energy</div>
   </div>
 
-  <!-- LINK AJUSTADO: YouTube Music -->
+  <!-- Externo: YouTube Music -->
   <div class="app-card" role="listitem" data-name="music" tabindex="0" onclick="window.open('https://music.youtube.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://music.youtube.com', '_blank')}">
     <span class="material-icons" aria-hidden="true">music_note</span> 🎵
     <div>Music</div>
   </div>
 
-  <!-- LINK AJUSTADO: WhatsApp Web -->
+  <!-- Externo: WhatsApp Web -->
   <div class="app-card" role="listitem" data-name="messages" tabindex="0" onclick="window.open('https://web.whatsapp.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://web.whatsapp.com', '_blank')}">
     <span class="material-icons" aria-hidden="true">message</span> 💬
     <div>Messages</div>
   </div>
 
-  <!-- LINK AJUSTADO: Gmail -->
+  <!-- Externo: Gmail -->
   <div class="app-card" role="listitem" data-name="mail" tabindex="0" onclick="window.open('https://mail.google.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://mail.google.com', '_blank')}">
     <span class="material-icons" aria-hidden="true">mail</span> 📧
     <div>Mail</div>
   </div>
 
-  <div class="app-card" role="listitem" data-name="calendar" tabindex="0" onclick="abrirPagina('calendar.html')" onkeydown="if(event.key==='Enter'){abrirPagina('calendar.html')}">
+  <!-- Externo: Google Agenda com evento preenchido -->
+  <div class="app-card" role="listitem" data-name="calendar" tabindex="0" onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Reunião+ORIS+OS&dates=20250701T150000Z/20250701T160000Z&details=Reunião+de+alinhamento+ORIS&location=Online&sf=true&output=xml', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Reunião+ORIS+OS&dates=20250701T150000Z/20250701T160000Z&details=Reunião+de+alinhamento+ORIS&location=Online&sf=true&output=xml', '_blank')}">
     <span class="material-icons" aria-hidden="true">calendar_today</span> 📅
-    <div>Calendar</div>
+    <div>Agenda</div>
   </div>
 
-  <div class="app-card" role="listitem" data-name="files" tabindex="0" onclick="abrirPagina('files.html')" onkeydown="if(event.key==='Enter'){abrirPagina('files.html')}">
+  <!-- Externo: OneDrive (altere o link para o seu) -->
+  <div class="app-card" role="listitem" data-name="files" tabindex="0" onclick="window.open('https://onedrive.live.com/YOUR_SHARE_LINK', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://onedrive.live.com/YOUR_SHARE_LINK', '_blank')}">
     <span class="material-icons" aria-hidden="true">folder</span> 📁
-    <div>Files</div>
+    <div>OneDrive</div>
   </div>
 
+  <!-- App: Settings -->
   <div class="app-card" role="listitem" data-name="settings" tabindex="0" onclick="abrirPagina('configuracoes.html')" onkeydown="if(event.key==='Enter'){abrirPagina('configuracoes.html')}">
     <span class="material-icons" aria-hidden="true">settings</span> ⚙️
     <div>Settings</div>
   </div>
 
+  <!-- App: Store -->
   <div class="app-card" role="listitem" data-name="store" tabindex="0" onclick="abrirPagina('akiles.html')" onkeydown="if(event.key==='Enter'){abrirPagina('akiles.html')}">
     <span class="material-icons" aria-hidden="true">store</span> 🛒
     <div>Store</div>
   </div>
 
+  <!-- App: Meta Rabbit -->
   <div class="app-card" role="listitem" data-name="meta rabbit" tabindex="0" onclick="abrirPagina('rabbit.html')" onkeydown="if(event.key==='Enter'){abrirPagina('rabbit.html')}">
     <span class="material-icons" aria-hidden="true">pets</span> 🐇
     <div>Meta Rabbit</div>
   </div>
 </div>
 
-    <footer class="footer" role="contentinfo">
-      <button onclick="logout()" aria-label="Logout">Logout</button>
-    </footer>
+<footer class="footer" role="contentinfo" aria-label="Rodapé">
+  <p>&copy; 2025 Lucas Januário — Todos os direitos reservados · ORIS OS v14</p>
+</footer>
+
   </main>
 
   <script>
