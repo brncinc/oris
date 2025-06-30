@@ -7,89 +7,184 @@
   <title>Configurações - ORIS OS</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    /* Mesmos estilos do dashboard */
     body {
-      margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #121212; color: #fff; display: flex; min-height: 100vh; user-select: none;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0d0d0d;
+      color: #00ffcc;
+      display: flex;
+      min-height: 100vh;
     }
+
     .sidebar {
-      width: 260px; background: #040404; padding: 32px 24px;
-      display: flex; flex-direction: column; gap: 24px;
-      border-right: 1px solid #282828; position: relative; z-index: 10;
+      width: 260px;
+      background: #000000;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      border-right: 1px solid #222;
     }
+
     .sidebar h2 {
-      color: #1DB954; font-size: 32px; font-weight: 900; letter-spacing: 1.5px;
-      cursor: default;
+      color: #00ffcc;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
     }
+
     .sidebar button {
-      background: transparent; border: none; color: #b3b3b3;
-      padding: 16px 20px; text-align: left; border-radius: 8px;
-      cursor: pointer; font-size: 16px; font-weight: 700;
-      display: flex; align-items: center; gap: 16px;
-      transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
-      position: relative;
-      user-select: none;
+      background: transparent;
+      border: none;
+      color: #888;
+      padding: 16px 20px;
+      text-align: left;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: 0.3s ease;
+      cursor: pointer;
     }
-    .sidebar button::after {
-      content: '';
-      position: absolute; left: 0; bottom: 0; height: 3px; width: 0;
-      background: #1DB954; transition: width 0.2s ease;
-      border-radius: 2px 2px 0 0;
-    }
-    .sidebar button:hover::after,
-    .sidebar button.active::after {
-      width: 100%;
-    }
+
     .sidebar button:hover,
     .sidebar button.active {
-      background: #1DB954; color: #121212; transform: scale(1.03); z-index: 1;
+      background-color: #00ffcc;
+      color: #000;
+      transform: scale(1.02);
     }
-    .sidebar button .material-icons {
-      font-size: 22px; color: #1DB954; transition: color 0.2s ease;
-      user-select: none;
+
+    .sidebar .material-icons {
+      font-size: 20px;
     }
-    .sidebar button:hover .material-icons,
-    .sidebar button.active .material-icons {
-      color: #121212;
-    }
+
     main {
-      flex: 1; padding: 48px 64px; background: linear-gradient(180deg, #121212 0%, #181818 100%);
-      color: #fff;
+      flex: 1;
+      padding: 48px 64px;
+      background: radial-gradient(circle at top left, #101010 0%, #000 100%);
     }
+
     h1 {
-      font-size: 48px; font-weight: 900; color: #1DB954; user-select: none;
+      font-size: 36px;
+      color: #00ffcc;
+      border-bottom: 2px solid #00ffcc;
+      display: inline-block;
+      padding-bottom: 8px;
     }
-    p {
-      font-size: 20px; margin-top: 24px; line-height: 1.5;
-      max-width: 700px;
+
+    .settings-group {
+      margin-top: 40px;
+    }
+
+    .setting {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a1a1a;
+      padding: 16px 24px;
+      margin-bottom: 20px;
+      border-left: 4px solid #00ffcc;
+      border-radius: 8px;
+    }
+
+    .setting label {
+      font-size: 18px;
+      color: #ccc;
+    }
+
+    .toggle {
+      width: 50px;
+      height: 26px;
+      background: #333;
+      border-radius: 13px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .toggle::before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      background: #00ffcc;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    .toggle.active::before {
+      left: 27px;
+    }
+
+    .slider {
+      width: 200px;
+      accent-color: #00ffcc;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #777;
+      margin-top: -12px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-  <nav class="sidebar" role="navigation" aria-label="Main Sidebar">
+  <nav class="sidebar">
     <h2>ORIS OS</h2>
     <button onclick="location.href='dashboard.html'">
-      <span class="material-icons" aria-hidden="true">dashboard</span> Dashboard
+      <span class="material-icons">dashboard</span> Dashboard
     </button>
     <button onclick="location.href='notificacoes.html'">
-      <span class="material-icons" aria-hidden="true">notifications</span> Notifications
+      <span class="material-icons">notifications</span> Notificações
     </button>
     <button onclick="location.href='perfil.html'">
-      <span class="material-icons" aria-hidden="true">person</span> Profile
+      <span class="material-icons">person</span> Perfil
     </button>
-    <button class="active" onclick="location.href='configuracoes.html'" aria-current="page">
-      <span class="material-icons" aria-hidden="true">settings</span> Settings
+    <button class="active" onclick="location.href='configuracoes.html'">
+      <span class="material-icons">settings</span> Configurações
     </button>
     <button onclick="location.href='sobre.html'">
-      <span class="material-icons" aria-hidden="true">info</span> About
+      <span class="material-icons">info</span> Sobre
     </button>
     <button onclick="logout()">
-      <span class="material-icons" aria-hidden="true">logout</span> Logout
+      <span class="material-icons">logout</span> Sair
     </button>
   </nav>
+
   <main>
-    <h1>Configurações</h1>
-    <p>Aqui você pode ajustar suas preferências e configurações do sistema.</p>
+    <h1>Configurações Avançadas</h1>
+
+    <div class="settings-group">
+      <div class="setting">
+        <label>Modo Turbo Ativado</label>
+        <div class="toggle" onclick="this.classList.toggle('active')"></div>
+      </div>
+
+      <div class="setting">
+        <label>Sons do Sistema</label>
+        <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+      </div>
+
+      <div class="setting">
+        <label>Brilho da Interface</label>
+        <input type="range" min="0" max="100" value="75" class="slider">
+      </div>
+      <p class="note">Ajuste o brilho do tema visual escuro. Recomendado: 70% ~ 80%</p>
+
+      <div class="setting">
+        <label>Contraste Dinâmico</label>
+        <div class="toggle" onclick="this.classList.toggle('active')"></div>
+      </div>
+
+      <div class="setting">
+        <label>Bluetooth Interativo</label>
+        <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+      </div>
+    </div>
   </main>
 
   <script>
