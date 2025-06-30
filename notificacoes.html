@@ -7,7 +7,6 @@
   <title>Notificações - ORIS OS</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    /* Mesmos estilos do dashboard para manter consistência */
     body {
       margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #121212; color: #fff; display: flex; min-height: 100vh; user-select: none;
@@ -27,18 +26,6 @@
       cursor: pointer; font-size: 16px; font-weight: 700;
       display: flex; align-items: center; gap: 16px;
       transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
-      position: relative;
-      user-select: none;
-    }
-    .sidebar button::after {
-      content: '';
-      position: absolute; left: 0; bottom: 0; height: 3px; width: 0;
-      background: #1DB954; transition: width 0.2s ease;
-      border-radius: 2px 2px 0 0;
-    }
-    .sidebar button:hover::after,
-    .sidebar button.active::after {
-      width: 100%;
     }
     .sidebar button:hover,
     .sidebar button.active {
@@ -46,57 +33,167 @@
     }
     .sidebar button .material-icons {
       font-size: 22px; color: #1DB954; transition: color 0.2s ease;
-      user-select: none;
     }
     .sidebar button:hover .material-icons,
     .sidebar button.active .material-icons {
       color: #121212;
     }
+
     main {
       flex: 1; padding: 48px 64px; background: linear-gradient(180deg, #121212 0%, #181818 100%);
-      color: #fff;
     }
     h1 {
-      font-size: 48px; font-weight: 900; color: #1DB954; user-select: none;
+      font-size: 48px; font-weight: 900; color: #1DB954;
     }
-    p {
-      font-size: 20px; margin-top: 24px; line-height: 1.5;
-      max-width: 700px;
+    .notification-list {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .notification {
+      background: #1e1e1e;
+      padding: 16px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    .notification.read {
+      opacity: 0.5;
+      background: #2b2b2b;
+    }
+    .notification p {
+      margin: 0;
+      font-size: 16px;
+      flex: 1;
+    }
+    .notification-actions button {
+      background: #1DB954;
+      border: none;
+      margin-left: 10px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #121212;
+    }
+    .notification-actions button:hover {
+      background: #14833b;
+    }
+    .top-actions {
+      margin-top: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .top-actions button {
+      background: #f44336;
+      border: none;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .top-actions button:hover {
+      background: #d32f2f;
     }
   </style>
 </head>
 <body>
-  <nav class="sidebar" role="navigation" aria-label="Main Sidebar">
+  <nav class="sidebar" role="navigation">
     <h2>ORIS OS</h2>
     <button onclick="location.href='dashboard.html'">
-      <span class="material-icons" aria-hidden="true">dashboard</span> Dashboard
+      <span class="material-icons">dashboard</span> Dashboard
     </button>
-    <button class="active" onclick="location.href='notificacoes.html'" aria-current="page">
-      <span class="material-icons" aria-hidden="true">notifications</span> Notifications
+    <button class="active" onclick="location.href='notificacoes.html'">
+      <span class="material-icons">notifications</span> Notifications
     </button>
     <button onclick="location.href='perfil.html'">
-      <span class="material-icons" aria-hidden="true">person</span> Profile
+      <span class="material-icons">person</span> Profile
     </button>
     <button onclick="location.href='configuracoes.html'">
-      <span class="material-icons" aria-hidden="true">settings</span> Settings
+      <span class="material-icons">settings</span> Settings
     </button>
     <button onclick="location.href='sobre.html'">
-      <span class="material-icons" aria-hidden="true">info</span> About
+      <span class="material-icons">info</span> About
     </button>
     <button onclick="logout()">
-      <span class="material-icons" aria-hidden="true">logout</span> Logout
+      <span class="material-icons">logout</span> Logout
     </button>
   </nav>
+
   <main>
     <h1>Notificações</h1>
-    <p>Aqui você verá todas as suas notificações recentes e alertas do sistema.</p>
+    <div class="top-actions">
+      <button onclick="clearAll()">Limpar Todas</button>
+    </div>
+    <div class="notification-list" id="notificationList">
+      <!-- Notificações serão inseridas via JS -->
+    </div>
   </main>
 
   <script>
+    const notificacoes = [
+      { id: 1, texto: "Atualização disponível para o sistema ORIS OS.", lida: false },
+      { id: 2, texto: "Dispositivo 'Sensor Portão' perdeu conexão.", lida: false },
+      { id: 3, texto: "Backup automático concluído com sucesso.", lida: true },
+    ];
+
+    const notificationList = document.getElementById("notificationList");
+
+    function renderNotificacoes() {
+      notificationList.innerHTML = '';
+      if (notificacoes.length === 0) {
+        notificationList.innerHTML = '<p style="color: #aaa;">Nenhuma notificação no momento.</p>';
+        return;
+      }
+      notificacoes.forEach((n) => {
+        const div = document.createElement("div");
+        div.className = `notification ${n.lida ? "read" : ""}`;
+        div.innerHTML = `
+          <p>${n.texto}</p>
+          <div class="notification-actions">
+            <button onclick="marcarComoLida(${n.id})">${n.lida ? 'Desmarcar' : 'Ler'}</button>
+            <button onclick="remover(${n.id})">Remover</button>
+          </div>
+        `;
+        notificationList.appendChild(div);
+      });
+    }
+
+    function marcarComoLida(id) {
+      const noti = notificacoes.find(n => n.id === id);
+      if (noti) {
+        noti.lida = !noti.lida;
+        renderNotificacoes();
+      }
+    }
+
+    function remover(id) {
+      const index = notificacoes.findIndex(n => n.id === id);
+      if (index !== -1) {
+        notificacoes.splice(index, 1);
+        renderNotificacoes();
+      }
+    }
+
+    function clearAll() {
+      if (confirm("Deseja realmente apagar todas as notificações?")) {
+        notificacoes.length = 0;
+        renderNotificacoes();
+      }
+    }
+
     function logout() {
-      alert('Você saiu da sua conta.');
+      alert("Você saiu da sua conta.");
       window.location.href = 'login.html';
     }
+
+    // Inicializa
+    renderNotificacoes();
   </script>
 </body>
 </html>
