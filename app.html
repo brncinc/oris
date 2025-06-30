@@ -573,191 +573,77 @@ body.reading-mode .main {
         <span class="material-icons" aria-hidden="true">call</span> 📞
         <div>Phone</div>
       </div>
-      <div class="app-card" role="listitem" data-name="calendar" tabindex="0" onclick="abrirPagina('calendar.html')" onkeydown="if(event.key==='Enter'){abrirPagina('calendar.html')}">
-        <span class="material-icons" aria-hidden="true">calendar_today</span> 📅
-        <div>Calendar</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="photos" tabindex="0" onclick="abrirPagina('photos.html')" onkeydown="if(event.key==='Enter'){abrirPagina('photos.html')}">
-        <span class="material-icons" aria-hidden="true">photo_camera</span> 📷
-        <div>Photos</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="files" tabindex="0" onclick="abrirPagina('files.html')" onkeydown="if(event.key==='Enter'){abrirPagina('files.html')}">
-        <span class="material-icons" aria-hidden="true">folder</span> 📁
-        <div>Files</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="videos" tabindex="0" onclick="abrirPagina('videos.html')" onkeydown="if(event.key==='Enter'){abrirPagina('videos.html')}">
-        <span class="material-icons" aria-hidden="true">videocam</span> 🎥
-        <div>Videos</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="settings" tabindex="0" onclick="abrirPagina('settings.html')" onkeydown="if(event.key==='Enter'){abrirPagina('settings.html')}">
-        <span class="material-icons" aria-hidden="true">settings</span> ⚙️
-        <div>Settings</div>
-      </div>
     </div>
 
-    <div class="wallpaper-selector" role="region" aria-label="Wallpaper selector">
-      <h3>Choose a Wallpaper</h3>
+    <div class="wallpaper-selector" aria-label="Wallpaper selection">
+      <h3>Choose your Wallpaper</h3>
       <div class="wallpaper-options">
-        <div class="wallpaper-option wallpaper-option1" role="button" tabindex="0" aria-label="Wallpaper 1" 
-          style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80');"
-          onclick="changeWallpaper(this)" onkeydown="if(event.key==='Enter'){changeWallpaper(this)}"></div>
-        <div class="wallpaper-option wallpaper-option2" role="button" tabindex="0" aria-label="Wallpaper 2"
-          style="background-image: url('https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=600&q=80');"
-          onclick="changeWallpaper(this)" onkeydown="if(event.key==='Enter'){changeWallpaper(this)}"></div>
-        <div class="wallpaper-option wallpaper-option3" role="button" tabindex="0" aria-label="Wallpaper 3"
-          style="background-image: url('https://images.unsplash.com/photo-1468071174046-657d9d351a40?auto=format&fit=crop&w=600&q=80');"
-          onclick="changeWallpaper(this)" onkeydown="if(event.key==='Enter'){changeWallpaper(this)}"></div>
-      </div>
-      <div style="margin-top: 20px; text-align: center;">
-        <label for="uploadWallpaper" style="cursor:pointer; font-weight:700; color:#1DB954;">Upload your own wallpaper</label>
-        <input type="file" id="uploadWallpaper" accept="image/*" style="display:none;" aria-label="Upload your own wallpaper" />
+        <div class="wallpaper-option selected" tabindex="0" style="background-image: url('wallpapers/wallpaper1.jpg')" role="button" aria-pressed="true" aria-label="Wallpaper 1" onclick="changeWallpaper(this)"></div>
+        <div class="wallpaper-option" tabindex="0" style="background-image: url('wallpapers/wallpaper2.jpg')" role="button" aria-pressed="false" aria-label="Wallpaper 2" onclick="changeWallpaper(this)"></div>
+        <div class="wallpaper-option" tabindex="0" style="background-image: url('wallpapers/wallpaper3.jpg')" role="button" aria-pressed="false" aria-label="Wallpaper 3" onclick="changeWallpaper(this)"></div>
+        <div class="wallpaper-option" tabindex="0" style="background-image: url('wallpapers/wallpaper4.jpg')" role="button" aria-pressed="false" aria-label="Wallpaper 4" onclick="changeWallpaper(this)"></div>
       </div>
     </div>
 
-    <div class="footer" role="contentinfo" style="margin-top:40px; text-align:center;">
-      <button id="clearWallpaperBtn" aria-label="Clear wallpaper and reset background">Clear Wallpaper</button>
+    <div class="footer">
+      <button onclick="alert('Obrigado por usar ORIS OS!')">© 2024 ORIS OS</button>
     </div>
   </main>
 
-<script>
-  function abrirPagina(url) {
-    window.location.href = url;
-  }
-
-  function logout() {
-    // Implementar logout conforme sua aplicação
-    alert("Logout efetuado!");
-  }
-
-  function filtrarApps() {
-    const filtro = document.getElementById('searchInput').value.toLowerCase();
-    const apps = document.querySelectorAll('.app-card');
-    apps.forEach(app => {
-      const nome = app.getAttribute('data-name');
-      if (nome.includes(filtro)) {
-        app.style.display = 'flex';
-      } else {
-        app.style.display = 'none';
-      }
-    });
-  }
-
-  // Salvar e aplicar preferências salvas (tema, leitura e wallpaper)
-  window.addEventListener('DOMContentLoaded', () => {
-    // Tema claro/escuro
-    const savedTheme = localStorage.getItem('orisos-theme');
-    if (savedTheme === 'light') {
-      document.body.classList.add('light-mode');
-      document.querySelector('.theme-toggle').setAttribute('aria-pressed', 'true');
+  <script>
+    // Função para abrir página pelo clique ou tecla Enter
+    function abrirPagina(url) {
+      window.location.href = url;
     }
 
-    // Modo leitura
-    const savedReading = localStorage.getItem('orisos-reading');
-    if (savedReading === 'true') {
-      document.body.classList.add('reading-mode');
-      document.querySelector('.reading-toggle').setAttribute('aria-pressed', 'true');
-    }
-
-    // Wallpaper
-    const savedWallpaper = localStorage.getItem('orisos-wallpaper');
-    if (savedWallpaper) {
-      document.body.style.backgroundImage = savedWallpaper;
-
-      // Marcar opção selecionada se for uma das opções fixas
-      document.querySelectorAll('.wallpaper-option').forEach(opt => {
-        if (opt.style.backgroundImage === savedWallpaper) {
-          opt.classList.add('selected');
-        } else {
-          opt.classList.remove('selected');
-        }
+    // Filtrar apps pelo input de busca
+    function filtrarApps() {
+      const filtro = document.getElementById('searchInput').value.toLowerCase();
+      const apps = document.querySelectorAll('.app-card');
+      apps.forEach(app => {
+        const nome = app.dataset.name.toLowerCase();
+        app.style.display = nome.includes(filtro) ? 'flex' : 'none';
       });
     }
-  });
 
-  function toggleTheme() {
-    const body = document.body;
-    body.classList.toggle('light-mode');
-    const btn = document.querySelector('.theme-toggle');
-    const pressed = btn.getAttribute('aria-pressed') === 'true';
-    btn.setAttribute('aria-pressed', !pressed);
-    
-    // Salvar estado no localStorage
-    if (body.classList.contains('light-mode')) {
-      localStorage.setItem('orisos-theme', 'light');
-    } else {
-      localStorage.removeItem('orisos-theme');
+    // Toggle tema claro/escuro
+    function toggleTheme() {
+      const body = document.body;
+      const btn = document.querySelector('.theme-toggle');
+      body.classList.toggle('light-mode');
+      const pressed = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', !pressed);
     }
-  }
 
-  function toggleReadingMode() {
-    const body = document.body;
-    body.classList.toggle('reading-mode');
-    const btn = document.querySelector('.reading-toggle');
-    const pressed = btn.getAttribute('aria-pressed') === 'true';
-    btn.setAttribute('aria-pressed', !pressed);
-
-    // Salvar estado no localStorage
-    if (body.classList.contains('reading-mode')) {
-      localStorage.setItem('orisos-reading', 'true');
-    } else {
-      localStorage.removeItem('orisos-reading');
+    // Toggle modo leitura
+    function toggleReadingMode() {
+      const body = document.body;
+      const btn = document.querySelector('.reading-toggle');
+      body.classList.toggle('reading-mode');
+      const pressed = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', !pressed);
     }
-  }
 
-  function changeWallpaper(element) {
-    // Remove seleção atual
-    document.querySelectorAll('.wallpaper-option').forEach(opt => opt.classList.remove('selected'));
-    element.classList.add('selected');
-    // Define background
-    const url = element.style.backgroundImage;
-    document.body.style.backgroundImage = url;
-    // Remove possível seleção do upload
-    document.getElementById('uploadWallpaper').value = '';
+    // Trocar wallpaper
+    function changeWallpaper(element) {
+      // Remove seleção atual
+      document.querySelectorAll('.wallpaper-option').forEach(el => {
+        el.classList.remove('selected');
+        el.setAttribute('aria-pressed', 'false');
+      });
+      element.classList.add('selected');
+      element.setAttribute('aria-pressed', 'true');
+      const bg = element.style.backgroundImage;
+      document.body.style.backgroundImage = bg;
+    }
 
-    // Salvar wallpaper no localStorage
-    localStorage.setItem('orisos-wallpaper', url);
-  }
-
-  // Upload de imagem para wallpaper
-  const uploadInput = document.getElementById('uploadWallpaper');
-  uploadInput.addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      // Remove seleção atual das opções
-      document.querySelectorAll('.wallpaper-option').forEach(opt => opt.classList.remove('selected'));
-      // Aplica o wallpaper carregado pelo usuário
-      document.body.style.backgroundImage = `url(${e.target.result})`;
-
-      // Salvar wallpaper no localStorage
-      localStorage.setItem('orisos-wallpaper', `url(${e.target.result})`);
-    };
-    reader.readAsDataURL(file);
-  });
-
-  // Botão para limpar wallpaper
-  const clearBtn = document.getElementById('clearWallpaperBtn');
-  clearBtn.style.background = "#f44336"; // vermelho
-  clearBtn.style.color = "#fff";
-  clearBtn.style.fontWeight = "700";
-  clearBtn.style.borderRadius = "50px";
-  clearBtn.style.border = "none";
-  clearBtn.style.padding = "16px 30px";
-  clearBtn.style.cursor = "pointer";
-  clearBtn.style.transition = "background 0.3s ease, transform 0.2s ease";
-
-  clearBtn.addEventListener('mouseenter', () => clearBtn.style.background = '#d32f2f');
-  clearBtn.addEventListener('mouseleave', () => clearBtn.style.background = '#f44336');
-
-  clearBtn.addEventListener('click', () => {
-    document.body.style.backgroundImage = 'none';
-    localStorage.removeItem('orisos-wallpaper');
-    document.querySelectorAll('.wallpaper-option').forEach(opt => opt.classList.remove('selected'));
-    document.getElementById('uploadWallpaper').value = '';
-  });
-</script>
+    // Função de logout placeholder
+    function logout() {
+      alert('Você saiu da sua conta.');
+      // Redirecionar para login
+      window.location.href = 'login.html';
+    }
+  </script>
 
 </body>
 </html>
