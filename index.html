@@ -2,114 +2,83 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="logo.ico" />
+  <link rel="icon" href="a.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login - ORIS OS</title>
   <style>
     body {
-      margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #121212; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh;
+      margin: 0; 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212; 
+      color: #fff; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      height: 100vh;
       user-select: none;
-      flex-direction: column;
-      gap: 12px;
     }
-    .form-container {
-      background: #222; padding: 32px 48px; border-radius: 12px;
+    .login-container {
+      background: #222; 
+      padding: 32px 48px; 
+      border-radius: 12px;
       box-shadow: 0 4px 12px rgb(0 0 0 / 0.6);
-      width: 320px; text-align: center;
-      display: none;
+      width: 320px; 
+      text-align: center;
     }
-    .form-container.active {
-      display: block;
+    .login-container img {
+      width: 80px;
+      margin-bottom: 24px;
+      user-select: none;
     }
     h1 {
-      margin-bottom: 24px; color: #1DB954; font-weight: 900;
+      margin-bottom: 24px; 
+      color: #1DB954; 
+      font-weight: 900;
+      user-select: none;
     }
-    input[type="email"], input[type="password"], input[type="text"] {
-      width: 100%; padding: 12px 14px; margin-bottom: 16px;
-      border: none; border-radius: 8px; font-size: 16px;
-      background: #333; color: #eee;
+    input[type="email"], input[type="password"] {
+      width: 100%; 
+      padding: 12px 14px; 
+      margin-bottom: 16px;
+      border: none; 
+      border-radius: 8px; 
+      font-size: 16px;
+      background: #333; 
+      color: #eee;
     }
     input[type="submit"] {
-      width: 100%; padding: 12px; border: none;
-      background: #1DB954; color: #121212; font-weight: 700;
-      font-size: 16px; border-radius: 8px; cursor: pointer;
+      width: 100%; 
+      padding: 12px; 
+      border: none;
+      background: #1DB954; 
+      color: #121212; 
+      font-weight: 700;
+      font-size: 16px; 
+      border-radius: 8px; 
+      cursor: pointer;
       transition: background-color 0.2s ease;
+      user-select: none;
     }
     input[type="submit"]:hover {
       background: #17a844;
     }
-    .toggle-btn {
-      background: none;
-      border: none;
-      color: #1DB954;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: underline;
-      font-size: 14px;
-      user-select: none;
-    }
-    .toggle-btn:hover {
-      color: #17a844;
-    }
   </style>
 </head>
 <body>
-
-  <form id="loginForm" class="form-container active" onsubmit="login(event)" aria-label="Formulário de login">
+  <form class="login-container" onsubmit="login(event)">
+    <img src="a.png" alt="Ícone ORIS OS" />
     <h1>Login</h1>
-    <input type="email" placeholder="Email" required autocomplete="username" aria-required="true" />
-    <input type="password" placeholder="Senha" required autocomplete="current-password" aria-required="true" />
+    <input type="email" placeholder="Email" required autocomplete="username" />
+    <input type="password" placeholder="Senha" required autocomplete="current-password" />
     <input type="submit" value="Entrar" />
-    <button type="button" class="toggle-btn" onclick="toggleForms()">Não tem conta? Cadastre-se</button>
   </form>
 
-  <form id="registerForm" class="form-container" onsubmit="register(event)" aria-label="Formulário de registro">
-    <h1>Registrar</h1>
-    <input type="text" placeholder="Nome completo" required autocomplete="name" aria-required="true" />
-    <input type="email" placeholder="Email" required autocomplete="email" aria-required="true" />
-    <input type="password" placeholder="Senha" required autocomplete="new-password" aria-required="true" />
-    <input type="password" placeholder="Confirmar senha" required aria-required="true" />
-    <input type="submit" value="Registrar" />
-    <button type="button" class="toggle-btn" onclick="toggleForms()">Já tem conta? Faça login</button>
-  </form>
-
-<script>
-  function login(e) {
-    e.preventDefault();
-    alert('Login simulado com sucesso!');
-    window.location.href = 'dashboard.html';
-  }
-
-  function register(e) {
-    e.preventDefault();
-    const form = e.target;
-    const senha = form.querySelector('input[type="password"]').value;
-    const confirmarSenha = form.querySelectorAll('input[type="password"]')[1].value;
-
-    if (senha !== confirmarSenha) {
-      alert('As senhas não coincidem!');
-      return;
+  <script>
+    function login(e) {
+      e.preventDefault();
+      alert('Login simulado com sucesso!');
+      window.location.href = 'dashboard.html';
     }
-
-    alert('Registro simulado com sucesso!');
-    // Após registrar, pode redirecionar ou alternar para login:
-    toggleForms();
-  }
-
-  function toggleForms() {
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-
-    if (loginForm.classList.contains('active')) {
-      loginForm.classList.remove('active');
-      registerForm.classList.add('active');
-    } else {
-      registerForm.classList.remove('active');
-      loginForm.classList.add('active');
-    }
-  }
-</script>
-
+  </script>
 </body>
 </html>
