@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,20 +5,10 @@
   <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ORIS OS - Neon Glass UI</title>
-
-  <!-- Google Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ORIS OS - Neon Glass UI</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
 <style>
-  /* Reset básico */
   * {
     margin: 0;
     padding: 0;
@@ -33,20 +22,22 @@
     display: flex;
     min-height: 100vh;
     overflow-x: hidden;
-    transition: background 0.5s ease, color 0.3s ease;
-    user-select: none;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    transition: background 0.5s ease, color 0.3s ease;
+    user-select: none;
   }
 
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
+
   ::-webkit-scrollbar-track {
     background: #121212;
   }
+
   ::-webkit-scrollbar-thumb {
     background: #1db954;
     border-radius: 10px;
@@ -60,8 +51,6 @@
     flex-direction: column;
     gap: 24px;
     border-right: 1px solid #282828;
-    position: relative;
-    z-index: 10;
   }
 
   .sidebar h2 {
@@ -70,7 +59,6 @@
     font-weight: 900;
     letter-spacing: 1.5px;
     cursor: default;
-    user-select: none;
   }
 
   .sidebar button {
@@ -87,7 +75,6 @@
     align-items: center;
     gap: 16px;
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
-    user-select: none;
     position: relative;
   }
 
@@ -113,15 +100,12 @@
     background: #1DB954;
     color: #121212;
     transform: scale(1.03);
-    position: relative;
-    z-index: 1;
   }
 
   .sidebar button .material-icons {
     font-size: 22px;
     color: #1DB954;
     transition: color 0.2s ease;
-    user-select: none;
   }
 
   .sidebar button:hover .material-icons,
@@ -136,10 +120,6 @@
     flex-direction: column;
     background: linear-gradient(180deg, #121212 0%, #181818 100%);
     overflow-y: auto;
-    scroll-behavior: smooth;
-    user-select: text;
-    position: relative;
-    z-index: 1;
   }
 
   .topbar {
@@ -147,15 +127,14 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 32px;
-    gap: 12px;
     flex-wrap: wrap;
+    gap: 12px;
   }
 
   .topbar h1 {
     font-size: 36px;
     color: #1DB954;
     font-weight: 900;
-    user-select: none;
   }
 
   .topbar input[type="text"] {
@@ -166,11 +145,10 @@
     color: #fff;
     width: 260px;
     font-size: 16px;
-    box-shadow: inset 0 0 5px #000000;
-    transition: background 0.3s ease;
+    box-shadow: inset 0 0 5px #000;
   }
 
-  .topbar input[type="text"]::placeholder {
+  .topbar input::placeholder {
     color: #8c8c8c;
   }
 
@@ -181,13 +159,8 @@
     font-weight: 700;
     cursor: pointer;
     font-size: 18px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    user-select: none;
     background: #1DB954;
     color: #121212;
-    box-shadow: none;
     transition: background 0.3s ease, transform 0.2s ease;
   }
 
@@ -201,7 +174,6 @@
     flex-wrap: wrap;
     gap: 14px;
     margin-bottom: 32px;
-    user-select: none;
   }
 
   .sections button {
@@ -213,8 +185,7 @@
     font-size: 14px;
     cursor: pointer;
     font-weight: 700;
-    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
-    box-shadow: none;
+    transition: background 0.3s ease, transform 0.2s ease;
   }
 
   .sections button:hover {
@@ -230,7 +201,6 @@
     max-height: 60vh;
     overflow-y: auto;
     padding-right: 8px;
-    user-select: none;
   }
 
   .app-card {
@@ -246,23 +216,19 @@
     gap: 18px;
     font-weight: 700;
     color: #1DB954;
-    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.25s ease;
-    user-select: none;
+    transition: background 0.3s ease, transform 0.25s ease;
   }
 
   .app-card .material-icons {
     font-size: 56px;
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: transform 0.3s ease;
     color: inherit;
-    user-select: none;
   }
 
   .app-card:hover {
     background: #1DB954;
     color: #121212;
-    border-color: #17c364;
     transform: translateY(-6px);
-    z-index: 2;
   }
 
   .app-card:hover .material-icons {
@@ -274,12 +240,10 @@
     margin-top: 48px;
     display: flex;
     justify-content: center;
-    user-select: none;
     background: #111;
     color: #ccc;
     padding: 12px;
     text-align: center;
-    font-family: 'Segoe UI', sans-serif;
     font-size: 14px;
     border-top: 1px solid #333;
     flex-direction: column;
@@ -295,22 +259,28 @@
       width: 220px;
       padding: 28px 16px;
     }
+
     .main {
       padding: 36px 28px;
     }
+
     .topbar h1 {
       font-size: 28px;
     }
+
     .topbar input[type="text"] {
       width: 180px;
     }
+
     .sections button {
       padding: 10px 20px;
       font-size: 13px;
     }
+
     .app-card {
       padding: 22px 14px;
     }
+
     .app-card .material-icons {
       font-size: 48px;
     }
@@ -320,6 +290,7 @@
     body {
       flex-direction: column;
     }
+
     .sidebar {
       width: 100%;
       flex-direction: row;
@@ -328,29 +299,35 @@
       overflow-x: auto;
       border-bottom: 1px solid #282828;
     }
+
     .sidebar h2 {
       flex-shrink: 0;
       margin-bottom: 0;
       padding-right: 16px;
       border-right: 1px solid #1DB954;
     }
+
     .sidebar button {
       flex-shrink: 0;
       padding: 12px 14px;
       font-size: 14px;
       gap: 8px;
     }
+
     .main {
       padding: 24px 16px;
     }
+
     .topbar {
       flex-direction: column;
       align-items: flex-start;
       gap: 16px;
     }
+
     .topbar input[type="text"] {
       width: 100%;
     }
+
     .grid {
       grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
       max-height: 50vh;
@@ -359,37 +336,19 @@
 </style>
 
 </head>
-<body>
 
+<body>
   <div class="sidebar" role="navigation" aria-label="Main Sidebar">
     <h2>ORIS OS</h2>
-    <button class="active" onclick="location.href='dashboard.html'">
-      <span class="material-icons">dashboard</span> Dashboard
-    </button>
-    <button onclick="location.href='notificacoes.html'">
-      <span class="material-icons">notifications</span> Notifications
-    </button>
-    <button onclick="location.href='perfil.html'">
-      <span class="material-icons">person</span> Profile
-    </button>
-    <button onclick="location.href='configuracoes.html'">
-      <span class="material-icons">settings</span> Settings
-    </button>
-    <button onclick="location.href='sobre.html'">
-      <span class="material-icons">info</span> About
-    </button>
-    <button onclick="location.href='akiles.html'">
-      <span class="material-icons">store</span> Store
-    </button>
-    <button onclick="location.href='rabbit.html'">
-      <span class="material-icons">pets</span> Meta Rabbit
-    </button>
-    <button onclick="location.href='chat.html'">
-      <span class="material-icons">smart_toy</span> ChatGPT
-    </button>
-    <button onclick="logout()">
-      <span class="material-icons">logout</span> Logout
-    </button>
+    <button class="active" onclick="abrirPagina('dashboard.html')"><span class="material-icons">dashboard</span> Dashboard</button>
+    <button onclick="abrirPagina('notificacoes.html')"><span class="material-icons">notifications</span> Notifications</button>
+    <button onclick="abrirPagina('perfil.html')"><span class="material-icons">person</span> Profile</button>
+    <button onclick="abrirPagina('configuracoes.html')"><span class="material-icons">settings</span> Settings</button>
+    <button onclick="abrirPagina('sobre.html')"><span class="material-icons">info</span> About</button>
+    <button onclick="abrirPagina('akiles.html')"><span class="material-icons">store</span> Store</button>
+    <button onclick="abrirPagina('rabbit.html')"><span class="material-icons">pets</span> Meta Rabbit</button>
+    <button onclick="abrirPagina('chat.html')"><span class="material-icons">smart_toy</span> ChatGPT</button>
+    <button onclick="logout()"><span class="material-icons">logout</span> Logout</button>
   </div>
 
   <main class="main" role="main">
@@ -397,8 +356,8 @@
       <h1>Welcome to ORIS OS</h1>
       <div class="controls">
         <input type="text" id="searchInput" placeholder="Search apps..." oninput="filtrarApps()"/>
-        <button onclick="toggleTheme()">🌓</button>
-        <button onclick="toggleReadingMode()">📖</button>
+        <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+        <button class="reading-toggle" onclick="toggleReadingMode()">📖</button>
       </div>
     </div>
 
@@ -410,82 +369,29 @@
     </div>
 
     <div class="grid" id="appGrid">
-      <div class="app-card" onclick="abrirPagina('home.html')">
-        <span class="material-icons">home</span>
-        <div>Home</div>
-      </div>
-      <div class="app-card" onclick="abrirPagina('light.html')">
-        <span class="material-icons">lightbulb</span>
-        <div>Light</div>
-      </div>
-      <div class="app-card" onclick="abrirPagina('air.html')">
-        <span class="material-icons">air</span>
-        <div>Air</div>
-      </div>
-      <div class="app-card" onclick="abrirPagina('energy.html')">
-        <span class="material-icons">electric_bolt</span>
-        <div>Energy</div>
-      </div>
-      <div class="app-card" onclick="abrirPagina('akiles.html')">
-        <span class="material-icons">store</span>
-        <div>Store</div>
-      </div>
-      <div class="app-card" onclick="abrirPagina('rabbit.html')">
-        <span class="material-icons">pets</span>
-        <div>Meta Rabbit</div>
-      </div>
-      <div class="app-card" onclick="abrirPagina('configuracoes.html')">
-        <span class="material-icons">settings</span>
-        <div>Settings</div>
-      </div>
-      <div class="app-card" onclick="window.open('https://calendar.google.com/...', '_blank')">
-        <span class="material-icons">calendar_today</span>
-        <div>Agenda</div>
-      </div>
+      <div class="app-card" data-name="home" onclick="abrirPagina('home.html')"><span class="material-icons">home</span><div>🏠 Home</div></div>
+      <div class="app-card" data-name="light" onclick="abrirPagina('light.html')"><span class="material-icons">lightbulb</span><div>💡 Light</div></div>
+      <div class="app-card" data-name="air" onclick="abrirPagina('air.html')"><span class="material-icons">air</span><div>🌬️ Air</div></div>
+      <div class="app-card" data-name="energy" onclick="abrirPagina('energy.html')"><span class="material-icons">electric_bolt</span><div>⚡ Energy</div></div>
+      <div class="app-card" data-name="store" onclick="abrirPagina('akiles.html')"><span class="material-icons">store</span><div>🛒 Store</div></div>
+      <div class="app-card" data-name="meta rabbit" onclick="abrirPagina('rabbit.html')"><span class="material-icons">pets</span><div>🐇 Meta Rabbit</div></div>
+      <div class="app-card" data-name="settings" onclick="abrirPagina('configuracoes.html')"><span class="material-icons">settings</span><div>⚙️ Settings</div></div>
+      <div class="app-card" data-name="agenda" onclick="window.open('https://calendar.google.com', '_blank')"><span class="material-icons">calendar_today</span><div>📅 Agenda</div></div>
     </div>
 
-    <h3 style="margin-top:32px;color:#1DB954;font-weight:800;">Web Apps</h3>
+    <h3 style="margin-top:32px;color:#1DB954;font-weight:800;">🌐 Web Apps</h3>
     <div class="grid">
-      <div class="app-card" onclick="window.open('https://music.youtube.com', '_blank')">
-        <span class="material-icons">music_note</span>
-        <div>Music</div>
-      </div>
-      <div class="app-card" onclick="window.open('https://web.whatsapp.com', '_blank')">
-        <span class="material-icons">message</span>
-        <div>WhatsApp</div>
-      </div>
-      <div class="app-card" onclick="window.open('https://mail.google.com', '_blank')">
-        <span class="material-icons">mail</span>
-        <div>Gmail</div>
-      </div>
-      <div class="app-card" onclick="window.open('https://onedrive.live.com/YOUR_SHARE_LINK', '_blank')">
-        <span class="material-icons">folder</span>
-        <div>OneDrive</div>
-      </div>
-      <div class="app-card" onclick="window.open('https://docs.google.com/spreadsheets', '_blank')">
-        <span class="material-icons">table_chart</span>
-        <div>Sheets</div>
-      </div>
-      <div class="app-card" onclick="window.open('https://docs.google.com/document', '_blank')">
-        <span class="material-icons">description</span>
-        <div>Docs</div>
-      </div>
-      <div class="app-card" onclick="window.open('https://open.spotify.com', '_blank')">
-        <span class="material-icons">headphones</span>
-        <div>Spotify</div>
-      </div>
-      <div class="app-card" onclick="window.open('https://photos.google.com', '_blank')">
-        <span class="material-icons">photo_library</span>
-        <div>Fotos</div>
-      </div>
-      <div class="app-card" onclick="window.open('https://instagram.com', '_blank')">
-        <span class="material-icons">photo_camera</span>
-        <div>Instagram</div>
-      </div>
-      <div class="app-card" onclick="window.open('https://twitter.com', '_blank')">
-        <span class="material-icons">alternate_email</span>
-        <div>Twitter</div>
-      </div>
+      <div class="app-card" data-name="music" onclick="window.open('https://music.youtube.com', '_blank')"><span class="material-icons">music_note</span><div>🎵 Music</div></div>
+      <div class="app-card" data-name="whatsapp" onclick="window.open('https://web.whatsapp.com', '_blank')"><span class="material-icons">chat</span><div>💬 WhatsApp</div></div>
+      <div class="app-card" data-name="gmail" onclick="window.open('https://mail.google.com', '_blank')"><span class="material-icons">mail</span><div>📧 Gmail</div></div>
+      <div class="app-card" data-name="onedrive" onclick="window.open('https://onedrive.live.com', '_blank')"><span class="material-icons">folder</span><div>📁 OneDrive</div></div>
+      <div class="app-card" data-name="sheets" onclick="window.open('https://docs.google.com/spreadsheets', '_blank')"><span class="material-icons">table_chart</span><div>📊 Sheets</div></div>
+      <div class="app-card" data-name="docs" onclick="window.open('https://docs.google.com/document', '_blank')"><span class="material-icons">description</span><div>📄 Docs</div></div>
+      <div class="app-card" data-name="spotify" onclick="window.open('https://open.spotify.com', '_blank')"><span class="material-icons">headphones</span><div>🎶 Spotify</div></div>
+      <div class="app-card" data-name="fotos" onclick="window.open('https://photos.google.com', '_blank')"><span class="material-icons">photo_library</span><div>🖼️ Fotos</div></div>
+      <div class="app-card" data-name="instagram" onclick="window.open('https://instagram.com', '_blank')"><span class="material-icons">photo_camera</span><div>📸 Instagram</div></div>
+      <div class="app-card" data-name="twitter" onclick="window.open('https://twitter.com', '_blank')"><span class="material-icons">alternate_email</span><div>🐦 Twitter</div></div>
+      <div class="app-card" data-name="chatgpt" onclick="window.open('https://chat.openai.com', '_blank')"><span class="material-icons">smart_toy</span><div>🤖 ChatGPT</div></div>
     </div>
 
     <footer class="footer">
@@ -497,92 +403,37 @@
 
   <script>
     function abrirPagina(pagina) {
-      window.location.href = pagina;
-    }
-    function logout() {
-      alert('Você saiu!');
-    }
-    function filtrarApps() {
-      // Lógica de filtro (opcional)
-    }
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-    }
-    function toggleReadingMode() {
-      document.body.classList.toggle('reading-mode');
-    }
-  </script>
-</body>
-</html>
-
-  </main>
-
-  <script>
-    function logout() {
-      alert('Logout realizado!');
-      // Aqui você pode adicionar sua lógica de logout real
-    }
-
-    function abrirPagina(pagina) {
       location.href = pagina;
     }
 
-    // Filtra os apps do grid pelo texto digitado
+    function logout() {
+      alert('Logout realizado!');
+    }
+
     function filtrarApps() {
       const filtro = document.getElementById('searchInput').value.toLowerCase();
       const apps = document.querySelectorAll('.app-card');
       apps.forEach(app => {
         const nome = app.getAttribute('data-name').toLowerCase();
-        if (nome.includes(filtro)) {
-          app.style.display = 'flex';
-        } else {
-          app.style.display = 'none';
-        }
+        app.style.display = nome.includes(filtro) ? 'flex' : 'none';
       });
     }
 
-    // Troca o wallpaper da página
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    function toggleReadingMode() {
+      document.body.classList.toggle('reading-mode');
+    }
+
     function changeWallpaper(image) {
       document.body.style.backgroundImage = `url('${image}')`;
-      document.querySelectorAll('.wallpaper-option').forEach(el => {
-        el.classList.remove('selected');
-      });
-      event.currentTarget.classList.add('selected');
     }
 
-    // Alterna o tema claro/escuro
-    function toggleTheme() {
-      const body = document.body;
-      const btn = document.querySelector('.theme-toggle');
-      if (body.classList.contains('light-mode')) {
-        body.classList.remove('light-mode');
-        btn.setAttribute('aria-pressed', 'false');
-      } else {
-        body.classList.add('light-mode');
-        btn.setAttribute('aria-pressed', 'true');
-      }
-    }
-
-    // Alterna o modo leitura
-    function toggleReadingMode() {
-      const body = document.body;
-      const btn = document.querySelector('.reading-toggle');
-      if (body.classList.contains('reading-mode')) {
-        body.classList.remove('reading-mode');
-        btn.setAttribute('aria-pressed', 'false');
-      } else {
-        body.classList.add('reading-mode');
-        btn.setAttribute('aria-pressed', 'true');
-      }
-        function changeGradient(gradient) {
-    document.body.style.backgroundImage = gradient;
-    document.querySelectorAll('.wallpaper-option').forEach(el => {
-      el.classList.remove('selected');
-    });
-    event.currentTarget.classList.add('selected');
-  }
+    function changeGradient(gradient) {
+      document.body.style.backgroundImage = gradient;
     }
   </script>
-
 </body>
 </html>
