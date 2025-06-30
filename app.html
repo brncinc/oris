@@ -3,193 +3,672 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" href="logo.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ORIS OS - Neon Glass UI (Estilo Spotify)</title>
 
   <!-- Google Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <style>
-    /* Reset básico */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  /* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #121212;
-      color: #e0e0e0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #121212; /* Preto escuro Spotify */
+  color: #fff;
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.5s ease, color 0.3s ease;
+  user-select: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-    header {
-      background: rgba(20, 20, 20, 0.85);
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+/* Scrollbar estilo Spotify */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #121212;
+}
+::-webkit-scrollbar-thumb {
+  background: #1db954;
+  border-radius: 10px;
+}
 
-    header img {
-      height: 40px;
-    }
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #040404;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-right: 1px solid #282828;
+  position: relative;
+  z-index: 10;
+}
 
-    header h1 {
-      font-weight: 700;
-      font-size: 1.6rem;
-      color: #1db954; /* Verde Spotify */
-    }
+.sidebar h2 {
+  color: #1DB954; /* Verde Spotify */
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  cursor: default;
+  user-select: none;
+}
 
-    nav {
-      margin-left: auto;
-    }
+.sidebar button {
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  padding: 16px 20px;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+  user-select: none;
+  position: relative;
+}
 
-    nav a {
-      color: #ccc;
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
+/* Linha verde simples embaixo do botão ativo ou hover */
+.sidebar button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  background: #1DB954;
+  transition: width 0.2s ease;
+  border-radius: 2px 2px 0 0;
+}
 
-    nav a:hover {
-      color: #1db954;
-    }
+.sidebar button:hover::after,
+.sidebar button.active::after {
+  width: 100%;
+}
 
-    main {
-      flex-grow: 1;
-      padding: 30px 20px;
-      background: linear-gradient(135deg, #121212 0%, #1f1f1f 100%);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
+.sidebar button:hover,
+.sidebar button.active {
+  background: #1DB954;
+  color: #121212;
+  transform: scale(1.03);
+  position: relative;
+  z-index: 1;
+}
 
-    .card {
-      background: rgba(30, 30, 30, 0.85);
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
-      padding: 20px;
-      backdrop-filter: blur(10px);
-    }
+.sidebar button .material-icons {
+  font-size: 22px;
+  color: #1DB954;
+  transition: color 0.2s ease;
+  user-select: none;
+}
 
-    .card h2 {
-      color: #1db954;
-      margin-bottom: 15px;
-    }
+.sidebar button:hover .material-icons,
+.sidebar button.active .material-icons {
+  color: #121212;
+}
 
-    .wallpaper-upload {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+/* Main content */
+.main {
+  flex: 1;
+  padding: 48px 64px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #121212 0%, #181818 100%);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  user-select: text;
+  position: relative;
+  z-index: 1;
+}
 
-    .wallpaper-upload label {
-      font-weight: 600;
-      color: #ccc;
-    }
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 
-    .wallpaper-upload input[type="file"] {
-      background: #222;
-      border: none;
-      color: #fff;
-      padding: 8px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+.topbar h1 {
+  font-size: 36px;
+  color: #1DB954;
+  font-weight: 900;
+  user-select: none;
+}
 
-    .wallpaper-upload input[type="file"]:hover {
-      background: #1db954;
-    }
+.topbar input[type="text"] {
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: none;
+  background: #282828;
+  color: #fff;
+  width: 260px;
+  font-size: 16px;
+  box-shadow: inset 0 0 5px #000000;
+  transition: background 0.3s ease;
+}
 
-    footer {
-      background: #181818;
-      padding: 15px 20px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #666;
-      border-top: 1px solid #222;
-    }
+.topbar input[type="text"]::placeholder {
+  color: #8c8c8c;
+}
 
-    /* Botão Store */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #121212;
-      border-top: 1px solid #222;
-      display: flex;
-      justify-content: center;
-      padding: 10px 0;
-      z-index: 101;
-    }
+/* Controls buttons in topbar */
+.topbar .controls button {
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  background: #1DB954;
+  color: #121212;
+  box-shadow: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
 
-    .bottom-nav a {
-      color: #1db954;
-      font-weight: 700;
-      font-size: 1.1rem;
-      text-decoration: none;
-      padding: 8px 20px;
-      border: 2px solid #1db954;
-      border-radius: 30px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
+.topbar .controls button:hover {
+  background: #17c364; /* Verde mais suave no hover */
+  transform: scale(1.05);
+}
 
-    .bottom-nav a:hover {
-      background-color: #1db954;
-      color: #121212;
-    }
+/* Sections buttons */
+.sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 32px;
+  user-select: none;
+}
+
+.sections button {
+  background: #282828;
+  color: #1DB954;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 28px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  box-shadow: none;
+}
+
+.sections button:hover {
+  background: #1DB954;
+  color: #121212;
+  transform: scale(1.1);
+}
+
+/* Grid of apps */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 22px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 8px;
+  user-select: none;
+}
+
+/* App cards */
+.app-card {
+  background: #181818;
+  border: 2px solid #1DB954;
+  border-radius: 22px;
+  padding: 28px 16px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  font-weight: 700;
+  color: #1DB954;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.25s ease;
+  user-select: none;
+}
+
+.app-card .material-icons {
+  font-size: 56px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  color: inherit;
+  user-select: none;
+}
+
+.app-card:hover {
+  background: #1DB954;
+  color: #121212;
+  border-color: #17c364;
+  transform: translateY(-6px);
+  z-index: 2;
+}
+
+.app-card:hover .material-icons {
+  transform: scale(1.3);
+  color: #121212;
+}
+
+/* Wallpaper changer */
+.wallpaper-selector {
+  margin-top: 40px;
+  background: #121212cc;
+  padding: 28px 32px;
+  border-radius: 18px;
+  border: 1.5px solid #282828;
+  color: #1DB954;
+  font-weight: 800;
+  user-select: none;
+}
+
+.wallpaper-selector h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.wallpaper-options {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.wallpaper-option {
+  width: 120px;
+  height: 80px;
+  border-radius: 14px;
+  border: 3px solid transparent;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 8px #00000088;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wallpaper-option:hover,
+.wallpaper-option.selected {
+  border-color: #1DB954;
+  box-shadow: 0 0 14px #1DB954cc;
+}
+
+/* Footer */
+.footer {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+}
+
+.footer button {
+  padding: 16px 60px;
+  border: none;
+  border-radius: 50px;
+  background: #1DB954;
+  color: #121212;
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: none;
+  transition: background 0.3s ease, transform 0.3s ease;
+  user-select: none;
+}
+
+.footer button:hover {
+  background: #17c364;
+  color: #121212;
+  transform: scale(1.1);
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 220px;
+    padding: 28px 16px;
+  }
+  .main {
+    padding: 36px 28px;
+  }
+  .topbar h1 {
+    font-size: 28px;
+  }
+  .topbar input[type="text"] {
+    width: 180px;
+  }
+  .sections button {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+  .app-card {
+    padding: 22px 14px;
+  }
+  .app-card .material-icons {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    padding: 20px 10px;
+    gap: 12px;
+    overflow-x: auto;
+    border-bottom: 1px solid #282828;
+    box-shadow: none;
+  }
+  .sidebar h2 {
+    flex-shrink: 0;
+    margin-bottom: 0;
+    padding-right: 16px;
+    border-right: 1px solid #1DB954;
+    user-select: none;
+  }
+  .sidebar button {
+    flex-shrink: 0;
+    padding: 12px 14px;
+    font-size: 14px;
+    gap: 8px;
+  }
+  .main {
+    padding: 24px 16px;
+  }
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .topbar input[type="text"] {
+    width: 100%;
+  }
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    max-height: 50vh;
+  }
+}
+
+/* --- Modo Light --- */
+body.light-mode {
+  background: #f5f5f5;
+  color: #121212;
+  background-image: none !important; /* Para evitar conflito */
+}
+
+body.light-mode .sidebar {
+  background: #ffffff;
+  border-right-color: #cccccc;
+}
+
+body.light-mode .sidebar h2 {
+  color: #1DB954;
+}
+
+body.light-mode .sidebar button {
+  color: #555;
+}
+
+body.light-mode .sidebar button:hover,
+body.light-mode .sidebar button.active {
+  background: #1DB954;
+  color: #ffffff;
+}
+
+body.light-mode .main {
+  background: linear-gradient(180deg, #f5f5f5 0%, #eaeaea 100%);
+  color: #121212;
+}
+
+body.light-mode .topbar input[type="text"] {
+  background: #ffffff;
+  color: #121212;
+  box-shadow: inset 0 0 5px #cccccc;
+}
+
+body.light-mode .sections button {
+  background: #d0d0d0;
+  color: #1DB954;
+}
+
+body.light-mode .sections button:hover {
+  background: #1DB954;
+  color: #ffffff;
+}
+
+body.light-mode .app-card {
+  background: #ffffff;
+  border-color: #1DB954;
+  color: #1DB954;
+}
+
+body.light-mode .app-card:hover {
+  background: #1DB954;
+  color: #ffffff;
+  border-color: #17c364;
+}
+
+body.light-mode .footer button {
+  background: #1DB954;
+  color: #ffffff;
+}
+
+body.light-mode .footer button:hover {
+  background: #17c364;
+  color: #ffffff;
+}
+
+/* --- Modo Leitura --- */
+body.reading-mode {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  background: #111;
+  color: #d0d0d0;
+  background-image: none !important;
+}
+
+body.reading-mode .main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 48px 16px;
+}
   </style>
 </head>
 <body>
 
-  <header>
-    <img src="logo.ico" alt="Logo Oris OS" />
-    <h1>ORIS OS</h1>
-    <nav>
-      <a href="akiles.html">Store</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="card wallpaper-upload">
-      <h2>Alterar Wallpaper</h2>
-      <label for="uploadWallpaper">Upload de imagem:</label>
-      <input type="file" id="uploadWallpaper" accept="image/*" />
-    </section>
-  </main>
-
-  <div class="bottom-nav">
-    <a href="akiles.html">Store</a>
+  <div class="sidebar" role="navigation" aria-label="Main Sidebar">
+    <h2>ORIS OS</h2>
+    <button class="active" onclick="location.href='dashboard.html'" aria-current="page" aria-label="Dashboard">
+      <span class="material-icons" aria-hidden="true">dashboard</span> Dashboard
+    </button>
+    <button onclick="location.href='notificacoes.html'" aria-label="Notifications">
+      <span class="material-icons" aria-hidden="true">notifications</span> Notifications
+    </button>
+    <button onclick="location.href='perfil.html'" aria-label="Profile">
+      <span class="material-icons" aria-hidden="true">person</span> Profile
+    </button>
+    <button onclick="location.href='configuracoes.html'" aria-label="Settings">
+      <span class="material-icons" aria-hidden="true">settings</span> Settings
+    </button>
+    <button onclick="location.href='sobre.html'" aria-label="About">
+      <span class="material-icons" aria-hidden="true">info</span> About
+    </button>
+    <button onclick="logout()" aria-label="Logout">
+      <span class="material-icons" aria-hidden="true">logout</span> Logout
+    </button>
   </div>
 
-  <footer>
-    &copy; 2025 ORIS OS - Todos os direitos reservados.
-  </footer>
+  <main class="main" role="main">
+    <div class="topbar">
+      <h1>Welcome to ORIS OS</h1>
+      <div class="controls" style="display:flex; gap:12px; align-items:center; flex-wrap: wrap;">
+        <input type="text" id="searchInput" placeholder="Search apps..." oninput="filtrarApps()" aria-label="Search apps"/>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode" aria-pressed="false" aria-label="Toggle Light/Dark Mode">🌓</button>
+        <button class="reading-toggle" onclick="toggleReadingMode()" title="Toggle Reading Mode" aria-pressed="false" aria-label="Toggle Reading Mode">📖</button>
+      </div>
+    </div>
+
+    <div class="sections" role="region" aria-label="Sections">
+      <button>My Home</button>
+      <button>Living Room</button>
+      <button>Bathroom</button>
+      <button>Office</button>
+    </div>
+
+    <div class="grid" id="appGrid" role="list" aria-label="Application grid">
+      <div class="app-card" role="listitem" data-name="home" tabindex="0" onclick="abrirPagina('home.html')" onkeydown="if(event.key==='Enter'){abrirPagina('home.html')}">
+        <span class="material-icons" aria-hidden="true">home</span> 🏠
+        <div>Home</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="light" tabindex="0" onclick="abrirPagina('light.html')" onkeydown="if(event.key==='Enter'){abrirPagina('light.html')}">
+        <span class="material-icons" aria-hidden="true">lightbulb</span> 💡
+        <div>Light</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="air" tabindex="0" onclick="abrirPagina('air.html')" onkeydown="if(event.key==='Enter'){abrirPagina('air.html')}">
+        <span class="material-icons" aria-hidden="true">air</span> 🌬️
+        <div>Air</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="energy" tabindex="0" onclick="abrirPagina('energy.html')" onkeydown="if(event.key==='Enter'){abrirPagina('energy.html')}">
+        <span class="material-icons" aria-hidden="true">electric_bolt</span> ⚡
+        <div>Energy</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="music" tabindex="0" onclick="abrirPagina('music.html')" onkeydown="if(event.key==='Enter'){abrirPagina('music.html')}">
+        <span class="material-icons" aria-hidden="true">music_note</span> 🎵
+        <div>Music</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="messages" tabindex="0" onclick="abrirPagina('messages.html')" onkeydown="if(event.key==='Enter'){abrirPagina('messages.html')}">
+        <span class="material-icons" aria-hidden="true">message</span> 💬
+        <div>Messages</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="phone" tabindex="0" onclick="abrirPagina('phone.html')" onkeydown="if(event.key==='Enter'){abrirPagina('phone.html')}">
+        <span class="material-icons" aria-hidden="true">phone</span> 📞
+        <div>Phone</div>
+      </div>
+      <div class="app-card" role="listitem" data-name="chat" tabindex="0" onclick="abrirPagina('chat.html')" onkeydown="if(event.key==='Enter'){abrirPagina('chat.html')}">
+        <span class="material-icons" aria-hidden="true">chat</span> 💭
+        <div>Chat</div>
+      </div>
+    </div>
+
+    <div class="wallpaper-selector" role="region" aria-label="Wallpaper selector">
+      <h3>Change Wallpaper</h3>
+      <div class="wallpaper-options" role="list">
+        <div class="wallpaper-option selected" tabindex="0" role="listitem" aria-label="Wallpaper 1" style="background-image: url('wallpaper1.jpg');" onclick="changeWallpaper(this)" onkeydown="if(event.key==='Enter'){changeWallpaper(this)}"></div>
+        <div class="wallpaper-option" tabindex="0" role="listitem" aria-label="Wallpaper 2" style="background-image: url('wallpaper2.jpg');" onclick="changeWallpaper(this)" onkeydown="if(event.key==='Enter'){changeWallpaper(this)}"></div>
+        <div class="wallpaper-option" tabindex="0" role="listitem" aria-label="Wallpaper 3" style="background-image: url('wallpaper3.jpg');" onclick="changeWallpaper(this)" onkeydown="if(event.key==='Enter'){changeWallpaper(this)}"></div>
+        <div class="wallpaper-option" tabindex="0" role="listitem" aria-label="Wallpaper 4" style="background-image: url('wallpaper4.jpg');" onclick="changeWallpaper(this)" onkeydown="if(event.key==='Enter'){changeWallpaper(this)}"></div>
+      </div>
+
+      <!-- Upload wallpaper -->
+      <div style="margin-top: 24px; text-align:center;">
+        <label for="uploadWallpaper" style="cursor:pointer; color:#1DB954; font-weight:700; user-select:none; border: 2px solid #1DB954; padding: 10px 20px; border-radius: 12px; display: inline-block;">
+          Upload Wallpaper
+        </label>
+        <input type="file" id="uploadWallpaper" accept="image/*" style="display:none" aria-label="Upload wallpaper image" />
+      </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+      <button onclick="alert('Feature coming soon!')" aria-label="Go to analysis page">Analysis</button>
+    </div>
+  </main>
 
   <script>
-    // Script para alterar wallpaper da página com upload do usuário
-    const uploadInput = document.getElementById('uploadWallpaper');
+    function abrirPagina(url) {
+      window.location.href = url;
+    }
 
-    uploadInput.addEventListener('change', function () {
-      const file = this.files[0];
+    function logout() {
+      // Aqui você pode colocar sua lógica de logout, por exemplo:
+      alert('Logout efetuado!');
+      // window.location.href = 'login.html';
+    }
+
+    // Filtra apps pelo nome digitado na busca
+    function filtrarApps() {
+      const filtro = document.getElementById('searchInput').value.toLowerCase();
+      const apps = document.querySelectorAll('.app-card');
+      apps.forEach(app => {
+        const nome = app.dataset.name.toLowerCase();
+        if (nome.includes(filtro)) {
+          app.style.display = 'flex';
+        } else {
+          app.style.display = 'none';
+        }
+      });
+    }
+
+    // Alterna modo claro e escuro
+    function toggleTheme() {
+      const body = document.body;
+      body.classList.toggle('light-mode');
+      const btn = document.querySelector('.theme-toggle');
+      const pressed = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', !pressed);
+    }
+
+    // Alterna modo leitura
+    function toggleReadingMode() {
+      const body = document.body;
+      body.classList.toggle('reading-mode');
+      const btn = document.querySelector('.reading-toggle');
+      const pressed = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', !pressed);
+    }
+
+    // Alterar wallpaper via clique nas opções
+    function changeWallpaper(element) {
+      // Remove seleção atual
+      document.querySelectorAll('.wallpaper-option').forEach(opt => opt.classList.remove('selected'));
+      element.classList.add('selected');
+      // Define background
+      const url = element.style.backgroundImage;
+      document.body.style.backgroundImage = url;
+      // Remove possível seleção do upload
+      document.getElementById('uploadWallpaper').value = '';
+    }
+
+    // Upload de imagem para wallpaper
+    const uploadInput = document.getElementById('uploadWallpaper');
+    uploadInput.addEventListener('change', function(event) {
+      const file = event.target.files[0];
       if (!file) return;
 
       const reader = new FileReader();
-      reader.onload = function (e) {
-        document.body.style.background = `url(${e.target.result}) no-repeat center center fixed`;
-        document.body.style.backgroundSize = 'cover';
+      reader.onload = function(e) {
+        // Remove seleção atual das opções
+        document.querySelectorAll('.wallpaper-option').forEach(opt => opt.classList.remove('selected'));
+        // Aplica o wallpaper carregado pelo usuário
+        document.body.style.backgroundImage = `url(${e.target.result})`;
       };
       reader.readAsDataURL(file);
     });
