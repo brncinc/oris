@@ -505,7 +505,7 @@ body.reading-mode .main {
 </head>
 <body>
 
-  <div class="sidebar" role="navigation" aria-label="Main Sidebar">
+    <div class="sidebar" role="navigation" aria-label="Main Sidebar">
     <h2>ORIS OS</h2>
     <button class="active" onclick="location.href='dashboard.html'" aria-current="page" aria-label="Dashboard">
       <span class="material-icons" aria-hidden="true">dashboard</span> Dashboard
@@ -522,68 +522,21 @@ body.reading-mode .main {
     <button onclick="location.href='sobre.html'" aria-label="About">
       <span class="material-icons" aria-hidden="true">info</span> About
     </button>
+
+    <!-- Botão Store -->
+    <button onclick="location.href='akiles.html'" aria-label="Store">
+      <span class="material-icons" aria-hidden="true">store</span> Store
+    </button>
+
+    <!-- Botão Meta Rabbit -->
+    <button onclick="location.href='rabbit.html'" aria-label="Meta Rabbit">
+      <span class="material-icons" aria-hidden="true">pets</span> Meta Rabbit
+    </button>
+
     <button onclick="logout()" aria-label="Logout">
       <span class="material-icons" aria-hidden="true">logout</span> Logout
     </button>
   </div>
-
-  <main class="main" role="main">
-    <div class="topbar">
-      <h1>Welcome to ORIS OS</h1>
-      <div class="controls" style="display:flex; gap:12px; align-items:center; flex-wrap: wrap;">
-        <input type="text" id="searchInput" placeholder="Search apps..." oninput="filtrarApps()" aria-label="Search apps"/>
-        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode" aria-pressed="false" aria-label="Toggle Light/Dark Mode">🌓</button>
-        <button class="reading-toggle" onclick="toggleReadingMode()" title="Toggle Reading Mode" aria-pressed="false" aria-label="Toggle Reading Mode">📖</button>
-      </div>
-    </div>
-
-    <div class="sections" role="region" aria-label="Sections">
-      <button>My Home</button>
-      <button>Living Room</button>
-      <button>Bathroom</button>
-      <button>Office</button>
-    </div>
-
-    <div class="grid" id="appGrid" role="list" aria-label="Application grid">
-      <div class="app-card" role="listitem" data-name="home" tabindex="0" onclick="abrirPagina('home.html')" onkeydown="if(event.key==='Enter'){abrirPagina('home.html')}">
-        <span class="material-icons" aria-hidden="true">home</span> 🏠
-        <div>Home</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="light" tabindex="0" onclick="abrirPagina('light.html')" onkeydown="if(event.key==='Enter'){abrirPagina('light.html')}">
-        <span class="material-icons" aria-hidden="true">lightbulb</span> 💡
-        <div>Light</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="air" tabindex="0" onclick="abrirPagina('air.html')" onkeydown="if(event.key==='Enter'){abrirPagina('air.html')}">
-        <span class="material-icons" aria-hidden="true">air</span> 🌬️
-        <div>Air</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="energy" tabindex="0" onclick="abrirPagina('energy.html')" onkeydown="if(event.key==='Enter'){abrirPagina('energy.html')}">
-        <span class="material-icons" aria-hidden="true">electric_bolt</span> ⚡
-        <div>Energy</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="music" tabindex="0" onclick="abrirPagina('music.html')" onkeydown="if(event.key==='Enter'){abrirPagina('music.html')}">
-        <span class="material-icons" aria-hidden="true">music_note</span> 🎵
-        <div>Music</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="messages" tabindex="0" onclick="abrirPagina('messages.html')" onkeydown="if(event.key==='Enter'){abrirPagina('messages.html')}">
-        <span class="material-icons" aria-hidden="true">message</span> 💬
-        <div>Messages</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="phone" tabindex="0" onclick="abrirPagina('phone.html')" onkeydown="if(event.key==='Enter'){abrirPagina('phone.html')}">
-        <span class="material-icons" aria-hidden="true">call</span> 📞
-        <div>Phone</div>
-      </div>
-    </div>
-
-    <div class="wallpaper-selector" aria-label="Wallpaper selection">
-      <h3>Choose your Wallpaper</h3>
-      <div class="wallpaper-options">
-        <div class="wallpaper-option selected" tabindex="0" style="background-image: url('wallpapers/wallpaper1.jpg')" role="button" aria-pressed="true" aria-label="Wallpaper 1" onclick="changeWallpaper(this)"></div>
-        <div class="wallpaper-option" tabindex="0" style="background-image: url('wallpapers/wallpaper2.jpg')" role="button" aria-pressed="false" aria-label="Wallpaper 2" onclick="changeWallpaper(this)"></div>
-        <div class="wallpaper-option" tabindex="0" style="background-image: url('wallpapers/wallpaper3.jpg')" role="button" aria-pressed="false" aria-label="Wallpaper 3" onclick="changeWallpaper(this)"></div>
-        <div class="wallpaper-option" tabindex="0" style="background-image: url('wallpapers/wallpaper4.jpg')" role="button" aria-pressed="false" aria-label="Wallpaper 4" onclick="changeWallpaper(this)"></div>
-      </div>
-    </div>
 
     <div class="footer">
       <button onclick="alert('Obrigado por usar ORIS OS!')">© 2024 ORIS OS</button>
