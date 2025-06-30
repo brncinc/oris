@@ -608,11 +608,21 @@ body.reading-mode .main {
 
     <section class="wallpaper-selector" aria-label="Wallpaper Selector">
       <h3>Escolha o Wallpaper</h3>
-      <div class="wallpaper-options" role="list">
-        <div class="wallpaper-option selected" tabindex="0" style="background-image: url('wallpaper1.jpg');" aria-label="Wallpaper 1" onclick="changeWallpaper('wallpaper1.jpg')" onkeydown="if(event.key==='Enter'){changeWallpaper('wallpaper1.jpg')}"></div>
-        <div class="wallpaper-option" tabindex="0" style="background-image: url('wallpaper2.jpg');" aria-label="Wallpaper 2" onclick="changeWallpaper('wallpaper2.jpg')" onkeydown="if(event.key==='Enter'){changeWallpaper('wallpaper2.jpg')}"></div>
-        <div class="wallpaper-option" tabindex="0" style="background-image: url('wallpaper3.jpg');" aria-label="Wallpaper 3" onclick="changeWallpaper('wallpaper3.jpg')" onkeydown="if(event.key==='Enter'){changeWallpaper('wallpaper3.jpg')}"></div>
-      </div>
+     <div class="wallpaper-options" role="list">
+  <!-- Imagens -->
+  <div class="wallpaper-option selected" tabindex="0" style="background-image: url('wallpaper1.jpg');" aria-label="Wallpaper 1" onclick="changeWallpaper('wallpaper1.jpg')" onkeydown="if(event.key==='Enter'){changeWallpaper('wallpaper1.jpg')}"></div>
+  <div class="wallpaper-option" tabindex="0" style="background-image: url('wallpaper2.jpg');" aria-label="Wallpaper 2" onclick="changeWallpaper('wallpaper2.jpg')" onkeydown="if(event.key==='Enter'){changeWallpaper('wallpaper2.jpg')}"></div>
+  <div class="wallpaper-option" tabindex="0" style="background-image: url('wallpaper3.jpg');" aria-label="Wallpaper 3" onclick="changeWallpaper('wallpaper3.jpg')" onkeydown="if(event.key==='Enter'){changeWallpaper('wallpaper3.jpg')}"></div>
+
+  <!-- Degradês -->
+  <div class="wallpaper-option" tabindex="0" style="background-image: linear-gradient(135deg, #1DB954, #121212);" aria-label="Verde Neon & Preto" onclick="changeGradient('linear-gradient(135deg, #1DB954, #121212)')" onkeydown="if(event.key==='Enter'){changeGradient('linear-gradient(135deg, #1DB954, #121212)')}"></div>
+
+  <div class="wallpaper-option" tabindex="0" style="background-image: linear-gradient(135deg, #1db954, #1e3c72);" aria-label="Verde & Azul Escuro" onclick="changeGradient('linear-gradient(135deg, #1db954, #1e3c72)')" onkeydown="if(event.key==='Enter'){changeGradient('linear-gradient(135deg, #1db954, #1e3c72)')}"></div>
+
+  <div class="wallpaper-option" tabindex="0" style="background-image: linear-gradient(135deg, #1db954, #8e24aa);" aria-label="Verde & Magenta" onclick="changeGradient('linear-gradient(135deg, #1db954, #8e24aa)')" onkeydown="if(event.key==='Enter'){changeGradient('linear-gradient(135deg, #1db954, #8e24aa)')}"></div>
+
+  <div class="wallpaper-option" tabindex="0" style="background-image: linear-gradient(135deg, #1db954, #00c6ff);" aria-label="Verde & Azul Claro" onclick="changeGradient('linear-gradient(135deg, #1db954, #00c6ff)')" onkeydown="if(event.key==='Enter'){changeGradient('linear-gradient(135deg, #1db954, #00c6ff)')}"></div>
+</div>
     </section>
 
     <footer class="footer" role="contentinfo">
