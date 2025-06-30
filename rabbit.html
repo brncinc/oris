@@ -171,6 +171,10 @@
     <h1>Meta Rabbit</h1>
     <img src="a.png" alt="Meta Rabbit Logo" />
   </div>
+  <div id="balanceBox" class="input-box" aria-label="Saldo atual">
+    <label for="balance">Saldo Atual:</label>
+    <input type="text" id="balance" readonly value="0 FRACTIO" />
+  </div>
 
   <div class="buttons-container">
     <button type="button" class="btn" onclick="createWallet()">Criar Fração</button>
@@ -218,13 +222,6 @@
   </div>
 
   <button type="button" class="btn" onclick="generateQR()">Gerar QR Code</button>
-
-<div id="output" aria-live="polite" aria-atomic="true" tabindex="0"></div>
-
-<div id="balanceBox" class="input-box" style="display:none;" aria-label="Saldo atual">
-  <label for="balance">Saldo Atual:</label>
-  <input type="text" id="balance" readonly value="0 FRACTIO" />
-</div>
 
 <section class="drax-tech">
   <h2>Drax Technology</h2>
