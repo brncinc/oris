@@ -44,8 +44,8 @@
     margin: 0 0 15px 0;
   }
   .header img {
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
     object-fit: contain;
     margin: 0 auto;
     display: block;
@@ -166,7 +166,7 @@
 
   <div class="header">
     <h1>Meta Rabbit</h1>
-    <img src="meta-rabbit.png" alt="Meta Rabbit Logo" />
+    <img src="a.png" alt="Meta Rabbit Logo" />
   </div>
 
   <div class="buttons-container">
@@ -233,7 +233,6 @@
   function createWallet() {
     wallet = {
       publicKey: 'MRW-' + Math.random().toString(36).substring(2, 10).toUpperCase(),
-      // Private key não é exibida nem armazenada publicamente
     };
     document.getElementById('output').innerText = 'Frações criadas!\nChave Pública: ' + wallet.publicKey;
   }
@@ -295,8 +294,6 @@
 
     document.getElementById('output').innerText = `QR Code gerado para:\nAtivo: ${selectedAsset}\nValor: ${value}\nCupom: ${coupon || "Nenhum"}`;
   }
-
-  generateQR();
 </script>
 
 </body>
