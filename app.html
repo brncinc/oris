@@ -3,197 +3,196 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" href="logo.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ORIS OS - Neon Glass UI (Estilo Spotify)</title>
 
   <!-- Google Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
   <style>
-    body {
+    /* Reset básico */
+    * {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(145deg, #0b0f0e, #141d17, #1c2e24);
-      color: #d6f5e1;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212;
+      color: #e0e0e0;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      padding: 30px;
     }
 
     header {
+      background: rgba(20, 20, 20, 0.85);
+      padding: 10px 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 40px;
+      gap: 15px;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .logo {
-      font-size: 28px;
-      font-weight: bold;
-      color: #00ff99;
+    header img {
+      height: 40px;
     }
 
-    .search-bar input {
-      padding: 10px 16px;
-      border-radius: 10px;
-      border: none;
-      background: #1a2a24;
-      color: #ccffdd;
-      width: 250px;
+    header h1 {
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: #1db954; /* Verde Spotify */
     }
 
-    h2 {
-      font-size: 24px;
-      margin: 20px 0 10px;
+    nav {
+      margin-left: auto;
     }
 
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #1db954;
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, #121212 0%, #1f1f1f 100%);
+      display: flex;
+      flex-direction: column;
       gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .game-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid #224432;
-      border-radius: 16px;
-      overflow: hidden;
-      transition: 0.3s;
-      cursor: pointer;
+    .card {
+      background: rgba(30, 30, 30, 0.85);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      backdrop-filter: blur(10px);
     }
 
-    .game-card:hover {
-      background: rgba(0, 255, 153, 0.08);
+    .card h2 {
+      color: #1db954;
+      margin-bottom: 15px;
     }
 
-    .game-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
+    .wallpaper-upload {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .game-card .info {
-      padding: 10px;
+    .wallpaper-upload label {
+      font-weight: 600;
+      color: #ccc;
     }
 
-    .game-card .info h4 {
-      margin: 5px 0;
-      color: #ffffff;
-      font-size: 16px;
-    }
-
-    .game-card .info button {
-      margin-top: 8px;
-      padding: 8px 12px;
-      background: #00ff99;
+    .wallpaper-upload input[type="file"] {
+      background: #222;
       border: none;
-      color: #000;
-      border-radius: 10px;
-      font-weight: bold;
+      color: #fff;
+      padding: 8px;
+      border-radius: 6px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .wallpaper-upload input[type="file"]:hover {
+      background: #1db954;
     }
 
     footer {
-      margin-top: 40px;
+      background: #181818;
+      padding: 15px 20px;
       text-align: center;
-      color: #66ffbb;
+      font-size: 0.9rem;
+      color: #666;
+      border-top: 1px solid #222;
+    }
+
+    /* Botão Store */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #121212;
+      border-top: 1px solid #222;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      z-index: 101;
+    }
+
+    .bottom-nav a {
+      color: #1db954;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      padding: 8px 20px;
+      border: 2px solid #1db954;
+      border-radius: 30px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .bottom-nav a:hover {
+      background-color: #1db954;
+      color: #121212;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo">Akiles OS Store</div>
-    <div class="search-bar">
-      <input type="text" placeholder="Search games..." id="searchInput" onkeyup="searchGames()">
-    </div>
+    <img src="logo.ico" alt="Logo Oris OS" />
+    <h1>ORIS OS</h1>
+    <nav>
+      <a href="akiles.html">Store</a>
+    </nav>
   </header>
 
-  <section>
-    <h2>Featured Games</h2>
-    <div class="game-grid" id="gameGrid">
-      <div class="game-card">
-        <img src="A.PNG" />
-        <div class="info">
-          <h4>SPACE DICKERS SHONEM</h4>
-          <a href="https://nscsuport.github.io/boscojones/WALLET.HTML">
-            <button>ORDER NOW</button>
-          </a>
-        </div>
-      </div>
+  <main>
+    <section class="card wallpaper-upload">
+      <h2>Alterar Wallpaper</h2>
+      <label for="uploadWallpaper">Upload de imagem:</label>
+      <input type="file" id="uploadWallpaper" accept="image/*" />
+    </section>
+  </main>
 
-      <div class="game-card">
-        <img src="B.png" />
-        <div class="info">
-          <h4>SPACE DICKERS K.O</h4>
-          <a href="https://nscsuport.github.io/boscojones/WALLET.HTML">
-            <button>ORDER NOW</button>
-          </a>
-        </div>
-      </div>
-
-      <div class="game-card">
-        <img src="C.png" />
-        <div class="info">
-          <h4>SURVIVAL SPACE</h4>
-          <a href="https://nscsuport.github.io/boscojones/WALLET.HTML">
-            <button>ORDER NOW</button>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Nova seção de filmes -->
-  <section>
-    <h2>Featured Movies</h2>
-    <div class="game-grid" id="movieGrid">
-      <div class="game-card">
-        <img src="movie1.jpg" alt="Movie 1" />
-        <div class="info">
-          <h4>GALAXY QUEST</h4>
-          <a href="https://example.com/galaxyquest">
-            <button>WATCH NOW</button>
-          </a>
-        </div>
-      </div>
-
-      <div class="game-card">
-        <img src="movie2.jpg" alt="Movie 2" />
-        <div class="info">
-          <h4>STAR VOYAGERS</h4>
-          <a href="https://example.com/starvoyagers">
-            <button>WATCH NOW</button>
-          </a>
-        </div>
-      </div>
-
-      <div class="game-card">
-        <img src="movie3.jpg" alt="Movie 3" />
-        <div class="info">
-          <h4>SPACE ODYSSEY</h4>
-          <a href="https://example.com/spaceodyssey">
-            <button>WATCH NOW</button>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="bottom-nav">
+    <a href="akiles.html">Store</a>
+  </div>
 
   <footer>
-    &copy; 2025 Akiles STORE. All rights reserved.
+    &copy; 2025 ORIS OS - Todos os direitos reservados.
   </footer>
 
   <script>
-    function searchGames() {
-      const input = document.getElementById("searchInput").value.toLowerCase();
-      const cards = document.querySelectorAll(".game-card");
+    // Script para alterar wallpaper da página com upload do usuário
+    const uploadInput = document.getElementById('uploadWallpaper');
 
-      cards.forEach(card => {
-        const title = card.querySelector("h4").textContent.toLowerCase();
-        card.style.display = title.includes(input) ? "block" : "none";
-      });
-    }
+    uploadInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        document.body.style.background = `url(${e.target.result}) no-repeat center center fixed`;
+        document.body.style.backgroundSize = 'cover';
+      };
+      reader.readAsDataURL(file);
+    });
   </script>
 
 </body>
