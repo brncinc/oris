@@ -5,9 +5,12 @@
   <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard - ORIS OS</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <style>
-    /* Sidebar e estilo básico (copiado do principal) */
+    /* Reset e básico */
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #121212; color: #fff; display: flex; min-height: 100vh; user-select: none;
@@ -55,14 +58,163 @@
 
     main {
       flex: 1; padding: 48px 64px; background: linear-gradient(180deg, #121212 0%, #181818 100%);
-      color: #fff;
+      color: #fff; overflow-y: auto;
     }
     h1 {
       font-size: 48px; font-weight: 900; color: #1DB954; user-select: none;
+      margin-bottom: 16px;
     }
     p {
-      font-size: 20px; margin-top: 24px; line-height: 1.5;
+      font-size: 20px; margin-top: 0; margin-bottom: 32px; line-height: 1.5;
       max-width: 700px;
+    }
+
+    /* Cards resumo */
+    .cards {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: #1E1E1E;
+      padding: 24px 32px;
+      border-radius: 12px;
+      flex: 1;
+      min-width: 220px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      user-select: none;
+    }
+    .card h3 {
+      margin: 0 0 12px;
+      color: #1DB954;
+      font-weight: 800;
+      font-size: 20px;
+    }
+    .card p {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    /* Tabela simples */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      user-select: none;
+    }
+    th, td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #282828;
+      text-align: left;
+      font-size: 16px;
+    }
+    th {
+      background-color: #1DB954;
+      color: #121212;
+      font-weight: 700;
+      user-select: none;
+    }
+    tr:hover {
+      background-color: #2A2A2A;
+    }
+    .actions button {
+      background: #1DB954;
+      border: none;
+      padding: 6px 12px;
+      margin-right: 8px;
+      border-radius: 6px;
+      color: #121212;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .actions button:hover {
+      background-color: #14833b;
+    }
+
+    /* Botão geral */
+    .btn-add {
+      background: #1DB954;
+      border: none;
+      color: #121212;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 24px;
+      user-select: none;
+    }
+    .btn-add:hover {
+      background-color: #14833b;
+    }
+
+    /* Modal simples */
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      user-select: none;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: #1E1E1E;
+      padding: 32px 40px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.9);
+    }
+    .modal-content h2 {
+      margin-top: 0;
+      margin-bottom: 24px;
+      color: #1DB954;
+    }
+    .modal-content label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .modal-content input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: none;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    .modal-content button {
+      background: #1DB954;
+      border: none;
+      color: #121212;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .modal-content button:hover {
+      background-color: #14833b;
+    }
+    .modal-close {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+      user-select: none;
     }
   </style>
 </head>
@@ -91,13 +243,190 @@
   <main>
     <h1>Dashboard</h1>
     <p>Bem-vindo ao painel principal do ORIS OS. Aqui você pode ver suas informações gerais e acessar funcionalidades principais.</p>
+
+    <section class="cards" aria-label="Resumo">
+      <div class="card" role="region" aria-labelledby="usuarios-title">
+        <h3 id="usuarios-title">Usuários</h3>
+        <p id="usuarios-count">0</p>
+      </div>
+      <div class="card" role="region" aria-labelledby="dispositivos-title">
+        <h3 id="dispositivos-title">Dispositivos</h3>
+        <p id="dispositivos-count">0</p>
+      </div>
+      <div class="card" role="region" aria-labelledby="notificacoes-title">
+        <h3 id="notificacoes-title">Notificações</h3>
+        <p id="notificacoes-count">0</p>
+      </div>
+    </section>
+
+    <button class="btn-add" id="btnAddDevice">+ Adicionar Dispositivo</button>
+
+    <section aria-label="Lista de Dispositivos">
+      <table aria-describedby="device-list-desc" id="deviceTable">
+        <caption id="device-list-desc" style="text-align:left; margin-bottom:12px; font-weight:700; font-size:18px; color:#1DB954;">
+          Dispositivos Cadastrados
+        </caption>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Linhas serão adicionadas via JS -->
+        </tbody>
+      </table>
+    </section>
   </main>
 
+  <!-- Modal para adicionar/editar dispositivo -->
+  <div class="modal" id="deviceModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Fechar modal" id="closeModal">&times;</button>
+      <h2 id="modalTitle">Adicionar Dispositivo</h2>
+      <form id="deviceForm">
+        <label for="deviceName">Nome do Dispositivo</label>
+        <input type="text" id="deviceName" name="deviceName" required />
+
+        <label for="deviceType">Tipo</label>
+        <input type="text" id="deviceType" name="deviceType" required />
+
+        <label for="deviceStatus">Status</label>
+        <select id="deviceStatus" name="deviceStatus" required>
+          <option value="Ativo">Ativo</option>
+          <option value="Inativo">Inativo</option>
+          <option value="Manutenção">Manutenção</option>
+        </select>
+
+        <button type="submit" id="saveDeviceBtn">Salvar</button>
+      </form>
+    </div>
+  </div>
+
   <script>
+    // Dados locais simulados
+    let dispositivos = [
+      { id: 1, nome: 'Sensor Portão', tipo: 'Sensor', status: 'Ativo' },
+      { id: 2, nome: 'Câmera Entrada', tipo: 'Câmera', status: 'Manutenção' },
+    ];
+    let usuariosCount = 5;
+    let notificacoesCount = 3;
+
+    // Referências DOM
+    const usuariosCountEl = document.getElementById('usuarios-count');
+    const dispositivosCountEl = document.getElementById('dispositivos-count');
+    const notificacoesCountEl = document.getElementById('notificacoes-count');
+    const deviceTableBody = document.querySelector('#deviceTable tbody');
+    const btnAddDevice = document.getElementById('btnAddDevice');
+    const deviceModal = document.getElementById('deviceModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const deviceForm = document.getElementById('deviceForm');
+    const modalTitle = document.getElementById('modalTitle');
+    const deviceNameInput = document.getElementById('deviceName');
+    const deviceTypeInput = document.getElementById('deviceType');
+    const deviceStatusSelect = document.getElementById('deviceStatus');
+
+    let editingDeviceId = null;
+
+    // Inicializa o dashboard
+    function updateDashboard() {
+      usuariosCountEl.textContent = usuariosCount;
+      notificacoesCountEl.textContent = notificacoesCount;
+      dispositivosCountEl.textContent = dispositivos.length;
+      renderDeviceTable();
+    }
+
+    // Renderiza tabela de dispositivos
+    function renderDeviceTable() {
+      deviceTableBody.innerHTML = '';
+      dispositivos.forEach(device => {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td>${device.nome}</td>
+          <td>${device.tipo}</td>
+          <td>${device.status}</td>
+          <td class="actions">
+            <button onclick="editDevice(${device.id})" aria-label="Editar ${device.nome}">Editar</button>
+            <button onclick="deleteDevice(${device.id})" aria-label="Excluir ${device.nome}">Excluir</button>
+          </td>
+        `;
+        deviceTableBody.appendChild(tr);
+      });
+    }
+
+    // Mostrar modal para adicionar dispositivo
+    btnAddDevice.addEventListener('click', () => {
+      editingDeviceId = null;
+      modalTitle.textContent = 'Adicionar Dispositivo';
+      deviceForm.reset();
+      deviceModal.classList.add('active');
+      deviceNameInput.focus();
+    });
+
+    // Fechar modal
+    closeModalBtn.addEventListener('click', () => {
+      deviceModal.classList.remove('active');
+    });
+
+    // Salvar dispositivo (adicionar ou editar)
+    deviceForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const nome = deviceNameInput.value.trim();
+      const tipo = deviceTypeInput.value.trim();
+      const status = deviceStatusSelect.value;
+
+      if (!nome || !tipo) {
+        alert('Preencha todos os campos.');
+        return;
+      }
+
+      if (editingDeviceId) {
+        // Editar
+        const index = dispositivos.findIndex(d => d.id === editingDeviceId);
+        if (index !== -1) {
+          dispositivos[index] = { id: editingDeviceId, nome, tipo, status };
+        }
+      } else {
+        // Adicionar
+        const newId = dispositivos.length ? Math.max(...dispositivos.map(d => d.id)) + 1 : 1;
+        dispositivos.push({ id: newId, nome, tipo, status });
+      }
+      deviceModal.classList.remove('active');
+      updateDashboard();
+    });
+
+    // Editar dispositivo
+    function editDevice(id) {
+      const device = dispositivos.find(d => d.id === id);
+      if (!device) return alert('Dispositivo não encontrado.');
+
+      editingDeviceId = id;
+      modalTitle.textContent = 'Editar Dispositivo';
+      deviceNameInput.value = device.nome;
+      deviceTypeInput.value = device.tipo;
+      deviceStatusSelect.value = device.status;
+      deviceModal.classList.add('active');
+      deviceNameInput.focus();
+    }
+
+    // Excluir dispositivo
+    function deleteDevice(id) {
+      if (!confirm('Tem certeza que deseja excluir este dispositivo?')) return;
+      dispositivos = dispositivos.filter(d => d.id !== id);
+      updateDashboard();
+    }
+
+    // Logout
     function logout() {
       alert('Você saiu da sua conta.');
       window.location.href = 'login.html';
     }
+
+    // Inicializar tudo
+    updateDashboard();
   </script>
 </body>
 </html>
