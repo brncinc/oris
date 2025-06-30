@@ -75,7 +75,7 @@
 
     function loginWithGitHub() {
       const client_id = "Ov23liebjVZey72wpCGy"; // Seu client_id do GitHub OAuth
-      const redirect_uri = "https://brncinc.github.io/ORIS/app.html"; // Sua URL de callback
+      const redirect_uri = "https://brncinc.github.io/oris/app.html"; // Sua URL de callback
       const githubAuthURL = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${encodeURIComponent(redirect_uri)}`;
       window.location.href = githubAuthURL;
     }
