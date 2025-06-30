@@ -7,7 +7,6 @@
   <title>Perfil - ORIS OS</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    /* Mesmos estilos para sidebar e corpo */
     body {
       margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #121212; color: #fff; display: flex; min-height: 100vh; user-select: none;
@@ -15,11 +14,10 @@
     .sidebar {
       width: 260px; background: #040404; padding: 32px 24px;
       display: flex; flex-direction: column; gap: 24px;
-      border-right: 1px solid #282828; position: relative; z-index: 10;
+      border-right: 1px solid #282828;
     }
     .sidebar h2 {
       color: #1DB954; font-size: 32px; font-weight: 900; letter-spacing: 1.5px;
-      cursor: default;
     }
     .sidebar button {
       background: transparent; border: none; color: #b3b3b3;
@@ -27,69 +25,122 @@
       cursor: pointer; font-size: 16px; font-weight: 700;
       display: flex; align-items: center; gap: 16px;
       transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
-      position: relative;
-      user-select: none;
-    }
-    .sidebar button::after {
-      content: '';
-      position: absolute; left: 0; bottom: 0; height: 3px; width: 0;
-      background: #1DB954; transition: width 0.2s ease;
-      border-radius: 2px 2px 0 0;
-    }
-    .sidebar button:hover::after,
-    .sidebar button.active::after {
-      width: 100%;
     }
     .sidebar button:hover,
     .sidebar button.active {
-      background: #1DB954; color: #121212; transform: scale(1.03); z-index: 1;
+      background: #1DB954; color: #121212; transform: scale(1.03);
     }
     .sidebar button .material-icons {
-      font-size: 22px; color: #1DB954; transition: color 0.2s ease;
-      user-select: none;
+      font-size: 22px; color: #1DB954;
     }
     .sidebar button:hover .material-icons,
     .sidebar button.active .material-icons {
       color: #121212;
     }
+
     main {
-      flex: 1; padding: 48px 64px; background: linear-gradient(180deg, #121212 0%, #181818 100%);
+      flex: 1; padding: 48px; background: linear-gradient(180deg, #121212 0%, #181818 100%);
+      display: flex; justify-content: center; align-items: center;
+    }
+
+    .profile-card {
+      background: #1f1f1f;
+      padding: 40px;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .profile-card h1 {
+      font-size: 36px;
+      margin-bottom: 24px;
+      color: #1DB954;
+      text-align: center;
+    }
+
+    .profile-card label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #b3b3b3;
+    }
+
+    .profile-card input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: none;
+      background-color: #2c2c2c;
       color: #fff;
+      font-size: 16px;
     }
-    h1 {
-      font-size: 48px; font-weight: 900; color: #1DB954; user-select: none;
+
+    .profile-card input:focus {
+      outline: 2px solid #1DB954;
     }
-    p {
-      font-size: 20px; margin-top: 24px; line-height: 1.5;
-      max-width: 700px;
+
+    .profile-card button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background-color: #1DB954;
+      color: #121212;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .profile-card button:hover {
+      background-color: #17a74a;
     }
   </style>
 </head>
 <body>
-  <nav class="sidebar" role="navigation" aria-label="Main Sidebar">
+  <nav class="sidebar" role="navigation">
     <h2>ORIS OS</h2>
     <button onclick="location.href='dashboard.html'">
-      <span class="material-icons" aria-hidden="true">dashboard</span> Dashboard
+      <span class="material-icons">dashboard</span> Dashboard
     </button>
     <button onclick="location.href='notificacoes.html'">
-      <span class="material-icons" aria-hidden="true">notifications</span> Notifications
+      <span class="material-icons">notifications</span> Notifications
     </button>
-    <button class="active" onclick="location.href='perfil.html'" aria-current="page">
-      <span class="material-icons" aria-hidden="true">person</span> Profile
+    <button class="active" onclick="location.href='perfil.html'">
+      <span class="material-icons">person</span> Profile
     </button>
     <button onclick="location.href='configuracoes.html'">
-      <span class="material-icons" aria-hidden="true">settings</span> Settings
+      <span class="material-icons">settings</span> Settings
     </button>
     <button onclick="location.href='sobre.html'">
-      <span class="material-icons" aria-hidden="true">info</span> About
+      <span class="material-icons">info</span> About
     </button>
     <button onclick="logout()">
-      <span class="material-icons" aria-hidden="true">logout</span> Logout
+      <span class="material-icons">logout</span> Logout
     </button>
   </nav>
+
   <main>
-    <h1>Perfil</h1>
-    <p>Esta é sua página de perfil. Aqui você pode ver e editar suas informações pessoais.</p>
+    <div class="profile-card">
+      <h1>Meu Perfil</h1>
+      <form id="perfilForm">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+
+        <label for="telefone">Telefone</label>
+        <input type="tel" id="telefone" name="telefone" placeholder="(99) 99999-9999">
+
+        <label for="senha">Nova Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="********">
+
+        <button type="submit">Salvar Alterações</button>
+      </form>
+    </div>
   </main>
 
   <script>
@@ -97,6 +148,12 @@
       alert('Você saiu da sua conta.');
       window.location.href = 'login.html';
     }
+
+    // Simular salvamento
+    document.getElementById('perfilForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Informações salvas com sucesso!');
+    });
   </script>
 </body>
 </html>
