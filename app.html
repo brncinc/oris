@@ -554,83 +554,70 @@ body.reading-mode .main {
       <button>Bathroom</button>
       <button>Office</button>
     </div>
+<div class="grid" id="appGrid" role="list" aria-label="Application grid">
+  <div class="app-card" role="listitem" data-name="home" tabindex="0" onclick="abrirPagina('home.html')" onkeydown="if(event.key==='Enter'){abrirPagina('home.html')}">
+    <span class="material-icons" aria-hidden="true">home</span> 🏠
+    <div>Home</div>
+  </div>
 
-    <div class="grid" id="appGrid" role="list" aria-label="Application grid">
-      <div class="app-card" role="listitem" data-name="home" tabindex="0" onclick="abrirPagina('home.html')" onkeydown="if(event.key==='Enter'){abrirPagina('home.html')}">
-        <span class="material-icons" aria-hidden="true">home</span> 🏠
-        <div>Home</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="light" tabindex="0" onclick="abrirPagina('light.html')" onkeydown="if(event.key==='Enter'){abrirPagina('light.html')}">
-        <span class="material-icons" aria-hidden="true">lightbulb</span> 💡
-        <div>Light</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="air" tabindex="0" onclick="abrirPagina('air.html')" onkeydown="if(event.key==='Enter'){abrirPagina('air.html')}">
-        <span class="material-icons" aria-hidden="true">air</span> 🌬️
-        <div>Air</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="energy" tabindex="0" onclick="abrirPagina('energy.html')" onkeydown="if(event.key==='Enter'){abrirPagina('energy.html')}">
-        <span class="material-icons" aria-hidden="true">electric_bolt</span> ⚡
-        <div>Energy</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="music" tabindex="0" onclick="abrirPagina('music.html')" onkeydown="if(event.key==='Enter'){abrirPagina('music.html')}">
-        <span class="material-icons" aria-hidden="true">music_note</span> 🎵
-        <div>Music</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="messages" tabindex="0" onclick="abrirPagina('messages.html')" onkeydown="if(event.key==='Enter'){abrirPagina('messages.html')}">
-        <span class="material-icons" aria-hidden="true">message</span> 💬
-        <div>Messages</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="mail" tabindex="0" onclick="abrirPagina('mail.html')" onkeydown="if(event.key==='Enter'){abrirPagina('mail.html')}">
-        <span class="material-icons" aria-hidden="true">mail</span> 📧
-        <div>Mail</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="calendar" tabindex="0" onclick="abrirPagina('calendar.html')" onkeydown="if(event.key==='Enter'){abrirPagina('calendar.html')}">
-        <span class="material-icons" aria-hidden="true">calendar_today</span> 📅
-        <div>Calendar</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="files" tabindex="0" onclick="abrirPagina('files.html')" onkeydown="if(event.key==='Enter'){abrirPagina('files.html')}">
-        <span class="material-icons" aria-hidden="true">folder</span> 📁
-        <div>Files</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="settings" tabindex="0" onclick="abrirPagina('configuracoes.html')" onkeydown="if(event.key==='Enter'){abrirPagina('configuracoes.html')}">
-        <span class="material-icons" aria-hidden="true">settings</span> ⚙️
-        <div>Settings</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="store" tabindex="0" onclick="abrirPagina('akiles.html')" onkeydown="if(event.key==='Enter'){abrirPagina('akiles.html')}">
-        <span class="material-icons" aria-hidden="true">store</span> 🛒
-        <div>Store</div>
-      </div>
-      <div class="app-card" role="listitem" data-name="meta rabbit" tabindex="0" onclick="abrirPagina('rabbit.html')" onkeydown="if(event.key==='Enter'){abrirPagina('rabbit.html')}">
-        <span class="material-icons" aria-hidden="true">pets</span> 🐇
-        <div>Meta Rabbit</div>
-      </div>
-    </div>
+  <div class="app-card" role="listitem" data-name="light" tabindex="0" onclick="abrirPagina('light.html')" onkeydown="if(event.key==='Enter'){abrirPagina('light.html')}">
+    <span class="material-icons" aria-hidden="true">lightbulb</span> 💡
+    <div>Light</div>
+  </div>
 
-    <section class="wallpaper-selector" aria-label="Wallpaper Selector">
-      <h3>Escolha o Wallpaper</h3>
-     <div class="wallpaper-options" role="list">
-<!-- Imagens -->
+  <div class="app-card" role="listitem" data-name="air" tabindex="0" onclick="abrirPagina('air.html')" onkeydown="if(event.key==='Enter'){abrirPagina('air.html')}">
+    <span class="material-icons" aria-hidden="true">air</span> 🌬️
+    <div>Air</div>
+  </div>
 
+  <div class="app-card" role="listitem" data-name="energy" tabindex="0" onclick="abrirPagina('energy.html')" onkeydown="if(event.key==='Enter'){abrirPagina('energy.html')}">
+    <span class="material-icons" aria-hidden="true">electric_bolt</span> ⚡
+    <div>Energy</div>
+  </div>
 
-<!-- Degradês -->
-<div class="wallpaper-option" tabindex="0" style="background-image: linear-gradient(135deg, #1DB954, #121212);" aria-label="Verde Neon & Preto" onclick="changeGradient('linear-gradient(135deg, #1DB954, #121212)')" onkeydown="if(event.key==='Enter'){changeGradient('linear-gradient(135deg, #1DB954, #121212)')}"></div>
+  <!-- LINK AJUSTADO: YouTube Music -->
+  <div class="app-card" role="listitem" data-name="music" tabindex="0" onclick="window.open('https://music.youtube.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://music.youtube.com', '_blank')}">
+    <span class="material-icons" aria-hidden="true">music_note</span> 🎵
+    <div>Music</div>
+  </div>
 
-<div class="wallpaper-option" tabindex="0" style="background-image: linear-gradient(135deg, #1db954, #1e3c72);" aria-label="Verde & Azul Escuro" onclick="changeGradient('linear-gradient(135deg, #1db954, #1e3c72)')" onkeydown="if(event.key==='Enter'){changeGradient('linear-gradient(135deg, #1db954, #1e3c72)')}"></div>
+  <!-- LINK AJUSTADO: WhatsApp Web -->
+  <div class="app-card" role="listitem" data-name="messages" tabindex="0" onclick="window.open('https://web.whatsapp.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://web.whatsapp.com', '_blank')}">
+    <span class="material-icons" aria-hidden="true">message</span> 💬
+    <div>Messages</div>
+  </div>
 
-<div class="wallpaper-option" tabindex="0" style="background-image: linear-gradient(135deg, #1db954, #8e24aa);" aria-label="Verde & Magenta" onclick="changeGradient('linear-gradient(135deg, #1db954, #8e24aa)')" onkeydown="if(event.key==='Enter'){changeGradient('linear-gradient(135deg, #1db954, #8e24aa)')}"></div>
+  <!-- LINK AJUSTADO: Gmail -->
+  <div class="app-card" role="listitem" data-name="mail" tabindex="0" onclick="window.open('https://mail.google.com', '_blank')" onkeydown="if(event.key==='Enter'){window.open('https://mail.google.com', '_blank')}">
+    <span class="material-icons" aria-hidden="true">mail</span> 📧
+    <div>Mail</div>
+  </div>
 
-<div class="wallpaper-option" tabindex="0" style="background-image: linear-gradient(135deg, #1db954, #00c6ff);" aria-label="Verde & Azul Claro" onclick="changeGradient('linear-gradient(135deg, #1db954, #00c6ff)')" onkeydown="if(event.key==='Enter'){changeGradient('linear-gradient(135deg, #1db954, #00c6ff)')}"></div>
+  <div class="app-card" role="listitem" data-name="calendar" tabindex="0" onclick="abrirPagina('calendar.html')" onkeydown="if(event.key==='Enter'){abrirPagina('calendar.html')}">
+    <span class="material-icons" aria-hidden="true">calendar_today</span> 📅
+    <div>Calendar</div>
+  </div>
 
-<!-- Novos degradês adicionados -->
-<div class="wallpaper-option" tabindex="0" style="background-image: linear-gradient(135deg, #1DB954, #ff6e7f);" aria-label="Verde & Rosa Claro" onclick="changeGradient('linear-gradient(135deg, #1DB954, #ff6e7f)')" onkeydown="if(event.key==='Enter'){changeGradient('linear-gradient(135deg, #1DB954, #ff6e7f)')}"></div>
+  <div class="app-card" role="listitem" data-name="files" tabindex="0" onclick="abrirPagina('files.html')" onkeydown="if(event.key==='Enter'){abrirPagina('files.html')}">
+    <span class="material-icons" aria-hidden="true">folder</span> 📁
+    <div>Files</div>
+  </div>
 
-<div class="wallpaper-option" tabindex="0" style="background-image: linear-gradient(135deg, #1DB954, #f7971e);" aria-label="Verde & Laranja" onclick="changeGradient('linear-gradient(135deg, #1DB954, #f7971e)')" onkeydown="if(event.key==='Enter'){changeGradient('linear-gradient(135deg, #1DB954, #f7971e)')}"></div>
+  <div class="app-card" role="listitem" data-name="settings" tabindex="0" onclick="abrirPagina('configuracoes.html')" onkeydown="if(event.key==='Enter'){abrirPagina('configuracoes.html')}">
+    <span class="material-icons" aria-hidden="true">settings</span> ⚙️
+    <div>Settings</div>
+  </div>
 
-<div class="wallpaper-option" tabindex="0" style="background-image: linear-gradient(135deg, #1DB954, #00d2ff);" aria-label="Verde & Azul Celeste" onclick="changeGradient('linear-gradient(135deg, #1DB954, #00d2ff)')" onkeydown="if(event.key==='Enter'){changeGradient('linear-gradient(135deg, #1DB954, #00d2ff)')}"></div>
+  <div class="app-card" role="listitem" data-name="store" tabindex="0" onclick="abrirPagina('akiles.html')" onkeydown="if(event.key==='Enter'){abrirPagina('akiles.html')}">
+    <span class="material-icons" aria-hidden="true">store</span> 🛒
+    <div>Store</div>
+  </div>
 
-<div class="wallpaper-option" tabindex="0" style="background-image: linear-gradient(135deg, #1DB954, #9d50bb);" aria-label="Verde & Roxo" onclick="changeGradient('linear-gradient(135deg, #1DB954, #9d50bb)')" onkeydown="if(event.key==='Enter'){changeGradient('linear-gradient(135deg, #1DB954, #9d50bb)')}"></div>
-
-    </section>
+  <div class="app-card" role="listitem" data-name="meta rabbit" tabindex="0" onclick="abrirPagina('rabbit.html')" onkeydown="if(event.key==='Enter'){abrirPagina('rabbit.html')}">
+    <span class="material-icons" aria-hidden="true">pets</span> 🐇
+    <div>Meta Rabbit</div>
+  </div>
+</div>
 
     <footer class="footer" role="contentinfo">
       <button onclick="logout()" aria-label="Logout">Logout</button>
