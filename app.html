@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,6 +8,7 @@
   <title>ORIS OS - Neon Glass UI</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
 <style>
   * {
     margin: 0;
@@ -50,9 +52,6 @@
     flex-direction: column;
     gap: 24px;
     border-right: 1px solid #282828;
-    position: fixed;
-    height: 100%;
-    overflow-y: auto;
   }
 
   .sidebar h2 {
@@ -116,7 +115,6 @@
   }
 
   .main {
-    margin-left: 260px;
     flex: 1;
     padding: 48px 64px;
     display: flex;
@@ -197,10 +195,9 @@
     transform: scale(1.1);
   }
 
-  /* Grid ajustada para matriz 6x6 */
   .grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* 6 colunas */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 22px;
     max-height: 60vh;
     overflow-y: auto;
@@ -265,7 +262,6 @@
     }
 
     .main {
-      margin-left: 0;
       padding: 36px 28px;
     }
 
@@ -334,13 +330,11 @@
     }
 
     .grid {
-      grid-template-columns: repeat(3, 1fr); /* Ajustado para 3 colunas em telas pequenas */
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
       max-height: 50vh;
     }
   }
 </style>
-
-
 
 </head>
 
@@ -364,7 +358,7 @@
       <div class="controls">
         <input type="text" id="searchInput" placeholder="Search apps..." oninput="filtrarApps()"/>
         <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
-    
+        <button class="reading-toggle" onclick="toggleReadingMode()">📖</button>
       </div>
     </div>
 
@@ -374,107 +368,124 @@
       <button>Bathroom</button>
       <button>Office</button>
     </div>
-<div class="app-grid">
-  <div class="app-card" data-name="home" onclick="abrirPagina('home.html')">
-    <span class="material-icons">home</span>🏠 Home
-  </div>
-  <div class="app-card" data-name="light" onclick="abrirPagina('light.html')">
-    <span class="material-icons">lightbulb</span>💡 Light
-  </div>
-  <div class="app-card" data-name="air" onclick="abrirPagina('air.html')">
-    <span class="material-icons">air</span>🌬️ Air
-  </div>
-  <div class="app-card" data-name="energy" onclick="abrirPagina('energy.html')">
-    <span class="material-icons">electric_bolt</span>⚡ Energy
-  </div>
-  <div class="app-card" data-name="store" onclick="abrirPagina('akiles.html')">
-    <span class="material-icons">store</span>🛒 Store
-  </div>
-  <div class="app-card" data-name="meta rabbit" onclick="abrirPagina('rabbit.html')">
-    <span class="material-icons">pets</span>🐇 Meta Rabbit
-  </div>
-  
-  <div class="app-card" data-name="settings" onclick="abrirPagina('configuracoes.html')">
-    <span class="material-icons">settings</span>⚙️ Settings
-  </div>
-  <div class="app-card" data-name="agenda" onclick="window.open('https://calendar.google.com', '_blank')">
-    <span class="material-icons">calendar_today</span>📅 Agenda
-  </div>
-  <div class="app-card" data-name="music" onclick="window.open('https://music.youtube.com', '_blank')">
-    <span class="material-icons">music_note</span>🎵 Music
-  </div>
-  <div class="app-card" data-name="whatsapp" onclick="window.open('https://web.whatsapp.com', '_blank')">
-    <span class="material-icons">chat</span>💬 WhatsApp
-  </div>
-  <div class="app-card" data-name="gmail" onclick="window.open('https://mail.google.com', '_blank')">
-    <span class="material-icons">mail</span>📧 Gmail
-  </div>
-  <div class="app-card" data-name="onedrive" onclick="window.open('https://onedrive.live.com', '_blank')">
-    <span class="material-icons">folder</span>📁 OneDrive
-  </div>
-  
-  <div class="app-card" data-name="sheets" onclick="window.open('https://docs.google.com/spreadsheets', '_blank')">
-    <span class="material-icons">table_chart</span>📊 Sheets
-  </div>
-  <div class="app-card" data-name="docs" onclick="window.open('https://docs.google.com/document', '_blank')">
-    <span class="material-icons">description</span>📄 Docs
-  </div>
-  <div class="app-card" data-name="spotify" onclick="window.open('https://open.spotify.com', '_blank')">
-    <span class="material-icons">headphones</span>🎶 Spotify
-  </div>
-  <div class="app-card" data-name="fotos" onclick="window.open('https://photos.google.com', '_blank')">
-    <span class="material-icons">photo_library</span>🖼️ Fotos
-  </div>
-  <div class="app-card" data-name="instagram" onclick="window.open('https://instagram.com', '_blank')">
-    <span class="material-icons">photo_camera</span>📸 Instagram
-  </div>
-  
-  <div class="app-card" data-name="twitter" onclick="window.open('https://twitter.com', '_blank')">
-    <span class="material-icons">alternate_email</span>🐦 Twitter
-  </div>
-  <div class="app-card" data-name="chatgpt" onclick="window.open('https://chat.openai.com', '_blank')">
-    <span class="material-icons">smart_toy</span>🤖 ChatGPT
-  </div>
-  <div class="app-card" data-name="kickstarter" onclick="window.open('https://www.kickstarter.com', '_blank')">
-    <span class="material-icons">rocket_launch</span>🚀 Kickstarter
-  </div>
-  <div class="app-card" data-name="netflix" onclick="window.open('https://www.netflix.com', '_blank')">
-    <span class="material-icons">movie</span>🎬 Netflix
-  </div>
-  <div class="app-card" data-name="cures" onclick="window.open('https://www.cures.org', '_blank')">
-    <span class="material-icons">favorite</span>💊 Cures
-  </div>
-  
-  <div class="app-card" data-name="edx" onclick="window.open('https://www.edx.org', '_blank')">
-    <span class="material-icons">school</span>📘 edX
-  </div>
-  <div class="app-card" data-name="eschool" onclick="window.open('https://eschooltoday.com', '_blank')">
-    <span class="material-icons">menu_book</span>🏫 e-School
-  </div>
-  <div class="app-card" data-name="udemy" onclick="window.open('https://www.udemy.com', '_blank')">
-    <span class="material-icons">cast_for_education</span>📚 Udemy
-  </div>
-  
-  <!-- Novo: Figma -->
-  <div class="app-card" data-name="figma" onclick="window.open('https://www.figma.com', '_blank')">
-    <span class="material-icons">design_services</span>🎨 Figma
-  </div>
-  
-  <!-- Novo: Canva -->
-  <div class="app-card" data-name="canva" onclick="window.open('https://www.canva.com', '_blank')">
-    <span class="material-icons">brush</span>🖌️ Canva
-  </div>
-  
-  <!-- Novo: Monday.com -->
-  <div class="app-card" data-name="monday" onclick="window.open('https://monday.com', '_blank')">
-    <span class="material-icons">event_note</span>📅 Monday
-  </div>
-  
-  <!-- Novo: Google IDX -->
-  <div class="app-card" data-name="google-idx" onclick="window.open('https://idx.dev', '_blank')">
-    <span class="material-icons">code</span>💻 Google IDX
-  </div>
+
+    <div class="grid" id="appGrid">
+     <div class="app-card" data-name="home" onclick="abrirPagina('home.html')">
+  <span class="material-icons">home</span><div>🏠 Home</div>
 </div>
+
+<div class="app-card" data-name="home" onclick="abrirPagina('light.html')">
+  <span class="material-icons">lightbulb</span><div>💡 Light</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="abrirPagina('air.html')">
+  <span class="material-icons">air</span><div>🌬️ Air</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="abrirPagina('energy.html')">
+  <span class="material-icons">electric_bolt</span><div>⚡ Energy</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="abrirPagina('akiles.html')">
+  <span class="material-icons">store</span><div>🛒 Store</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="abrirPagina('rabbit.html')">
+  <span class="material-icons">pets</span><div>🐇 Meta Rabbit</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="abrirPagina('configuracoes.html')">
+  <span class="material-icons">settings</span><div>⚙️ Settings</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://calendar.google.com', '_blank')">
+  <span class="material-icons">calendar_today</span><div>📅 Agenda</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://music.youtube.com', '_blank')">
+  <span class="material-icons">music_note</span><div>🎵 Music</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://web.whatsapp.com', '_blank')">
+  <span class="material-icons">chat</span><div>💬 WhatsApp</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://mail.google.com', '_blank')">
+  <span class="material-icons">mail</span><div>📧 Gmail</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://onedrive.live.com', '_blank')">
+  <span class="material-icons">folder</span><div>📁 OneDrive</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://docs.google.com/spreadsheets', '_blank')">
+  <span class="material-icons">table_chart</span><div>📊 Sheets</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://docs.google.com/document', '_blank')">
+  <span class="material-icons">description</span><div>📄 Docs</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://open.spotify.com', '_blank')">
+  <span class="material-icons">headphones</span><div>🎶 Spotify</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://photos.google.com', '_blank')">
+  <span class="material-icons">photo_library</span><div>🖼️ Fotos</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://instagram.com', '_blank')">
+  <span class="material-icons">photo_camera</span><div>📸 Instagram</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://twitter.com', '_blank')">
+  <span class="material-icons">alternate_email</span><div>🐦 Twitter</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://chat.openai.com', '_blank')">
+  <span class="material-icons">smart_toy</span><div>🤖 ChatGPT</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://www.kickstarter.com', '_blank')">
+  <span class="material-icons">rocket_launch</span><div>🚀 Kickstarter</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://www.netflix.com', '_blank')">
+  <span class="material-icons">movie</span><div>🎬 Netflix</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://www.cures.org', '_blank')">
+  <span class="material-icons">favorite</span><div>💊 Cures</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://www.edx.org', '_blank')">
+  <span class="material-icons">school</span><div>📘 edX</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://eschooltoday.com', '_blank')">
+  <span class="material-icons">menu_book</span><div>🏫 e-School</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://www.udemy.com', '_blank')">
+  <span class="material-icons">cast_for_education</span><div>📚 Udemy</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://www.figma.com', '_blank')">
+  <span class="material-icons">design_services</span><div>🎨 Figma</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://www.canva.com', '_blank')">
+  <span class="material-icons">brush</span><div>🖌️ Canva</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://monday.com', '_blank')">
+  <span class="material-icons">event_note</span><div>📅 Monday</div>
+</div>
+
+<div class="app-card" data-name="home" onclick="window.open('https://idx.dev', '_blank')">
+  <span class="material-icons">code</span><div>💻 Google IDX</div>
+</div>
+
 
     </div>
 
