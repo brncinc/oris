@@ -7,7 +7,6 @@
   <title>ORIS OS - Neon Glass UI</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
 <style>
   * {
     margin: 0;
@@ -198,9 +197,10 @@
     transform: scale(1.1);
   }
 
+  /* Grid ajustada para matriz 6x6 */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(6, 1fr); /* 6 colunas */
     gap: 22px;
     max-height: 60vh;
     overflow-y: auto;
@@ -334,11 +334,12 @@
     }
 
     .grid {
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      grid-template-columns: repeat(3, 1fr); /* Ajustado para 3 colunas em telas pequenas */
       max-height: 50vh;
     }
   }
 </style>
+
 
 
 </head>
