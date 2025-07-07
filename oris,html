@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ORIS SDK Terminal - HTML6 ORIS Version</title>
+<style>
+  body {
+    background: #121212;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  #terminal {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+  }
+  #input-area {
+    border-top: 1px solid #00ff00;
+    padding: 10px;
+    display: flex;
+  }
+  #cmd-input {
+    flex: 1;
+    background: #000;
+    border: none;
+    color: #00ff00;
+    font-family: monospace;
+    font-size: 16px;
+    padding: 5px;
+  }
+  #cmd-input:focus {
+    outline: none;
+  }
+  .output-line {
+    margin: 2px 0;
+  }
+  video, img {
+    max-width: 100%;
+    margin: 10px 0;
+    border: 1px solid #00ff00;
+  }
+</style>
+</head>
+<body>
+
+<div id="terminal" aria-live="polite" aria-atomic="true"></div>
+
+<div id="input-area">
+  <input id="cmd-input" type="text" autocomplete="off" spellcheck="false" placeholder="Type a command..." aria-label="Command input"/>
+</div>
+
+<script>
+  const terminal = document.getElementById('terminal');
+  const input = document.getElementById('cmd-input');
+
+  const state = {
+    sprites: {},
+    animations: {},
+    dragging: new Set(),
+    currentVideo: null,
+    currentSound: null,
+    frameRate: 24,
+    currentScene: 'default'
+  };
+
+  function printOutput(text) {
+    if (!text) return;
+    if (typeof text === 'string') {
+      const line = document.createElement('div');
+      line.textContent = text;
+      line.className = 'output-line';
+      terminal.appendChild(line);
+    } else if (typeof text === 'object') {
+      if (text.type === 'video') {
+        const video = document.createElement('video');
+        video.src = text.url;
+        video.controls = true;
+        video.autoplay = true;
+        terminal.appendChild(video);
+      } else if (text.type === 'image') {
+        const img = document.createElement('img');
+        img.src = text.url;
+        terminal.appendChild(img);
+      }
+    }
+    terminal.scrollTop = terminal.scrollHeight;
+  }
+
+  const commands = {
+    help: {
+      exec: () => [
+        'Available commands:',
+        '- help: Show this help message',
+        '- clear: Clear the terminal',
+        '- echo [text]: Print text',
+        '- log [text]: Log message',
+        '- playVideo [url]',
+        '- pauseVideo',
+        '- stopVideo',
+        '- playSound [url]',
+        '- stopSound',
+        '- createSprite [id]',
+        '- setPosition [id] [x] [y]',
+        '- setScale [id] [scale]',
+        '- setRotation [id] [deg]',
+        '- startAnimation [id]',
+        '- stopAnimation [id]',
+        '- gotoFrame [id] [frame]',
+        '- setFrameRate [fps]',
+        '- enableDrag [id]',
+        '- disableDrag [id]',
+        '- onKeyPress [key] [msg]',
+        '- loadScene [name]',
+        '- transitionToScene [name] [effect]',
+        '- pauseScene',
+        '- resumeScene'
+      ].join('\n')
+    },
+
+    clear: { exec: () => { terminal.innerHTML = ''; return null; } },
+
+    echo: { exec: (args) => args.join(' ') },
+
+    log: { exec: (args) => `LOG: ${args.join(' ')}` },
+
+    playVideo: {
+      exec: (args) => args[0]
+        ? { type: 'video', url: args[0] }
+        : 'Error: video URL required'
+    },
+
+    pauseVideo: { exec: () => 'Video paused (simulated)' },
+
+    stopVideo: {
+      exec: () => {
+        state.currentVideo = null;
+        return 'Video stopped (simulated)';
+      }
+    },
+
+    playSound: {
+      exec: (args) => args[0]
+        ? `Playing sound: ${args[0]} (simulated)`
+        : 'Error: sound URL required'
+    },
+
+    stopSound: {
+      exec: () => {
+        state.currentSound = null;
+        return 'Sound stopped (simulated)';
+      }
+    },
+
+    createSprite: {
+      exec: (args) => {
+        const id = args[0];
+        if (!id) return 'Error: Sprite ID required';
+        state.sprites[id] = { x: 0, y: 0, scale: 1, rotation: 0 };
+        return `Sprite "${id}" created`;
+      }
+    },
+
+    setPosition: {
+      exec: (args) => {
+        const [id, x, y] = args;
+        if (!state.sprites[id]) return `Sprite "${id}" not found`;
+        state.sprites[id].x = parseFloat(x);
+        state.sprites[id].y = parseFloat(y);
+        return `Position of "${id}" set to (${x}, ${y})`;
+      }
+    },
+
+    setScale: {
+      exec: (args) => {
+        const [id, scale] = args;
+        if (!state.sprites[id]) return `Sprite "${id}" not found`;
+        state.sprites[id].scale = parseFloat(scale);
+        return `Scale of "${id}" set to ${scale}`;
+      }
+    },
+
+    setRotation: {
+      exec: (args) => {
+        const [id, deg] = args;
+        if (!state.sprites[id]) return `Sprite "${id}" not found`;
+        state.sprites[id].rotation = parseFloat(deg);
+        return `Rotation of "${id}" set to ${deg}°`;
+      }
+    },
+
+    startAnimation: {
+      exec: (args) => {
+        const id = args[0];
+        if (!id) return 'Error: Animation ID required';
+        state.animations[id] = { running: true, frame: 0 };
+        return `Animation "${id}" started`;
+      }
+    },
+
+    stopAnimation: {
+      exec: (args) => {
+        const id = args[0];
+        if (!state.animations[id]) return `Animation "${id}" not found`;
+        state.animations[id].running = false;
+        return `Animation "${id}" stopped`;
+      }
+    },
+
+    gotoFrame: {
+      exec: (args) => {
+        const [id, frame] = args;
+        if (!state.animations[id]) return `Animation "${id}" not found`;
+        state.animations[id].frame = parseInt(frame);
+        return `Animation "${id}" moved to frame ${frame}`;
+      }
+    },
+
+    setFrameRate: {
+      exec: (args) => {
+        const fps = parseInt(args[0]);
+        state.frameRate = fps;
+        return `Frame rate set to ${fps} FPS`;
+      }
+    },
+
+    enableDrag: {
+      exec: (args) => {
+        const id = args[0];
+        state.dragging.add(id);
+        return `Drag enabled for "${id}" (simulated)`;
+      }
+    },
+
+    disableDrag: {
+      exec: (args) => {
+        const id = args[0];
+        state.dragging.delete(id);
+        return `Drag disabled for "${id}" (simulado)`;
+      }
+    },
+
+    onKeyPress: {
+      exec: (args) => {
+        const [key, ...msg] = args;
+        return `Press "${key}" will show: "${msg.join(' ')}" (simulado)`;
+      }
+    },
+
+    loadScene: {
+      exec: (args) => {
+        const scene = args[0] || 'default';
+        state.currentScene = scene;
+        return `Scene "${scene}" loaded`;
+      }
+    },
+
+    transitionToScene: {
+      exec: (args) => {
+        const [scene, effect] = args;
+        state.currentScene = scene;
+        return `Transition to "${scene}" with effect "${effect}"`;
+      }
+    },
+
+    pauseScene: { exec: () => 'Scene paused (simulado)' },
+
+    resumeScene: { exec: () => 'Scene resumed (simulado)' }
+  };
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const raw = input.value.trim();
+      if (!raw) return;
+      printOutput(`> ${raw}`);
+
+      const [cmd, ...args] = raw.split(' ');
+      if (commands[cmd]) {
+        const result = commands[cmd].exec(args);
+        if (result !== null) printOutput(result);
+      } else {
+        printOutput(`Unknown command: ${cmd} — type "help"`);
+      }
+      input.value = '';
+    }
+  });
+
+  printOutput('🌐 ORIS SDK Terminal (HTML6 ORIS Version)');
+  printOutput('Type "help" for available commands.');
+  input.focus();
+</script>
+
+</body>
+</html>
