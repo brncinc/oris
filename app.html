@@ -5,524 +5,529 @@
   <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ORIS OS - Neon Glass UI</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <style>
- /* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* Corpo principal */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #121212;
-  color: #fff;
-  min-height: 100vh;
-  display: flex;
-  overflow-x: hidden;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: background 0.4s ease, color 0.3s ease;
-  user-select: none;
-  backdrop-filter: blur(6px);
-}
+    /* Corpo principal */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      overflow-x: hidden;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background 0.4s ease, color 0.3s ease;
+      user-select: none;
+      backdrop-filter: blur(6px);
+    }
 
-/* Scrollbar estilo neon */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #1db954aa;
-  border-radius: 10px;
-  border: 1px solid #1db95455;
-}
+    /* Scrollbar estilo neon */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1db954aa;
+      border-radius: 10px;
+      border: 1px solid #1db95455;
+    }
 
-/* Sidebar */
-.sidebar {
-  width: 260px;
-  background: rgba(4, 4, 4, 0.85);
-  padding: 32px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  border-right: 1px solid #282828;
-  backdrop-filter: blur(10px);
-  transition: background 0.3s ease;
-}
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: rgba(4, 4, 4, 0.85);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      border-right: 1px solid #282828;
+      backdrop-filter: blur(10px);
+      transition: background 0.3s ease;
+      flex-shrink: 0;
+    }
 
-.sidebar h2 {
-  color: #1DB954;
-  font-size: 30px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  user-select: text;
-}
+    .sidebar h2 {
+      color: #1DB954;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      user-select: text;
+    }
 
-/* Botões da sidebar */
-.sidebar button {
-  background: transparent;
-  border: none;
-  color: #b3b3b3;
-  padding: 14px 18px;
-  text-align: left;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  position: relative;
-  transition: all 0.3s ease;
-  outline-offset: 2px;
-}
+    /* Botões da sidebar */
+    .sidebar button {
+      background: transparent;
+      border: none;
+      color: #b3b3b3;
+      padding: 14px 18px;
+      text-align: left;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      transition: all 0.3s ease;
+      outline-offset: 2px;
+      user-select: none;
+    }
 
-.sidebar button::after {
-  content: '';
-  position: absolute;
-  left: 10px;
-  bottom: 6px;
-  height: 3px;
-  width: 0;
-  background: #1DB954;
-  transition: width 0.25s ease;
-  border-radius: 2px;
-}
+    .sidebar button::after {
+      content: '';
+      position: absolute;
+      left: 10px;
+      bottom: 6px;
+      height: 3px;
+      width: 0;
+      background: #1DB954;
+      transition: width 0.25s ease;
+      border-radius: 2px;
+    }
 
-.sidebar button:hover::after,
-.sidebar button.active::after {
-  width: 80%;
-}
+    .sidebar button:hover::after,
+    .sidebar button.active::after {
+      width: 80%;
+    }
 
-.sidebar button:hover,
-.sidebar button.active {
-  background: rgba(29, 185, 84, 0.2);
-  color: #fff;
-  transform: translateX(5px);
-  box-shadow: 0 0 10px #1db95488;
-}
+    .sidebar button:hover,
+    .sidebar button.active {
+      background: rgba(29, 185, 84, 0.2);
+      color: #fff;
+      transform: translateX(5px);
+      box-shadow: 0 0 10px #1db95488;
+    }
 
-.sidebar button:focus-visible {
-  outline: 2px solid #1DB954;
-  outline-offset: 4px;
-  background: rgba(29, 185, 84, 0.3);
-  color: #fff;
-  transform: translateX(5px);
-}
+    .sidebar button:focus-visible {
+      outline: 2px solid #1DB954;
+      outline-offset: 4px;
+      background: rgba(29, 185, 84, 0.3);
+      color: #fff;
+      transform: translateX(5px);
+    }
 
-.sidebar button .material-icons {
-  font-size: 22px;
-  color: #1DB954;
-  transition: transform 0.3s, color 0.2s;
-  flex-shrink: 0;
-}
+    .sidebar button .material-icons {
+      font-size: 22px;
+      color: #1DB954;
+      transition: transform 0.3s, color 0.2s;
+      flex-shrink: 0;
+    }
 
-.sidebar button:hover .material-icons,
-.sidebar button.active .material-icons {
-  color: #1db954;
-  transform: scale(1.2);
-}
+    .sidebar button:hover .material-icons,
+    .sidebar button.active .material-icons {
+      color: #1db954;
+      transform: scale(1.2);
+    }
 
-/* Conteúdo principal */
-.main {
-  flex: 1;
-  padding: 48px 64px;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(180deg, #121212 0%, #181818 100%);
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  min-height: 100vh;
-}
+    /* Conteúdo principal */
+    .main {
+      flex: 1;
+      padding: 48px 64px;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, #121212 0%, #181818 100%);
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+    }
 
-/* Topbar */
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
-  gap: 16px;
-}
+    /* Topbar */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      gap: 16px;
+    }
 
-.topbar h1 {
-  font-size: 34px;
-  font-weight: 900;
-  color: #1DB954;
-  letter-spacing: 0.5px;
-  user-select: text;
-}
+    .topbar h1 {
+      font-size: 34px;
+      font-weight: 900;
+      color: #1DB954;
+      letter-spacing: 0.5px;
+      user-select: text;
+    }
 
-.topbar input[type="text"] {
-  padding: 12px 24px;
-  border-radius: 40px;
-  background: #1b1b1b;
-  border: 1px solid #333;
-  color: #fff;
-  width: 260px;
-  font-size: 15px;
-  box-shadow: inset 0 0 6px #000;
-  transition: border-color 0.3s ease;
-}
+    .topbar input[type="text"] {
+      padding: 12px 24px;
+      border-radius: 40px;
+      background: #1b1b1b;
+      border: 1px solid #333;
+      color: #fff;
+      width: 260px;
+      font-size: 15px;
+      box-shadow: inset 0 0 6px #000;
+      transition: border-color 0.3s ease;
+    }
 
-.topbar input[type="text"]:focus {
-  outline: none;
-  border-color: #1DB954;
-  box-shadow: 0 0 8px #1DB954;
-}
+    .topbar input[type="text"]:focus {
+      outline: none;
+      border-color: #1DB954;
+      box-shadow: 0 0 8px #1DB954;
+    }
 
-.topbar input::placeholder {
-  color: #888;
-}
+    .topbar input::placeholder {
+      color: #888;
+    }
 
-.topbar .controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+    .topbar .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-.topbar .controls button {
-  padding: 12px 20px;
-  border-radius: 30px;
-  border: none;
-  font-weight: 700;
-  font-size: 16px;
-  background: #1DB954;
-  color: #121212;
-  transition: background 0.3s, transform 0.2s;
-  box-shadow: 0 0 10px #1db954bb;
-  cursor: pointer;
-  position: relative;
-}
+    .topbar .controls button {
+      padding: 12px 20px;
+      border-radius: 30px;
+      border: none;
+      font-weight: 700;
+      font-size: 16px;
+      background: #1DB954;
+      color: #121212;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 0 10px #1db954bb;
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+    }
 
-.topbar .controls button:hover {
-  background: #1fd666;
-  transform: scale(1.1);
-  box-shadow: 0 0 15px #1fd666cc;
-}
+    .topbar .controls button:hover {
+      background: #1fd666;
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #1fd666cc;
+    }
 
-/* Tooltip */
-.topbar .controls button[aria-label] {
-  position: relative;
-}
-.topbar .controls button[aria-label]:hover::after {
-  content: attr(aria-label);
-  position: absolute;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1DB954dd;
-  color: #121212;
-  padding: 6px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  font-size: 13px;
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-  z-index: 10;
-}
-.topbar .controls button[aria-label]::after {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
+    /* Tooltip */
+    .topbar .controls button[aria-label] {
+      position: relative;
+    }
+    .topbar .controls button[aria-label]:hover::after {
+      content: attr(aria-label);
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1DB954dd;
+      color: #121212;
+      padding: 6px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      font-size: 13px;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+    .topbar .controls button[aria-label]::after {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
 
-/* Sections (filtros, categorias) */
-.sections {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-bottom: 30px;
-}
+    /* Sections (filtros, categorias) */
+    .sections {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
 
-.sections button {
-  background: #1b1b1b;
-  color: #1DB954;
-  border: 1px solid #333;
-  border-radius: 40px;
-  padding: 10px 24px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  user-select: none;
-}
+    .sections button {
+      background: #1b1b1b;
+      color: #1DB954;
+      border: 1px solid #333;
+      border-radius: 40px;
+      padding: 10px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
 
-.sections button:hover,
-.sections button:focus-visible {
-  background: #1DB954;
-  color: #121212;
-  transform: scale(1.07);
-  outline: none;
-  box-shadow: 0 0 10px #1db954cc;
-}
+    .sections button:hover,
+    .sections button:focus-visible {
+      background: #1DB954;
+      color: #121212;
+      transform: scale(1.07);
+      outline: none;
+      box-shadow: 0 0 10px #1db954cc;
+    }
 
-/* Grid de apps */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 22px;
-  max-height: 60vh;
-  overflow-y: auto;
-  padding-right: 8px;
-  scroll-behavior: smooth;
-  position: relative;
-}
+    /* Grid de apps */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 22px;
+      max-height: 60vh;
+      overflow-y: auto;
+      padding-right: 8px;
+      scroll-behavior: smooth;
+      position: relative;
+    }
 
-/* Mensagem caso nenhum app encontrado */
-#noResults {
-  grid-column: 1/-1;
-  color: #888;
-  font-style: italic;
-  text-align: center;
-  user-select: none;
-  padding: 30px 0;
-  font-size: 18px;
-}
+    /* Mensagem caso nenhum app encontrado */
+    #noResults {
+      grid-column: 1/-1;
+      color: #888;
+      font-style: italic;
+      text-align: center;
+      user-select: none;
+      padding: 30px 0;
+      font-size: 18px;
+    }
 
-/* Cards de apps */
-.app-card {
-  background: rgba(24, 24, 24, 0.9);
-  border: 2px solid #1DB954;
-  border-radius: 20px;
-  padding: 28px 16px;
-  text-align: center;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  font-weight: 700;
-  color: #1DB954;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 8px #1db95425;
-  user-select: none;
-  position: relative;
-}
+    /* Cards de apps */
+    .app-card {
+      background: rgba(24, 24, 24, 0.9);
+      border: 2px solid #1DB954;
+      border-radius: 20px;
+      padding: 28px 16px;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      font-weight: 700;
+      color: #1DB954;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px #1db95425;
+      user-select: none;
+      position: relative;
+      outline-offset: 4px;
+    }
 
-.app-card .material-icons {
-  font-size: 56px;
-  color: inherit;
-  transition: transform 0.3s;
-  pointer-events: none;
-}
+    .app-card .material-icons {
+      font-size: 56px;
+      color: inherit;
+      transition: transform 0.3s;
+      pointer-events: none;
+    }
 
-.app-card:hover,
-.app-card:focus-visible {
-  background: #1DB954;
-  color: #121212;
-  transform: translateY(-6px) scale(1.05);
-  box-shadow: 0 0 20px #1DB954dd;
-  outline: none;
-  z-index: 2;
-}
+    .app-card:hover,
+    .app-card:focus-visible {
+      background: #1DB954;
+      color: #121212;
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 0 20px #1DB954dd;
+      outline: none;
+      z-index: 2;
+    }
 
-.app-card:hover .material-icons,
-.app-card:focus-visible .material-icons {
-  transform: scale(1.3);
-  color: #121212;
-}
+    .app-card:hover .material-icons,
+    .app-card:focus-visible .material-icons {
+      transform: scale(1.3);
+      color: #121212;
+    }
 
-/* Tooltip nos cards */
-.app-card[title]:hover::after {
-  content: attr(title);
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1DB954cc;
-  color: #121212;
-  padding: 6px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  font-size: 13px;
-  pointer-events: none;
-  user-select: none;
-  opacity: 1;
-  z-index: 5;
-}
+    /* Tooltip nos cards */
+    .app-card[title]:hover::after,
+    .app-card:focus-visible[title]::after {
+      content: attr(title);
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1DB954cc;
+      color: #121212;
+      padding: 6px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      font-size: 13px;
+      pointer-events: none;
+      user-select: none;
+      opacity: 1;
+      z-index: 5;
+    }
 
-/* Footer */
-.footer {
-  margin-top: 48px;
-  padding: 16px;
-  background: #0c0c0c;
-  color: #ccc;
-  border-top: 1px solid #222;
-  text-align: center;
-  font-size: 14px;
-  user-select: text;
-  font-family: Arial, sans-serif;
-  line-height: 1.5;
-}
+    /* Footer */
+    .footer {
+      margin-top: 48px;
+      padding: 16px;
+      background: #0c0c0c;
+      color: #ccc;
+      border-top: 1px solid #222;
+      text-align: center;
+      font-size: 14px;
+      user-select: text;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
 
-.footer strong {
-  color: #fff;
-}
+    .footer strong {
+      color: #fff;
+    }
 
-/* Responsividade */
-@media (max-width: 1200px) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
+    /* Responsividade */
+    @media (max-width: 1200px) {
+      .grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
 
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
 
-@media (max-width: 600px) {
-  body {
-    flex-direction: column;
-  }
+    @media (max-width: 600px) {
+      body {
+        flex-direction: column;
+      }
 
-  .sidebar {
-    width: 100%;
-    flex-direction: row;
-    padding: 20px 10px;
-    gap: 12px;
-    overflow-x: auto;
-    border-bottom: 1px solid #282828;
-  }
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        padding: 20px 10px;
+        gap: 12px;
+        overflow-x: auto;
+        border-bottom: 1px solid #282828;
+      }
 
-  .sidebar h2 {
-    flex-shrink: 0;
-    padding-right: 16px;
-    border-right: 1px solid #1DB954;
-  }
+      .sidebar h2 {
+        flex-shrink: 0;
+        padding-right: 16px;
+        border-right: 1px solid #1DB954;
+      }
 
-  .sidebar button {
-    flex-shrink: 0;
-    padding: 12px;
-    font-size: 14px;
-    gap: 6px;
-  }
+      .sidebar button {
+        flex-shrink: 0;
+        padding: 12px;
+        font-size: 14px;
+        gap: 6px;
+      }
 
-  .main {
-    padding: 24px 16px;
-  }
+      .main {
+        padding: 24px 16px;
+      }
 
-  .topbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
 
-  .topbar input[type="text"] {
-    width: 100%;
-  }
+      .topbar input[type="text"] {
+        width: 100%;
+      }
 
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-height: 50vh;
-  }
-}
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-height: 50vh;
+      }
+    }
 
-/* Light mode */
-body.light-mode {
-  background: #e5e5e5;
-  color: #121212;
-}
-body.light-mode .sidebar {
-  background: rgba(255, 255, 255, 0.9);
-  border-right: 1px solid #ccc;
-  color: #121212;
-}
-body.light-mode .sidebar h2 {
-  color: #1DB954;
-}
-body.light-mode .sidebar button {
-  color: #4a4a4a;
-}
-body.light-mode .sidebar button:hover,
-body.light-mode .sidebar button.active {
-  background: #1DB954;
-  color: #fff;
-  transform: translateX(5px);
-  box-shadow: 0 0 10px #1db95488;
-}
-body.light-mode .main {
-  background: #fff;
-}
-body.light-mode .app-card {
-  background: #f5f5f5;
-  border-color: #1DB954;
-  color: #1DB954;
-  box-shadow: 0 0 8px #1db95433;
-}
-body.light-mode .app-card:hover,
-body.light-mode .app-card:focus-visible {
-  background: #1DB954;
-  color: #fff;
-  box-shadow: 0 0 20px #1DB954dd;
-}
-body.light-mode .topbar input[type="text"] {
-  background: #fff;
-  color: #121212;
-  border: 1px solid #1DB954;
-  box-shadow: inset 0 0 6px #1DB95455;
-}
-body.light-mode .topbar input::placeholder {
-  color: #555;
-}
+    /* Light mode */
+    body.light-mode {
+      background: #e5e5e5;
+      color: #121212;
+    }
+    body.light-mode .sidebar {
+      background: rgba(255, 255, 255, 0.9);
+      border-right: 1px solid #ccc;
+      color: #121212;
+    }
+    body.light-mode .sidebar h2 {
+      color: #1DB954;
+    }
+    body.light-mode .sidebar button {
+      color: #4a4a4a;
+    }
+    body.light-mode .sidebar button:hover,
+    body.light-mode .sidebar button.active {
+      background: #1DB954;
+      color: #fff;
+      transform: translateX(5px);
+      box-shadow: 0 0 10px #1db95488;
+    }
+    body.light-mode .main {
+      background: #fff;
+    }
+    body.light-mode .app-card {
+      background: #f5f5f5;
+      border-color: #1DB954;
+      color: #1DB954;
+      box-shadow: 0 0 8px #1db95433;
+    }
+    body.light-mode .app-card:hover,
+    body.light-mode .app-card:focus-visible {
+      background: #1DB954;
+      color: #fff;
+      box-shadow: 0 0 20px #1DB954dd;
+    }
+    body.light-mode .topbar input[type="text"] {
+      background: #fff;
+      color: #121212;
+      border: 1px solid #1DB954;
+      box-shadow: inset 0 0 6px #1DB95455;
+    }
+    body.light-mode .topbar input::placeholder {
+      color: #555;
+    }
 
-/* Reading mode */
-body.reading-mode {
-  font-size: 1.15rem;
-  line-height: 1.75;
-  background: #222;
-  color: #ddd;
-}
-body.reading-mode .sidebar {
-  background: rgba(0, 0, 0, 0.95);
-}
-body.reading-mode .topbar input[type="text"] {
-  font-size: 1.2rem;
-}
-body.reading-mode .app-card {
-  font-size: 1.1rem;
-  padding: 36px 20px;
-}
-
+    /* Reading mode */
+    body.reading-mode {
+      font-size: 1.15rem;
+      line-height: 1.75;
+      background: #222;
+      color: #ddd;
+    }
+    body.reading-mode .sidebar {
+      background: rgba(0, 0, 0, 0.95);
+    }
+    body.reading-mode .topbar input[type="text"] {
+      font-size: 1.2rem;
+    }
+    body.reading-mode .app-card {
+      font-size: 1.1rem;
+      padding: 36px 20px;
+    }
   </style>
 </head>
 
 <body>
   <nav class="sidebar" role="navigation" aria-label="Main Sidebar">
     <h2>ORIS OS</h2>
-    <button class="active" onclick="abrirPagina('dashboard.html', this)" aria-current="page" aria-label="Dashboard">
+    <button class="active" onclick="abrirPagina('dashboard.html', this)" aria-current="page" aria-label="Dashboard" tabindex="0">
       <span class="material-icons" aria-hidden="true">dashboard</span> Dashboard
     </button>
-    <button onclick="abrirPagina('notificacoes.html', this)" aria-label="Notifications">
+    <button onclick="abrirPagina('notificacoes.html', this)" aria-label="Notifications" tabindex="0">
       <span class="material-icons" aria-hidden="true">notifications</span> Notifications
     </button>
-    <button onclick="abrirPagina('perfil.html', this)" aria-label="Profile">
+    <button onclick="abrirPagina('perfil.html', this)" aria-label="Profile" tabindex="0">
       <span class="material-icons" aria-hidden="true">person</span> Profile
     </button>
-    <button onclick="abrirPagina('configuracoes.html', this)" aria-label="Settings">
+    <button onclick="abrirPagina('configuracoes.html', this)" aria-label="Settings" tabindex="0">
       <span class="material-icons" aria-hidden="true">settings</span> Settings
     </button>
-    <button onclick="abrirPagina('sobre.html', this)" aria-label="About">
+    <button onclick="abrirPagina('sobre.html', this)" aria-label="About" tabindex="0">
       <span class="material-icons" aria-hidden="true">info</span> About
     </button>
-    <button onclick="abrirPagina('akiles.html', this)" aria-label="Store">
+    <button onclick="abrirPagina('akiles.html', this)" aria-label="Store" tabindex="0">
       <span class="material-icons" aria-hidden="true">store</span> Store
     </button>
-    <button onclick="abrirPagina('rabbit.html', this)" aria-label="Meta Rabbit">
+    <button onclick="abrirPagina('rabbit.html', this)" aria-label="Meta Rabbit" tabindex="0">
       <span class="material-icons" aria-hidden="true">pets</span> Meta Rabbit
     </button>
-    <button onclick="abrirPagina('oris.html', this)" aria-label="Oris SDK">
+    <button onclick="abrirPagina('oris.html', this)" aria-label="Oris SDK" tabindex="0">
       <span class="material-icons" aria-hidden="true">smart_toy</span> oris sdk
     </button>
-    <button onclick="logout()" aria-label="Logout">
+    <button onclick="logout()" aria-label="Logout" tabindex="0">
       <span class="material-icons" aria-hidden="true">logout</span> Logout
     </button>
   </nav>
@@ -531,27 +536,26 @@ body.reading-mode .app-card {
     <div class="topbar">
       <h1>Welcome to ORIS OS</h1>
       <div class="controls">
-        <input type="text" id="searchInput" placeholder="Search apps..." oninput="filtrarApps()" aria-label="Search applications"/>
-        <button onclick="toggleTheme()" aria-label="Toggle Light/Dark Mode" title="Toggle Light/Dark Mode" style="margin-left: 10px;">
-          <span class="material-icons">brightness_6</span>
+        <input type="text" id="searchInput" placeholder="Search apps..." oninput="filtrarApps()" aria-label="Search applications" />
+        <button onclick="toggleTheme()" aria-label="Toggle Light/Dark Mode" title="Toggle Light/Dark Mode" style="margin-left: 10px;" tabindex="0">
+          <span class="material-icons" aria-hidden="true">brightness_6</span>
         </button>
-        <button onclick="toggleReadingMode()" aria-label="Toggle Reading Mode" title="Toggle Reading Mode">
-          <span class="material-icons">chrome_reader_mode</span>
+        <button onclick="toggleReadingMode()" aria-label="Toggle Reading Mode" title="Toggle Reading Mode" tabindex="0">
+          <span class="material-icons" aria-hidden="true">chrome_reader_mode</span>
         </button>
       </div>
     </div>
 
     <div class="sections" role="region" aria-label="Sections">
-      <!-- Seções dinâmicas, se quiser adicionar futuramente -->
+      <!-- Seções dinâmicas -->
     </div>
 
     <div class="grid" id="appGrid" role="list" aria-label="Applications list">
-      <!-- seus app cards aqui, iguais aos seus -->
       <div class="app-card" data-name="home" onclick="abrirPagina('home.html')" role="listitem" tabindex="0" title="Home">
         <span class="material-icons" aria-hidden="true">home</span>
         <div>🏠 Home</div>
       </div>
-      <!-- ... demais apps ... -->
+      <!-- Adicione mais apps aqui -->
     </div>
   </main>
 
@@ -560,31 +564,32 @@ body.reading-mode .app-card {
     <p>ORIS OS v14 · <em>Powered by HoloFi</em></p>
     <p>
       Apps: Home · Light · Air · Energy · Store · Meta Rabbit · Settings · 
-      <br>
+      <br />
       Agenda · Music · WhatsApp · Gmail · OneDrive · Sheets · Docs · Spotify · Fotos · Instagram · Twitter · ChatGPT · Kickstarter · Netflix · Cures · 
-      <br>
+      <br />
       edX · e-School · Udemy · Figma · Canva · Monday · Google IDX · Drive · GitHub · Notion · Trello · Tradutor · Pixabay · Behance · Grupos · Zoom · 
-      <br>
+      <br />
       Cloudflare · Framer · Replit · StackOverflow · Play Store
     </p>
   </footer>
 
   <script>
     function abrirPagina(pagina, btn) {
-      // Atualiza URL para navegar
+      // Navega para a página
       location.href = pagina;
 
-      // Atualiza classe active no menu lateral (se btn for definido)
+      // Atualiza botão ativo
       if (btn) {
         document.querySelectorAll('.sidebar button').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        btn.focus();
       }
     }
 
     function logout() {
       if (confirm('Você realmente deseja sair?')) {
         alert('Logout realizado!');
-        // Aqui você pode adicionar lógica de logout real, ex: limpar sessão, redirecionar etc.
+        // Aqui você pode colocar lógica real de logout, ex: limpar sessão
       }
     }
 
@@ -608,6 +613,7 @@ body.reading-mode .app-card {
         noResults = document.createElement('div');
         noResults.id = 'noResults';
         noResults.textContent = 'Nenhum app encontrado.';
+        noResults.style.gridColumn = '1 / -1';
         document.getElementById('appGrid').appendChild(noResults);
       }
 
