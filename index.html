@@ -7,53 +7,70 @@
   <title>Login - ORIS OS</title>
   <style>
     body {
-      margin: 0; 
+      margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0b1f3a, #b85700); /* Azul mais escuro para laranja mais forte */
-      color: #fff; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
+      background: linear-gradient(135deg, #e8ecf1, #dfe6ed); /* Cinza-claro azulado */
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
       user-select: none;
     }
+
     .login-container {
-      background: rgba(34, 34, 34, 0.9); 
-      padding: 32px 48px; 
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgb(0 0 0 / 0.6);
-      width: 320px; 
+      background: rgba(255, 255, 255, 0.85); /* Estilo translúcido */
+      backdrop-filter: blur(12px);
+      padding: 32px 48px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      width: 320px;
       text-align: center;
+      transition: 0.3s;
     }
+
     .login-container img {
       width: 80px;
       margin-bottom: 24px;
       user-select: none;
     }
+
     h1 {
-      margin-bottom: 24px; 
-      color: #1DB954; 
-      font-weight: 900;
+      margin-bottom: 24px;
+      color: #007aff; /* Azul estilo macOS */
+      font-weight: 700;
       user-select: none;
     }
+
     .github-btn {
       margin-top: 12px;
       padding: 10px 20px;
       border: none;
       border-radius: 8px;
-      background-color: #333;
+      background-color: #24292e;
       color: #fff;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 14px;
       cursor: pointer;
       user-select: none;
       transition: background-color 0.2s ease;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
     }
+
     .github-btn:hover {
-      background-color: #444;
+      background-color: #3c434a;
+    }
+
+    footer {
+      background-color: #f5f5f7;
+      color: #333;
+      text-align: center;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 13px;
+      box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
@@ -66,7 +83,7 @@
     </button>
   </form>
 
-  <footer style="background-color: #000; color: #fff; text-align: center; padding: 10px; font-family: Arial, sans-serif; position: fixed; bottom: 0; width: 100%;">
+  <footer>
     Desenvolvido por Lucas Januário do Nascimento — Made in Brazil @lucasjanuario14
   </footer>
 
@@ -78,8 +95,8 @@
     }
 
     function loginWithGitHub() {
-      const client_id = "Ov23liebjVZey72wpCGy"; // Seu client_id do GitHub OAuth
-      const redirect_uri = "https://brncinc.github.io/oris/app.html"; // Sua URL de callback
+      const client_id = "Ov23liebjVZey72wpCGy";
+      const redirect_uri = "https://brncinc.github.io/oris/app.html";
       const githubAuthURL = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${encodeURIComponent(redirect_uri)}`;
       window.location.href = githubAuthURL;
     }
