@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+  <meta charset="UTF-8" />
   <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ORIS SDK Terminal - HTML6 ORIS Version</title>
-<style>
-  body {
-    background: #121212;
-    color: #00ff00;
-    font-family: 'Courier New', Courier, monospace;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  #terminal {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-    white-space: pre-wrap;
-  }
-  #input-area {
-    border-top: 1px solid #00ff00;
-    padding: 10px;
-    display: flex;
-  }
-  #cmd-input {
-    flex: 1;
-    background: #000;
-    border: none;
-    color: #00ff00;
-    font-family: monospace;
-    font-size: 16px;
-    padding: 5px;
-  }
-  #cmd-input:focus {
-    outline: none;
-  }
-  .output-line {
-    margin: 2px 0;
-  }
-  video, img {
-    max-width: 100%;
-    margin: 10px 0;
-    border: 1px solid #00ff00;
-  }
-</style>
+  <title>ORIS SDK Terminal - HTML6 ORIS Version</title>
+  <style>
+    body {
+      background: #121212;
+      color: #00ff00;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    #terminal {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    #input-area {
+      border-top: 1px solid #00ff00;
+      padding: 10px;
+      display: flex;
+    }
+    #cmd-input {
+      flex: 1;
+      background: #000;
+      border: none;
+      color: #00ff00;
+      font-family: monospace;
+      font-size: 16px;
+      padding: 5px;
+    }
+    #cmd-input:focus {
+      outline: none;
+    }
+    .output-line {
+      margin: 2px 0;
+    }
+    video, img {
+      max-width: 100%;
+      margin: 10px 0;
+      border: 1px solid #00ff00;
+    }
+  </style>
 </head>
 <body>
 
@@ -98,37 +98,23 @@
     help: {
       exec: () => [
         'Available commands:',
-        '- help: Show this help message',
-        '- clear: Clear the terminal',
-        '- echo [text]: Print text',
-        '- log [text]: Log message',
-        '- playVideo [url]',
-        '- pauseVideo',
-        '- stopVideo',
-        '- playSound [url]',
-        '- stopSound',
-        '- createSprite [id]',
-        '- setPosition [id] [x] [y]',
-        '- setScale [id] [scale]',
-        '- setRotation [id] [deg]',
-        '- startAnimation [id]',
-        '- stopAnimation [id]',
-        '- gotoFrame [id] [frame]',
-        '- setFrameRate [fps]',
-        '- enableDrag [id]',
-        '- disableDrag [id]',
-        '- onKeyPress [key] [msg]',
-        '- loadScene [name]',
-        '- transitionToScene [name] [effect]',
-        '- pauseScene',
-        '- resumeScene'
+        '- help, clear, echo [text], log [text]',
+        '- playVideo [url], pauseVideo, stopVideo',
+        '- playSound [url], stopSound',
+        '- createSprite [id], setPosition [id] [x] [y]',
+        '- setScale [id] [scale], setRotation [id] [deg]',
+        '- startAnimation [id], stopAnimation [id], gotoFrame [id] [frame]',
+        '- setFrameRate [fps], enableDrag [id], disableDrag [id]',
+        '- onKeyPress [key] [msg], loadScene [name], transitionToScene [name] [effect]',
+        '- pauseScene, resumeScene',
+        '- createClip [id], addFrame [clipId] [imageUrl]',
+        '- playClip [id], stopClip [id], gotoClipFrame [id] [n]',
+        '- bindEvent [event] [msg]'
       ].join('\n')
     },
 
     clear: { exec: () => { terminal.innerHTML = ''; return null; } },
-
     echo: { exec: (args) => args.join(' ') },
-
     log: { exec: (args) => `LOG: ${args.join(' ')}` },
 
     playVideo: {
@@ -136,9 +122,7 @@
         ? { type: 'video', url: args[0] }
         : 'Error: video URL required'
     },
-
     pauseVideo: { exec: () => 'Video paused (simulated)' },
-
     stopVideo: {
       exec: () => {
         state.currentVideo = null;
@@ -151,7 +135,6 @@
         ? `Playing sound: ${args[0]} (simulated)`
         : 'Error: sound URL required'
     },
-
     stopSound: {
       exec: () => {
         state.currentSound = null;
@@ -167,7 +150,6 @@
         return `Sprite "${id}" created`;
       }
     },
-
     setPosition: {
       exec: (args) => {
         const [id, x, y] = args;
@@ -177,7 +159,6 @@
         return `Position of "${id}" set to (${x}, ${y})`;
       }
     },
-
     setScale: {
       exec: (args) => {
         const [id, scale] = args;
@@ -186,7 +167,6 @@
         return `Scale of "${id}" set to ${scale}`;
       }
     },
-
     setRotation: {
       exec: (args) => {
         const [id, deg] = args;
@@ -204,7 +184,6 @@
         return `Animation "${id}" started`;
       }
     },
-
     stopAnimation: {
       exec: (args) => {
         const id = args[0];
@@ -213,7 +192,6 @@
         return `Animation "${id}" stopped`;
       }
     },
-
     gotoFrame: {
       exec: (args) => {
         const [id, frame] = args;
@@ -238,7 +216,6 @@
         return `Drag enabled for "${id}" (simulated)`;
       }
     },
-
     disableDrag: {
       exec: (args) => {
         const id = args[0];
@@ -261,7 +238,6 @@
         return `Scene "${scene}" loaded`;
       }
     },
-
     transitionToScene: {
       exec: (args) => {
         const [scene, effect] = args;
@@ -269,10 +245,84 @@
         return `Transition to "${scene}" with effect "${effect}"`;
       }
     },
-
     pauseScene: { exec: () => 'Scene paused (simulado)' },
+    resumeScene: { exec: () => 'Scene resumed (simulado)' },
 
-    resumeScene: { exec: () => 'Scene resumed (simulado)' }
+    // Flash-like MovieClip Functions
+    createClip: {
+      exec: (args) => {
+        const id = args[0];
+        if (!id) return 'Error: Clip ID required';
+        state.sprites[id] = {
+          x: 0, y: 0, scale: 1, rotation: 0,
+          frames: [], currentFrame: 0, playing: false
+        };
+        return `Clip "${id}" created`;
+      }
+    },
+    addFrame: {
+      exec: (args) => {
+        const [id, url] = args;
+        const clip = state.sprites[id];
+        if (!clip) return `Clip "${id}" not found`;
+        clip.frames.push(url);
+        return `Frame added to clip "${id}"`;
+      }
+    },
+    playClip: {
+      exec: (args) => {
+        const id = args[0];
+        const clip = state.sprites[id];
+        if (!clip || !clip.frames.length) return `Clip "${id}" not found or empty`;
+
+        clip.playing = true;
+        const container = document.createElement('div');
+        container.id = `clip-${id}`;
+        terminal.appendChild(container);
+
+        let frameIndex = 0;
+        const interval = setInterval(() => {
+          if (!clip.playing) return clearInterval(interval);
+          container.innerHTML = `<img src="${clip.frames[frameIndex]}" style="max-width:100%; border:1px solid #0f0;" />`;
+          frameIndex = (frameIndex + 1) % clip.frames.length;
+        }, 1000 / state.frameRate);
+
+        return `Clip "${id}" is playing`;
+      }
+    },
+    stopClip: {
+      exec: (args) => {
+        const id = args[0];
+        const clip = state.sprites[id];
+        if (!clip) return `Clip "${id}" not found`;
+        clip.playing = false;
+        const container = document.getElementById(`clip-${id}`);
+        if (container) container.remove();
+        return `Clip "${id}" stopped`;
+      }
+    },
+    gotoClipFrame: {
+      exec: (args) => {
+        const [id, n] = args;
+        const clip = state.sprites[id];
+        if (!clip || !clip.frames[n]) return `Invalid frame or clip`;
+        const container = document.getElementById(`clip-${id}`) || document.createElement('div');
+        container.id = `clip-${id}`;
+        container.innerHTML = `<img src="${clip.frames[n]}" style="max-width:100%; border:1px solid #0f0;" />`;
+        terminal.appendChild(container);
+        return `Clip "${id}" set to frame ${n}`;
+      }
+    },
+
+    bindEvent: {
+      exec: (args) => {
+        const [evt, ...msg] = args;
+        window.addEventListener(evt, () => {
+          printOutput(`[${evt}] ${msg.join(' ')}`);
+        });
+        return `Event "${evt}" bound`;
+      }
+    }
   };
 
   input.addEventListener('keydown', (e) => {
