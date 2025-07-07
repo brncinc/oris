@@ -28,6 +28,7 @@
       transition: background 0.4s ease, color 0.3s ease;
       user-select: none;
       backdrop-filter: blur(6px);
+      padding-bottom: 40px; /* espaço para o footer fixo */
     }
 
     /* Scrollbar estilo neon */
@@ -354,22 +355,35 @@
       z-index: 5;
     }
 
-    /* Footer */
+    /* Footer fixo com rolagem horizontal */
     .footer {
-      margin-top: 48px;
-      padding: 16px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
       background: #0c0c0c;
       color: #ccc;
       border-top: 1px solid #222;
-      text-align: center;
       font-size: 14px;
-      user-select: text;
+      line-height: 40px;
+      white-space: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0 16px;
       font-family: Arial, sans-serif;
-      line-height: 1.5;
+      user-select: text;
+      box-shadow: inset 0 1px 3px #0008;
+      z-index: 1000;
     }
 
     .footer strong {
       color: #fff;
+    }
+
+    .footer p {
+      display: inline;
+      margin-right: 40px;
     }
 
     /* Responsividade */
@@ -388,6 +402,7 @@
     @media (max-width: 600px) {
       body {
         flex-direction: column;
+        padding-bottom: 40px; /* garante espaço para footer */
       }
 
       .sidebar {
@@ -559,6 +574,13 @@
     </div>
   </main>
 
+  <footer class="footer" role="contentinfo" aria-label="Footer">
+    <p><strong>ORIS OS</strong> © 2025 — Developed by Lucas Januário</p>
+    <p>Contact: support@oris.com</p>
+    <p>Version 1.0.0</p>
+    <p>Powered by Neon Glass UI</p>
+    <p>All rights reserved.</p>
+  </footer>
 
   <script>
     function abrirPagina(pagina, btn) {
