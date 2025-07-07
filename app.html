@@ -29,6 +29,8 @@ body {
   transition: background 0.4s ease, color 0.3s ease;
   user-select: none;
   backdrop-filter: blur(6px);
+  -webkit-font-smoothing: antialiased; /* fonte mais suave */
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Scrollbar neon */
@@ -39,20 +41,25 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1db954aa;
+  background: #1db954cc; /* mais opaco para melhor visibilidade */
   border-radius: 10px;
-  border: 1px solid #1db95455;
+  border: 1px solid #1db95488;
+  transition: background-color 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1db954ee;
 }
 
 .sidebar {
   width: 260px;
-  background: rgba(4, 4, 4, 0.75);
+  background: rgba(4, 4, 4, 0.85); /* leve aumento na opacidade para contraste */
   padding: 32px 24px;
   display: flex;
   flex-direction: column;
   gap: 24px;
   border-right: 1px solid #282828;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px); /* mais blur para efeito cristal */
+  box-shadow: inset 0 0 10px #1db95444; /* leve brilho interno */
 }
 
 .sidebar h2 {
@@ -60,6 +67,7 @@ body {
   font-size: 30px;
   font-weight: 900;
   letter-spacing: 1px;
+  user-select: text; /* permitir seleção do título */
 }
 
 .sidebar button {
@@ -76,7 +84,13 @@ body {
   align-items: center;
   gap: 14px;
   position: relative;
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline-offset: 3px;
+}
+
+.sidebar button:focus-visible {
+  outline: 2px solid #1DB954;
+  outline-offset: 3px;
 }
 
 .sidebar button::after {
@@ -87,7 +101,7 @@ body {
   height: 3px;
   width: 0;
   background: #1DB954;
-  transition: width 0.25s ease;
+  transition: width 0.3s ease;
   border-radius: 2px;
 }
 
@@ -98,21 +112,22 @@ body {
 
 .sidebar button:hover,
 .sidebar button.active {
-  background: rgba(29, 185, 84, 0.15);
+  background: rgba(29, 185, 84, 0.20); /* mais visível */
   color: #fff;
-  transform: translateX(3px);
+  transform: translateX(4px);
+  box-shadow: 0 0 10px #1db954cc; /* brilho ao focar */
 }
 
 .sidebar button .material-icons {
   font-size: 22px;
   color: #1DB954;
-  transition: transform 0.3s, color 0.2s;
+  transition: transform 0.3s ease, color 0.25s ease;
 }
 
 .sidebar button:hover .material-icons,
 .sidebar button.active .material-icons {
-  color: #1db954;
-  transform: scale(1.2);
+  color: #1fff65;
+  transform: scale(1.25);
 }
 
 .main {
@@ -122,6 +137,9 @@ body {
   flex-direction: column;
   background: linear-gradient(180deg, #121212 0%, #181818 100%);
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #1db954cc transparent;
+  transition: background-color 0.4s ease;
 }
 
 .topbar {
@@ -138,21 +156,30 @@ body {
   font-weight: 900;
   color: #1DB954;
   letter-spacing: 0.5px;
+  user-select: text;
 }
 
 .topbar input[type="text"] {
   padding: 12px 24px;
   border-radius: 40px;
   background: #1b1b1b;
-  border: 1px solid #333;
+  border: 1.5px solid #333;
   color: #fff;
   width: 260px;
   font-size: 15px;
-  box-shadow: inset 0 0 6px #000;
+  box-shadow: inset 0 0 8px #000;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.topbar input[type="text"]:focus {
+  outline: none;
+  border-color: #1DB954;
+  box-shadow: 0 0 8px #1db954cc;
 }
 
 .topbar input::placeholder {
   color: #888;
+  user-select: none;
 }
 
 .topbar .controls button {
@@ -163,13 +190,17 @@ body {
   font-size: 16px;
   background: #1DB954;
   color: #121212;
-  transition: background 0.3s, transform 0.2s;
-  box-shadow: 0 0 10px #1db95455;
+  transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 12px #1db954aa;
+  cursor: pointer;
 }
 
-.topbar .controls button:hover {
-  background: #1fd666;
-  transform: scale(1.06);
+.topbar .controls button:hover,
+.topbar .controls button:focus-visible {
+  background: #1ffb66;
+  transform: scale(1.07);
+  box-shadow: 0 0 16px #1ffb66cc;
+  outline: none;
 }
 
 .sections {
@@ -182,19 +213,22 @@ body {
 .sections button {
   background: #1b1b1b;
   color: #1DB954;
-  border: 1px solid #333;
+  border: 1.5px solid #333;
   border-radius: 40px;
   padding: 10px 24px;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  user-select: none;
 }
 
-.sections button:hover {
+.sections button:hover,
+.sections button:focus-visible {
   background: #1DB954;
   color: #121212;
-  transform: scale(1.07);
+  transform: scale(1.1);
+  outline: none;
 }
 
 .grid {
@@ -204,10 +238,12 @@ body {
   max-height: 60vh;
   overflow-y: auto;
   padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #1db954cc transparent;
 }
 
 .app-card {
-  background: rgba(24, 24, 24, 0.9);
+  background: rgba(24, 24, 24, 0.95);
   border: 2px solid #1DB954;
   border-radius: 20px;
   padding: 28px 16px;
@@ -219,26 +255,36 @@ body {
   gap: 16px;
   font-weight: 700;
   color: #1DB954;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 8px #1db95425;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 8px #1db95433;
+  user-select: none;
 }
 
 .app-card .material-icons {
   font-size: 56px;
   color: inherit;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease, color 0.3s ease;
+  pointer-events: none;
 }
 
-.app-card:hover {
+.app-card:hover,
+.app-card:focus-within {
   background: #1DB954;
   color: #121212;
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 0 15px #1DB95488;
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 0 18px #1db954cc;
+  outline: none;
 }
 
-.app-card:hover .material-icons {
-  transform: scale(1.3);
+.app-card:hover .material-icons,
+.app-card:focus-within .material-icons {
+  transform: scale(1.4);
   color: #121212;
+}
+
+.app-card:focus-visible {
+  outline: 2px solid #1DB954;
+  outline-offset: 4px;
 }
 
 .footer {
@@ -249,6 +295,7 @@ body {
   border-top: 1px solid #222;
   text-align: center;
   font-size: 14px;
+  user-select: none;
 }
 
 .footer strong {
@@ -280,6 +327,8 @@ body {
     gap: 12px;
     overflow-x: auto;
     border-bottom: 1px solid #282828;
+    scrollbar-width: thin;
+    scrollbar-color: #1db954cc transparent;
   }
 
   .sidebar h2 {
@@ -290,9 +339,9 @@ body {
 
   .sidebar button {
     flex-shrink: 0;
-    padding: 12px;
+    padding: 12px 14px;
     font-size: 14px;
-    gap: 6px;
+    gap: 8px;
   }
 
   .main {
@@ -314,6 +363,7 @@ body {
     max-height: 50vh;
   }
 }
+
 
 </style>
 
@@ -344,12 +394,7 @@ body {
       </div>
     </div>
 
-    <div class="sections">
-      <button>My Home</button>
-      <button>Living Room</button>
-      <button>Bathroom</button>
-      <button>Office</button>
-    </div>
+   
 
     <div class="grid" id="appGrid">
      <div class="app-card" data-name="home" onclick="abrirPagina('home.html')">
