@@ -4,27 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dark Trade Σ — Seth Aurion Terminal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background-color: #0e0e0e;
-      color: #f0f0f0;
+      font-family: 'Rubik', sans-serif;
+      background-color: #121212;
+      color: #fff;
     }
     header {
-      background-color: #1a1a1a;
+      background-color: #1db954;
       padding: 1.5rem;
       text-align: center;
-      border-bottom: 1px solid #444;
     }
     h1 {
       font-size: 2rem;
-      color: #00ffcc;
+      color: #121212;
       margin-bottom: 0.2rem;
     }
     p.subtitle {
-      color: #aaa;
+      color: #121212;
       margin-top: 0;
     }
     .container {
@@ -34,24 +34,24 @@
       gap: 2rem;
     }
     .card {
-      background: #1b1b1b;
+      background: #181818;
       padding: 1.5rem;
       border-radius: 12px;
-      box-shadow: 0 0 15px #00ffcc33;
+      box-shadow: 0 0 15px #1db95455;
     }
     .card h2 {
       margin-top: 0;
-      color: #00ffcc;
+      color: #1db954;
     }
     select, button, input {
       padding: 0.7rem;
       margin-top: 1rem;
       width: 100%;
-      background-color: #111;
-      color: #0ff;
-      border: 1px solid #0ff;
+      background-color: #282828;
+      color: #1db954;
+      border: 1px solid #1db954;
       border-radius: 8px;
-      font-family: 'Orbitron';
+      font-family: 'Rubik';
     }
     .quote {
       font-size: 0.9rem;
@@ -62,8 +62,11 @@
     footer {
       text-align: center;
       padding: 1rem;
-      color: #555;
+      color: #666;
       font-size: 0.8rem;
+    }
+    canvas {
+      margin-top: 1rem;
     }
   </style>
 </head>
@@ -71,25 +74,21 @@
 
   <header>
     <h1>Dark Trade Σ</h1>
-    <p class="subtitle">Terminal Supersimétrico — Seth Aurion Operador</p>
+    <p class="subtitle">Terminal Supersimétrico — Seth Aurion</p>
   </header>
 
   <main class="container">
 
-    <!-- Painel de Cotações -->
+    <!-- Gráfico de Valorização -->
     <div class="card">
-      <h2>🧠 Cotações Atuais (BRL)</h2>
-      <ul>
-        <li><strong>Dark Bitcoin Σ:</strong> R$ 1.114,97 (+3.2%)</li>
-        <li><strong>Dark Ether Σ:</strong> R$ 1.853,00 (-1.5%)</li>
-        <li><strong>Dark Vertex Σ:</strong> R$ 16.350,00 (+0.8%)</li>
-      </ul>
-      <p class="quote">“O mercado não sobe nem desce. Ele pulsa.” — Seth Aurion</p>
+      <h2>📊 Valorização dos Ativos (em BRL)</h2>
+      <canvas id="valorChart" width="400" height="300"></canvas>
+      <p class="quote">“Não existe alta nem queda — apenas ciclos.” — Seth Aurion</p>
     </div>
 
-    <!-- Operação e Seleção -->
+    <!-- Painel de Operação -->
     <div class="card">
-      <h2>🔮 Ativar Operação Supersimétrica</h2>
+      <h2>🔮 Ativar Operação</h2>
       <label for="selectAsset">Selecione o Ativo</label>
       <select id="selectAsset">
         <option value="sDarkBitcoin">Dark Bitcoin Σ — 0.0033 BTC</option>
@@ -98,7 +97,10 @@
       </select>
 
       <label for="rq">Royalt Quântico Σ</label>
-      <input type="text" id="rq" value="Calculando..." disabled />
+      <input type="text" id="rq" disabled />
+
+      <label for="key">Operation Key (Meta Rabbit)</label>
+      <input type="text" id="opKey" readonly />
 
       <button onclick="activateOperation()">🧬 Solicitar Autorização</button>
 
@@ -117,10 +119,56 @@
       sDarkVertex: 1.25
     };
 
+    const valorizacao = {
+      labels: ["BTC Σ", "ETH Σ", "Vertex Σ"],
+      datasets: [{
+        label: 'Valorização em BRL',
+        data: [1114.97, 1853.00, 16350.00],
+        backgroundColor: [
+          'rgba(29, 185, 84, 0.6)',
+          'rgba(255, 255, 255, 0.4)',
+          'rgba(255, 100, 200, 0.4)'
+        ],
+        borderColor: [
+          'rgba(29, 185, 84, 1)',
+          'rgba(255, 255, 255, 0.6)',
+          'rgba(255, 100, 200, 1)'
+        ],
+        borderWidth: 2
+      }]
+    };
+
+    const ctx = document.getElementById('valorChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: valorizacao,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { color: '#fff' }
+          },
+          x: {
+            ticks: { color: '#fff' }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: { color: '#fff' }
+          }
+        }
+      }
+    });
+
     function updateRQ() {
       const asset = document.getElementById("selectAsset").value;
       const rq = rqValues[asset];
       document.getElementById("rq").value = rq.toFixed(2) + " HF";
+
+      // Geração de Operation Key única
+      const key = asset + "-" + Math.random().toString(36).substr(2, 8).toUpperCase();
+      document.getElementById("opKey").value = key;
     }
 
     function activateOperation() {
@@ -128,9 +176,9 @@
       const rq = rqValues[asset];
 
       if (rq < 1) {
-        document.getElementById("sethMessage").innerText = "🧬 Seth Aurion autoriza a operação. Ciclo Σ está ativo.";
+        document.getElementById("sethMessage").innerText = "🧬 Seth Aurion autoriza a operação. Ciclo Σ ativo.";
       } else {
-        document.getElementById("sethMessage").innerText = "⛔ Ciclo fechado. Royalt Σ elevado. Aguarde ressonância.";
+        document.getElementById("sethMessage").innerText = "⛔ Royalt Σ elevado. A operação foi rejeitada por pureza incompleta.";
       }
     }
 
