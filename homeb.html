@@ -15,18 +15,56 @@
     }
     header {
       background-color: #000;
-      padding: 1.5rem;
+      padding: 0.5rem 1rem;
       text-align: center;
+      position: relative;
     }
-    h1 {
-      font-size: 2rem;
+    header h1 {
+      font-size: 1.4rem;
       color: #1db954;
-      margin-bottom: 0.2rem;
+      margin: 0;
     }
-    p.subtitle {
+    header .subtitle {
       color: #1db954;
-      margin-top: 0;
+      font-size: 0.8rem;
+      margin: 0.2rem 0 0.5rem;
     }
+    .ticker {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      background-color: #101010;
+      padding: 0.3rem 0;
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+    }
+    .ticker-items {
+      display: inline-block;
+      animation: scrollTicker 25s linear infinite;
+    }
+    .ticker-item {
+      display: inline-block;
+      margin-right: 2rem;
+      font-size: 0.85rem;
+      color: #ccc;
+    }
+    .ticker-item .positive {
+      color: #00ff88;
+      animation: blink 0.8s infinite alternate;
+    }
+    .ticker-item .negative {
+      color: #ff4f4f;
+      animation: blink 0.8s infinite alternate;
+    }
+    @keyframes scrollTicker {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    @keyframes blink {
+      from { opacity: 0.7; }
+      to { opacity: 1; }
+    }
+
     .container {
       padding: 2rem;
       display: grid;
@@ -85,7 +123,10 @@
 
   <header>
     <h1>ORIS S2000</h1>
-    <p class="subtitle">Terminal Supersimétrico — Seth Aurion</p>
+    <p class="subtitle">Seth Aurion</p>
+    <div class="ticker">
+      <div class="ticker-items" id="tickerItems"></div>
+    </div>
   </header>
 
   <main class="container">
@@ -99,7 +140,7 @@
 
     <!-- Painel de Operação -->
     <div class="card">
-      <h2>🔮 Ativar Operação</h2>
+      <h2> Ativar Operação</h2>
       <label for="selectAsset">Selecione o Ativo</label>
       <select id="selectAsset">
         <option value="sDarkBitcoin">Dark Bitcoin Σ — 0.0033 BTC</option>
@@ -134,6 +175,26 @@
       sDarkGemini: 0.75,
       sDarkFlex: 0.95
     };
+
+    const ativosTicker = [
+      { nome: "Dark BTC Σ", valor: 1114.97, variacao: +3.2 },
+      { nome: "Dark ETH Σ", valor: 1853.00, variacao: -1.5 },
+      { nome: "Vertex Σ", valor: 16350.00, variacao: +0.8 },
+      { nome: "Gemini Σ", valor: 1275.00, variacao: -0.6 },
+      { nome: "Flex Σ", valor: 980.00, variacao: +2.1 },
+    ];
+
+    function renderTicker() {
+      const container = document.getElementById("tickerItems");
+      ativosTicker.forEach(ativo => {
+        const div = document.createElement("div");
+        div.className = "ticker-item";
+        const classe = ativo.variacao >= 0 ? "positive" : "negative";
+        const seta = ativo.variacao >= 0 ? "▲" : "▼";
+        div.innerHTML = `<strong>${ativo.nome}</strong>: R$ ${ativo.valor.toFixed(2)} <span class="${classe}">${seta} ${Math.abs(ativo.variacao).toFixed(1)}%</span>`;
+        container.appendChild(div);
+      });
+    }
 
     const valorizacao = {
       labels: ["BTC Σ", "ETH Σ", "Vertex Σ", "Gemini Σ", "Flex Σ"],
@@ -192,7 +253,10 @@
     }
 
     document.getElementById("selectAsset").addEventListener("change", updateRQ);
-    window.onload = updateRQ;
+    window.onload = () => {
+      updateRQ();
+      renderTicker();
+    };
   </script>
 
 </body>
