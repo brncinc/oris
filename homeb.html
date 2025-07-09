@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dark Trade Σ — Seth Aurion Terminal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0e0e0e;
+      color: #f0f0f0;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid #444;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #00ffcc;
+      margin-bottom: 0.2rem;
+    }
+    p.subtitle {
+      color: #aaa;
+      margin-top: 0;
+    }
+    .container {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .card {
+      background: #1b1b1b;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00ffcc33;
+    }
+    .card h2 {
+      margin-top: 0;
+      color: #00ffcc;
+    }
+    select, button, input {
+      padding: 0.7rem;
+      margin-top: 1rem;
+      width: 100%;
+      background-color: #111;
+      color: #0ff;
+      border: 1px solid #0ff;
+      border-radius: 8px;
+      font-family: 'Orbitron';
+    }
+    .quote {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      color: #ccc;
+      font-style: italic;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #555;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Dark Trade Σ</h1>
+    <p class="subtitle">Terminal Supersimétrico — Seth Aurion Operador</p>
+  </header>
+
+  <main class="container">
+
+    <!-- Painel de Cotações -->
+    <div class="card">
+      <h2>🧠 Cotações Atuais (BRL)</h2>
+      <ul>
+        <li><strong>Dark Bitcoin Σ:</strong> R$ 1.114,97 (+3.2%)</li>
+        <li><strong>Dark Ether Σ:</strong> R$ 1.853,00 (-1.5%)</li>
+        <li><strong>Dark Vertex Σ:</strong> R$ 16.350,00 (+0.8%)</li>
+      </ul>
+      <p class="quote">“O mercado não sobe nem desce. Ele pulsa.” — Seth Aurion</p>
+    </div>
+
+    <!-- Operação e Seleção -->
+    <div class="card">
+      <h2>🔮 Ativar Operação Supersimétrica</h2>
+      <label for="selectAsset">Selecione o Ativo</label>
+      <select id="selectAsset">
+        <option value="sDarkBitcoin">Dark Bitcoin Σ — 0.0033 BTC</option>
+        <option value="sDarkEther">Dark Ether Σ — 0.1 ETH</option>
+        <option value="sDarkVertex">Dark Vertex Σ — Estratégia Pura</option>
+      </select>
+
+      <label for="rq">Royalt Quântico Σ</label>
+      <input type="text" id="rq" value="Calculando..." disabled />
+
+      <button onclick="activateOperation()">🧬 Solicitar Autorização</button>
+
+      <p id="sethMessage" class="quote">“A abertura depende do tempo e da pureza.”</p>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 HoloFi Quantum Layer | Seth Aurion Protocol
+  </footer>
+
+  <script>
+    const rqValues = {
+      sDarkBitcoin: 0.55,
+      sDarkEther: 0.85,
+      sDarkVertex: 1.25
+    };
+
+    function updateRQ() {
+      const asset = document.getElementById("selectAsset").value;
+      const rq = rqValues[asset];
+      document.getElementById("rq").value = rq.toFixed(2) + " HF";
+    }
+
+    function activateOperation() {
+      const asset = document.getElementById("selectAsset").value;
+      const rq = rqValues[asset];
+
+      if (rq < 1) {
+        document.getElementById("sethMessage").innerText = "🧬 Seth Aurion autoriza a operação. Ciclo Σ está ativo.";
+      } else {
+        document.getElementById("sethMessage").innerText = "⛔ Ciclo fechado. Royalt Σ elevado. Aguarde ressonância.";
+      }
+    }
+
+    document.getElementById("selectAsset").addEventListener("change", updateRQ);
+    window.onload = updateRQ;
+  </script>
+
+</body>
+</html>
