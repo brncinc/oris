@@ -207,11 +207,11 @@
 
   <div id="output">Aguardando ação do usuário...</div>
 
-  <form>
+<form>
   <div class="input-box">
     <label for="assetSelect">Selecione seu ativo:</label>
-    <select id="assetSelect" name="investmentPlan">
-      <!-- 🪙 Dark Cryptos Supersimétricos Σ -->
+    <select id="assetSelect" name="investmentPlan" required>
+      <option value="" disabled selected hidden>Selecione seu ativo</option>
       <optgroup label="🪙 Dark Cryptos Supersimétricos Σ">
         <option value="sDarkBitcoin">Dark Bitcoin Σ — 0.0033 BTC (Matriz Temporal Satoshi)</option>
         <option value="sDarkEthereum">Dark Ethereum Σ — 0.1 ETH (Simetria Vital de Contrato)</option>
@@ -368,10 +368,8 @@
         <option value="sDarkOuroboros">Dark Ouroboros Σ — 8,100 USD</option>
         <option value="sDarkAnima">Dark Anima Σ — 3,500 USD</option>
       </optgroup>
-    </select>
+     </select>
   </div>
-</form>
-
 
     <label for="couponInput">Cupom de desconto:</label>
     <input type="text" id="couponInput" value="omegalul100" placeholder="Digite seu cupom aqui">
