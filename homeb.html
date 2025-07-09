@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dark Trade Σ — Seth Aurion Terminal</title>
+  <title>ORIS S2000 — Seth Aurion Terminal</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
@@ -14,17 +14,17 @@
       color: #fff;
     }
     header {
-      background-color: #1db954;
+      background-color: #000;
       padding: 1.5rem;
       text-align: center;
     }
     h1 {
       font-size: 2rem;
-      color: #121212;
+      color: #1db954;
       margin-bottom: 0.2rem;
     }
     p.subtitle {
-      color: #121212;
+      color: #1db954;
       margin-top: 0;
     }
     .container {
@@ -68,12 +68,23 @@
     canvas {
       margin-top: 1rem;
     }
+    a.button-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1rem;
+      background-color: #1db954;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Dark Trade Σ</h1>
+    <h1>ORIS S2000</h1>
     <p class="subtitle">Terminal Supersimétrico — Seth Aurion</p>
   </header>
 
@@ -81,7 +92,7 @@
 
     <!-- Gráfico de Valorização -->
     <div class="card">
-      <h2>📊 Valorização dos Ativos (em BRL)</h2>
+      <h2>📈 Valorização dos Ativos (em BRL)</h2>
       <canvas id="valorChart" width="400" height="300"></canvas>
       <p class="quote">“Não existe alta nem queda — apenas ciclos.” — Seth Aurion</p>
     </div>
@@ -94,6 +105,8 @@
         <option value="sDarkBitcoin">Dark Bitcoin Σ — 0.0033 BTC</option>
         <option value="sDarkEther">Dark Ether Σ — 0.1 ETH</option>
         <option value="sDarkVertex">Dark Vertex Σ — Estratégia Pura</option>
+        <option value="sDarkGemini">Dark Gemini Σ — Par Espelho</option>
+        <option value="sDarkFlex">Dark Flex Σ — Elastic Protocol</option>
       </select>
 
       <label for="rq">Royalt Quântico Σ</label>
@@ -103,50 +116,47 @@
       <input type="text" id="opKey" readonly />
 
       <button onclick="activateOperation()">🧬 Solicitar Autorização</button>
+      <a href="rabbit.html" class="button-link">📤 Enviar Código à Meta Rabbit</a>
 
       <p id="sethMessage" class="quote">“A abertura depende do tempo e da pureza.”</p>
     </div>
   </main>
 
   <footer>
-    &copy; 2025 HoloFi Quantum Layer | Seth Aurion Protocol
+    &copy; 2025 HoloFi Quantum Layer | ORIS S2000 Engine
   </footer>
 
   <script>
     const rqValues = {
       sDarkBitcoin: 0.55,
       sDarkEther: 0.85,
-      sDarkVertex: 1.25
+      sDarkVertex: 1.25,
+      sDarkGemini: 0.75,
+      sDarkFlex: 0.95
     };
 
     const valorizacao = {
-      labels: ["BTC Σ", "ETH Σ", "Vertex Σ"],
+      labels: ["BTC Σ", "ETH Σ", "Vertex Σ", "Gemini Σ", "Flex Σ"],
       datasets: [{
         label: 'Valorização em BRL',
-        data: [1114.97, 1853.00, 16350.00],
-        backgroundColor: [
-          'rgba(29, 185, 84, 0.6)',
-          'rgba(255, 255, 255, 0.4)',
-          'rgba(255, 100, 200, 0.4)'
-        ],
-        borderColor: [
-          'rgba(29, 185, 84, 1)',
-          'rgba(255, 255, 255, 0.6)',
-          'rgba(255, 100, 200, 1)'
-        ],
-        borderWidth: 2
+        data: [1114.97, 1853.00, 16350.00, 1275.00, 980.00],
+        fill: false,
+        borderColor: ['#FFD700', '#1DB954', '#00BFFF', '#FFA500', '#00FFAA'],
+        backgroundColor: ['#FFD70088', '#1DB95488', '#00BFFF88', '#FFA50088', '#00FFAA88'],
+        borderWidth: 3,
+        tension: 0.3
       }]
     };
 
     const ctx = document.getElementById('valorChart').getContext('2d');
     new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: valorizacao,
       options: {
         responsive: true,
         scales: {
           y: {
-            beginAtZero: true,
+            beginAtZero: false,
             ticks: { color: '#fff' }
           },
           x: {
@@ -166,7 +176,6 @@
       const rq = rqValues[asset];
       document.getElementById("rq").value = rq.toFixed(2) + " HF";
 
-      // Geração de Operation Key única
       const key = asset + "-" + Math.random().toString(36).substr(2, 8).toUpperCase();
       document.getElementById("opKey").value = key;
     }
