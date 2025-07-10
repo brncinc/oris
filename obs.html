@@ -29,7 +29,7 @@
     overflow: hidden;
   }
   header {
-    background-color: #2a2a2a; /* cor mais sóbria, menos neon */
+    background-color: var(--purple); /* mantido roxo */
     padding: 0.8rem 1rem;
     display: flex;
     justify-content: center; /* centraliza o logo */
@@ -41,7 +41,7 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.6);
   }
   header img.logo {
-    height: 48px; /* 50% maior que 32px */
+    height: 48px; /* 50% maior */
     width: auto;
     object-fit: contain;
   }
@@ -63,33 +63,21 @@
     flex-grow: 1;
   }
   .profile {
-    position: relative;
     display: flex;
     align-items: center;
     gap: 0.75rem;
     color: var(--text-muted);
     font-weight: 600;
+    position: relative;
   }
   .profile img {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border: 2px solid var(--red); /* vermelho */
+    border: 2px solid var(--red); /* anel vermelho */
     object-fit: cover;
   }
-  /* Bolinha vermelha ao lado da foto */
-  .profile .status-red-dot {
-    position: absolute;
-    top: 4px;
-    left: 38px; /* posiciona sobre a borda da foto */
-    width: 14px;
-    height: 14px;
-    background: var(--red);
-    border: 2px solid var(--card);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--red);
-    pointer-events: none;
-  }
+  /* Removida bolinha vermelha de status */
 
   main {
     margin-top: 0.5rem;
@@ -103,7 +91,7 @@
     flex: 3;
     background: var(--card);
     border-radius: 12px;
-    box-shadow: 0 0 15px var(--primary);
+    /* Removido box-shadow neon daqui */
     display: flex;
     flex-direction: column;
   }
@@ -129,7 +117,7 @@
     flex: 1;
     background: var(--card);
     border-radius: 12px;
-    box-shadow: 0 0 10px var(--primary);
+    box-shadow: 0 0 15px var(--primary); /* mantido neon só no chat */
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -211,7 +199,6 @@
   <div class="profile">
     <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto perfil" />
     <div>Lucas Januário</div>
-    <div class="status-red-dot" title="Offline"></div>
   </div>
 </div>
 <main>
@@ -226,7 +213,7 @@
   <section class="chat-container">
     <div class="chat-header">
       Chat
-      <span id="viewerCount"> 👁 128 espectadores</span>
+      <span id="viewerCount">👁 1100 espectadores</span>
     </div>
     <div class="chat-messages" id="chatMessages"></div>
     <form id="chatForm" class="chat-input">
