@@ -1,69 +1,265 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Oris TV - Player</title>
-  <style>
-    :root {
-      --primary: #0f0;
-      --dark: #0a0a0a;
-      --card: #151515;
-      --text: #fff;
-      --text-muted: #aaa;
-      --purple: #6e00ff;
-      --green: #00ff00;
-      --red: #ff0033;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--dark);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-    header {
-      background-color: var(--purple);
-      padding: 1rem 2rem;
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 10;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Oris TV - Transmissão</title>
+<style>
+  :root {
+    --primary: #0f0;
+    --dark: #0a0a0a;
+    --card: #151515;
+    --text: #fff;
+    --text-muted: #aaa;
+    --purple: #6e00ff;
+    --green: #00ff00;
+    --red: #ff0033;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--dark);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+  header {
+    background-color: var(--purple);
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 50px;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+  }
+  header img.logo {
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
+  }
+  /* Conteúdo abaixo do header */
+  .title-bar {
+    margin-top: 50px;
+    padding: 1rem 1.5rem 0.5rem;
+    border-bottom: 1px solid #222;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--card);
+  }
+  .title-bar h1 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--primary);
+    flex-grow: 1;
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .profile img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    object-fit: cover;
+  }
+  .status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 1.5px solid var(--dark);
+    margin-left: -14px;
+    margin-top: 24px;
+    box-shadow: 0 0 6px var(--green);
+  }
+
+  main {
+    margin-top: 0.5rem;
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    overflow: hidden;
+  }
+  .player-container {
+    flex: 3;
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 0 15px var(--primary);
+    display: flex;
+    flex-direction: column;
+  }
+  video {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px 12px 0 0;
+    background: black;
+    outline: none;
+    flex-grow: 1;
+  }
+  .video-info {
+    padding: 0.75rem 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--primary);
+    background-color: #101010;
+    border-radius: 0 0 12px 12px;
+    user-select: none;
+  }
+
+  .chat-container {
+    flex: 1;
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 0 10px var(--primary);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .chat-header {
+    padding: 0.75rem 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    border-bottom: 1px solid #222;
+    color: var(--primary);
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .chat-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .chat-input {
+    display: flex;
+    border-top: 1px solid #222;
+  }
+  .chat-input input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: none;
+    background: #222;
+    color: var(--text);
+    font-size: 1rem;
+    border-radius: 0 0 0 12px;
+  }
+  .chat-input button {
+    background: var(--primary);
+    border: none;
+    padding: 0 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 0 0 12px 0;
+    color: var(--dark);
+    transition: background-color 0.3s;
+  }
+  .chat-input button:hover {
+    background: #0c0;
+    color: #fff;
+  }
+  .chat-messages::-webkit-scrollbar {
+    width: 8px;
+  }
+  .chat-messages::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+  }
+
+  /* Responsividade */
+  @media (max-width: 900px) {
     main {
-      margin-top: 80px;
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column;
       padding: 1rem;
-      background: var(--card);
     }
-    video {
-      width: 100%;
-      max-width: 900px;
+    .player-container, .chat-container {
+      flex: none;
+      height: 300px;
+      margin-bottom: 1rem;
       border-radius: 12px;
-      background: black;
-      outline: none;
-      box-shadow: 0 0 15px var(--primary);
     }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <header>Oris TV - Player</header>
-  <main>
-    <video controls autoplay muted>
+<header>
+  <img src="z.png" alt="Logo Oris TV" class="logo" />
+</header>
+<div class="title-bar">
+  <h1>Super Live: Gameplay Insano</h1>
+  <div class="profile">
+    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto perfil" />
+    <div>Lucas Januário</div>
+    <div class="status-dot" title="Online"></div>
+  </div>
+</div>
+<main>
+  <section class="player-container">
+    <video id="video" controls autoplay muted>
       <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4" />
-      Seu navegador não suporta vídeo HTML5.
+      Seu navegador não suporta vídeo.
     </video>
-  </main>
+    <div class="video-info">Assistindo: Super Live: Gameplay Insano</div>
+  </section>
+
+  <section class="chat-container">
+    <div class="chat-header">
+      Chat
+      <span id="viewerCount">👁️ 128 espectadores</span>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <form id="chatForm" class="chat-input">
+      <input type="text" id="chatInput" placeholder="Digite sua mensagem..." autocomplete="off" />
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+</main>
+
+<script>
+  // Código simples do chat só no frontend para demo
+  const chatMessages = document.getElementById('chatMessages');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+
+  function addMessage(msg, isOwn = false) {
+    const div = document.createElement('div');
+    div.textContent = msg;
+    div.style.marginBottom = '0.5rem';
+    if (isOwn) div.style.color = 'var(--green)';
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  chatForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+    addMessage('Você: ' + msg, true);
+    chatInput.value = '';
+    chatInput.focus();
+
+    // Simula resposta do chat depois de 1.5s
+    setTimeout(() => {
+      addMessage('Outro usuário: ' + msg.split('').reverse().join(''));
+    }, 1500);
+  });
+</script>
 </body>
 </html>
