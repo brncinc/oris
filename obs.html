@@ -29,11 +29,11 @@
     overflow: hidden;
   }
   header {
-    background-color: var(--purple);
+    background-color: #2a2a2a; /* cor mais sóbria, menos neon */
     padding: 0.8rem 1rem;
     display: flex;
+    justify-content: center; /* centraliza o logo */
     align-items: center;
-    gap: 0.8rem;
     position: fixed;
     top: 0; left: 0; right: 0;
     height: 50px;
@@ -41,8 +41,8 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.6);
   }
   header img.logo {
-    height: 32px;
-    width: 32px;
+    height: 48px; /* 50% maior que 32px */
+    width: auto;
     object-fit: contain;
   }
   /* Conteúdo abaixo do header */
@@ -63,6 +63,7 @@
     flex-grow: 1;
   }
   .profile {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -73,18 +74,21 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border: 2px solid var(--primary);
+    border: 2px solid var(--red); /* vermelho */
     object-fit: cover;
   }
-  .status-dot {
-    width: 12px;
-    height: 12px;
+  /* Bolinha vermelha ao lado da foto */
+  .profile .status-red-dot {
+    position: absolute;
+    top: 4px;
+    left: 38px; /* posiciona sobre a borda da foto */
+    width: 14px;
+    height: 14px;
+    background: var(--red);
+    border: 2px solid var(--card);
     border-radius: 50%;
-    background: var(--green);
-    border: 1.5px solid var(--dark);
-    margin-left: -14px;
-    margin-top: 24px;
-    box-shadow: 0 0 6px var(--green);
+    box-shadow: 0 0 8px var(--red);
+    pointer-events: none;
   }
 
   main {
@@ -207,7 +211,7 @@
   <div class="profile">
     <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto perfil" />
     <div>Lucas Januário</div>
-    <div class="status-dot" title="Online"></div>
+    <div class="status-red-dot" title="Offline"></div>
   </div>
 </div>
 <main>
@@ -222,7 +226,7 @@
   <section class="chat-container">
     <div class="chat-header">
       Chat
-      <span id="viewerCount">👁️ 128 espectadores</span>
+      <span id="viewerCount"> 👁 128 espectadores</span>
     </div>
     <div class="chat-messages" id="chatMessages"></div>
     <form id="chatForm" class="chat-input">
