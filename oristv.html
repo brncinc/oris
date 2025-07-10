@@ -5,19 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OrisTV - Live Powered by BTC-X</title>
   <style>
+    :root {
+      --primary: #0f0; /* Razer green */
+      --dark: #0a0a0a;
+      --card: #151515;
+      --text: #fff;
+      --text-muted: #aaa;
+    }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #000;
-      color: #fff;
+      background-color: var(--dark);
+      color: var(--text);
     }
 
     header {
-      background: #0f0; /* Razer green */
+      background-color: #000;
       padding: 1rem 2rem;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #000;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .container {
@@ -25,16 +37,20 @@
     }
 
     .sidebar {
-      width: 220px;
+      width: 250px;
       background-color: #111;
-      border-right: 2px solid #0f0;
+      border-right: 1px solid #222;
       padding: 1rem;
       height: 100vh;
+      position: fixed;
+      top: 60px;
+      left: 0;
     }
 
     .sidebar h3 {
-      margin-top: 0;
-      color: #0f0;
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 1rem;
     }
 
     .sidebar ul {
@@ -43,110 +59,120 @@
     }
 
     .sidebar ul li {
-      padding: 10px;
+      display: flex;
+      align-items: center;
+      padding: 10px 8px;
+      border-radius: 6px;
+      color: var(--text-muted);
       cursor: pointer;
-      color: #ccc;
+      transition: background 0.2s;
     }
 
     .sidebar ul li:hover {
-      background: #0f0;
-      color: #000;
-      font-weight: bold;
+      background: #1a1a1a;
+      color: var(--primary);
     }
 
     .main {
-      flex: 1;
+      margin-left: 260px;
       padding: 2rem;
+      width: 100%;
     }
 
     .stream-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1.5rem;
     }
 
     .stream-card {
-      background: #111;
-      border: 2px solid #0f0;
+      background: var(--card);
+      border: 1px solid #222;
       border-radius: 10px;
       overflow: hidden;
-      transition: transform 0.3s;
+      box-shadow: 0 0 5px #0f02;
+      transition: transform 0.3s, border 0.3s;
     }
 
     .stream-card:hover {
       transform: scale(1.03);
-      border-color: #33ff33;
+      border-color: var(--primary);
     }
 
     .stream-card img {
       width: 100%;
       height: 180px;
       object-fit: cover;
+      display: block;
     }
 
-    .stream-card .info {
+    .info {
       padding: 1rem;
     }
 
-    .stream-card .info h4 {
+    .info h4 {
       margin: 0;
-      color: #0f0;
+      font-size: 1.1rem;
+      color: var(--primary);
     }
 
-    .stream-card .info p {
-      margin: 0.3rem 0 0;
-      color: #ccc;
+    .info p {
+      margin: 0.4rem 0 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
 
     footer {
       text-align: center;
       padding: 1rem;
       background: #111;
-      color: #0f0;
-      border-top: 2px solid #0f0;
+      color: var(--primary);
+      border-top: 1px solid #222;
     }
   </style>
 </head>
 <body>
 
 <header>
-  🎮 OrisTV | Powered by BTC-X & Meta Rabbit
+  OrisTV 🎮 <span style="font-size: 0.9rem;">Live in BTC-X</span>
 </header>
 
 <div class="container">
   <aside class="sidebar">
-    <h3>Live Channels</h3>
+    <h3>📺 Live Channels</h3>
     <ul>
-      <li>@GameZone</li>
-      <li>@CryptoGamer</li>
-      <li>@OrisAcademy</li>
-      <li>@FPSMaster</li>
-      <li>@ArtPixel</li>
+      <li>🎮 @GameZone</li>
+      <li>💻 @DevArena</li>
+      <li>🎨 @PixelBrush</li>
+      <li>📚 @OrisAcademy</li>
+      <li>🕹️ @RetroWave</li>
     </ul>
   </aside>
 
   <main class="main">
-    <h2>🔥 Live Now</h2>
+    <h2 style="color: var(--primary); margin-bottom: 1.5rem;">🔥 Live Now</h2>
     <div class="stream-grid">
       <div class="stream-card">
-        <img src="https://placehold.co/300x180/0f0/000?text=Stream+1" alt="Live Stream 1">
+        <img src="https://placehold.co/320x180/0f0/000?text=Live+Stream+1" alt="Live Stream 1">
         <div class="info">
           <h4>@CryptoGamer</h4>
-          <p>Web3 Battle Royale • 420 viewers</p>
+          <p>Battle of Chains – 420 viewers</p>
         </div>
       </div>
+
       <div class="stream-card">
-        <img src="https://placehold.co/300x180/0f0/000?text=Stream+2" alt="Live Stream 2">
+        <img src="https://placehold.co/320x180/0f0/000?text=Live+Stream+2" alt="Live Stream 2">
         <div class="info">
           <h4>@OrisAcademy</h4>
-          <p>Curso de BTC-X ao vivo • 210 viewers</p>
+          <p>Live: BTC-X Fundamentals</p>
         </div>
       </div>
+
       <div class="stream-card">
-        <img src="https://placehold.co/300x180/0f0/000?text=Stream+3" alt="Live Stream 3">
+        <img src="https://placehold.co/320x180/0f0/000?text=Live+Stream+3" alt="Live Stream 3">
         <div class="info">
           <h4>@FPSMaster</h4>
-          <p>Call of Crypto Duty • 800 viewers</p>
+          <p>Warzone Arena • 800 viewers</p>
         </div>
       </div>
     </div>
@@ -154,7 +180,7 @@
 </div>
 
 <footer>
-  © 2025 OrisTV • All rights reserved • Powered by BTC-X + Meta Rabbit
+  © 2025 OrisTV | Powered by BTC-X + Meta Rabbit
 </footer>
 
 </body>
