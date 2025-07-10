@@ -29,10 +29,10 @@
     overflow: hidden;
   }
   header {
-    background-color: var(--purple); /* mantido roxo */
+    background-color: var(--purple);
     padding: 0.8rem 1rem;
     display: flex;
-    justify-content: center; /* centraliza o logo */
+    justify-content: center;
     align-items: center;
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -41,13 +41,63 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.6);
   }
   header img.logo {
-    height: 48px; /* 50% maior */
+    height: 48px;
     width: auto;
     object-fit: contain;
   }
-  /* Conteúdo abaixo do header */
+
+  /* Sidebar */
+  .sidebar {
+    width: 240px;
+    background-color: #111;
+    border-right: 1px solid #222;
+    padding: 1rem;
+    position: fixed;
+    top: 50px; /* abaixo do header fixo */
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+  }
+  .sidebar h3 {
+    color: var(--primary);
+    font-size: 1rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .top-streamer {
+    background-color: #1a1a1a;
+    padding: 12px;
+    border-left: 4px solid var(--primary);
+    margin-bottom: 1rem;
+    color: var(--primary);
+    font-weight: bold;
+  }
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .sidebar ul li {
+    padding: 8px 10px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .sidebar ul li:hover {
+    background: #1a1a1a;
+    color: var(--primary);
+  }
+
+  /* Content layout */
+  .content-wrapper {
+    margin-top: 50px; /* altura do header */
+    margin-left: 240px; /* largura da sidebar */
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+  }
+
   .title-bar {
-    margin-top: 50px;
     padding: 1rem 1.5rem 0.5rem;
     border-bottom: 1px solid #222;
     display: flex;
@@ -68,19 +118,16 @@
     gap: 0.75rem;
     color: var(--text-muted);
     font-weight: 600;
-    position: relative;
   }
   .profile img {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border: 2px solid var(--red); /* anel vermelho */
+    border: 2px solid var(--red);
     object-fit: cover;
   }
-  /* Removida bolinha vermelha de status */
 
   main {
-    margin-top: 0.5rem;
     flex: 1;
     display: flex;
     gap: 1rem;
@@ -91,7 +138,6 @@
     flex: 3;
     background: var(--card);
     border-radius: 12px;
-    /* Removido box-shadow neon daqui */
     display: flex;
     flex-direction: column;
   }
@@ -117,7 +163,7 @@
     flex: 1;
     background: var(--card);
     border-radius: 12px;
-    box-shadow: 0 0 15px var(--primary); /* mantido neon só no chat */
+    box-shadow: 0 0 15px var(--primary);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -177,9 +223,23 @@
 
   /* Responsividade */
   @media (max-width: 900px) {
+    .sidebar {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid #222;
+      top: auto;
+    }
+    .content-wrapper {
+      margin-left: 0;
+      margin-top: 0;
+      height: auto;
+    }
     main {
       flex-direction: column;
       padding: 1rem;
+      height: auto;
     }
     .player-container, .chat-container {
       flex: none;
@@ -194,34 +254,60 @@
 <header>
   <img src="z.png" alt="Logo Oris TV" class="logo" />
 </header>
-<div class="title-bar">
-  <h1>Super Live: Gameplay Insano</h1>
-  <div class="profile">
-    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto perfil" />
-    <div>Lucas Januário</div>
-  </div>
-</div>
-<main>
-  <section class="player-container">
-    <video id="video" controls autoplay muted>
-      <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4" />
-      Seu navegador não suporta vídeo.
-    </video>
-    <div class="video-info">Assistindo: Super Live: Gameplay Insano</div>
-  </section>
 
-  <section class="chat-container">
-    <div class="chat-header">
-      Chat
-      <span id="viewerCount">👁 1100 espectadores</span>
+<aside class="sidebar">
+  <h3>👑 Featured</h3>
+  <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
+
+  <h3>📺 Live Channels</h3>
+  <ul>
+    <li>🎮 @GameZone</li>
+    <li>💻 @DevArena</li>
+    <li>🎨 @PixelBrush</li>
+    <li>📚 @OrisAcademy</li>
+    <li>🕹️ @RetroWave</li>
+  </ul>
+
+  <h3>🎓 Courses</h3>
+  <ul>
+    <li>🎮 Games</li>
+    <li>💻 Development</li>
+    <li>🎨 Design</li>
+    <li>💰 Finance</li>
+    <li>🪙 Crypto</li>
+  </ul>
+</aside>
+
+<div class="content-wrapper">
+  <div class="title-bar">
+    <h1>Super Live: Gameplay Insano</h1>
+    <div class="profile">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto perfil" />
+      <div>Lucas Januário</div>
     </div>
-    <div class="chat-messages" id="chatMessages"></div>
-    <form id="chatForm" class="chat-input">
-      <input type="text" id="chatInput" placeholder="Digite sua mensagem..." autocomplete="off" />
-      <button type="submit">Enviar</button>
-    </form>
-  </section>
-</main>
+  </div>
+  <main>
+    <section class="player-container">
+      <video id="video" controls autoplay muted>
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4" />
+        Seu navegador não suporta vídeo.
+      </video>
+      <div class="video-info">Assistindo: Super Live: Gameplay Insano</div>
+    </section>
+
+    <section class="chat-container">
+      <div class="chat-header">
+        Chat
+        <span id="viewerCount">👁️ 128 espectadores</span>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <form id="chatForm" class="chat-input">
+        <input type="text" id="chatInput" placeholder="Digite sua mensagem..." autocomplete="off" />
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+</div>
 
 <script>
   // Código simples do chat só no frontend para demo
