@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OrisTV - Live Powered by BTC-X</title>
   <style>
     :root {
-      --primary: #0f0; /* Razer green */
+      --primary: #0f0;
       --dark: #0a0a0a;
       --card: #151515;
       --text: #fff;
       --text-muted: #aaa;
+      --purple: #6e00ff;
+      --green: #00ff00;
+      --red: #ff0033;
     }
 
     body {
@@ -21,15 +24,47 @@
     }
 
     header {
-      background-color: #000;
+      background-color: var(--purple);
       padding: 1rem 2rem;
       font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--primary);
-      border-bottom: 2px solid var(--primary);
+      font-weight: bold;
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .header-buttons button {
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .btn-green {
+      background-color: var(--green);
+      color: #000;
+    }
+
+    .btn-green:hover {
+      background-color: #00cc00;
+    }
+
+    .btn-red {
+      background-color: var(--red);
+      color: #fff;
+    }
+
+    .btn-red:hover {
+      background-color: #cc0022;
     }
 
     .container {
@@ -134,7 +169,11 @@
 <body>
 
 <header>
-  OrisTV 🎮 <span style="font-size: 0.9rem;">Live in BTC-X</span>
+  <span>OrisTV</span>
+  <div class="header-buttons">
+    <button class="btn-red">🔴 Ao Vivo</button>
+    <button class="btn-green">Entrar</button>
+  </div>
 </header>
 
 <div class="container">
