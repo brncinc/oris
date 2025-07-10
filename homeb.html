@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-    <link rel="icon" href="logo.ico" />
+  <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ORIS S2000 — Seth Aurion Terminal</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
@@ -65,7 +65,6 @@
       from { opacity: 0.7; }
       to { opacity: 1; }
     }
-
     .container {
       padding: 2rem;
       display: grid;
@@ -122,143 +121,148 @@
 </head>
 <body>
 
-  <header>
-    <h1>ORIS S2000</h1>
-    <p class="subtitle">Seth Aurion</p>
-    <div class="ticker">
-      <div class="ticker-items" id="tickerItems"></div>
-    </div>
-  </header>
+<header>
+  <h1>ORIS S2000</h1>
+  <p class="subtitle">Seth Aurion</p>
+  <div class="ticker">
+    <div class="ticker-items" id="tickerItems"></div>
+  </div>
+</header>
 
-  <main class="container">
+<main class="container">
 
-    <!-- Gráfico de Valorização -->
-    <div class="card">
-      <h2>📈 Valorização dos Ativos (em BRL)</h2>
-      <canvas id="valorChart" width="400" height="300"></canvas>
-      <p class="quote">“Não existe alta nem queda — apenas ciclos.” — Seth Aurion</p>
-    </div>
+  <!-- Gráfico de Valorização -->
+  <div class="card">
+    <h2>📈 Valorização dos Ativos (em BRL)</h2>
+    <canvas id="valorChart" width="400" height="300"></canvas>
+    <p class="quote">“Não existe alta nem queda — apenas ciclos.” — Seth Aurion</p>
+  </div>
 
-    <!-- Painel de Operação -->
-    <div class="card">
-      <h2> Ativar Operação</h2>
-      <label for="selectAsset">Selecione o Ativo</label>
-      <select id="selectAsset">
-        <option value="sDarkBitcoin">Dark Bitcoin Σ — 0.0033 BTC</option>
-        <option value="sDarkEther">Dark Ether Σ — 0.1 ETH</option>
-        <option value="sDarkVertex">Dark Vertex Σ — Estratégia Pura</option>
-        <option value="sDarkGemini">Dark Gemini Σ — Par Espelho</option>
-        <option value="sDarkFlex">Dark Flex Σ — Elastic Protocol</option>
-      </select>
+  <!-- Painel de Operação -->
+  <div class="card">
+    <h2> Ativar Operação</h2>
+    <label for="selectAsset">Selecione o Ativo</label>
+    <select id="selectAsset">
+      <option value="sDarkBitcoin">Dark Bitcoin Σ — 0.0033 BTC</option>
+      <option value="sDarkEther">Dark Ether Σ — 0.1 ETH</option>
+      <option value="sDarkVertex">Dark Vertex Σ — Estratégia Pura</option>
+      <option value="sDarkGemini">Dark Gemini Σ — Par Espelho</option>
+      <option value="sDarkFlex">Dark Flex Σ — Elastic Protocol</option>
+      <option value="sBitcoinX">Bitcoin X Σ — Prisma de Geminiosidade</option>
+    </select>
 
-      <label for="rq">Royalt Quântico Σ</label>
-      <input type="text" id="rq" disabled />
+    <label for="rq">Royalt Quântico Σ</label>
+    <input type="text" id="rq" disabled />
 
-      <label for="key">Operation Key (Meta Rabbit)</label>
-      <input type="text" id="opKey" readonly />
+    <label for="key">Operation Key (Meta Rabbit)</label>
+    <input type="text" id="opKey" readonly />
 
-      <button onclick="activateOperation()">🧬 Solicitar Autorização</button>
-      <a href="rabbit.html" class="button-link">📤 Enviar Código à Meta Rabbit</a>
+    <button onclick="activateOperation()">🧬 Solicitar Autorização</button>
+    <a href="rabbit.html" class="button-link">📤 Enviar Código à Meta Rabbit</a>
 
-      <p id="sethMessage" class="quote">“A abertura depende do tempo e da pureza.”</p>
-    </div>
-  </main>
+    <p id="sethMessage" class="quote">“A abertura depende do tempo e da pureza.”</p>
+  </div>
+</main>
 
-  <footer>
-    &copy; 2025 HoloFi Quantum Layer | ORIS S2000 Engine
-  </footer>
+<footer>
+  &copy; 2025 HoloFi Quantum Layer | ORIS S2000 Engine
+</footer>
 
-  <script>
-    const rqValues = {
-      sDarkBitcoin: 0.55,
-      sDarkEther: 0.85,
-      sDarkVertex: 1.25,
-      sDarkGemini: 0.75,
-      sDarkFlex: 0.95
-    };
+<script>
+  const rqValues = {
+    sDarkBitcoin: 0.55,
+    sDarkEther: 0.85,
+    sDarkVertex: 1.25,
+    sDarkGemini: 0.75,
+    sDarkFlex: 0.95,
+    sBitcoinX: 0.65
+  };
 
-    const ativosTicker = [
-      { nome: "Dark BTC Σ", valor: 1114.97, variacao: +3.2 },
-      { nome: "Dark ETH Σ", valor: 1853.00, variacao: -1.5 },
-      { nome: "Vertex Σ", valor: 16350.00, variacao: +0.8 },
-      { nome: "Gemini Σ", valor: 1275.00, variacao: -0.6 },
-      { nome: "Flex Σ", valor: 980.00, variacao: +2.1 },
-    ];
+  const ativosTicker = [
+    { nome: "Dark BTC Σ", valor: 1114.97, variacao: +3.2 },
+    { nome: "Dark ETH Σ", valor: 1853.00, variacao: -1.5 },
+    { nome: "Vertex Σ", valor: 16350.00, variacao: +0.8 },
+    { nome: "Gemini Σ", valor: 1275.00, variacao: -0.6 },
+    { nome: "Flex Σ", valor: 980.00, variacao: +2.1 },
+    { nome: "Bitcoin X Σ", valor: 13880.00, variacao: +5.3 }
+  ];
 
-    function renderTicker() {
-      const container = document.getElementById("tickerItems");
-      ativosTicker.forEach(ativo => {
-        const div = document.createElement("div");
-        div.className = "ticker-item";
-        const classe = ativo.variacao >= 0 ? "positive" : "negative";
-        const seta = ativo.variacao >= 0 ? "▲" : "▼";
-        div.innerHTML = `<strong>${ativo.nome}</strong>: R$ ${ativo.valor.toFixed(2)} <span class="${classe}">${seta} ${Math.abs(ativo.variacao).toFixed(1)}%</span>`;
-        container.appendChild(div);
-      });
-    }
+  function renderTicker() {
+    const container = document.getElementById("tickerItems");
+    ativosTicker.forEach(ativo => {
+      const div = document.createElement("div");
+      div.className = "ticker-item";
+      const classe = ativo.variacao >= 0 ? "positive" : "negative";
+      const seta = ativo.variacao >= 0 ? "▲" : "▼";
+      div.innerHTML = `<strong>${ativo.nome}</strong>: R$ ${ativo.valor.toFixed(2)} <span class="${classe}">${seta} ${Math.abs(ativo.variacao).toFixed(1)}%</span>`;
+      container.appendChild(div);
+    });
+  }
 
-    const valorizacao = {
-      labels: ["BTC Σ", "ETH Σ", "Vertex Σ", "Gemini Σ", "Flex Σ"],
-      datasets: [{
-        label: 'Valorização em BRL',
-        data: [1114.97, 1853.00, 16350.00, 1275.00, 980.00],
-        fill: false,
-        borderColor: ['#FFD700', '#1DB954', '#00BFFF', '#FFA500', '#00FFAA'],
-        backgroundColor: ['#FFD70088', '#1DB95488', '#00BFFF88', '#FFA50088', '#00FFAA88'],
-        borderWidth: 3,
-        tension: 0.3
-      }]
-    };
+  const valorizacao = {
+    labels: ["BTC Σ", "ETH Σ", "Vertex Σ", "Gemini Σ", "Flex Σ", "Bitcoin X Σ"],
+    datasets: [{
+      label: 'Valorização em BRL',
+      data: [1114.97, 1853.00, 16350.00, 1275.00, 980.00, 13880.00],
+      fill: false,
+      borderColor: ['#FFD700', '#1DB954', '#00BFFF', '#FFA500', '#00FFAA', '#FF69B4'],
+      backgroundColor: ['#FFD70088', '#1DB95488', '#00BFFF88', '#FFA50088', '#00FFAA88', '#FF69B488'],
+      borderWidth: 3,
+      tension: 0.3
+    }]
+  };
 
-    const ctx = document.getElementById('valorChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'line',
-      data: valorizacao,
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: false,
-            ticks: { color: '#fff' }
-          },
-          x: {
-            ticks: { color: '#fff' }
-          }
+  const ctx = document.getElementById('valorChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: valorizacao,
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: false,
+          ticks: { color: '#fff' }
         },
-        plugins: {
-          legend: {
-            labels: { color: '#fff' }
-          }
+        x: {
+          ticks: { color: '#fff' }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: { color: '#fff' }
         }
       }
-    });
-
-    function updateRQ() {
-      const asset = document.getElementById("selectAsset").value;
-      const rq = rqValues[asset];
-      document.getElementById("rq").value = rq.toFixed(2) + " HF";
-
-      const key = asset + "-" + Math.random().toString(36).substr(2, 8).toUpperCase();
-      document.getElementById("opKey").value = key;
     }
+  });
 
-    function activateOperation() {
-      const asset = document.getElementById("selectAsset").value;
-      const rq = rqValues[asset];
+  function updateRQ() {
+    const asset = document.getElementById("selectAsset").value;
+    const rq = rqValues[asset];
+    document.getElementById("rq").value = rq.toFixed(2) + " HF";
 
-      if (rq < 1) {
-        document.getElementById("sethMessage").innerText = "🧬 Seth Aurion autoriza a operação. Ciclo Σ ativo.";
-      } else {
-        document.getElementById("sethMessage").innerText = "⛔ Royalt Σ elevado. A operação foi rejeitada por pureza incompleta.";
-      }
+    const key = asset + "-" + Math.random().toString(36).substr(2, 8).toUpperCase();
+    document.getElementById("opKey").value = key;
+  }
+
+  function activateOperation() {
+    const asset = document.getElementById("selectAsset").value;
+    const rq = rqValues[asset];
+
+    if (asset === "sBitcoinX") {
+      document.getElementById("sethMessage").innerText = "⚡ Bitcoin X Σ autorizado. Prisma energizado para cotação máxima horária.";
+    } else if (rq < 1) {
+      document.getElementById("sethMessage").innerText = "🧬 Seth Aurion autoriza a operação. Ciclo Σ ativo.";
+    } else {
+      document.getElementById("sethMessage").innerText = "⛔ Royalt Σ elevado. A operação foi rejeitada por pureza incompleta.";
     }
+  }
 
-    document.getElementById("selectAsset").addEventListener("change", updateRQ);
-    window.onload = () => {
-      updateRQ();
-      renderTicker();
-    };
-  </script>
+  document.getElementById("selectAsset").addEventListener("change", updateRQ);
+  window.onload = () => {
+    updateRQ();
+    renderTicker();
+  };
+</script>
 
 </body>
 </html>
