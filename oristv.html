@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -17,200 +18,247 @@
       --red: #ff0033;
     }
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--dark);
-      color: var(--text);
-    }
+```
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--dark);
+  color: var(--text);
+}
 
-    header {
-      background-color: var(--purple);
-      padding: 1rem 2rem;
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
-    }
+header {
+  background-color: var(--purple);
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+}
 
-    .header-buttons {
-      display: flex;
-      gap: 1rem;
-    }
+.header-buttons {
+  display: flex;
+  gap: 1rem;
+}
 
-    .header-buttons button {
-      padding: 0.5rem 1rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: 0.2s;
-    }
+.header-buttons button {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
 
-    .btn-green {
-      background-color: var(--green);
-      color: #000;
-    }
+.btn-green {
+  background-color: var(--green);
+  color: #000;
+}
 
-    .btn-green:hover {
-      background-color: #00cc00;
-    }
+.btn-green:hover {
+  background-color: #00cc00;
+}
 
-    .btn-red {
-      background-color: var(--red);
-      color: #fff;
-    }
+.btn-red {
+  background-color: var(--red);
+  color: #fff;
+}
 
-    .btn-red:hover {
-      background-color: #cc0022;
-    }
+.btn-red:hover {
+  background-color: #cc0022;
+}
 
-    .container {
-      display: flex;
-      margin-top: 80px; /* para não ficar atrás do header fixo */
-      min-height: calc(100vh - 80px);
-    }
+.container {
+  display: flex;
+  margin-top: 80px;
+  min-height: calc(100vh - 80px);
+}
 
-    .sidebar {
-      width: 260px;
-      background-color: #111;
-      border-right: 1px solid #222;
-      padding: 1rem;
-      height: calc(100vh - 80px);
-      position: fixed;
-      top: 80px;
-      left: 0;
-      overflow-y: auto;
-    }
+.sidebar {
+  width: 260px;
+  background-color: #111;
+  border-right: 1px solid #222;
+  padding: 1rem;
+  height: calc(100vh - 80px);
+  position: fixed;
+  top: 80px;
+  left: 0;
+  overflow-y: auto;
+}
 
-    .sidebar h3 {
-      color: var(--primary);
-      font-size: 1rem;
-      margin: 1.5rem 0 0.5rem;
-    }
+.sidebar h3 {
+  color: var(--primary);
+  font-size: 1rem;
+  margin: 1.5rem 0 0.5rem;
+}
 
-    .top-streamer {
-      background-color: #1a1a1a;
-      padding: 12px;
-      border-left: 4px solid var(--primary);
-      margin-bottom: 1rem;
-      color: var(--primary);
-      font-weight: bold;
-    }
+.top-streamer {
+  background-color: #1a1a1a;
+  padding: 12px;
+  border-left: 4px solid var(--primary);
+  margin-bottom: 1rem;
+  color: var(--primary);
+  font-weight: bold;
+}
 
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    .sidebar ul li {
-      display: flex;
-      align-items: center;
-      padding: 10px 8px;
-      border-radius: 6px;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
+.sidebar ul li {
+  display: flex;
+  align-items: center;
+  padding: 10px 8px;
+  border-radius: 6px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
 
-    .sidebar ul li:hover {
-      background: #1a1a1a;
-      color: var(--primary);
-    }
+.sidebar ul li:hover {
+  background: #1a1a1a;
+  color: var(--primary);
+}
 
-    .main {
-      margin-left: 280px;
-      padding: 2rem;
-      width: calc(100% - 280px);
-      overflow-y: auto;
-    }
+.main {
+  margin-left: 280px;
+  margin-right: 280px;
+  padding: 2rem;
+  width: calc(100% - 560px);
+  overflow-y: auto;
+}
 
-    .stream-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
+.stream-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
 
-    .stream-card {
-      background: var(--card);
-      border: 1px solid #222;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 0 5px #0f02;
-      transition: transform 0.3s, border 0.3s;
-    }
+.stream-card {
+  background: var(--card);
+  border: 1px solid #222;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 5px #0f02;
+  transition: transform 0.3s, border 0.3s;
+}
 
-    .stream-card:hover {
-      transform: scale(1.03);
-      border-color: var(--primary);
-    }
+.stream-card:hover {
+  transform: scale(1.03);
+  border-color: var(--primary);
+}
 
-    .stream-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-    }
+.stream-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
 
-    .info {
-      padding: 1rem;
-    }
+.info {
+  padding: 1rem;
+}
 
-    .info h4 {
-      margin: 0;
-      font-size: 1.1rem;
-      color: var(--primary);
-    }
+.info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--primary);
+}
 
-    .info p {
-      margin: 0.4rem 0 0;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
+.info p {
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
 
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #111;
-      color: var(--primary);
-      border-top: 1px solid #222;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
-    }
+.ranking {
+  width: 260px;
+  background-color: #111;
+  border-left: 1px solid #222;
+  padding: 1rem;
+  height: calc(100vh - 80px);
+  position: fixed;
+  top: 80px;
+  right: 0;
+  overflow-y: auto;
+}
 
-    @media (max-width: 720px) {
-      .container {
-        flex-direction: column;
-        margin-top: 140px;
-      }
+.ranking h3 {
+  color: var(--primary);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
 
-      .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid #222;
-      }
+.ranking ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-      .main {
-        margin-left: 0;
-        width: 100%;
-      }
-    }
+.ranking li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-weight: bold;
+}
+
+.flag {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #111;
+  color: var(--primary);
+  border-top: 1px solid #222;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+@media (max-width: 720px) {
+  .container {
+    flex-direction: column;
+    margin-top: 140px;
+  }
+
+  .sidebar, .ranking {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #222;
+    margin-bottom: 1rem;
+  }
+
+  .main {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+}
+```
+
   </style>
 </head>
 <body>
@@ -223,85 +271,58 @@
   </div>
 </header>
 
-
 <div class="container">
   <aside class="sidebar">
     <h3>👑 Featured</h3>
     <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
 
-    <h3>📺 Live Channels</h3>
-    <ul>
-      <li>🎮 @GameZone</li>
-      <li>💻 @DevArena</li>
-      <li>🎨 @PixelBrush</li>
-      <li>📚 @OrisAcademy</li>
-      <li>🕹️ @RetroWave</li>
-    </ul>
+```
+<h3>📺 Live Channels</h3>
+<ul>
+  <li>🎮 @GameZone</li>
+  <li>💻 @DevArena</li>
+  <li>🎨 @PixelBrush</li>
+  <li>📚 @OrisAcademy</li>
+  <li>🕹️ @RetroWave</li>
+</ul>
 
-    <h3>🎓 Courses</h3>
-    <ul>
-      <li>🎮 Games</li>
-      <li>💻 Development</li>
-      <li>🎨 Design</li>
-      <li>💰 Finance</li>
-      <li>🪙 Crypto</li>
-    </ul>
+<h3>🎓 Courses</h3>
+<ul>
+  <li>🎮 Games</li>
+  <li>💻 Development</li>
+  <li>🎨 Design</li>
+  <li>💰 Finance</li>
+  <li>🪙 Crypto</li>
+</ul>
+
+<h3>🏁 Capture Flags</h3>
+<ul>
+  <li>Tier 1 — Newbie</li>
+  <li>Tier 2 — Challenger</li>
+  <li>Tier 3 — Hacker</li>
+  <li>Tier 4 — Master</li>
+  <li>Tier 5 — Legend</li>
+</ul>
+```
+
   </aside>
 
-<main class="main">
-  <h2 style="color: var(--primary); margin-bottom: 1.5rem;">🔥 Live Now</h2>
-  <div class="stream-grid">
+  <main class="main">
+    <!-- STREAM CARDS AQUI (sem alteração) -->
+    <!-- ... você já tem seus cards aqui ... -->
+  </main>
 
-    <a href="obs.html?channel=BlazeMaster" class="stream-card" style="text-decoration:none; color: inherit;">
-      <img src="https://placehold.co/600x400/png?text=BlazeMaster" alt="BlazeMaster Live" />
-      <div class="info">
-        <div style="display:flex; align-items:center; gap: 0.7rem; margin-bottom: 0.4rem;">
-          <img src="https://placehold.co/40x40/png?text=B" alt="BlazeMaster" style="border-radius: 50%; width: 40px; height: 40px; object-fit: cover; border: 2px solid var(--primary);" />
-          <h4 style="margin: 0; color: var(--primary); font-weight: 700;">🔥 BlazeMaster</h4>
-        </div>
-        <p style="margin: 0 0 0.3rem; font-weight: 600;">Playing Elden Ring</p>
-        <p style="margin: 0; color: var(--green); font-weight: bold;">1200 viewers</p>
-      </div>
-    </a>
-
-    <a href="obs.html?channel=NightWolf" class="stream-card" style="text-decoration:none; color: inherit;">
-      <img src="https://placehold.co/600x400/png?text=NightWolf" alt="NightWolf Live" />
-      <div class="info">
-        <div style="display:flex; align-items:center; gap: 0.7rem; margin-bottom: 0.4rem;">
-          <img src="https://placehold.co/40x40/png?text=N" alt="NightWolf" style="border-radius: 50%; width: 40px; height: 40px; object-fit: cover; border: 2px solid var(--primary);" />
-          <h4 style="margin: 0; color: var(--primary); font-weight: 700;">🌟 NightWolf</h4>
-        </div>
-        <p style="margin: 0 0 0.3rem; font-weight: 600;">Call of Duty: Warzone</p>
-        <p style="margin: 0; color: var(--green); font-weight: bold;">950 viewers</p>
-      </div>
-    </a>
-
-    <a href="obs.html?channel=CyberNova" class="stream-card" style="text-decoration:none; color: inherit;">
-      <img src="https://placehold.co/600x400/png?text=CyberNova" alt="CyberNova Live" />
-      <div class="info">
-        <div style="display:flex; align-items:center; gap: 0.7rem; margin-bottom: 0.4rem;">
-          <img src="https://placehold.co/40x40/png?text=C" alt="CyberNova" style="border-radius: 50%; width: 40px; height: 40px; object-fit: cover; border: 2px solid var(--primary);" />
-          <h4 style="margin: 0; color: var(--primary); font-weight: 700;">⚡ CyberNova</h4>
-        </div>
-        <p style="margin: 0 0 0.3rem; font-weight: 600;">Valorant Ranked</p>
-        <p style="margin: 0; color: var(--green); font-weight: bold;">670 viewers</p>
-      </div>
-    </a>
-
-    <a href="obs.html?channel=SharpShooter" class="stream-card" style="text-decoration:none; color: inherit;">
-      <img src="https://placehold.co/600x400/png?text=SharpShooter" alt="SharpShooter Live" />
-      <div class="info">
-        <div style="display:flex; align-items:center; gap: 0.7rem; margin-bottom: 0.4rem;">
-          <img src="https://placehold.co/40x40/png?text=S" alt="SharpShooter" style="border-radius: 50%; width: 40px; height: 40px; object-fit: cover; border: 2px solid var(--primary);" />
-          <h4 style="margin: 0; color: var(--primary); font-weight: 700;">🎯 SharpShooter</h4>
-        </div>
-        <p style="margin: 0 0 0.3rem; font-weight: 600;">Fortnite Battle Royale</p>
-        <p style="margin: 0; color: var(--green); font-weight: bold;">830 viewers</p>
-      </div>
-    </a>
-
-  </div>
-</main>
+  <aside class="ranking">
+    <h3>🏆 Top Active Users</h3>
+    <ul>
+      <li><span class="flag">🇺🇸</span> BlazeMaster — 1234 pts</li>
+      <li><span class="flag">🇧🇷</span> NightWolf — 1102 pts</li>
+      <li><span class="flag">🇯🇵</span> CyberNova — 980 pts</li>
+      <li><span class="flag">🇩🇪</span> SharpShooter — 940 pts</li>
+      <li><span class="flag">🇫🇷</span> DevArena — 860 pts</li>
+    </ul>
+  </aside>
+</div>
 
 <footer>
   © 2025 OrisTV | Powered by BTC-X + Meta Rabbit
@@ -325,49 +346,34 @@
       obs = new WebSocket("ws://localhost:4444");
 
       obs.onopen = function () {
-        console.log("🔗 Connected to OBS WebSocket");
-
-        // Example authentication (if your OBS WebSocket requires authentication, handle here)
-        /*
-        const authPayload = {
-          "request-type": "GetAuthRequired",
-          "message-id": "authCheck"
-        };
-        obs.send(JSON.stringify(authPayload));
-        */
-
-        // Start streaming request
         const startStreamRequest = {
           "request-type": "StartStreaming",
           "message-id": "startStream",
           "stream": {
             "type": "rtmp_custom",
             "settings": {
-              "server": "rtmp://live.twitch.tv/app", // Replace with your RTMP server
+              "server": "rtmp://live.twitch.tv/app",
               "key": existingKey
             }
           }
         };
-
         obs.send(JSON.stringify(startStreamRequest));
         alert("🎥 Streaming started with key: " + existingKey);
       };
 
       obs.onerror = function (error) {
         alert("⚠️ Unable to connect to OBS WebSocket. Is OBS running with WebSocket plugin?");
-        console.error("WebSocket error:", error);
       };
 
       obs.onmessage = function (msg) {
-        console.log("📩 OBS Message:", msg.data);
+        console.log("OBS Message:", msg.data);
       };
 
       obs.onclose = function () {
-        console.log("⚠️ OBS WebSocket connection closed");
+        console.log("OBS WebSocket connection closed");
       };
 
     } catch (e) {
-      console.error("❌ OBS WebSocket error:", e);
       alert("❌ Error connecting to OBS WebSocket.");
     }
   }
