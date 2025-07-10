@@ -68,23 +68,6 @@
       background-color: #cc0022;
     }
 
-    .header-categories {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
-      width: 100%;
-    }
-
-    .header-categories a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .header-categories a:hover {
-      color: var(--primary);
-    }
-
     .container {
       display: flex;
     }
@@ -96,14 +79,15 @@
       padding: 1rem;
       height: 100vh;
       position: fixed;
-      top: 110px;
+      top: 80px;
       left: 0;
+      overflow-y: auto;
     }
 
     .sidebar h3 {
       color: var(--primary);
       font-size: 1rem;
-      margin-bottom: 1rem;
+      margin: 1.5rem 0 0.5rem;
     }
 
     .top-streamer {
@@ -197,21 +181,14 @@
 <header>
   <span>OrisTV</span>
   <div class="header-buttons">
-    <button class="btn-red" onclick="generateOBSKey()">🔴 Ao Vivo</button>
-    <button class="btn-green">Entrar</button>
-  </div>
-  <div class="header-categories">
-    <a href="#games">🎮 Games</a>
-    <a href="#dev">💻 Dev</a>
-    <a href="#design">🎨 Design</a>
-    <a href="#finance">💰 Finance</a>
-    <a href="#crypto">🪙 Cripto</a>
+    <button class="btn-red" onclick="generateOBSKey()">🔴 Go Live</button>
+    <button class="btn-green">Login</button>
   </div>
 </header>
 
 <div class="container">
   <aside class="sidebar">
-    <h3>👑 Destaque</h3>
+    <h3>👑 Featured</h3>
     <div class="top-streamer">
       @FPSMaster<br><small>800 viewers</small>
     </div>
@@ -223,6 +200,15 @@
       <li>🎨 @PixelBrush</li>
       <li>📚 @OrisAcademy</li>
       <li>🕹️ @RetroWave</li>
+    </ul>
+
+    <h3>🎓 Courses</h3>
+    <ul>
+      <li>🎮 Games</li>
+      <li>💻 Development</li>
+      <li>🎨 Design</li>
+      <li>💰 Finance</li>
+      <li>🪙 Crypto</li>
     </ul>
   </aside>
 
@@ -260,8 +246,15 @@
 
 <script>
   function generateOBSKey() {
-    alert("🔐 Chave de transmissão gerada: OBS-KEY-1234-ORISTV");
-    // Aqui você poderá integrar futuramente a API WebSocket do OBS
+    const existingKey = localStorage.getItem("oris_stream_key");
+    if (existingKey) {
+      alert("🔐 Your streaming key: " + existingKey);
+    } else {
+      const confirmRedirect = confirm("You don't have a streaming key yet. Would you like to generate one via Meta Rabbit?");
+      if (confirmRedirect) {
+        window.location.href = "rabbit.html";
+      }
+    }
   }
 </script>
 
