@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OrisTV - Live Powered by BTC-X</title>
+  <link rel="icon" href="logo.ico" />
   <style>
     :root {
       --primary: #0f0;
@@ -15,6 +15,10 @@
       --purple: #6e00ff;
       --green: #00ff00;
       --red: #ff0033;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -33,7 +37,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
       position: fixed;
       top: 0;
       left: 0;
@@ -87,19 +90,27 @@
       min-height: calc(100vh - 80px);
     }
 
-    .sidebar {
-      width: 260px;
+    .sidebar, .ranking {
+      width: 180px;
       background-color: #111;
       border-right: 1px solid #222;
       padding: 1rem;
-      height: calc(100vh - 80px);
       position: fixed;
       top: 80px;
-      left: 0;
+      bottom: 0;
       overflow-y: auto;
     }
 
-    .sidebar h3 {
+    .sidebar {
+      left: 0;
+    }
+
+    .ranking {
+      right: 0;
+      border-left: 1px solid #222;
+    }
+
+    .sidebar h3, .ranking h3 {
       color: var(--primary);
       font-size: 1rem;
       margin: 1.5rem 0 0.5rem;
@@ -107,22 +118,21 @@
 
     .top-streamer {
       background-color: #1a1a1a;
-      padding: 12px;
+      padding: 10px;
       border-left: 4px solid var(--primary);
       margin-bottom: 1rem;
       color: var(--primary);
       font-weight: bold;
     }
 
-    .sidebar ul {
+    .sidebar ul, .ranking ol {
       list-style: none;
       padding: 0;
       margin: 0;
     }
 
-    .sidebar ul li {
-      display: flex;
-      align-items: center;
+    .sidebar ul li,
+    .ranking li {
       padding: 10px 8px;
       border-radius: 6px;
       color: var(--text-muted);
@@ -130,15 +140,17 @@
       transition: background 0.2s, color 0.2s;
     }
 
-    .sidebar ul li:hover {
+    .sidebar ul li:hover,
+    .ranking li:hover {
       background: #1a1a1a;
       color: var(--primary);
     }
 
     .main {
-      margin-left: 280px;
+      margin-left: 180px;
+      margin-right: 180px;
       padding: 2rem;
-      width: calc(100% - 280px);
+      width: calc(100% - 360px);
       overflow-y: auto;
     }
 
@@ -168,7 +180,6 @@
       width: 100%;
       height: 140px;
       object-fit: cover;
-      display: block;
     }
 
     .info {
@@ -197,25 +208,23 @@
       bottom: 0;
       left: 0;
       right: 0;
-      z-index: 10;
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 768px) {
       .container {
         flex-direction: column;
-        margin-top: 140px;
       }
 
-      .sidebar {
+      .sidebar,
+      .ranking {
         position: relative;
         width: 100%;
         height: auto;
-        border-right: none;
-        border-bottom: 1px solid #222;
+        border: none;
       }
 
       .main {
-        margin-left: 0;
+        margin: 0;
         width: 100%;
       }
     }
@@ -232,11 +241,13 @@
 </header>
 
 <div class="container">
+
+  <!-- Sidebar -->
   <aside class="sidebar">
     <h3>👑 Featured</h3>
     <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
 
-    <h3>📺 Live Channels</h3>
+    <h3>📺 Channels</h3>
     <ul>
       <li>🎮 @GameZone</li>
       <li>💻 @DevArena</li>
@@ -247,54 +258,47 @@
 
     <h3>🎓 Courses</h3>
     <ul>
-      <li>🎮 Games</li>
-      <li>💻 Development</li>
-      <li>🎨 Design</li>
-      <li>💰 Finance</li>
-      <li>🪙 Crypto</li>
+      <li>Games</li>
+      <li>Development</li>
+      <li>Design</li>
+      <li>Finance</li>
+      <li>Crypto</li>
     </ul>
   </aside>
 
+  <!-- Main -->
   <main class="main">
     <h2 style="color: var(--primary); margin-bottom: 1.5rem;">🔥 Live Now</h2>
     <div class="stream-grid">
-      <a href="obs.html?channel=BlazeMaster" class="stream-card">
-        <img src="https://placehold.co/600x400/png?text=BlazeMaster" />
+      <a href="#" class="stream-card">
+        <img src="https://placehold.co/240x140" alt="Live" />
         <div class="info">
           <h4>🔥 BlazeMaster</h4>
           <p>Playing Elden Ring</p>
           <p style="color: var(--green); font-weight: bold;">1200 viewers</p>
         </div>
       </a>
-
-      <a href="obs.html?channel=NightWolf" class="stream-card">
-        <img src="https://placehold.co/600x400/png?text=NightWolf" />
+      <a href="#" class="stream-card">
+        <img src="https://placehold.co/240x140" alt="Live" />
         <div class="info">
           <h4>🌟 NightWolf</h4>
-          <p>Call of Duty: Warzone</p>
+          <p>Warzone</p>
           <p style="color: var(--green); font-weight: bold;">950 viewers</p>
-        </div>
-      </a>
-
-      <a href="obs.html?channel=CyberNova" class="stream-card">
-        <img src="https://placehold.co/600x400/png?text=CyberNova" />
-        <div class="info">
-          <h4>⚡ CyberNova</h4>
-          <p>Valorant Ranked</p>
-          <p style="color: var(--green); font-weight: bold;">670 viewers</p>
-        </div>
-      </a>
-
-      <a href="obs.html?channel=SharpShooter" class="stream-card">
-        <img src="https://placehold.co/600x400/png?text=SharpShooter" />
-        <div class="info">
-          <h4>🎯 SharpShooter</h4>
-          <p>Fortnite Battle Royale</p>
-          <p style="color: var(--green); font-weight: bold;">830 viewers</p>
         </div>
       </a>
     </div>
   </main>
+
+  <!-- Ranking -->
+  <aside class="ranking">
+    <h3>🏆 Ranking</h3>
+    <ol>
+      <li>🔥 BlazeMaster — 1200</li>
+      <li>🌟 NightWolf — 950</li>
+      <li>⚡ CyberNova — 670</li>
+      <li>🎯 SharpShooter — 830</li>
+    </ol>
+  </aside>
 </div>
 
 <footer>
@@ -302,12 +306,10 @@
 </footer>
 
 <script>
-  async function startStreaming() {
-    const existingKey = localStorage.getItem("oris_stream_key");
-
-    if (!existingKey) {
-      const confirmRedirect = confirm("You don't have a streaming key yet. Generate one via Meta Rabbit?");
-      if (confirmRedirect) {
+  function startStreaming() {
+    const key = localStorage.getItem("oris_stream_key");
+    if (!key) {
+      if (confirm("You don't have a streaming key. Generate one via Meta Rabbit?")) {
         window.location.href = "rabbit.html";
       }
       return;
@@ -316,27 +318,24 @@
     try {
       const obs = new WebSocket("ws://localhost:4444");
 
-      obs.onopen = function () {
-        const startStreamRequest = {
+      obs.onopen = () => {
+        obs.send(JSON.stringify({
           "request-type": "StartStreaming",
-          "message-id": "startStream",
+          "message-id": "start",
           "stream": {
-            "type": "rtmp_custom",
-            "settings": {
-              "server": "rtmp://live.twitch.tv/app",
-              "key": existingKey
+            type: "rtmp_custom",
+            settings: {
+              server: "rtmp://live.twitch.tv/app",
+              key: key
             }
           }
-        };
-        obs.send(JSON.stringify(startStreamRequest));
-        alert("🎥 Streaming started with key: " + existingKey);
+        }));
+        alert("🎥 Streaming started.");
       };
 
-      obs.onerror = function () {
-        alert("⚠️ Unable to connect to OBS WebSocket. Is OBS running?");
-      };
-    } catch (e) {
-      alert("❌ Error connecting to OBS WebSocket.");
+      obs.onerror = () => alert("⚠️ OBS WebSocket error.");
+    } catch {
+      alert("❌ Unable to connect to OBS WebSocket.");
     }
   }
 </script>
