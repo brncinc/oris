@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OrisTV - Live Powered by BTC-X</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    header {
+      background: #0f0; /* Razer green */
+      padding: 1rem 2rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .container {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #111;
+      border-right: 2px solid #0f0;
+      padding: 1rem;
+      height: 100vh;
+    }
+
+    .sidebar h3 {
+      margin-top: 0;
+      color: #0f0;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      padding: 10px;
+      cursor: pointer;
+      color: #ccc;
+    }
+
+    .sidebar ul li:hover {
+      background: #0f0;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .main {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    .stream-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .stream-card {
+      background: #111;
+      border: 2px solid #0f0;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .stream-card:hover {
+      transform: scale(1.03);
+      border-color: #33ff33;
+    }
+
+    .stream-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .stream-card .info {
+      padding: 1rem;
+    }
+
+    .stream-card .info h4 {
+      margin: 0;
+      color: #0f0;
+    }
+
+    .stream-card .info p {
+      margin: 0.3rem 0 0;
+      color: #ccc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #111;
+      color: #0f0;
+      border-top: 2px solid #0f0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  🎮 OrisTV | Powered by BTC-X & Meta Rabbit
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h3>Live Channels</h3>
+    <ul>
+      <li>@GameZone</li>
+      <li>@CryptoGamer</li>
+      <li>@OrisAcademy</li>
+      <li>@FPSMaster</li>
+      <li>@ArtPixel</li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <h2>🔥 Live Now</h2>
+    <div class="stream-grid">
+      <div class="stream-card">
+        <img src="https://placehold.co/300x180/0f0/000?text=Stream+1" alt="Live Stream 1">
+        <div class="info">
+          <h4>@CryptoGamer</h4>
+          <p>Web3 Battle Royale • 420 viewers</p>
+        </div>
+      </div>
+      <div class="stream-card">
+        <img src="https://placehold.co/300x180/0f0/000?text=Stream+2" alt="Live Stream 2">
+        <div class="info">
+          <h4>@OrisAcademy</h4>
+          <p>Curso de BTC-X ao vivo • 210 viewers</p>
+        </div>
+      </div>
+      <div class="stream-card">
+        <img src="https://placehold.co/300x180/0f0/000?text=Stream+3" alt="Live Stream 3">
+        <div class="info">
+          <h4>@FPSMaster</h4>
+          <p>Call of Crypto Duty • 800 viewers</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  © 2025 OrisTV • All rights reserved • Powered by BTC-X + Meta Rabbit
+</footer>
+
+</body>
+</html>
