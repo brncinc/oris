@@ -229,6 +229,34 @@
       color: var(--text-muted);
     }
 
+    /* Estilo da seção Code Jams Open */
+    .code-jams {
+      background: #222;
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      max-height: 30vh;
+      overflow-y: auto;
+    }
+
+    .code-jams div {
+      background: #111;
+      border: 1px solid #333;
+      padding: 0.4rem 0.6rem;
+      border-radius: 6px;
+      color: var(--primary);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .code-jams div:hover {
+      background: var(--primary);
+      color: var(--dark);
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -312,6 +340,16 @@
       <li><button class="btn btn-purple">Finance</button></li>
       <li><button class="btn btn-purple">Crypto</button></li>
     </ul>
+
+    <!-- Nova seção Code Jams Open -->
+    <h3>💻 Code Jams Open</h3>
+    <div class="code-jams">
+      <div>Jam #1 - Quick Algorithms</div>
+      <div>Jam #2 - UI Challenge</div>
+      <div>Jam #3 - Crypto Puzzle</div>
+      <div>Jam #4 - Speed Coding</div>
+      <div>Jam #5 - Game Dev Sprint</div>
+    </div>
   </aside>
 
   <!-- Main -->
