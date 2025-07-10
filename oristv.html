@@ -15,6 +15,10 @@
       --purple: #6e00ff;
       --green: #00ff00;
       --red: #ff0033;
+      --btn-padding: 0.5rem 1.2rem;
+      --btn-radius: 6px;
+      --btn-fontsize: 0.9rem;
+      --btn-height: 40px;
     }
 
     * {
@@ -45,32 +49,27 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.6);
     }
 
-    .header-buttons {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .header-buttons button,
-    .header-buttons a {
-      padding: 0.5rem 1.2rem;
+    /* Botões Header e Sidebar uniformizados */
+    .btn {
+      padding: var(--btn-padding);
       font-weight: bold;
-      font-size: 0.9rem;
+      font-size: var(--btn-fontsize);
       border: none;
-      border-radius: 6px;
+      border-radius: var(--btn-radius);
       text-decoration: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 40px;
+      height: var(--btn-height);
       transition: background 0.2s;
+      user-select: none;
     }
 
     .btn-green {
       background-color: var(--green);
       color: #000;
     }
-
     .btn-green:hover {
       background-color: #00cc00;
     }
@@ -79,9 +78,16 @@
       background-color: var(--red);
       color: #fff;
     }
-
     .btn-red:hover {
       background-color: #cc0022;
+    }
+
+    .btn-purple {
+      background-color: var(--purple);
+      color: #fff;
+    }
+    .btn-purple:hover {
+      background-color: #5700cc;
     }
 
     .container {
@@ -99,6 +105,9 @@
       top: 80px;
       bottom: 0;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
     .sidebar {
@@ -113,22 +122,24 @@
     .sidebar h3, .ranking h3 {
       color: var(--primary);
       font-size: 1rem;
-      margin: 1.5rem 0 0.5rem;
+      margin: 0 0 0.5rem 0;
     }
 
     .top-streamer {
       background-color: #1a1a1a;
       padding: 10px;
       border-left: 4px solid var(--primary);
-      margin-bottom: 1rem;
       color: var(--primary);
       font-weight: bold;
+      border-radius: 6px;
     }
 
     .sidebar ul, .ranking ol {
       list-style: none;
       padding: 0;
       margin: 0;
+      flex-grow: 1;
+      overflow-y: auto;
     }
 
     .sidebar ul li,
@@ -146,6 +157,10 @@
       color: var(--primary);
     }
 
+    .sidebar .btn {
+      margin-top: auto;
+    }
+
     .main {
       margin-left: 180px;
       margin-right: 180px;
@@ -154,14 +169,30 @@
       overflow-y: auto;
     }
 
+    /* Scroll horizontal para stream-grid */
     .stream-grid {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
       gap: 1.2rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
+    }
+
+    .stream-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+    .stream-grid::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+    .stream-grid::-webkit-scrollbar-track {
+      background: #222;
     }
 
     .stream-card {
+      flex: 0 0 auto; /* fixa o tamanho para scroll */
+      scroll-snap-align: center;
       width: 240px;
       background: var(--card);
       border: 1px solid #222;
@@ -221,11 +252,28 @@
         width: 100%;
         height: auto;
         border: none;
+        flex-direction: row;
+        gap: 1rem;
+        overflow-x: auto;
+      }
+
+      .sidebar ul, .ranking ol {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        overflow-x: auto;
+        flex-grow: 0;
+        height: auto;
       }
 
       .main {
         margin: 0;
         width: 100%;
+        padding: 1rem;
+      }
+
+      .stream-card {
+        width: 200px;
       }
     }
   </style>
@@ -235,8 +283,8 @@
 <header>
   <img src="z.png" alt="Logo OrisTV" style="height: 52px; margin-right: 12px;">
   <div class="header-buttons">
-    <button class="btn-red" onclick="startStreaming()">🔴 Go Live</button>
-    <a href="rabbit.html" class="btn-green">Get Key</a>
+    <button class="btn btn-red" onclick="startStreaming()">🔴 Go Live</button>
+    <a href="rabbit.html" class="btn btn-green">Get Key</a>
   </div>
 </header>
 
@@ -249,29 +297,29 @@
 
     <h3>📺 Channels</h3>
     <ul>
-      <li>🎮 @GameZone</li>
-      <li>💻 @DevArena</li>
-      <li>🎨 @PixelBrush</li>
-      <li>📚 @OrisAcademy</li>
-      <li>🕹️ @RetroWave</li>
+      <li><button class="btn btn-purple">🎮 @GameZone</button></li>
+      <li><button class="btn btn-purple">💻 @DevArena</button></li>
+      <li><button class="btn btn-purple">🎨 @PixelBrush</button></li>
+      <li><button class="btn btn-purple">📚 @OrisAcademy</button></li>
+      <li><button class="btn btn-purple">🕹️ @RetroWave</button></li>
     </ul>
 
     <h3>🎓 Courses</h3>
     <ul>
-      <li>Games</li>
-      <li>Development</li>
-      <li>Design</li>
-      <li>Finance</li>
-      <li>Crypto</li>
+      <li><button class="btn btn-purple">Games</button></li>
+      <li><button class="btn btn-purple">Development</button></li>
+      <li><button class="btn btn-purple">Design</button></li>
+      <li><button class="btn btn-purple">Finance</button></li>
+      <li><button class="btn btn-purple">Crypto</button></li>
     </ul>
   </aside>
 
   <!-- Main -->
   <main class="main">
     <h2 style="color: var(--primary); margin-bottom: 1.5rem;">🔥 Live Now</h2>
-    <div class="stream-grid">
+    <div class="stream-grid" tabindex="0" aria-label="Live streams">
       <a href="#" class="stream-card">
-        <img src="https://placehold.co/240x140" alt="Live" />
+        <img src="https://placehold.co/240x140" alt="BlazeMaster live" />
         <div class="info">
           <h4>🔥 BlazeMaster</h4>
           <p>Playing Elden Ring</p>
@@ -279,11 +327,27 @@
         </div>
       </a>
       <a href="#" class="stream-card">
-        <img src="https://placehold.co/240x140" alt="Live" />
+        <img src="https://placehold.co/240x140" alt="NightWolf live" />
         <div class="info">
           <h4>🌟 NightWolf</h4>
           <p>Warzone</p>
           <p style="color: var(--green); font-weight: bold;">950 viewers</p>
+        </div>
+      </a>
+      <a href="#" class="stream-card">
+        <img src="https://placehold.co/240x140" alt="CyberNova live" />
+        <div class="info">
+          <h4>⚡ CyberNova</h4>
+          <p>Valorant Ranked</p>
+          <p style="color: var(--green); font-weight: bold;">670 viewers</p>
+        </div>
+      </a>
+      <a href="#" class="stream-card">
+        <img src="https://placehold.co/240x140" alt="SharpShooter live" />
+        <div class="info">
+          <h4>🎯 SharpShooter</h4>
+          <p>Fortnite Battle Royale</p>
+          <p style="color: var(--green); font-weight: bold;">830 viewers</p>
         </div>
       </a>
     </div>
@@ -295,8 +359,8 @@
     <ol>
       <li>🔥 BlazeMaster — 1200</li>
       <li>🌟 NightWolf — 950</li>
-      <li>⚡ CyberNova — 670</li>
       <li>🎯 SharpShooter — 830</li>
+      <li>⚡ CyberNova — 670</li>
     </ol>
   </aside>
 </div>
@@ -314,10 +378,8 @@
       }
       return;
     }
-
     try {
       const obs = new WebSocket("ws://localhost:4444");
-
       obs.onopen = () => {
         obs.send(JSON.stringify({
           "request-type": "StartStreaming",
@@ -332,7 +394,6 @@
         }));
         alert("🎥 Streaming started.");
       };
-
       obs.onerror = () => alert("⚠️ OBS WebSocket error.");
     } catch {
       alert("❌ Unable to connect to OBS WebSocket.");
