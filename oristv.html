@@ -47,14 +47,20 @@
       gap: 1rem;
     }
 
-    .header-buttons button {
-      padding: 0.5rem 1rem;
+    .header-buttons button,
+    .header-buttons a {
+      padding: 0.5rem 1.2rem;
       font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
       font-size: 0.9rem;
-      transition: 0.2s;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      transition: background 0.2s;
     }
 
     .btn-green {
@@ -131,19 +137,20 @@
 
     .main {
       margin-left: 280px;
-      margin-right: 280px;
       padding: 2rem;
-      width: calc(100% - 560px);
+      width: calc(100% - 280px);
       overflow-y: auto;
     }
 
     .stream-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
     }
 
     .stream-card {
+      width: 240px;
       background: var(--card);
       border: 1px solid #222;
       border-radius: 10px;
@@ -159,7 +166,7 @@
 
     .stream-card img {
       width: 100%;
-      height: 180px;
+      height: 140px;
       object-fit: cover;
       display: block;
     }
@@ -176,7 +183,7 @@
 
     .info p {
       margin: 0.4rem 0 0;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
     }
 
@@ -193,67 +200,22 @@
       z-index: 10;
     }
 
-    .ranking {
-      width: 260px;
-      background-color: #111;
-      border-left: 1px solid #222;
-      padding: 1rem;
-      height: calc(100vh - 80px);
-      position: fixed;
-      top: 80px;
-      right: 0;
-      overflow-y: auto;
-    }
-
-    .ranking h3 {
-      color: var(--primary);
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .ranking ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .ranking li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #1a1a1a;
-      margin-bottom: 0.5rem;
-      padding: 0.5rem 0.7rem;
-      border-radius: 6px;
-      color: var(--text-muted);
-      font-weight: bold;
-    }
-
-    .flag {
-      font-size: 1.2rem;
-      margin-right: 0.5rem;
-    }
-
     @media (max-width: 720px) {
       .container {
         flex-direction: column;
         margin-top: 140px;
       }
 
-      .sidebar,
-      .ranking {
+      .sidebar {
         position: relative;
         width: 100%;
         height: auto;
         border-right: none;
         border-bottom: 1px solid #222;
-        border-left: none;
-        margin-bottom: 1rem;
       }
 
       .main {
         margin-left: 0;
-        margin-right: 0;
         width: 100%;
       }
     }
@@ -291,34 +253,48 @@
       <li>💰 Finance</li>
       <li>🪙 Crypto</li>
     </ul>
-
-    <h3>🏁 Capture Flags</h3>
-    <ul>
-      <li>Tier 1 — Newbie</li>
-      <li>Tier 2 — Challenger</li>
-      <li>Tier 3 — Hacker</li>
-      <li>Tier 4 — Master</li>
-      <li>Tier 5 — Legend</li>
-    </ul>
   </aside>
 
   <main class="main">
     <h2 style="color: var(--primary); margin-bottom: 1.5rem;">🔥 Live Now</h2>
     <div class="stream-grid">
-      <!-- Cards (como BlazeMaster, NightWolf etc) -->
+      <a href="obs.html?channel=BlazeMaster" class="stream-card">
+        <img src="https://placehold.co/600x400/png?text=BlazeMaster" />
+        <div class="info">
+          <h4>🔥 BlazeMaster</h4>
+          <p>Playing Elden Ring</p>
+          <p style="color: var(--green); font-weight: bold;">1200 viewers</p>
+        </div>
+      </a>
+
+      <a href="obs.html?channel=NightWolf" class="stream-card">
+        <img src="https://placehold.co/600x400/png?text=NightWolf" />
+        <div class="info">
+          <h4>🌟 NightWolf</h4>
+          <p>Call of Duty: Warzone</p>
+          <p style="color: var(--green); font-weight: bold;">950 viewers</p>
+        </div>
+      </a>
+
+      <a href="obs.html?channel=CyberNova" class="stream-card">
+        <img src="https://placehold.co/600x400/png?text=CyberNova" />
+        <div class="info">
+          <h4>⚡ CyberNova</h4>
+          <p>Valorant Ranked</p>
+          <p style="color: var(--green); font-weight: bold;">670 viewers</p>
+        </div>
+      </a>
+
+      <a href="obs.html?channel=SharpShooter" class="stream-card">
+        <img src="https://placehold.co/600x400/png?text=SharpShooter" />
+        <div class="info">
+          <h4>🎯 SharpShooter</h4>
+          <p>Fortnite Battle Royale</p>
+          <p style="color: var(--green); font-weight: bold;">830 viewers</p>
+        </div>
+      </a>
     </div>
   </main>
-
-  <aside class="ranking">
-    <h3>🏆 Top Active Users</h3>
-    <ul>
-      <li><span class="flag">🇺🇸</span> BlazeMaster — 1234 pts</li>
-      <li><span class="flag">🇧🇷</span> NightWolf — 1102 pts</li>
-      <li><span class="flag">🇯🇵</span> CyberNova — 980 pts</li>
-      <li><span class="flag">🇩🇪</span> SharpShooter — 940 pts</li>
-      <li><span class="flag">🇫🇷</span> DevArena — 860 pts</li>
-    </ul>
-  </aside>
 </div>
 
 <footer>
@@ -326,13 +302,11 @@
 </footer>
 
 <script>
-  let obs;
-
   async function startStreaming() {
     const existingKey = localStorage.getItem("oris_stream_key");
 
     if (!existingKey) {
-      const confirmRedirect = confirm("You don't have a streaming key yet. Would you like to generate one via Meta Rabbit?");
+      const confirmRedirect = confirm("You don't have a streaming key yet. Generate one via Meta Rabbit?");
       if (confirmRedirect) {
         window.location.href = "rabbit.html";
       }
@@ -340,11 +314,9 @@
     }
 
     try {
-      obs = new WebSocket("ws://localhost:4444");
+      const obs = new WebSocket("ws://localhost:4444");
 
       obs.onopen = function () {
-        console.log("🔗 Connected to OBS WebSocket");
-
         const startStreamRequest = {
           "request-type": "StartStreaming",
           "message-id": "startStream",
@@ -356,26 +328,14 @@
             }
           }
         };
-
         obs.send(JSON.stringify(startStreamRequest));
         alert("🎥 Streaming started with key: " + existingKey);
       };
 
-      obs.onerror = function (error) {
-        alert("⚠️ Unable to connect to OBS WebSocket. Is OBS running with WebSocket plugin?");
-        console.error("WebSocket error:", error);
+      obs.onerror = function () {
+        alert("⚠️ Unable to connect to OBS WebSocket. Is OBS running?");
       };
-
-      obs.onmessage = function (msg) {
-        console.log("📩 OBS Message:", msg.data);
-      };
-
-      obs.onclose = function () {
-        console.log("⚠️ OBS WebSocket connection closed");
-      };
-
     } catch (e) {
-      console.error("❌ OBS WebSocket error:", e);
       alert("❌ Error connecting to OBS WebSocket.");
     }
   }
