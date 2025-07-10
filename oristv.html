@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OrisTV - Live Powered by BTC-X</title>
-  <style>
+<style>
     :root {
       --primary: #0f0;
       --dark: #0a0a0a;
@@ -181,7 +181,7 @@
 <header>
   <span>OrisTV</span>
   <div class="header-buttons">
-    <button class="btn-red" onclick="generateOBSKey()">🔴 Go Live</button>
+    <button class="btn-red" onclick="startStreaming()">🔴 Go Live</button>
     <button class="btn-green">Login</button>
   </div>
 </header>
@@ -189,9 +189,7 @@
 <div class="container">
   <aside class="sidebar">
     <h3>👑 Featured</h3>
-    <div class="top-streamer">
-      @FPSMaster<br><small>800 viewers</small>
-    </div>
+    <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
 
     <h3>📺 Live Channels</h3>
     <ul>
@@ -215,27 +213,7 @@
   <main class="main">
     <h2 style="color: var(--primary); margin-bottom: 1.5rem;">🔥 Live Now</h2>
     <div class="stream-grid">
-      <div class="stream-card">
-        <img src="https://placehold.co/320x180/0f0/000?text=Live+Stream+1" alt="Live Stream 1">
-        <div class="info">
-          <h4>@CryptoGamer</h4>
-          <p>Battle of Chains – 420 viewers</p>
-        </div>
-      </div>
-      <div class="stream-card">
-        <img src="https://placehold.co/320x180/0f0/000?text=Live+Stream+2" alt="Live Stream 2">
-        <div class="info">
-          <h4>@OrisAcademy</h4>
-          <p>Live: BTC-X Fundamentals</p>
-        </div>
-      </div>
-      <div class="stream-card">
-        <img src="https://placehold.co/320x180/0f0/000?text=Live+Stream+3" alt="Live Stream 3">
-        <div class="info">
-          <h4>@FPSMaster</h4>
-          <p>Warzone Arena • 800 viewers</p>
-        </div>
-      </div>
+      <!-- stream cards (como no exemplo anterior) -->
     </div>
   </main>
 </div>
@@ -245,15 +223,50 @@
 </footer>
 
 <script>
-  function generateOBSKey() {
+  let obs;
+
+  async function startStreaming() {
     const existingKey = localStorage.getItem("oris_stream_key");
-    if (existingKey) {
-      alert("🔐 Your streaming key: " + existingKey);
-    } else {
+
+    if (!existingKey) {
       const confirmRedirect = confirm("You don't have a streaming key yet. Would you like to generate one via Meta Rabbit?");
       if (confirmRedirect) {
         window.location.href = "rabbit.html";
       }
+      return;
+    }
+
+    try {
+      obs = new WebSocket("ws://localhost:4444");
+
+      obs.onopen = function () {
+        console.log("🔗 Connected to OBS WebSocket");
+        // Optional: Send auth here if your OBS WebSocket requires it
+        const request = {
+          "request-type": "StartStreaming",
+          "stream": {
+            "type": "rtmp_custom",
+            "settings": {
+              "server": "rtmp://live.twitch.tv/app", // Example
+              "key": existingKey
+            }
+          },
+          "message-id": "1"
+        };
+        obs.send(JSON.stringify(request));
+        alert("🎥 Streaming started with key: " + existingKey);
+      };
+
+      obs.onerror = function () {
+        alert("⚠️ Unable to connect to OBS WebSocket. Is OBS running with WebSocket plugin?");
+      };
+
+      obs.onmessage = function (msg) {
+        console.log("📩 OBS Message:", msg.data);
+      };
+
+    } catch (e) {
+      console.error("❌ OBS WebSocket error:", e);
     }
   }
 </script>
