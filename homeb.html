@@ -1,3 +1,5 @@
+<!-- ORIS S2000 Terminal com Prisma BTCXG Σ -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,14 +133,14 @@
 
 <main class="container">
 
-  <!-- Gráfico de Valorização -->
+  <!-- Gráfico -->
   <div class="card">
     <h2>📈 Valorização dos Ativos (em BRL)</h2>
     <canvas id="valorChart" width="400" height="300"></canvas>
     <p class="quote">“Não existe alta nem queda — apenas ciclos.” — Seth Aurion</p>
   </div>
 
-  <!-- Painel de Operação -->
+  <!-- Painel -->
   <div class="card">
     <h2> Ativar Operação</h2>
     <label for="selectAsset">Selecione o Ativo</label>
@@ -149,6 +151,7 @@
       <option value="sDarkGemini">Dark Gemini Σ — Par Espelho</option>
       <option value="sDarkFlex">Dark Flex Σ — Elastic Protocol</option>
       <option value="sBitcoinX">Bitcoin X Σ — Prisma de Geminiosidade</option>
+      <option value="sBTCXG">Prisma BTCXG Σ — Aceleração Tripla Horária</option>
     </select>
 
     <label for="rq">Royalt Quântico Σ</label>
@@ -175,7 +178,8 @@
     sDarkVertex: 1.25,
     sDarkGemini: 0.75,
     sDarkFlex: 0.95,
-    sBitcoinX: 0.65
+    sBitcoinX: 0.65,
+    sBTCXG: 0.60
   };
 
   const ativosTicker = [
@@ -184,7 +188,8 @@
     { nome: "Vertex Σ", valor: 16350.00, variacao: +0.8 },
     { nome: "Gemini Σ", valor: 1275.00, variacao: -0.6 },
     { nome: "Flex Σ", valor: 980.00, variacao: +2.1 },
-    { nome: "Bitcoin X Σ", valor: 13880.00, variacao: +5.3 }
+    { nome: "Bitcoin X Σ", valor: 13880.00, variacao: +5.3 },
+    { nome: "BTCXG Σ", valor: 16880.00, variacao: +6.9 }
   ];
 
   function renderTicker() {
@@ -200,13 +205,13 @@
   }
 
   const valorizacao = {
-    labels: ["BTC Σ", "ETH Σ", "Vertex Σ", "Gemini Σ", "Flex Σ", "Bitcoin X Σ"],
+    labels: ["BTC Σ", "ETH Σ", "Vertex Σ", "Gemini Σ", "Flex Σ", "Bitcoin X Σ", "BTCXG Σ"],
     datasets: [{
       label: 'Valorização em BRL',
-      data: [1114.97, 1853.00, 16350.00, 1275.00, 980.00, 13880.00],
+      data: [1114.97, 1853.00, 16350.00, 1275.00, 980.00, 13880.00, 16880.00],
       fill: false,
-      borderColor: ['#FFD700', '#1DB954', '#00BFFF', '#FFA500', '#00FFAA', '#FF69B4'],
-      backgroundColor: ['#FFD70088', '#1DB95488', '#00BFFF88', '#FFA50088', '#00FFAA88', '#FF69B488'],
+      borderColor: ['#FFD700', '#1DB954', '#00BFFF', '#FFA500', '#00FFAA', '#FF69B4', '#39FF14'],
+      backgroundColor: ['#FFD70088', '#1DB95488', '#00BFFF88', '#FFA50088', '#00FFAA88', '#FF69B488', '#39FF14AA'],
       borderWidth: 3,
       tension: 0.3
     }]
@@ -219,13 +224,8 @@
     options: {
       responsive: true,
       scales: {
-        y: {
-          beginAtZero: false,
-          ticks: { color: '#fff' }
-        },
-        x: {
-          ticks: { color: '#fff' }
-        }
+        y: { beginAtZero: false, ticks: { color: '#fff' } },
+        x: { ticks: { color: '#fff' } }
       },
       plugins: {
         legend: {
@@ -239,7 +239,6 @@
     const asset = document.getElementById("selectAsset").value;
     const rq = rqValues[asset];
     document.getElementById("rq").value = rq.toFixed(2) + " HF";
-
     const key = asset + "-" + Math.random().toString(36).substr(2, 8).toUpperCase();
     document.getElementById("opKey").value = key;
   }
@@ -250,6 +249,8 @@
 
     if (asset === "sBitcoinX") {
       document.getElementById("sethMessage").innerText = "⚡ Bitcoin X Σ autorizado. Prisma energizado para cotação máxima horária.";
+    } else if (asset === "sBTCXG") {
+      document.getElementById("sethMessage").innerText = "⚙️ Prisma BTCXG Σ ativado. Contrato em cotação máxima horária com geminiosidade tripla.";
     } else if (rq < 1) {
       document.getElementById("sethMessage").innerText = "🧬 Seth Aurion autoriza a operação. Ciclo Σ ativo.";
     } else {
