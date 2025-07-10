@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oris TV - Player</title>
+  <style>
+    :root {
+      --primary: #0f0;
+      --dark: #0a0a0a;
+      --card: #151515;
+      --text: #fff;
+      --text-muted: #aaa;
+      --purple: #6e00ff;
+      --green: #00ff00;
+      --red: #ff0033;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--dark);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background-color: var(--purple);
+      padding: 1rem 2rem;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    }
+    main {
+      margin-top: 80px;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      background: var(--card);
+    }
+    video {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 12px;
+      background: black;
+      outline: none;
+      box-shadow: 0 0 15px var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <header>Oris TV - Player</header>
+  <main>
+    <video controls autoplay muted>
+      <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </main>
+</body>
+</html>
