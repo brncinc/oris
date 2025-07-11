@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -230,9 +229,23 @@ header {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  z-index: 50; /* garantir que fique acima do conteúdo */
 }
 
-/* Aparece ao passar o mouse */
+/* Área invisível para ativar o hover na sidebar */
+.sidebar-right-trigger {
+  position: fixed;
+  top: 80px;
+  bottom: 40px;
+  right: 0;
+  width: 10px; /* faixa fina para ativar hover */
+  z-index: 60;
+  cursor: pointer;
+  background: transparent; /* invisível, pode colocar rgba(0,255,0,0.05) para testar */
+}
+
+/* Mostrar sidebar se passar mouse na trigger ou na sidebar */
+.sidebar-right-trigger:hover + .sidebar-right,
 .sidebar-right:hover {
   opacity: 1;
   pointer-events: auto;
@@ -318,7 +331,8 @@ footer {
   }
 
   .sidebar-left,
-  .sidebar-right {
+  .sidebar-right,
+  .sidebar-right-trigger {
     position: relative;
     width: 100%;
     height: auto;
@@ -374,7 +388,10 @@ footer {
       <li>🕹️ @RetroWave</li>
     </ul>
   </aside>
-<div class="horizontal-scroll-container">
+
+  <!-- Faixa invisível para ativar hover sidebar direita -->
+  <div class="sidebar-right-trigger"></div>
+
   <main class="main">
     <!-- seus cards de stream pequenos -->
     <a href="obs.html?channel=BlazeMaster" class="stream-card-small" title="BlazeMaster Live">
@@ -464,17 +481,15 @@ footer {
       </div>
     </a>
   </section>
-</div>
-
 
   <aside class="sidebar-right">
     <h3>🏅 Ranking da Comunidade</h3>
     <ul class="ranking-list">
-      <li><span class="username">@FPSMaster</span><img class="flag" src="https://flagcdn.com/br.svg" /></li>
-      <li><span class="username">@NightWolf</span><img class="flag" src="https://flagcdn.com/us.svg" /></li>
-      <li><span class="username">@BlazeMaster</span><img class="flag" src="https://flagcdn.com/jp.svg" /></li>
-      <li><span class="username">@CyberNova</span><img class="flag" src="https://flagcdn.com/ca.svg" /></li>
-      <li><span class="username">@SharpShooter</span><img class="flag" src="https://flagcdn.com/de.svg" /></li>
+      <li><span class="username">@FPSMaster</span><img class="flag" src="https://flagcdn.com/br.svg" alt="Brasil"/></li>
+      <li><span class="username">@NightWolf</span><img class="flag" src="https://flagcdn.com/us.svg" alt="USA"/></li>
+      <li><span class="username">@BlazeMaster</span><img class="flag" src="https://flagcdn.com/jp.svg" alt="Japão"/></li>
+      <li><span class="username">@CyberNova</span><img class="flag" src="https://flagcdn.com/ca.svg" alt="Canadá"/></li>
+      <li><span class="username">@SharpShooter</span><img class="flag" src="https://flagcdn.com/de.svg" alt="Alemanha"/></li>
     </ul>
   </aside>
 </div>
