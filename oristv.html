@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -232,7 +233,20 @@ header {
   transition: opacity 0.3s ease;
 }
 
-/* Aparece ao passar o mouse */
+/* Faixa invisível para ativar o hover na sidebar direita */
+.sidebar-right-trigger {
+  position: fixed;
+  top: 80px;
+  bottom: 40px;
+  right: 0;
+  width: 12px;
+  cursor: pointer;
+  z-index: 60;
+  background: transparent;
+}
+
+/* Mostrar a sidebar quando o mouse estiver sobre a faixa trigger ou a própria sidebar */
+.sidebar-right-trigger:hover + .sidebar-right,
 .sidebar-right:hover {
   opacity: 1;
   pointer-events: auto;
@@ -340,6 +354,7 @@ footer {
 }
 </style>
 
+
 </head>
 <body>
 
@@ -350,29 +365,7 @@ footer {
     <a href="rabbit.html" class="btn-green">Get Key</a>
   </div>
 </header>
-<!-- Barra ranking piscando abaixo da navbar -->
-<div class="ranking-bar" aria-label="Ranking da Comunidade" role="list">
-  <div class="ranking-user" title="@FPSMaster" role="listitem">
-    <img class="flag" src="https://flagcdn.com/br.svg" alt="Brasil" />
-    @FPSMaster
-  </div>
-  <div class="ranking-user" title="@NightWolf" role="listitem">
-    <img class="flag" src="https://flagcdn.com/us.svg" alt="Estados Unidos" />
-    @NightWolf
-  </div>
-  <div class="ranking-user" title="@BlazeMaster" role="listitem">
-    <img class="flag" src="https://flagcdn.com/jp.svg" alt="Japão" />
-    @BlazeMaster
-  </div>
-  <div class="ranking-user" title="@CyberNova" role="listitem">
-    <img class="flag" src="https://flagcdn.com/ca.svg" alt="Canadá" />
-    @CyberNova
-  </div>
-  <div class="ranking-user" title="@SharpShooter" role="listitem">
-    <img class="flag" src="https://flagcdn.com/de.svg" alt="Alemanha" />
-    @SharpShooter
-  </div>
-</div>
+
 <div class="container">
   <aside class="sidebar-left">
     <h3>🏷️ Códigos Jans #1 a #5</h3>
@@ -489,16 +482,20 @@ footer {
 </div>
 
 
-  <aside class="sidebar-right">
-    <h3>🏅 Ranking da Comunidade</h3>
-    <ul class="ranking-list">
-      <li><span class="username">@FPSMaster</span><img class="flag" src="https://flagcdn.com/br.svg" /></li>
-      <li><span class="username">@NightWolf</span><img class="flag" src="https://flagcdn.com/us.svg" /></li>
-      <li><span class="username">@BlazeMaster</span><img class="flag" src="https://flagcdn.com/jp.svg" /></li>
-      <li><span class="username">@CyberNova</span><img class="flag" src="https://flagcdn.com/ca.svg" /></li>
-      <li><span class="username">@SharpShooter</span><img class="flag" src="https://flagcdn.com/de.svg" /></li>
-    </ul>
-  </aside>
+<!-- Faixa invisível para ativar hover -->
+<div class="sidebar-right-trigger"></div>
+
+<aside class="sidebar-right">
+  <h3>🏅 Ranking da Comunidade</h3>
+  <ul class="ranking-list">
+    <li><span class="username">@FPSMaster</span><img class="flag" src="https://flagcdn.com/br.svg" /></li>
+    <li><span class="username">@NightWolf</span><img class="flag" src="https://flagcdn.com/us.svg" /></li>
+    <li><span class="username">@BlazeMaster</span><img class="flag" src="https://flagcdn.com/jp.svg" /></li>
+    <li><span class="username">@CyberNova</span><img class="flag" src="https://flagcdn.com/ca.svg" /></li>
+    <li><span class="username">@SharpShooter</span><img class="flag" src="https://flagcdn.com/de.svg" /></li>
+  </ul>
+</aside>
+
 </div>
 
 <footer>
