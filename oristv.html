@@ -5,338 +5,320 @@
   <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OrisTV - Live Powered by BTC-X</title>
-:root {
-  --primary: #0f0;
-  --dark: #0a0a0a;
-  --card: #151515;
-  --text: #fff;
-  --text-muted: #aaa;
-  --purple: #6e00ff;
-  --green: #00ff00;
-  --red: #ff0033;
-}
 
-* {
-  box-sizing: border-box;
-}
+  <style>
+    :root {
+      --primary: #0f0;
+      --dark: #0a0a0a;
+      --card: #151515;
+      --text: #fff;
+      --text-muted: #aaa;
+      --purple: #6e00ff;
+      --green: #00ff00;
+      --red: #ff0033;
+    }
 
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--dark);
-  color: var(--text);
-  overflow-x: hidden;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-header {
-  background-color: var(--purple);
-  padding: 1rem 2rem;
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.6);
-}
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--dark);
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-.header-buttons {
-  display: flex;
-  gap: 1rem;
-}
+    header {
+      background-color: var(--purple);
+      padding: 1rem 2rem;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    }
 
-.header-buttons button,
-.header-buttons a {
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: 0.2s;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-}
+    .header-buttons {
+      display: flex;
+      gap: 1rem;
+    }
 
-.btn-green {
-  background-color: var(--green);
-  color: #000;
-}
+    .header-buttons button,
+    .header-buttons a {
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 36px;
+    }
 
-.btn-green:hover {
-  background-color: #00cc00;
-}
+    .btn-green {
+      background-color: var(--green);
+      color: #000;
+    }
 
-.btn-red {
-  background-color: var(--red);
-  color: #fff;
-}
+    .btn-green:hover {
+      background-color: #00cc00;
+    }
 
-.btn-red:hover {
-  background-color: #cc0022;
-}
+    .btn-red {
+      background-color: var(--red);
+      color: #fff;
+    }
 
-/* Layout containers */
-.container {
-  display: flex;
-  margin-top: 80px;
-  height: calc(100vh - 80px - 40px);
-}
+    .btn-red:hover {
+      background-color: #cc0022;
+    }
 
-/* Sidebar esquerda */
-.sidebar-left {
-  width: 200px;
-  background-color: #111;
-  border-right: 1px solid #222;
-  padding: 1rem;
-  overflow-y: auto;
-  position: fixed;
-  top: 80px;
-  bottom: 40px;
-  left: 0;
-  color: var(--text-muted);
-}
+    .container {
+      display: flex;
+      margin-top: 80px;
+      height: calc(100vh - 80px - 40px);
+    }
 
-.sidebar-left h3 {
-  color: var(--primary);
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-}
+    .sidebar-left {
+      width: 200px;
+      background-color: #111;
+      border-right: 1px solid #222;
+      padding: 1rem;
+      overflow-y: auto;
+      position: fixed;
+      top: 80px;
+      bottom: 40px;
+      left: 0;
+      color: var(--text-muted);
+    }
 
-.sidebar-left ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+    .sidebar-left h3 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
 
-.sidebar-left ul li {
-  padding: 8px 6px;
-  border-radius: 5px;
-  cursor: default;
-  font-weight: 600;
-  color: var(--text-muted);
-  transition: background 0.2s ease, color 0.2s ease;
-}
+    .sidebar-left ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-.sidebar-left ul li:hover {
-  background-color: #1a1a1a;
-  color: var(--primary);
-}
+    .sidebar-left ul li {
+      padding: 8px 6px;
+      border-radius: 5px;
+      cursor: default;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
 
-/* Área principal - slide bar de vídeos */
-.main {
-  margin-left: 200px;
-  margin-right: 220px;
-  padding: 1rem 1rem 0 1rem;
-  overflow-x: auto;
-  overflow-y: hidden;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
+    .sidebar-left ul li:hover {
+      background-color: #1a1a1a;
+      color: var(--primary);
+    }
 
-/* Cards de stream */
-.stream-card-small {
-  background: var(--card);
-  border: 1px solid #222;
-  border-radius: 8px;
-  overflow: hidden;
-  width: 180px;
-  flex-shrink: 0;
-  box-shadow: 0 0 5px #0f02;
-  cursor: pointer;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-  color: var(--text);
-  text-decoration: none;
-}
+    .main {
+      margin-left: 200px;
+      margin-right: 220px;
+      padding: 1rem 1rem 0 1rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
 
-.stream-card-small:hover {
-  transform: scale(1.05);
-  border-color: var(--primary);
-}
+    .stream-card-small {
+      background: var(--card);
+      border: 1px solid #222;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 180px;
+      flex-shrink: 0;
+      box-shadow: 0 0 5px #0f02;
+      cursor: pointer;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      color: var(--text);
+      text-decoration: none;
+    }
 
-.stream-card-small img {
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
-  display: block;
-}
+    .stream-card-small:hover {
+      transform: scale(1.05);
+      border-color: var(--primary);
+    }
 
-.info-small {
-  padding: 0.5rem 0.7rem;
-}
+    .stream-card-small img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      display: block;
+    }
 
-.info-small h4 {
-  margin: 0;
-  font-size: 1rem;
-  color: var(--primary);
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
+    .info-small {
+      padding: 0.5rem 0.7rem;
+    }
 
-.info-small p {
-  margin: 0.25rem 0 0;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-weight: 600;
-}
+    .info-small h4 {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--primary);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-.info-small p.viewers {
-  color: var(--green);
-  font-weight: 700;
-  margin-top: 0.3rem;
-}
+    .info-small p {
+      margin: 0.25rem 0 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
 
-/* Barra lateral direita */
-.sidebar-right {
-  width: 220px;
-  background-color: #111;
-  border-left: 1px solid #222;
-  padding: 1rem;
-  overflow-y: auto;
-  position: fixed;
-  top: 80px;
-  bottom: 40px;
-  right: 0;
-  color: var(--text-muted);
-}
+    .info-small p.viewers {
+      color: var(--green);
+      font-weight: 700;
+      margin-top: 0.3rem;
+    }
 
-.sidebar-right h3 {
-  color: var(--primary);
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-}
+    .sidebar-right {
+      width: 220px;
+      background-color: #111;
+      border-left: 1px solid #222;
+      padding: 1rem;
+      overflow-y: auto;
+      position: fixed;
+      top: 80px;
+      bottom: 40px;
+      right: 0;
+      color: var(--text-muted);
+    }
 
-.ranking-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+    .sidebar-right h3 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
 
-.ranking-list li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 10px;
-  border-radius: 6px;
-  cursor: default;
-  color: var(--text-muted);
-  transition: background 0.2s ease;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
+    .ranking-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-.ranking-list li:hover {
-  background-color: #1a1a1a;
-  color: var(--primary);
-}
+    .ranking-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: 6px;
+      cursor: default;
+      color: var(--text-muted);
+      transition: background 0.2s ease;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
 
-.ranking-list .username {
-  flex-grow: 1;
-}
+    .ranking-list li:hover {
+      background-color: #1a1a1a;
+      color: var(--primary);
+    }
 
-.ranking-list .flag {
-  width: 28px;
-  height: 18px;
-  border-radius: 2px;
-  object-fit: cover;
-  flex-shrink: 0;
-  border: 1px solid #222;
-}
+    .ranking-list .username {
+      flex-grow: 1;
+    }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #111;
-  color: var(--primary);
-  border-top: 1px solid #222;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  font-size: 0.9rem;
-}
+    .ranking-list .flag {
+      width: 28px;
+      height: 18px;
+      border-radius: 2px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid #222;
+    }
 
-/* Scrollbar custom */
-.sidebar-left::-webkit-scrollbar,
-.sidebar-right::-webkit-scrollbar,
-.main::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
-}
-.sidebar-left::-webkit-scrollbar-thumb,
-.sidebar-right::-webkit-scrollbar-thumb,
-.main::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
-}
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #111;
+      color: var(--primary);
+      border-top: 1px solid #222;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      font-size: 0.9rem;
+    }
 
-/* Categorias */
-.category-bar {
-  margin-left: 200px;
-  margin-right: 220px;
-  padding: 1rem 1rem 2rem;
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
+    .sidebar-left::-webkit-scrollbar,
+    .sidebar-right::-webkit-scrollbar,
+    .main::-webkit-scrollbar {
+      height: 8px;
+      width: 8px;
+    }
 
-.category-bar a.stream-card-small {
-  width: 180px;
-  min-width: 180px;
-  flex-shrink: 0;
-}
+    .sidebar-left::-webkit-scrollbar-thumb,
+    .sidebar-right::-webkit-scrollbar-thumb,
+    .main::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
 
-.category-bar a.stream-card-small img {
-  height: 100px;
-}
+    .category-bar {
+      margin-left: 200px;
+      margin-right: 220px;
+      padding: 1rem 1rem 2rem;
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
 
-/* Responsividade */
-@media (max-width: 900px) {
-  .container {
-    flex-direction: column;
-  }
+    .category-bar .stream-card-small {
+      width: 180px;
+    }
 
-  .sidebar-left,
-  .sidebar-right {
-    position: relative;
-    width: 100%;
-    height: auto;
-    border: none;
-    border-bottom: 1px solid #222;
-  }
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
 
-  .main,
-  .category-bar {
-    margin: 0;
-    width: 100%;
-    padding: 1rem;
-    overflow-x: auto;
-    padding-bottom: 1rem;
-  }
-}
+      .sidebar-left,
+      .sidebar-right {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border: none;
+      }
 
-
+      .main,
+      .category-bar {
+        margin: 0;
+        width: 100%;
+        padding: 1rem;
+        overflow-x: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -350,46 +332,29 @@ footer {
 </header>
 
 <div class="container">
-  <!-- Barra lateral esquerda: Jans + conteúdo original -->
   <aside class="sidebar-left">
-    <section>
-      <h3>🏷️ Códigos Jans #1 a #5</h3>
-      <ul>
-        <li>#1 - Jans Alpha</li>
-        <li>#2 - Jans Beta</li>
-        <li>#3 - Jans Gamma</li>
-        <li>#4 - Jans Delta</li>
-        <li>#5 - Jans Epsilon</li>
-      </ul>
-    </section>
-
+    <h3>🏷️ Códigos Jans #1 a #5</h3>
+    <ul>
+      <li>#1 - Jans Alpha</li>
+      <li>#2 - Jans Beta</li>
+      <li>#3 - Jans Gamma</li>
+      <li>#4 - Jans Delta</li>
+      <li>#5 - Jans Epsilon</li>
+    </ul>
     <hr style="border-color: #222; margin: 1rem 0;" />
+    <h3>👑 Featured</h3>
+    <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
 
-    <section>
-      <h3>👑 Featured</h3>
-      <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
-
-      <h3>📺 Live Channels</h3>
-      <ul>
-        <li>🎮 @GameZone</li>
-        <li>💻 @DevArena</li>
-        <li>🎨 @PixelBrush</li>
-        <li>📚 @OrisAcademy</li>
-        <li>🕹️ @RetroWave</li>
-      </ul>
-
-      <h3>🎓 Courses</h3>
-      <ul>
-        <li>🎮 Games</li>
-        <li>💻 Development</li>
-        <li>🎨 Design</li>
-        <li>💰 Finance</li>
-        <li>🪙 Crypto</li>
-      </ul>
-    </section>
+    <h3>📺 Live Channels</h3>
+    <ul>
+      <li>🎮 @GameZone</li>
+      <li>💻 @DevArena</li>
+      <li>🎨 @PixelBrush</li>
+      <li>📚 @OrisAcademy</li>
+      <li>🕹️ @RetroWave</li>
+    </ul>
   </aside>
-<!-- Área principal: vídeos em slide bar horizontal -->
-<main class="main" role="main" aria-label="Vídeos ao vivo em slide">
+<main class="main">
   <a href="obs.html?channel=BlazeMaster" class="stream-card-small" title="BlazeMaster Live">
     <img src="https://placehold.co/600x400/png?text=BlazeMaster" alt="BlazeMaster Live" />
     <div class="info-small">
@@ -427,8 +392,7 @@ footer {
   </a>
 </main>
 
-<!-- Sessão de categorias em slide bar horizontal -->
-<section class="main category-bar" aria-label="Categorias em destaque">
+<section class="category-bar">
   <a href="gta.html" class="stream-card-small" title="GTA V">
     <img src="1.png" alt="GTA V" />
     <div class="info-small">
@@ -484,30 +448,15 @@ footer {
   </a>
 </section>
 
-  <!-- Barra lateral direita: Ranking com bandeiras -->
-  <aside class="sidebar-right" aria-label="Ranking lateral">
+
+  <aside class="sidebar-right">
     <h3>🏅 Ranking da Comunidade</h3>
     <ul class="ranking-list">
-      <li>
-        <span class="username">@FPSMaster</span>
-        <img class="flag" src="https://flagcdn.com/br.svg" alt="Brasil" loading="lazy" />
-      </li>
-      <li>
-        <span class="username">@NightWolf</span>
-        <img class="flag" src="https://flagcdn.com/us.svg" alt="Estados Unidos" loading="lazy" />
-      </li>
-      <li>
-        <span class="username">@BlazeMaster</span>
-        <img class="flag" src="https://flagcdn.com/jp.svg" alt="Japão" loading="lazy" />
-      </li>
-      <li>
-        <span class="username">@CyberNova</span>
-        <img class="flag" src="https://flagcdn.com/ca.svg" alt="Canadá" loading="lazy" />
-      </li>
-      <li>
-        <span class="username">@SharpShooter</span>
-        <img class="flag" src="https://flagcdn.com/de.svg" alt="Alemanha" loading="lazy" />
-      </li>
+      <li><span class="username">@FPSMaster</span><img class="flag" src="https://flagcdn.com/br.svg" /></li>
+      <li><span class="username">@NightWolf</span><img class="flag" src="https://flagcdn.com/us.svg" /></li>
+      <li><span class="username">@BlazeMaster</span><img class="flag" src="https://flagcdn.com/jp.svg" /></li>
+      <li><span class="username">@CyberNova</span><img class="flag" src="https://flagcdn.com/ca.svg" /></li>
+      <li><span class="username">@SharpShooter</span><img class="flag" src="https://flagcdn.com/de.svg" /></li>
     </ul>
   </aside>
 </div>
@@ -517,59 +466,15 @@ footer {
 </footer>
 
 <script>
-  let obs;
-
-  async function startStreaming() {
+  function startStreaming() {
     const existingKey = localStorage.getItem("oris_stream_key");
-
     if (!existingKey) {
-      const confirmRedirect = confirm("You don't have a streaming key yet. Would you like to generate one via Meta Rabbit?");
-      if (confirmRedirect) {
+      if (confirm("Generate your key via Meta Rabbit?")) {
         window.location.href = "rabbit.html";
       }
       return;
     }
-
-    try {
-      obs = new WebSocket("ws://localhost:4444");
-
-      obs.onopen = function () {
-        console.log("🔗 Connected to OBS WebSocket");
-
-        // Start streaming request
-        const startStreamRequest = {
-          "request-type": "StartStreaming",
-          "message-id": "startStream",
-          "stream": {
-            "type": "rtmp_custom",
-            "settings": {
-              "server": "rtmp://live.twitch.tv/app",
-              "key": existingKey
-            }
-          }
-        };
-
-        obs.send(JSON.stringify(startStreamRequest));
-        alert("🎥 Streaming started with key: " + existingKey);
-      };
-
-      obs.onerror = function (error) {
-        alert("⚠️ Unable to connect to OBS WebSocket. Is OBS running with WebSocket plugin?");
-        console.error("WebSocket error:", error);
-      };
-
-      obs.onmessage = function (msg) {
-        console.log("📩 OBS Message:", msg.data);
-      };
-
-      obs.onclose = function () {
-        console.log("⚠️ OBS WebSocket connection closed");
-      };
-
-    } catch (e) {
-      console.error("❌ OBS WebSocket error:", e);
-      alert("❌ Error connecting to OBS WebSocket.");
-    }
+    alert("🔗 Streaming key: " + existingKey);
   }
 </script>
 
