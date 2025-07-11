@@ -5,8 +5,7 @@
   <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OrisTV - Live Powered by BTC-X</title>
-
-  <style>
+<style>
  :root {
   --primary: #0f0;
   --dark: #0a0a0a;
@@ -225,6 +224,17 @@ header {
   bottom: 40px;
   right: 0;
   color: var(--text-muted);
+
+  /* Inicialmente invisível e não interativo */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Aparece ao passar o mouse */
+.sidebar-right:hover {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .sidebar-right h3 {
@@ -312,6 +322,10 @@ footer {
     width: 100%;
     height: auto;
     border: none;
+
+    /* No mobile, mostrar sempre */
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 
   .main,
@@ -323,8 +337,8 @@ footer {
     overflow-x: auto;
   }
 }
+</style>
 
-  </style>
 </head>
 <body>
 
