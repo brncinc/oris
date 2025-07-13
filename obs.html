@@ -115,10 +115,17 @@
   }
   .profile {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
     color: var(--text-muted);
     font-weight: 600;
+    min-width: 150px;
+  }
+  .profile-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
   }
   .profile img {
     width: 36px;
@@ -126,6 +133,21 @@
     border-radius: 50%;
     border: 2px solid var(--red);
     object-fit: cover;
+  }
+  .profile-name {
+    color: var(--primary);
+    font-weight: 700;
+    user-select: none;
+  }
+  .profile-bio {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    user-select: none;
+    max-width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   main {
@@ -282,18 +304,19 @@
 <div class="content-wrapper">
   <div class="title-bar">
     <h1>Super Live: Gameplay Insano</h1>
-    <div class="profile">
-      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto perfil" />
-      <div>Lucas Januário</div>
+    <div class="profile" title="Perfil do usuário">
+      <div class="profile-row">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto perfil" id="profilePhoto" />
+        <div class="profile-name" id="profileName">Lucas Januário</div>
+      </div>
+      <div class="profile-bio" id="profileBio" title=""></div>
     </div>
   </div>
   <main>
     <section class="player-container">
       <video id="video" controls autoplay muted>
         <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4" />
-       
       </video>
-     
     </section>
 
     <section class="chat-container">
@@ -311,6 +334,43 @@
 </div>
 
 <script>
+  // Função para carregar perfil do localStorage e aplicar na interface
+  function loadUserProfile() {
+    const photo = localStorage.getItem('profilePhoto');
+    const name = localStorage.getItem('profileName');
+    const bio = localStorage.getItem('profileBio');
+
+    const photoEl = document.getElementById('profilePhoto');
+    const nameEl = document.getElementById('profileName');
+    const bioEl = document.getElementById('profileBio');
+
+    if (photo && photo.trim() !== '') {
+      photoEl.src = photo;
+      photoEl.alt = name ? name + ' - Foto de perfil' : 'Foto do perfil';
+    } else {
+      photoEl.src = 'https://randomuser.me/api/portraits/men/32.jpg'; // fallback padrão
+      photoEl.alt = 'Foto do perfil padrão';
+    }
+
+    if (name && name.trim() !== '') {
+      nameEl.textContent = name;
+      nameEl.title = name;
+    } else {
+      nameEl.textContent = 'Usuário não logado';
+      nameEl.title = '';
+    }
+
+    if (bio && bio.trim() !== '') {
+      bioEl.textContent = bio;
+      bioEl.title = bio;
+      bioEl.style.display = 'block';
+    } else {
+      bioEl.style.display = 'none';
+    }
+  }
+
+  loadUserProfile();
+
   // Código simples do chat só no frontend para demo
   const chatMessages = document.getElementById('chatMessages');
   const chatForm = document.getElementById('chatForm');
