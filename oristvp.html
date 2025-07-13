@@ -110,6 +110,205 @@
       font-weight: bold;
       display: none;
     }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="z.png" alt="Logo Oris TV" class="logo" />
+  </header>
+
+  <main>
+    <h1>Editar Perfil</h1>
+
+    <form id="profileForm">
+      <label for="photo">URL da Foto do Perfil</label>
+      <input type="text" id="photo" name="photo" placeholder="https://exemplo.com/foto.jpg" />
+      <div class="photo-preview" id="photoPreview">
+        <p>Preview da foto aparecerá aqui</p>
+      </div>
+
+      <label for="name">Nome Completo</label>
+      <input type="text" id="name" name="name" placeholder="Seu nome completo" required />
+
+      <label for="bio">Descrição / Bio</label>
+      <textarea id="bio" name="bio" placeholder="Fale um pouco sobre você..."></textarea>
+
+      <button type="submit">Salvar Perfil</button>
+    </form>
+    <div class="saved-message" id="savedMessage">Perfil salvo com sucesso! ✅</div>
+  </main>
+
+  <script>
+    const photoInput = document.getElementById('photo');
+    const nameInput = document.getElementById('name');
+    const bioInput = document.getElementById('bio');
+    const photoPreview = document.getElementById('photoPreview');
+    const savedMessage = document.getElementById('savedMessage');
+    const form = document.getElementById('profileForm');
+
+    function updatePhotoPreview(url) {
+      if (url.trim() === '') {
+        photoPreview.innerHTML = '<p>Preview da foto aparecerá aqui</p>';
+        return;
+      }
+      const img = document.createElement('img');
+      img.src = url;
+      img.alt = 'Foto do perfil';
+      img.onerror = () => {
+        photoPreview.innerHTML = '<p>URL inválida ou imagem não carregou</p>';
+      };
+      img.onload = () => {
+        photoPreview.innerHTML = '';
+        photoPreview.appendChild(img);
+      };
+      photoPreview.innerHTML = '';
+      photoPreview.appendChild(img);
+    }
+
+    photoInput.addEventListener('input', () => {
+      updatePhotoPreview(photoInput.value);
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      localStorage.setItem('profilePhoto', photoInput.value.trim());
+      localStorage.setItem('profileName', nameInput.value.trim());
+      localStorage.setItem('profileBio', bioInput.value.trim());
+
+      savedMessage.style.display = 'block';
+      setTimeout(() => {
+        savedMessage.style.display = 'none';
+      }, 3000);
+    });
+
+    // Carrega dados do localStorage ao abrir a página
+    function loadProfile() {
+      const photo = localStorage.getItem('profilePhoto') || '';
+      const name = localStorage.getItem('profileName') || '';
+      const bio = localStorage.getItem('profileBio') || '';
+
+      photoInput.value = photo;
+      nameInput.value = name;
+      bioInput.value = bio;
+      updatePhotoPreview(photo);
+    }
+
+    loadProfile();
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfil Editável - Oris TV</title>
+  <link rel="icon" href="logo.ico" />
+  <style>
+    :root {
+      --primary: #0f0;
+      --dark: #0a0a0a;
+      --card: #151515;
+      --text: #fff;
+      --text-muted: #aaa;
+      --purple: #6e00ff;
+      --green: #00ff00;
+      --red: #ff0033;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+    }
+    header {
+      background-color: var(--purple);
+      padding: 0.8rem 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    }
+    header img.logo {
+      height: 48px;
+      width: auto;
+    }
+    main {
+      max-width: 700px;
+      margin: 80px auto 2rem;
+      padding: 2rem;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 0 10px #0f05;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    h1 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    label {
+      font-weight: 600;
+      color: var(--green);
+    }
+    input[type="text"], textarea {
+      background: #222;
+      border: 1px solid #444;
+      border-radius: 8px;
+      color: var(--text);
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    textarea {
+      min-height: 80px;
+    }
+    .photo-preview {
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+    .photo-preview img {
+      max-width: 150px;
+      border-radius: 50%;
+      border: 3px solid var(--green);
+      object-fit: cover;
+    }
+    button {
+      background: var(--green);
+      color: var(--dark);
+      border: none;
+      font-weight: bold;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      align-self: center;
+      width: 160px;
+    }
+    button:hover {
+      background: #0c0;
+      color: #fff;
+    }
+    .saved-message {
+      text-align: center;
+      margin-top: 1rem;
+      color: var(--primary);
+      font-weight: bold;
+      display: none;
+    }
     .login-btn {
       background: #24292e;
       color: #fff;
