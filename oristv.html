@@ -17,6 +17,7 @@
   --purple: #6e00ff;
   --green: #00ff00;
   --red: #ff0033;
+  --orange: orange;
 }
 
 * {
@@ -88,12 +89,21 @@ header {
   background-color: #cc0022;
 }
 
+.btn-orange {
+  background-color: var(--orange);
+  color: #000;
+}
+
+.btn-orange:hover {
+  background-color: darkorange;
+}
+
 /* Container com empilhamento vertical */
 .container {
   display: flex;
-  flex-direction: column; /* Alinha main e category-bar verticalmente */
+  flex-direction: column;
   margin-top: 80px;
-  padding-bottom: 40px; /* Espaço para footer */
+  padding-bottom: 40px;
   width: 100%;
 }
 
@@ -140,7 +150,7 @@ header {
 
 /* Main vídeos */
 .main {
-  margin-left: 200px; /* Para evitar sobreposição da sidebar esquerda */
+  margin-left: 200px;
   padding: 1rem 1rem 0 1rem;
   overflow-x: auto;
   overflow-y: hidden;
@@ -153,7 +163,7 @@ header {
 
 /* Categoria cards abaixo do main */
 .category-bar {
-  margin-left: 200px; /* Igual main para alinhar com sidebar esquerda */
+  margin-left: 200px;
   padding: 1rem 1rem 2rem 1rem;
   display: flex;
   gap: 1rem;
@@ -226,14 +236,11 @@ header {
   bottom: 40px;
   right: 0;
   color: var(--text-muted);
-
-  /* Inicialmente invisível e não interativo */
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
 
-/* Faixa invisível para ativar o hover na sidebar direita */
 .sidebar-right-trigger {
   position: fixed;
   top: 80px;
@@ -245,7 +252,6 @@ header {
   background: transparent;
 }
 
-/* Mostrar a sidebar quando o mouse estiver sobre a faixa trigger ou a própria sidebar */
 .sidebar-right-trigger:hover + .sidebar-right,
 .sidebar-right:hover {
   opacity: 1;
@@ -337,8 +343,6 @@ footer {
     width: 100%;
     height: auto;
     border: none;
-
-    /* No mobile, mostrar sempre */
     opacity: 1 !important;
     pointer-events: auto !important;
   }
@@ -353,7 +357,6 @@ footer {
   }
 }
 </style>
-
 
 </head>
 <body>
