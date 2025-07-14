@@ -6,6 +6,7 @@
   <title>Perfil - OrisTV</title>
   <link rel="icon" href="logo.ico" />
   <style>
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
     :root {
       --purple: #9147ff;
       --purple-dark: #772ce8;
@@ -14,6 +15,7 @@
       --card: #1f1f23;
       --text: #ffffff;
       --muted: #adadb8;
+      --title-green: #53fc18;
     }
 
     * {
@@ -80,13 +82,15 @@
     .username {
       font-size: 1.8rem;
       font-weight: bold;
-      color: var(--purple);
+      color: var(--title-green);
+      user-select: text;
     }
 
     .action-buttons {
       display: flex;
       gap: 0.5rem;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .btn {
@@ -100,6 +104,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      user-select: none;
     }
 
     .btn-follow {
@@ -120,6 +125,24 @@
       background: var(--purple-dark);
     }
 
+    .btn-save {
+      background: var(--purple);
+      color: white;
+      margin-left: 1rem;
+    }
+    .btn-save:hover {
+      background: var(--purple-dark);
+    }
+
+    .btn-generate {
+      background: var(--green);
+      color: #000;
+      margin-left: 1rem;
+    }
+    .btn-generate:hover {
+      background: #40c013;
+    }
+
     .search-bar {
       background: #2c2c31;
       border: 1px solid #444;
@@ -128,6 +151,7 @@
       color: var(--text);
       font-size: 0.9rem;
       width: 250px;
+      user-select: text;
     }
 
     form {
@@ -138,8 +162,9 @@
     }
 
     label {
-      color: var(--muted);
-      font-weight: 500;
+      color: var(--title-green);
+      font-weight: 600;
+      user-select: text;
     }
 
     input[type="text"], textarea {
@@ -163,6 +188,35 @@
       color: var(--green);
       font-family: monospace;
       font-size: 0.9rem;
+      user-select: all;
+    }
+
+    /* Social media pane (tipo joptionpane) */
+    .social-pane {
+      margin-top: 1rem;
+      background: #222;
+      border: 1px solid var(--purple);
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .social-pane a {
+      color: var(--purple);
+      font-size: 1.6rem;
+      transition: color 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .social-pane a:hover {
+      color: var(--green);
     }
   </style>
 </head>
@@ -176,20 +230,22 @@
 
     <div class="content">
       <div class="header">
-        <div class="username" id="displayUsername">seu_usuario</div>
+        <div class="username" id="displayUsername" title="Nome do usuário">seu_usuario</div>
         <input class="search-bar" type="text" placeholder="🔍 Buscar usuários..." id="searchUser" />
         <div class="action-buttons">
-          <button class="btn btn-follow">Seguir</button>
-          <a href="https://brncinc.github.io/oris/rabbit.html" target="_blank" class="btn btn-key">Comprar Key</a>
+          <button class="btn btn-follow" type="button">Seguir</button>
+          <a href="https://brncinc.github.io/oris/rabbit.html" target="_blank" class="btn btn-key" rel="noopener noreferrer">Comprar Key</a>
+          <button class="btn btn-generate" type="button" id="btnGenerateUrl">Gerar URL</button>
+          <button class="btn btn-save" type="button" id="btnSaveProfile">Salvar</button>
         </div>
       </div>
 
-      <form id="profileForm">
+      <form id="profileForm" onsubmit="return false;">
         <label for="username">Nome de usuário (ID primário)</label>
-        <input type="text" id="username" name="username" placeholder="Digite seu username" required />
+        <input type="text" id="username" name="username" placeholder="Digite seu username" required autocomplete="off" />
 
         <label for="photo">URL da Foto de Perfil</label>
-        <input type="text" id="photo" name="photo" placeholder="https://exemplo.com/avatar.jpg" />
+        <input type="text" id="photo" name="photo" placeholder="https://exemplo.com/avatar.jpg" autocomplete="off" />
 
         <label for="bio">Bio</label>
         <textarea id="bio" name="bio" placeholder="Fale sobre você..."></textarea>
@@ -197,6 +253,13 @@
         <label for="streamUrl">URL da Transmissão</label>
         <input type="text" id="streamUrl" class="stream-url" readonly />
       </form>
+
+      <div class="social-pane" aria-label="Redes sociais">
+        <a href="#" id="linkDiscord" title="Discord" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
+        <a href="#" id="linkTwitter" title="Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+        <a href="#" id="linkYouTube" title="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+        <a href="#" id="linkInstagram" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+      </div>
     </div>
   </div>
 
@@ -208,15 +271,75 @@
     const displayUsername = document.getElementById('displayUsername');
     const streamUrl = document.getElementById('streamUrl');
 
-    usernameInput.addEventListener('input', () => {
+    const btnGenerateUrl = document.getElementById('btnGenerateUrl');
+    const btnSaveProfile = document.getElementById('btnSaveProfile');
+
+    const linkDiscord = document.getElementById('linkDiscord');
+    const linkTwitter = document.getElementById('linkTwitter');
+    const linkYouTube = document.getElementById('linkYouTube');
+    const linkInstagram = document.getElementById('linkInstagram');
+
+    function generateStreamUrl(username) {
+      return `https://brncinc.github.io/oris/obs.html?channel=${username}`;
+    }
+
+    function updatePreview() {
       const username = usernameInput.value.trim().toLowerCase().replace(/\s+/g, '');
       displayUsername.textContent = username || 'seu_usuario';
-      streamUrl.value = username ? `https://brncinc.github.io/oris/obs.html?channel=${username}` : '';
+      streamUrl.value = username ? generateStreamUrl(username) : '';
+      avatarImg.src = photo.value || 'https://placehold.co/100x100/png?text=Foto';
+    }
+
+    btnGenerateUrl.addEventListener('click', () => {
+      updatePreview();
+      alert('URL da transmissão gerada!');
     });
 
-    photo.addEventListener('input', () => {
-      avatarImg.src = photo.value || 'https://placehold.co/100x100/png?text=Foto';
+    btnSaveProfile.addEventListener('click', () => {
+      const username = usernameInput.value.trim();
+      if (!username) {
+        alert('Por favor, preencha o nome de usuário antes de salvar.');
+        return;
+      }
+      const data = {
+        username,
+        photo: photo.value.trim(),
+        bio: bio.value.trim(),
+        discord: linkDiscord.href,
+        twitter: linkTwitter.href,
+        youtube: linkYouTube.href,
+        instagram: linkInstagram.href
+      };
+      localStorage.setItem('profileData', JSON.stringify(data));
+      alert('Perfil salvo com sucesso!');
+      updatePreview();
     });
+
+    // Atualizar live preview enquanto digita username e foto
+    usernameInput.addEventListener('input', updatePreview);
+    photo.addEventListener('input', updatePreview);
+
+    // Carregar dados do localStorage no carregamento da página
+    function loadProfile() {
+      const saved = localStorage.getItem('profileData');
+      if (!saved) return;
+      try {
+        const data = JSON.parse(saved);
+        usernameInput.value = data.username || '';
+        photo.value = data.photo || '';
+        bio.value = data.bio || '';
+
+        if (data.discord) linkDiscord.href = data.discord;
+        if (data.twitter) linkTwitter.href = data.twitter;
+        if (data.youtube) linkYouTube.href = data.youtube;
+        if (data.instagram) linkInstagram.href = data.instagram;
+
+        updatePreview();
+      } catch (e) {
+        console.error('Erro ao carregar perfil:', e);
+      }
+    }
+    loadProfile();
   </script>
 </body>
 </html>
