@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Oris TV - Transmissão</title>
+  <title>Oris TV</title>
   <style>
     :root {
       --primary: #0f0;
@@ -12,7 +12,6 @@
       --card: #151515;
       --text: #fff;
       --text-muted: #aaa;
-      --purple: #6e00ff;
       --green: #00ff00;
       --red: #ff0033;
     }
@@ -29,17 +28,6 @@
       height: 100vh;
       overflow: hidden;
     }
-    header {
-      background: var(--purple);
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
-    }
 
     .sidebar {
       width: 240px;
@@ -47,21 +35,23 @@
       border-right: 1px solid #222;
       padding: 1rem;
       position: fixed;
-      top: 50px;
+      top: 0;
       bottom: 0;
       left: 0;
       overflow-y: auto;
     }
+
     .sidebar h3 {
       color: var(--primary);
       font-size: 1rem;
       margin-top: 1.5rem;
     }
+
     .sidebar ul {
       list-style: none;
       padding: 0;
-      margin: 0;
     }
+
     .sidebar ul li {
       padding: 8px;
       border-radius: 6px;
@@ -69,10 +59,12 @@
       cursor: pointer;
       transition: 0.2s;
     }
+
     .sidebar ul li:hover {
       background: #1a1a1a;
       color: var(--primary);
     }
+
     .top-streamer {
       background: #1a1a1a;
       padding: 12px;
@@ -83,8 +75,8 @@
     }
 
     .content-wrapper {
-      margin: 50px 0 0 240px;
-      height: calc(100vh - 50px);
+      margin-left: 240px;
+      height: 100vh;
       display: flex;
       flex-direction: column;
     }
@@ -96,18 +88,21 @@
       align-items: center;
       border-bottom: 1px solid #222;
     }
+
     .title-bar h1 {
       font-size: 1.3rem;
       color: var(--primary);
       flex-grow: 1;
       margin: 0;
     }
+
     .profile {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       color: var(--text-muted);
     }
+
     .profile img {
       width: 36px;
       height: 36px;
@@ -122,15 +117,19 @@
       gap: 1rem;
       overflow: hidden;
     }
-    .player-container, .chat-container {
+
+    .player-container,
+    .chat-container {
       background: var(--card);
       border-radius: 12px;
       display: flex;
       flex-direction: column;
     }
+
     .player-container {
       flex: 3;
     }
+
     iframe {
       flex: 1;
       width: 100%;
@@ -138,6 +137,7 @@
       background: black;
       border-radius: 12px 12px 0 0;
     }
+
     .video-info {
       padding: 0.75rem 1rem;
       background: #101010;
@@ -150,6 +150,7 @@
       flex: 1;
       box-shadow: 0 0 15px var(--primary);
     }
+
     .chat-header {
       padding: 0.75rem 1rem;
       border-bottom: 1px solid #222;
@@ -158,16 +159,19 @@
       display: flex;
       justify-content: space-between;
     }
+
     .chat-messages {
       flex: 1;
       padding: 1rem;
       overflow-y: auto;
       font-size: 0.9rem;
     }
+
     .chat-input {
       display: flex;
       border-top: 1px solid #222;
     }
+
     .chat-input input {
       flex: 1;
       padding: 0.8rem;
@@ -176,6 +180,7 @@
       border: none;
       border-radius: 0 0 0 12px;
     }
+
     .chat-input button {
       background: var(--primary);
       color: var(--dark);
@@ -185,6 +190,7 @@
       cursor: pointer;
       border-radius: 0 0 12px 0;
     }
+
     .chat-input button:hover {
       background: #0c0;
       color: white;
@@ -193,6 +199,7 @@
     .chat-messages::-webkit-scrollbar {
       width: 6px;
     }
+
     .chat-messages::-webkit-scrollbar-thumb {
       background: var(--primary);
       border-radius: 4px;
@@ -202,18 +209,19 @@
       .sidebar {
         position: relative;
         width: 100%;
-        top: 50px;
         height: auto;
         border-right: none;
         border-bottom: 1px solid #222;
       }
+
       .content-wrapper {
-        margin: 0;
+        margin-left: 0;
       }
+
       main {
         flex-direction: column;
-        padding: 1rem;
       }
+
       .player-container,
       .chat-container {
         height: 300px;
@@ -222,7 +230,6 @@
   </style>
 </head>
 <body>
-<header></header>
 
 <aside class="sidebar">
   <h3>🔍 Buscar Perfis</h3>
@@ -252,7 +259,7 @@
 
 <div class="content-wrapper">
   <div class="title-bar">
-    <h1 id="liveTitle">Oris TV - Transmissão</h1>
+    <h1 id="liveTitle">Oris TV</h1>
     <div class="profile">
       <img id="profilePhoto" src="https://placehold.co/100x100" alt="Foto perfil" />
       <span id="profileName">Convidado</span>
@@ -262,7 +269,7 @@
   <main>
     <section class="player-container">
       <iframe id="streamFrame" src="" allowfullscreen></iframe>
-      <div class="video-info" id="videoInfo">Transmissão ao vivo</div>
+      <div class="video-info" id="videoInfo"></div>
     </section>
 
     <section class="chat-container">
@@ -290,8 +297,8 @@
     document.getElementById('profileName').textContent = name;
     document.getElementById('profilePhoto').src = profile.photo || 'https://placehold.co/100x100';
     document.getElementById('streamFrame').src = `https://brncinc.github.io/oris/obs.html?channel=${slug || 'guest'}`;
-    document.getElementById('videoInfo').textContent = `Transmissão de ${name}`;
-    document.getElementById('liveTitle').textContent = `Live - ${name}`;
+    document.getElementById('videoInfo').textContent = name !== 'Convidado' ? `Transmissão de ${name}` : '';
+    document.getElementById('liveTitle').textContent = 'Oris TV';
   }
 
   loadProfile();
@@ -319,5 +326,6 @@
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 </script>
+
 </body>
 </html>
