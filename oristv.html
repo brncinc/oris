@@ -100,6 +100,34 @@
       margin-top: 80px;
       padding: 1rem;
       display: flex;
+      flex-direction: row;
+      gap: 2rem;
+    }
+
+    .sidebar-left,
+    .sidebar-right {
+      width: 220px;
+      background-color: #111;
+      border: 1px solid #222;
+      padding: 1rem;
+      height: calc(100vh - 120px);
+      overflow-y: auto;
+      position: fixed;
+      top: 80px;
+    }
+
+    .sidebar-left {
+      left: 0;
+    }
+
+    .sidebar-right {
+      right: 0;
+    }
+
+    .main-content {
+      margin: 0 240px;
+      flex: 1;
+      display: flex;
       flex-direction: column;
       gap: 2rem;
     }
@@ -175,13 +203,6 @@
       font-size: 0.9rem;
       margin-top: 2rem;
     }
-
-    @media (max-width: 900px) {
-      .sidebar-left,
-      .sidebar-right {
-        display: none;
-      }
-    }
   </style>
 </head>
 <body>
@@ -194,7 +215,23 @@
     </div>
   </header>
 
-  <div class="container">
+  <div class="sidebar-left">
+    <h3>📺 Canais</h3>
+    <p>@GameZone</p>
+    <p>@DevArena</p>
+    <p>@PixelBrush</p>
+    <p>@OrisAcademy</p>
+  </div>
+
+  <div class="sidebar-right">
+    <h3>🏆 Top Streamers</h3>
+    <p>@FPSMaster</p>
+    <p>@NightWolf</p>
+    <p>@BlazeMaster</p>
+    <p>@CyberNova</p>
+  </div>
+
+  <div class="main-content">
     <div class="scroll-row">
       <a href="#" class="stream-card-small">
         <img src="https://placehold.co/600x400/png?text=Streamer+1" alt="Streamer" />
@@ -218,14 +255,6 @@
           <h4>@CyberNova</h4>
           <p>Valorant</p>
           <p class="viewers">670 viewers</p>
-        </div>
-      </a>
-      <a href="#" class="stream-card-small">
-        <img src="https://placehold.co/600x400/png?text=Streamer+4" alt="Streamer" />
-        <div class="info-small">
-          <h4>@SharpShooter</h4>
-          <p>Fortnite</p>
-          <p class="viewers">830 viewers</p>
         </div>
       </a>
     </div>
@@ -255,19 +284,11 @@
           <p class="viewers">Esports</p>
         </div>
       </a>
-      <a href="#" class="stream-card-small">
-        <img src="4.png" alt="CSGO" />
-        <div class="info-small">
-          <h4>💣 CS:GO</h4>
-          <p>Competitivo</p>
-          <p class="viewers">Clássico</p>
-        </div>
-      </a>
     </div>
   </div>
 
   <footer>
-    © 2025 OrisTV Under Development  | Powered by BTC-X + Meta Rabbit
+    © 2025 OrisTV Under Developement  | Powered by BTC-X + Meta Rabbit
   </footer>
 
   <script>
