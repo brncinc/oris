@@ -191,7 +191,6 @@
       user-select: all;
     }
 
-    /* Social media pane (tipo joptionpane) */
     .social-pane {
       margin-top: 1rem;
       background: #222;
@@ -218,6 +217,13 @@
     .social-pane a:hover {
       color: var(--green);
     }
+
+    #followersCount {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: bold;
+      margin-left: 0.5rem;
+    }
   </style>
 </head>
 <body>
@@ -233,7 +239,8 @@
         <div class="username" id="displayUsername" title="Nome do usuário">seu_usuario</div>
         <input class="search-bar" type="text" placeholder="🔍 Buscar usuários..." id="searchUser" />
         <div class="action-buttons">
-          <button class="btn btn-follow" type="button">Seguir</button>
+          <button class="btn btn-follow" type="button" id="btnFollow">➕ Seguir</button>
+          <span id="followersCount">👥 0 seguidores</span>
           <a href="https://brncinc.github.io/oris/rabbit.html" target="_blank" class="btn btn-key" rel="noopener noreferrer">Comprar Key</a>
           <button class="btn btn-generate" type="button" id="btnGenerateUrl">Gerar URL</button>
           <button class="btn btn-save" type="button" id="btnSaveProfile">Salvar</button>
@@ -270,6 +277,8 @@
     const bio = document.getElementById('bio');
     const displayUsername = document.getElementById('displayUsername');
     const streamUrl = document.getElementById('streamUrl');
+    const btnFollow = document.getElementById('btnFollow');
+    const followersCount = document.getElementById('followersCount');
 
     const btnGenerateUrl = document.getElementById('btnGenerateUrl');
     const btnSaveProfile = document.getElementById('btnSaveProfile');
@@ -288,7 +297,29 @@
       displayUsername.textContent = username || 'seu_usuario';
       streamUrl.value = username ? generateStreamUrl(username) : '';
       avatarImg.src = photo.value || 'https://placehold.co/100x100/png?text=Foto';
+      updateFollowUI(username);
     }
+
+    function updateFollowUI(username) {
+      const followers = JSON.parse(localStorage.getItem("followersData") || "{}");
+      const isFollowing = followers[username] || false;
+      btnFollow.textContent = isFollowing ? "✔ Seguindo" : "➕ Seguir";
+      btnFollow.style.backgroundColor = isFollowing ? "#40c013" : "var(--green)";
+      const total = Object.values(followers).filter(f => f).length;
+      followersCount.textContent = `👥 ${total} seguidores`;
+    }
+
+    btnFollow.addEventListener("click", () => {
+      const username = usernameInput.value.trim().toLowerCase().replace(/\s+/g, '');
+      if (!username) {
+        alert("Insira o nome de usuário antes de seguir.");
+        return;
+      }
+      const followers = JSON.parse(localStorage.getItem("followersData") || "{}");
+      followers[username] = !followers[username];
+      localStorage.setItem("followersData", JSON.stringify(followers));
+      updateFollowUI(username);
+    });
 
     btnGenerateUrl.addEventListener('click', () => {
       updatePreview();
@@ -315,11 +346,9 @@
       updatePreview();
     });
 
-    // Atualizar live preview enquanto digita username e foto
     usernameInput.addEventListener('input', updatePreview);
     photo.addEventListener('input', updatePreview);
 
-    // Carregar dados do localStorage no carregamento da página
     function loadProfile() {
       const saved = localStorage.getItem('profileData');
       if (!saved) return;
@@ -339,6 +368,7 @@
         console.error('Erro ao carregar perfil:', e);
       }
     }
+
     loadProfile();
   </script>
 </body>
