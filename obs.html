@@ -24,20 +24,34 @@
       background: var(--dark);
       color: var(--text);
       display: flex;
-      flex-direction: column;
       height: 100vh;
       overflow: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background-color: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      box-shadow: 0 2px 5px rgba(0, 255, 0, 0.2);
+    }
+
+    header img {
+      height: 40px;
     }
 
     .sidebar {
       width: 240px;
       background: #111;
-      border-right: 1px solid #222;
       padding: 1rem;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
+      padding-top: 70px;
+      border-right: 1px solid #222;
       overflow-y: auto;
     }
 
@@ -65,20 +79,12 @@
       color: var(--primary);
     }
 
-    .top-streamer {
-      background: #1a1a1a;
-      padding: 12px;
-      margin-bottom: 1rem;
-      border-left: 4px solid var(--primary);
-      font-weight: bold;
-      color: var(--primary);
-    }
-
     .content-wrapper {
       margin-left: 240px;
-      height: 100vh;
+      padding-top: 50px;
       display: flex;
       flex-direction: column;
+      height: 100vh;
     }
 
     .title-bar {
@@ -90,7 +96,7 @@
     }
 
     .title-bar h1 {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: var(--primary);
       flex-grow: 1;
       margin: 0;
@@ -113,13 +119,12 @@
     main {
       flex: 1;
       display: flex;
-      padding: 1rem;
       gap: 1rem;
+      padding: 1rem;
       overflow: hidden;
     }
 
-    .player-container,
-    .chat-container {
+    .player-container, .chat-container {
       background: var(--card);
       border-radius: 12px;
       display: flex;
@@ -135,15 +140,7 @@
       width: 100%;
       border: none;
       background: black;
-      border-radius: 12px 12px 0 0;
-    }
-
-    .video-info {
-      padding: 0.75rem 1rem;
-      background: #101010;
-      border-radius: 0 0 12px 12px;
-      font-weight: bold;
-      color: var(--primary);
+      border-radius: 12px;
     }
 
     .chat-container {
@@ -196,22 +193,9 @@
       color: white;
     }
 
-    .chat-messages::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .chat-messages::-webkit-scrollbar-thumb {
-      background: var(--primary);
-      border-radius: 4px;
-    }
-
     @media (max-width: 900px) {
       .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid #222;
+        display: none;
       }
 
       .content-wrapper {
@@ -231,35 +215,24 @@
 </head>
 <body>
 
+<header>
+  <img src="logo.ico" alt="Oris TV" />
+</header>
+
 <aside class="sidebar">
-  <h3>🔍 Buscar Perfis</h3>
-  <input type="text" id="profileSearch" placeholder="Digite nome para buscar..." />
-
-  <h3>👑 Featured</h3>
-  <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
-
-  <h3>📺 Live Channels</h3>
+  <h3>📺 Canais</h3>
   <ul>
-    <li>🎮 @GameZone</li>
-    <li>💻 @DevArena</li>
-    <li>🎨 @PixelBrush</li>
-    <li>📚 @OrisAcademy</li>
-    <li>🕹️ @RetroWave</li>
-  </ul>
-
-  <h3>🎓 Courses</h3>
-  <ul>
-    <li>🎮 Games</li>
-    <li>💻 Development</li>
-    <li>🎨 Design</li>
-    <li>💰 Finance</li>
-    <li>🪙 Crypto</li>
+    <li>🎮 GameZone</li>
+    <li>💻 DevArena</li>
+    <li>🎨 PixelBrush</li>
+    <li>📚 OrisAcademy</li>
+    <li>🕹️ RetroWave</li>
   </ul>
 </aside>
 
 <div class="content-wrapper">
   <div class="title-bar">
-    <h1 id="liveTitle">Oris TV</h1>
+    <h1>Transmissão</h1>
     <div class="profile">
       <img id="profilePhoto" src="https://placehold.co/100x100" alt="Foto perfil" />
       <span id="profileName">Convidado</span>
@@ -269,7 +242,6 @@
   <main>
     <section class="player-container">
       <iframe id="streamFrame" src="" allowfullscreen></iframe>
-      <div class="video-info" id="videoInfo"></div>
     </section>
 
     <section class="chat-container">
@@ -297,8 +269,6 @@
     document.getElementById('profileName').textContent = name;
     document.getElementById('profilePhoto').src = profile.photo || 'https://placehold.co/100x100';
     document.getElementById('streamFrame').src = `https://brncinc.github.io/oris/obs.html?channel=${slug || 'guest'}`;
-    document.getElementById('videoInfo').textContent = name !== 'Convidado' ? `Transmissão de ${name}` : '';
-    document.getElementById('liveTitle').textContent = 'Oris TV';
   }
 
   loadProfile();
