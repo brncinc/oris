@@ -98,10 +98,9 @@
 
     .container {
       margin-top: 80px;
-      padding: 1rem;
       display: flex;
-      flex-direction: row;
-      gap: 2rem;
+      height: calc(100vh - 80px);
+      gap: 1rem;
     }
 
     .sidebar-left,
@@ -110,10 +109,14 @@
       background-color: #111;
       border: 1px solid #222;
       padding: 1rem;
-      height: calc(100vh - 120px);
       overflow-y: auto;
       position: fixed;
       top: 80px;
+      bottom: 0;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
     .sidebar-left {
@@ -124,20 +127,25 @@
       right: 0;
     }
 
+    /* Conteúdo principal entre as sidebars */
     .main-content {
-      margin: 0 240px;
+      margin-left: 240px;
+      margin-right: 240px;
       flex: 1;
       display: flex;
       flex-direction: column;
       gap: 2rem;
+      overflow-y: auto;
+      padding-bottom: 1rem;
     }
 
+    /* Barras de scroll horizontal para cards */
     .scroll-row {
       display: flex;
       overflow-x: auto;
       gap: 1rem;
       scroll-snap-type: x mandatory;
-      padding-bottom: 1rem;
+      padding-bottom: 8px;
     }
 
     .scroll-row::-webkit-scrollbar {
@@ -149,6 +157,7 @@
       border-radius: 4px;
     }
 
+    /* Cards de stream */
     .stream-card-small {
       background: var(--card);
       border: 1px solid #222;
@@ -162,6 +171,8 @@
       transition: transform 0.3s ease, border-color 0.3s ease;
       color: var(--text);
       text-decoration: none;
+      display: flex;
+      flex-direction: column;
     }
 
     .stream-card-small:hover {
@@ -174,10 +185,12 @@
       height: 120px;
       object-fit: cover;
       display: block;
+      flex-shrink: 0;
     }
 
     .info-small {
       padding: 0.5rem 0.7rem;
+      flex-grow: 1;
     }
 
     .info-small h4 {
@@ -194,6 +207,17 @@
       font-weight: 600;
     }
 
+    #profileSearch {
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      background-color: #222;
+      color: var(--text);
+      outline: none;
+      border: 1px solid #444;
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -201,7 +225,44 @@
       color: var(--primary);
       border-top: 1px solid #222;
       font-size: 0.9rem;
-      margin-top: 2rem;
+      margin-top: 1rem;
+    }
+
+    /* Listas da sidebar */
+    aside.sidebar-left ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+
+    aside.sidebar-left ul li {
+      padding: 8px 6px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: background 0.2s ease, color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    aside.sidebar-left ul li:hover {
+      background-color: #1a1a1a;
+      color: var(--primary);
+    }
+
+    /* Ajustes responsivos */
+    @media (max-width: 900px) {
+      .sidebar-left,
+      .sidebar-right {
+        display: none;
+      }
+      .main-content {
+        margin: 0;
+      }
     }
   </style>
 </head>
@@ -215,80 +276,103 @@
     </div>
   </header>
 
-  <div class="sidebar-left">
-    <h3>📺 Canais</h3>
-    <p>@GameZone</p>
-    <p>@DevArena</p>
-    <p>@PixelBrush</p>
-    <p>@OrisAcademy</p>
-  </div>
+  <div class="container">
+    <aside class="sidebar-left">
+      <h3>🔍 Buscar Perfis</h3>
+      <input type="text" id="profileSearch" placeholder="Digite nome para buscar..." autocomplete="off" />
 
-  <div class="sidebar-right">
-    <h3>🏆 Top Streamers</h3>
-    <p>@FPSMaster</p>
-    <p>@NightWolf</p>
-    <p>@BlazeMaster</p>
-    <p>@CyberNova</p>
-  </div>
+      <h3>👑 Featured</h3>
+      <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
 
-  <div class="main-content">
-    <div class="scroll-row">
-      <a href="#" class="stream-card-small">
-        <img src="https://placehold.co/600x400/png?text=Streamer+1" alt="Streamer" />
-        <div class="info-small">
-          <h4>@BlazeMaster</h4>
-          <p>FPS Arena</p>
-          <p class="viewers">1200 viewers</p>
-        </div>
-      </a>
-      <a href="#" class="stream-card-small">
-        <img src="https://placehold.co/600x400/png?text=Streamer+2" alt="Streamer" />
-        <div class="info-small">
-          <h4>@NightWolf</h4>
-          <p>Warzone</p>
-          <p class="viewers">950 viewers</p>
-        </div>
-      </a>
-      <a href="#" class="stream-card-small">
-        <img src="https://placehold.co/600x400/png?text=Streamer+3" alt="Streamer" />
-        <div class="info-small">
-          <h4>@CyberNova</h4>
-          <p>Valorant</p>
-          <p class="viewers">670 viewers</p>
-        </div>
-      </a>
-    </div>
+      <h3>📺 Live Channels</h3>
+      <ul>
+        <li>🎮 @GameZone</li>
+        <li>💻 @DevArena</li>
+        <li>🎨 @PixelBrush</li>
+        <li>📚 @OrisAcademy</li>
+        <li>🕹️ @RetroWave</li>
+      </ul>
 
-    <div class="scroll-row">
-      <a href="#" class="stream-card-small">
-        <img src="1.png" alt="GTA V" />
-        <div class="info-small">
-          <h4>🚗 GTA V</h4>
-          <p>Ação & Roleplay</p>
-          <p class="viewers">Trending</p>
-        </div>
-      </a>
-      <a href="#" class="stream-card-small">
-        <img src="8.png" alt="LoL" />
-        <div class="info-small">
-          <h4>🧙 LoL</h4>
-          <p>MOBA Strategy</p>
-          <p class="viewers">Popular</p>
-        </div>
-      </a>
-      <a href="#" class="stream-card-small">
-        <img src="7.png" alt="Valorant" />
-        <div class="info-small">
-          <h4>🎯 Valorant</h4>
-          <p>FPS Tático</p>
-          <p class="viewers">Esports</p>
-        </div>
-      </a>
-    </div>
+      <h3>🎓 Courses</h3>
+      <ul>
+        <li>🎮 Games</li>
+        <li>💻 Development</li>
+        <li>🎨 Design</li>
+        <li>💰 Finance</li>
+        <li>🪙 Crypto</li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div class="scroll-row" aria-label="Streamers">
+        <a href="#" class="stream-card-small" title="@BlazeMaster Live">
+          <img src="https://placehold.co/600x400/png?text=Streamer+1" alt="@BlazeMaster" />
+          <div class="info-small">
+            <h4>@BlazeMaster</h4>
+            <p>FPS Arena</p>
+            <p class="viewers">1200 viewers</p>
+          </div>
+        </a>
+        <a href="#" class="stream-card-small" title="@NightWolf Live">
+          <img src="https://placehold.co/600x400/png?text=Streamer+2" alt="@NightWolf" />
+          <div class="info-small">
+            <h4>@NightWolf</h4>
+            <p>Warzone</p>
+            <p class="viewers">950 viewers</p>
+          </div>
+        </a>
+        <a href="#" class="stream-card-small" title="@CyberNova Live">
+          <img src="https://placehold.co/600x400/png?text=Streamer+3" alt="@CyberNova" />
+          <div class="info-small">
+            <h4>@CyberNova</h4>
+            <p>Valorant</p>
+            <p class="viewers">670 viewers</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="scroll-row" aria-label="Game Categories">
+        <a href="#" class="stream-card-small" title="GTA V">
+          <img src="1.png" alt="GTA V" />
+          <div class="info-small">
+            <h4>🚗 GTA V</h4>
+            <p>Ação & Roleplay</p>
+            <p class="viewers">Trending</p>
+          </div>
+        </a>
+        <a href="#" class="stream-card-small" title="League of Legends">
+          <img src="8.png" alt="LoL" />
+          <div class="info-small">
+            <h4>🧙 LoL</h4>
+            <p>MOBA Strategy</p>
+            <p class="viewers">Popular</p>
+          </div>
+        </a>
+        <a href="#" class="stream-card-small" title="Valorant">
+          <img src="7.png" alt="Valorant" />
+          <div class="info-small">
+            <h4>🎯 Valorant</h4>
+            <p>FPS Tático</p>
+            <p class="viewers">Esports</p>
+          </div>
+        </a>
+      </div>
+    </main>
+
+    <aside class="sidebar-right">
+      <!-- Conteúdo para a barra lateral direita (ex: ranking, estatísticas) -->
+      <h3>📊 Ranking</h3>
+      <ul>
+        <li>1. @TopStreamer1 - 1500 viewers</li>
+        <li>2. @TopStreamer2 - 1400 viewers</li>
+        <li>3. @TopStreamer3 - 1300 viewers</li>
+        <li>4. @TopStreamer4 - 1200 viewers</li>
+      </ul>
+    </aside>
   </div>
 
   <footer>
-    © 2025 OrisTV Under Developement  | Powered by BTC-X + Meta Rabbit
+    © 2025 OrisTV Under Development | Powered by BTC-X + Meta Rabbit
   </footer>
 
   <script>
