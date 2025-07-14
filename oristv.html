@@ -45,7 +45,7 @@
       left: 0;
       right: 0;
       z-index: 100;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
     }
 
     .header-buttons {
@@ -73,38 +73,52 @@
       background-color: var(--green);
       color: #000;
     }
+
     .btn-green:hover {
       background-color: #00cc00;
     }
+
     .btn-red {
       background-color: var(--red);
       color: #fff;
     }
+
     .btn-red:hover {
       background-color: #cc0022;
     }
+
     .btn-orange {
       background-color: var(--orange);
       color: #000;
     }
+
     .btn-orange:hover {
       background-color: darkorange;
     }
 
-    .sidebar-left,
-    .sidebar-right,
-    .sidebar-right-trigger {
-      display: none !important;
+    .container {
+      margin-top: 80px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
 
-    .main,
-    .category-bar {
-      margin: 0;
-      padding: 1rem;
-      width: 100%;
-      flex-wrap: wrap;
-      justify-content: center;
+    .scroll-row {
       display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 1rem;
+    }
+
+    .scroll-row::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .scroll-row::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
     }
 
     .stream-card-small {
@@ -112,9 +126,9 @@
       border: 1px solid #222;
       border-radius: 8px;
       overflow: hidden;
-      width: 100%;
-      max-width: 800px;
-      margin-bottom: 1rem;
+      width: 220px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
       box-shadow: 0 0 5px #0f02;
       cursor: pointer;
       transition: transform 0.3s ease, border-color 0.3s ease;
@@ -123,13 +137,13 @@
     }
 
     .stream-card-small:hover {
-      transform: scale(1.02);
+      transform: scale(1.05);
       border-color: var(--primary);
     }
 
     .stream-card-small img {
       width: 100%;
-      height: 300px;
+      height: 120px;
       object-fit: cover;
       display: block;
     }
@@ -140,22 +154,16 @@
 
     .info-small h4 {
       margin: 0;
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: var(--primary);
       font-weight: 700;
     }
 
     .info-small p {
       margin: 0.25rem 0 0;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       font-weight: 600;
-    }
-
-    .info-small p.viewers {
-      color: var(--green);
-      font-weight: 700;
-      margin-top: 0.3rem;
     }
 
     footer {
@@ -164,12 +172,15 @@
       background: #111;
       color: var(--primary);
       border-top: 1px solid #222;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
       font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar-left,
+      .sidebar-right {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -183,44 +194,44 @@
     </div>
   </header>
 
-  <div style="margin-top: 100px;">
-    <main class="main">
-      <a href="obs.html?channel=BlazeMaster" class="stream-card-small">
-        <img src="https://placehold.co/800x400/png?text=BlazeMaster" alt="BlazeMaster" />
+  <div class="container">
+    <div class="scroll-row">
+      <a href="#" class="stream-card-small">
+        <img src="https://placehold.co/600x400/png?text=Streamer+1" alt="Streamer" />
         <div class="info-small">
-          <h4>🔥 BlazeMaster</h4>
-          <p>Playing Elden Ring</p>
+          <h4>@BlazeMaster</h4>
+          <p>FPS Arena</p>
           <p class="viewers">1200 viewers</p>
         </div>
       </a>
-      <a href="obs.html?channel=NightWolf" class="stream-card-small">
-        <img src="https://placehold.co/800x400/png?text=NightWolf" alt="NightWolf" />
+      <a href="#" class="stream-card-small">
+        <img src="https://placehold.co/600x400/png?text=Streamer+2" alt="Streamer" />
         <div class="info-small">
-          <h4>🌟 NightWolf</h4>
-          <p>Call of Duty: Warzone</p>
+          <h4>@NightWolf</h4>
+          <p>Warzone</p>
           <p class="viewers">950 viewers</p>
         </div>
       </a>
-      <a href="obs.html?channel=CyberNova" class="stream-card-small">
-        <img src="https://placehold.co/800x400/png?text=CyberNova" alt="CyberNova" />
+      <a href="#" class="stream-card-small">
+        <img src="https://placehold.co/600x400/png?text=Streamer+3" alt="Streamer" />
         <div class="info-small">
-          <h4>⚡ CyberNova</h4>
-          <p>Valorant Ranked</p>
+          <h4>@CyberNova</h4>
+          <p>Valorant</p>
           <p class="viewers">670 viewers</p>
         </div>
       </a>
-      <a href="obs.html?channel=SharpShooter" class="stream-card-small">
-        <img src="https://placehold.co/800x400/png?text=SharpShooter" alt="SharpShooter" />
+      <a href="#" class="stream-card-small">
+        <img src="https://placehold.co/600x400/png?text=Streamer+4" alt="Streamer" />
         <div class="info-small">
-          <h4>🎯 SharpShooter</h4>
-          <p>Fortnite Battle Royale</p>
+          <h4>@SharpShooter</h4>
+          <p>Fortnite</p>
           <p class="viewers">830 viewers</p>
         </div>
       </a>
-    </main>
+    </div>
 
-    <section class="category-bar">
-      <a href="gta.html" class="stream-card-small">
+    <div class="scroll-row">
+      <a href="#" class="stream-card-small">
         <img src="1.png" alt="GTA V" />
         <div class="info-small">
           <h4>🚗 GTA V</h4>
@@ -228,7 +239,7 @@
           <p class="viewers">Trending</p>
         </div>
       </a>
-      <a href="lol.html" class="stream-card-small">
+      <a href="#" class="stream-card-small">
         <img src="8.png" alt="LoL" />
         <div class="info-small">
           <h4>🧙 LoL</h4>
@@ -236,7 +247,7 @@
           <p class="viewers">Popular</p>
         </div>
       </a>
-      <a href="valorant.html" class="stream-card-small">
+      <a href="#" class="stream-card-small">
         <img src="7.png" alt="Valorant" />
         <div class="info-small">
           <h4>🎯 Valorant</h4>
@@ -244,7 +255,7 @@
           <p class="viewers">Esports</p>
         </div>
       </a>
-      <a href="csgo.html" class="stream-card-small">
+      <a href="#" class="stream-card-small">
         <img src="4.png" alt="CSGO" />
         <div class="info-small">
           <h4>💣 CS:GO</h4>
@@ -252,11 +263,11 @@
           <p class="viewers">Clássico</p>
         </div>
       </a>
-    </section>
+    </div>
   </div>
 
   <footer>
-    © 2025 OrisTV | under development  Powered by BTC-X + Meta Rabbit
+    © 2025 OrisTV Under Development  | Powered by BTC-X + Meta Rabbit
   </footer>
 
   <script>
