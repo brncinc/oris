@@ -244,6 +244,21 @@
         margin-bottom: 1rem;
         border-radius: 12px;
       }
+      .follow-button {
+  background-color: var(--green);
+  color: var(--dark);
+  font-weight: bold;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.follow-button:hover {
+  background-color: #0c0;
+  color: #fff;
+}
+
     }
   </style>
 </head>
@@ -290,6 +305,7 @@
     <section class="player-container">
       <iframe id="streamFrame" src="" allowfullscreen></iframe>
       <div class="video-info" id="videoInfo">Transmissão ao vivo</div>
+      <button id="followBtn" class="follow-button">➕ Seguir</button>
     </section>
 
     <section class="chat-container">
@@ -344,7 +360,14 @@
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
+const followBtn = document.getElementById('followBtn');
+let isFollowing = false;
 
+followBtn.addEventListener('click', () => {
+  isFollowing = !isFollowing;
+  followBtn.textContent = isFollowing ? '✔ Seguindo' : '➕ Seguir';
+  followBtn.style.backgroundColor = isFollowing ? '#0c0' : 'var(--green)';
+}
   chatForm.addEventListener('submit', e => {
     e.preventDefault();
     const msg = chatInput.value.trim();
