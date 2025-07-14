@@ -22,7 +22,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: var(--dark);
+      background: var(--dark);
       color: var(--text);
       display: flex;
       flex-direction: column;
@@ -30,26 +30,20 @@
       overflow: hidden;
     }
     header {
-      background-color: var(--purple);
-      padding: 0.8rem 1rem;
+      background: var(--purple);
+      height: 50px;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       position: fixed;
       top: 0; left: 0; right: 0;
-      height: 50px;
       z-index: 100;
       box-shadow: 0 2px 5px rgba(0,0,0,0.6);
-    }
-    header img.logo {
-      height: 48px;
-      width: auto;
-      object-fit: contain;
     }
 
     .sidebar {
       width: 240px;
-      background-color: #111;
+      background: #111;
       border-right: 1px solid #222;
       padding: 1rem;
       position: fixed;
@@ -61,15 +55,7 @@
     .sidebar h3 {
       color: var(--primary);
       font-size: 1rem;
-      margin: 1.5rem 0 0.5rem;
-    }
-    .top-streamer {
-      background-color: #1a1a1a;
-      padding: 12px;
-      border-left: 4px solid var(--primary);
-      margin-bottom: 1rem;
-      color: var(--primary);
-      font-weight: bold;
+      margin-top: 1.5rem;
     }
     .sidebar ul {
       list-style: none;
@@ -77,112 +63,106 @@
       margin: 0;
     }
     .sidebar ul li {
-      padding: 8px 10px;
+      padding: 8px;
       border-radius: 6px;
       color: var(--text-muted);
       cursor: pointer;
-      transition: background 0.2s, color 0.2s;
+      transition: 0.2s;
     }
     .sidebar ul li:hover {
       background: #1a1a1a;
       color: var(--primary);
     }
+    .top-streamer {
+      background: #1a1a1a;
+      padding: 12px;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--primary);
+      font-weight: bold;
+      color: var(--primary);
+    }
 
     .content-wrapper {
-      margin-top: 50px;
-      margin-left: 240px;
+      margin: 50px 0 0 240px;
       height: calc(100vh - 50px);
       display: flex;
       flex-direction: column;
     }
+
     .title-bar {
-      padding: 1rem 1.5rem 0.5rem;
-      border-bottom: 1px solid #222;
+      background: var(--card);
+      padding: 1rem;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      background-color: var(--card);
+      border-bottom: 1px solid #222;
     }
     .title-bar h1 {
-      margin: 0;
-      font-size: 1.4rem;
-      font-weight: bold;
+      font-size: 1.3rem;
       color: var(--primary);
       flex-grow: 1;
+      margin: 0;
     }
     .profile {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       color: var(--text-muted);
-      font-weight: 600;
     }
     .profile img {
       width: 36px;
       height: 36px;
       border-radius: 50%;
       border: 2px solid var(--red);
-      object-fit: cover;
     }
 
     main {
       flex: 1;
       display: flex;
+      padding: 1rem;
       gap: 1rem;
-      padding: 1rem 1.5rem;
       overflow: hidden;
     }
-    .player-container {
-      flex: 3;
+    .player-container, .chat-container {
       background: var(--card);
       border-radius: 12px;
       display: flex;
       flex-direction: column;
     }
+    .player-container {
+      flex: 3;
+    }
     iframe {
+      flex: 1;
       width: 100%;
-      height: 100%;
-      border-radius: 12px 12px 0 0;
-      background: black;
       border: none;
-      flex-grow: 1;
+      background: black;
+      border-radius: 12px 12px 0 0;
     }
     .video-info {
       padding: 0.75rem 1rem;
-      font-weight: bold;
-      font-size: 1rem;
-      color: var(--primary);
-      background-color: #101010;
+      background: #101010;
       border-radius: 0 0 12px 12px;
-      user-select: none;
+      font-weight: bold;
+      color: var(--primary);
     }
 
     .chat-container {
       flex: 1;
-      background: var(--card);
-      border-radius: 12px;
       box-shadow: 0 0 15px var(--primary);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
     }
     .chat-header {
       padding: 0.75rem 1rem;
-      font-weight: bold;
-      font-size: 1rem;
       border-bottom: 1px solid #222;
       color: var(--primary);
-      user-select: none;
+      font-weight: bold;
       display: flex;
       justify-content: space-between;
-      align-items: center;
     }
     .chat-messages {
       flex: 1;
       padding: 1rem;
       overflow-y: auto;
       font-size: 0.9rem;
-      color: var(--text);
     }
     .chat-input {
       display: flex;
@@ -190,29 +170,28 @@
     }
     .chat-input input {
       flex: 1;
-      padding: 0.8rem 1rem;
-      border: none;
+      padding: 0.8rem;
       background: #222;
       color: var(--text);
-      font-size: 1rem;
+      border: none;
       border-radius: 0 0 0 12px;
     }
     .chat-input button {
       background: var(--primary);
-      border: none;
-      padding: 0 1.5rem;
-      cursor: pointer;
-      font-weight: bold;
-      border-radius: 0 0 12px 0;
       color: var(--dark);
-      transition: background-color 0.3s;
+      border: none;
+      padding: 0 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 0 0 12px 0;
     }
     .chat-input button:hover {
       background: #0c0;
-      color: #fff;
+      color: white;
     }
+
     .chat-messages::-webkit-scrollbar {
-      width: 8px;
+      width: 6px;
     }
     .chat-messages::-webkit-scrollbar-thumb {
       background: var(--primary);
@@ -223,37 +202,31 @@
       .sidebar {
         position: relative;
         width: 100%;
+        top: 50px;
         height: auto;
         border-right: none;
         border-bottom: 1px solid #222;
-        top: auto;
       }
       .content-wrapper {
-        margin-left: 0;
-        margin-top: 0;
-        height: auto;
+        margin: 0;
       }
       main {
         flex-direction: column;
         padding: 1rem;
-        height: auto;
       }
-      .player-container, .chat-container {
-        flex: none;
+      .player-container,
+      .chat-container {
         height: 300px;
-        margin-bottom: 1rem;
-        border-radius: 12px;
       }
     }
   </style>
 </head>
 <body>
-<header>
-</header>
+<header></header>
 
 <aside class="sidebar">
   <h3>🔍 Buscar Perfis</h3>
-  <input type="text" id="profileSearch" placeholder="Digite nome para buscar..." autocomplete="off" />
+  <input type="text" id="profileSearch" placeholder="Digite nome para buscar..." />
 
   <h3>👑 Featured</h3>
   <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
@@ -282,7 +255,7 @@
     <h1 id="liveTitle">Oris TV - Transmissão</h1>
     <div class="profile">
       <img id="profilePhoto" src="https://placehold.co/100x100" alt="Foto perfil" />
-      <div id="profileName">Convidado</div>
+      <span id="profileName">Convidado</span>
     </div>
   </div>
 
@@ -294,12 +267,11 @@
 
     <section class="chat-container">
       <div class="chat-header">
-        Chat
-        <span id="viewerCount">👁 128 espectadores</span>
+        Chat <span id="viewerCount">👁 128 espectadores</span>
       </div>
       <div class="chat-messages" id="chatMessages"></div>
       <form id="chatForm" class="chat-input">
-        <input type="text" id="chatInput" placeholder="Digite sua mensagem..." autocomplete="off" />
+        <input type="text" id="chatInput" placeholder="Digite sua mensagem..." />
         <button type="submit">➤</button>
       </form>
     </section>
@@ -312,68 +284,40 @@
   }
 
   function loadProfile() {
-    const savedProfile = localStorage.getItem('profile');
-
-    const profileNameElem = document.getElementById('profileName');
-    const profilePhotoElem = document.getElementById('profilePhoto');
-    const streamFrame = document.getElementById('streamFrame');
-    const videoInfo = document.getElementById('videoInfo');
-    const liveTitle = document.getElementById('liveTitle');
-
-    if (!savedProfile) {
-      profileNameElem.textContent = 'Convidado';
-      profilePhotoElem.src = 'https://placehold.co/100x100';
-      streamFrame.src = 'https://brncinc.github.io/oris/obs.html?channel=guest';
-      videoInfo.textContent = 'Transmissão de convidado';
-      liveTitle.textContent = 'Live - Convidado';
-      return;
-    }
-
-    try {
-      const profile = JSON.parse(savedProfile);
-      const name = profile.name || 'Convidado';
-      const slug = slugify(name);
-
-      profileNameElem.textContent = name;
-      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100';
-      streamFrame.src = `https://brncinc.github.io/oris/obs.html?channel=${slug}`;
-      videoInfo.textContent = `Transmissão de ${name}`;
-      liveTitle.textContent = `Live - ${name}`;
-    } catch {
-      profileNameElem.textContent = 'Convidado';
-      profilePhotoElem.src = 'https://placehold.co/100x100';
-      streamFrame.src = 'https://brncinc.github.io/oris/obs.html?channel=guest';
-      videoInfo.textContent = 'Transmissão de convidado';
-      liveTitle.textContent = 'Live - Convidado';
-    }
+    const profile = JSON.parse(localStorage.getItem('profile') || '{}');
+    const name = profile.name || 'Convidado';
+    const slug = slugify(name);
+    document.getElementById('profileName').textContent = name;
+    document.getElementById('profilePhoto').src = profile.photo || 'https://placehold.co/100x100';
+    document.getElementById('streamFrame').src = `https://brncinc.github.io/oris/obs.html?channel=${slug || 'guest'}`;
+    document.getElementById('videoInfo').textContent = `Transmissão de ${name}`;
+    document.getElementById('liveTitle').textContent = `Live - ${name}`;
   }
 
   loadProfile();
 
-  const chatMessages = document.getElementById('chatMessages');
   const chatForm = document.getElementById('chatForm');
+  const chatMessages = document.getElementById('chatMessages');
   const chatInput = document.getElementById('chatInput');
-
-  function addMessage(msg, isOwn = false) {
-    const div = document.createElement('div');
-    div.textContent = msg;
-    div.style.marginBottom = '0.5rem';
-    if (isOwn) div.style.color = 'var(--green)';
-    chatMessages.appendChild(div);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
 
   chatForm.addEventListener('submit', e => {
     e.preventDefault();
     const msg = chatInput.value.trim();
     if (!msg) return;
-    addMessage('Você: ' + msg, true);
+    addMessage(`Você: ${msg}`, true);
     chatInput.value = '';
     chatInput.focus();
-    setTimeout(() => {
-      addMessage('Outro usuário: ' + msg.split('').reverse().join(''));
-    }, 1000);
+    setTimeout(() => addMessage(`Outro usuário: ${msg.split('').reverse().join('')}`), 1000);
   });
+
+  function addMessage(msg, isOwn = false) {
+    const div = document.createElement('div');
+    div.textContent = msg;
+    div.style.marginBottom = '0.5rem';
+    div.style.color = isOwn ? 'var(--green)' : 'var(--text)';
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
 </script>
 </body>
 </html>
