@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Oris TV</title>
+  <title>Oris TV - Transmissão</title>
   <style>
     :root {
       --primary: #0f0;
@@ -12,6 +13,7 @@
       --card: #151515;
       --text: #fff;
       --text-muted: #aaa;
+      --purple: #6e00ff;
       --green: #00ff00;
       --red: #ff0033;
     }
@@ -21,236 +23,284 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: var(--dark);
+      background-color: var(--dark);
       color: var(--text);
       display: flex;
+      flex-direction: column;
       height: 100vh;
       overflow: hidden;
     }
-
     header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50px;
-      background-color: var(--dark);
+      background-color: var(--purple);
+      padding: 0.8rem 1rem;
       display: flex;
-      align-items: center;
       justify-content: center;
-      z-index: 10;
-      box-shadow: 0 2px 5px rgba(0, 255, 0, 0.2);
+      align-items: center;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 50px;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
     }
-
-    header img {
-      height: 40px;
+    header img.logo {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
     }
 
     .sidebar {
       width: 240px;
-      background: #111;
-      padding: 1rem;
-      padding-top: 70px;
+      background-color: #111;
       border-right: 1px solid #222;
+      padding: 1rem;
+      position: fixed;
+      top: 50px;
+      bottom: 0;
+      left: 0;
       overflow-y: auto;
     }
-
     .sidebar h3 {
       color: var(--primary);
       font-size: 1rem;
-      margin-top: 1.5rem;
+      margin: 1.5rem 0 0.5rem;
     }
-
+    .top-streamer {
+      background-color: #1a1a1a;
+      padding: 12px;
+      border-left: 4px solid var(--primary);
+      margin-bottom: 1rem;
+      color: var(--primary);
+      font-weight: bold;
+    }
     .sidebar ul {
       list-style: none;
       padding: 0;
+      margin: 0;
     }
-
     .sidebar ul li {
-      padding: 8px;
+      padding: 8px 10px;
       border-radius: 6px;
       color: var(--text-muted);
       cursor: pointer;
-      transition: 0.2s;
+      transition: background 0.2s, color 0.2s;
     }
-
     .sidebar ul li:hover {
       background: #1a1a1a;
       color: var(--primary);
     }
 
     .content-wrapper {
+      margin-top: 50px;
       margin-left: 240px;
-      padding-top: 50px;
+      height: calc(100vh - 50px);
       display: flex;
       flex-direction: column;
-      height: 100vh;
     }
-
     .title-bar {
-      background: var(--card);
-      padding: 1rem;
+      padding: 1rem 1.5rem 0.5rem;
+      border-bottom: 1px solid #222;
       display: flex;
       align-items: center;
-      border-bottom: 1px solid #222;
+      gap: 1rem;
+      background-color: var(--card);
     }
-
     .title-bar h1 {
-      font-size: 1.2rem;
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: bold;
       color: var(--primary);
       flex-grow: 1;
-      margin: 0;
     }
-
     .profile {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       color: var(--text-muted);
+      font-weight: 600;
     }
-
     .profile img {
       width: 36px;
       height: 36px;
       border-radius: 50%;
       border: 2px solid var(--red);
+      object-fit: cover;
     }
 
     main {
       flex: 1;
       display: flex;
       gap: 1rem;
-      padding: 1rem;
+      padding: 1rem 1.5rem;
       overflow: hidden;
     }
-
-    .player-container, .chat-container {
+    .player-container {
+      flex: 3;
       background: var(--card);
       border-radius: 12px;
       display: flex;
       flex-direction: column;
     }
-
-    .player-container {
-      flex: 3;
-    }
-
     iframe {
-      flex: 1;
       width: 100%;
-      border: none;
+      height: 100%;
+      border-radius: 12px 12px 0 0;
       background: black;
-      border-radius: 12px;
+      border: none;
+      flex-grow: 1;
+    }
+    .video-info {
+      padding: 0.75rem 1rem;
+      font-weight: bold;
+      font-size: 1rem;
+      color: var(--primary);
+      background-color: #101010;
+      border-radius: 0 0 12px 12px;
+      user-select: none;
     }
 
     .chat-container {
       flex: 1;
+      background: var(--card);
+      border-radius: 12px;
       box-shadow: 0 0 15px var(--primary);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
-
     .chat-header {
       padding: 0.75rem 1rem;
+      font-weight: bold;
+      font-size: 1rem;
       border-bottom: 1px solid #222;
       color: var(--primary);
-      font-weight: bold;
+      user-select: none;
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
-
     .chat-messages {
       flex: 1;
       padding: 1rem;
       overflow-y: auto;
       font-size: 0.9rem;
+      color: var(--text);
     }
-
     .chat-input {
       display: flex;
       border-top: 1px solid #222;
     }
-
     .chat-input input {
       flex: 1;
-      padding: 0.8rem;
+      padding: 0.8rem 1rem;
+      border: none;
       background: #222;
       color: var(--text);
-      border: none;
+      font-size: 1rem;
       border-radius: 0 0 0 12px;
     }
-
     .chat-input button {
       background: var(--primary);
-      color: var(--dark);
       border: none;
-      padding: 0 1.2rem;
-      font-weight: bold;
+      padding: 0 1.5rem;
       cursor: pointer;
+      font-weight: bold;
       border-radius: 0 0 12px 0;
+      color: var(--dark);
+      transition: background-color 0.3s;
     }
-
     .chat-input button:hover {
       background: #0c0;
-      color: white;
+      color: #fff;
+    }
+    .chat-messages::-webkit-scrollbar {
+      width: 8px;
+    }
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
     }
 
     @media (max-width: 900px) {
       .sidebar {
-        display: none;
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #222;
+        top: auto;
       }
-
       .content-wrapper {
         margin-left: 0;
+        margin-top: 0;
+        height: auto;
       }
-
       main {
         flex-direction: column;
+        padding: 1rem;
+        height: auto;
       }
-
-      .player-container,
-      .chat-container {
+      .player-container, .chat-container {
+        flex: none;
         height: 300px;
+        margin-bottom: 1rem;
+        border-radius: 12px;
       }
     }
   </style>
 </head>
 <body>
-
 <header>
-  <img src="logo.ico" alt="Oris TV" />
 </header>
 
 <aside class="sidebar">
-  <h3>📺 Canais</h3>
+  <h3>🔍 Buscar Perfis</h3>
+  <input type="text" id="profileSearch" placeholder="Digite nome para buscar..." autocomplete="off" />
+
+  <h3>👑 Featured</h3>
+  <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
+
+  <h3>📺 Live Channels</h3>
   <ul>
-    <li>🎮 GameZone</li>
-    <li>💻 DevArena</li>
-    <li>🎨 PixelBrush</li>
-    <li>📚 OrisAcademy</li>
-    <li>🕹️ RetroWave</li>
+    <li>🎮 @GameZone</li>
+    <li>💻 @DevArena</li>
+    <li>🎨 @PixelBrush</li>
+    <li>📚 @OrisAcademy</li>
+    <li>🕹️ @RetroWave</li>
+  </ul>
+
+  <h3>🎓 Courses</h3>
+  <ul>
+    <li>🎮 Games</li>
+    <li>💻 Development</li>
+    <li>🎨 Design</li>
+    <li>💰 Finance</li>
+    <li>🪙 Crypto</li>
   </ul>
 </aside>
 
 <div class="content-wrapper">
   <div class="title-bar">
-    <h1>Transmissão</h1>
+    <h1 id="liveTitle">Oris TV - Transmissão</h1>
     <div class="profile">
       <img id="profilePhoto" src="https://placehold.co/100x100" alt="Foto perfil" />
-      <span id="profileName">Convidado</span>
+      <div id="profileName">Convidado</div>
     </div>
   </div>
 
   <main>
     <section class="player-container">
       <iframe id="streamFrame" src="" allowfullscreen></iframe>
+      <div class="video-info" id="videoInfo">Transmissão ao vivo</div>
     </section>
 
     <section class="chat-container">
       <div class="chat-header">
-        Chat <span id="viewerCount">👁 128 espectadores</span>
+        Chat
+        <span id="viewerCount">👁 128 espectadores</span>
       </div>
       <div class="chat-messages" id="chatMessages"></div>
       <form id="chatForm" class="chat-input">
-        <input type="text" id="chatInput" placeholder="Digite sua mensagem..." />
+        <input type="text" id="chatInput" placeholder="Digite sua mensagem..." autocomplete="off" />
         <button type="submit">➤</button>
       </form>
     </section>
@@ -263,39 +313,68 @@
   }
 
   function loadProfile() {
-    const profile = JSON.parse(localStorage.getItem('profile') || '{}');
-    const name = profile.name || 'Convidado';
-    const slug = slugify(name);
-    document.getElementById('profileName').textContent = name;
-    document.getElementById('profilePhoto').src = profile.photo || 'https://placehold.co/100x100';
-    document.getElementById('streamFrame').src = `https://brncinc.github.io/oris/obs.html?channel=${slug || 'guest'}`;
+    const savedProfile = localStorage.getItem('profile');
+
+    const profileNameElem = document.getElementById('profileName');
+    const profilePhotoElem = document.getElementById('profilePhoto');
+    const streamFrame = document.getElementById('streamFrame');
+    const videoInfo = document.getElementById('videoInfo');
+    const liveTitle = document.getElementById('liveTitle');
+
+    if (!savedProfile) {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100';
+      streamFrame.src = 'https://brncinc.github.io/oris/obs.html?channel=guest';
+      videoInfo.textContent = 'Transmissão de convidado';
+      liveTitle.textContent = 'Live - Convidado';
+      return;
+    }
+
+    try {
+      const profile = JSON.parse(savedProfile);
+      const name = profile.name || 'Convidado';
+      const slug = slugify(name);
+
+      profileNameElem.textContent = name;
+      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100';
+      streamFrame.src = `https://brncinc.github.io/oris/obs.html?channel=${slug}`;
+      videoInfo.textContent = `Transmissão de ${name}`;
+      liveTitle.textContent = `Live - ${name}`;
+    } catch {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100';
+      streamFrame.src = 'https://brncinc.github.io/oris/obs.html?channel=guest';
+      videoInfo.textContent = 'Transmissão de convidado';
+      liveTitle.textContent = 'Live - Convidado';
+    }
   }
 
   loadProfile();
 
-  const chatForm = document.getElementById('chatForm');
   const chatMessages = document.getElementById('chatMessages');
+  const chatForm = document.getElementById('chatForm');
   const chatInput = document.getElementById('chatInput');
-
-  chatForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const msg = chatInput.value.trim();
-    if (!msg) return;
-    addMessage(`Você: ${msg}`, true);
-    chatInput.value = '';
-    chatInput.focus();
-    setTimeout(() => addMessage(`Outro usuário: ${msg.split('').reverse().join('')}`), 1000);
-  });
 
   function addMessage(msg, isOwn = false) {
     const div = document.createElement('div');
     div.textContent = msg;
     div.style.marginBottom = '0.5rem';
-    div.style.color = isOwn ? 'var(--green)' : 'var(--text)';
+    if (isOwn) div.style.color = 'var(--green)';
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
-</script>
 
+  chatForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+    addMessage('Você: ' + msg, true);
+    chatInput.value = '';
+    chatInput.focus();
+    setTimeout(() => {
+      addMessage('Outro usuário: ' + msg.split('').reverse().join(''));
+    }, 1000);
+  });
+</script>
 </body>
 </html>
