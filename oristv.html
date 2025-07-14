@@ -6,423 +6,601 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OrisTV - Live Powered by BTC-X</title>
 <style>
-  :root {
-    --primary: #0f0;
-    --dark: #0a0a0a;
-    --card: #151515;
-    --text: #fff;
-    --text-muted: #aaa;
-    --purple: #6e00ff;
-    --green: #00ff00;
-    --red: #ff0033;
-    --orange: orange;
-  }
+ :root {
+  --primary: #0f0;
+  --dark: #0a0a0a;
+  --card: #151515;
+  --text: #fff;
+  --text-muted: #aaa;
+  --purple: #6e00ff;
+  --green: #00ff00;
+  --red: #ff0033;
+  --orange: orange;
+  --gray-dark: #2f2f2f; /* para a barra de busca */
+  --black: #000;
+}
 
-  * {
-    box-sizing: border-box;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: var(--dark);
-    color: var(--text);
-    overflow-x: hidden;
-  }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--dark);
+  color: var(--text);
+  overflow-x: hidden;
+}
 
-  header {
-    background-color: var(--purple);
-    padding: 1rem 2rem;
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
-  }
+header {
+  background-color: var(--purple);
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+  gap: 1rem;
+}
 
-  .header-buttons {
-    display: flex;
-    gap: 1rem;
-  }
+/* Logo */
+header img {
+  height: 52px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
 
-  .header-buttons button,
-  .header-buttons a {
-    padding: 0.5rem 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: 0.2s;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px;
-  }
+/* Container para o lado esquerdo: logo + busca */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-grow: 1;
+  min-width: 0;
+}
 
-  .btn-green {
-    background-color: var(--green);
-    color: #000;
-  }
+/* Barra de busca */
+.search-bar {
+  background-color: var(--gray-dark);
+  border-radius: 6px;
+  padding: 0 0.75rem;
+  display: flex;
+  align-items: center;
+  max-width: 320px;
+  width: 100%;
+  height: 36px;
+  flex-shrink: 1;
+}
 
-  .btn-green:hover {
-    background-color: #00cc00;
-  }
+.search-bar input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 1rem;
+  width: 100%;
+  padding: 6px 0;
+}
 
-  .btn-red {
-    background-color: var(--red);
-    color: #fff;
-  }
+.search-bar input::placeholder {
+  color: var(--text-muted);
+}
 
-  .btn-red:hover {
-    background-color: #cc0022;
-  }
+/* Botão de notificação */
+.notification-btn {
+  background: var(--gray-dark);
+  border: none;
+  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+}
 
-  .btn-orange {
-    background-color: var(--orange);
-    color: #000;
-  }
+.notification-btn:hover {
+  background: #444;
+}
 
-  .btn-orange:hover {
-    background-color: darkorange;
-  }
+/* Ícone sino preto (SVG) */
+.notification-btn svg {
+  fill: var(--black);
+  width: 20px;
+  height: 20px;
+}
 
-  /* Container geral - para alinhar sidebars e main */
+/* Container dos botões à direita */
+.header-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.header-buttons button,
+.header-buttons a {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+}
+
+.btn-green {
+  background-color: var(--green);
+  color: #000;
+}
+
+.btn-green:hover {
+  background-color: #00cc00;
+}
+
+.btn-red {
+  background-color: var(--red);
+  color: #fff;
+}
+
+.btn-red:hover {
+  background-color: #cc0022;
+}
+
+.btn-orange {
+  background-color: var(--orange);
+  color: #000;
+}
+
+.btn-orange:hover {
+  background-color: darkorange;
+}
+
+/* Container com empilhamento vertical */
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 80px;
+  padding-bottom: 40px;
+  width: 100%;
+}
+
+/* Sidebar esquerda fixa */
+.sidebar-left {
+  width: 200px;
+  background-color: #111;
+  border-right: 1px solid #222;
+  padding: 1rem;
+  overflow-y: auto;
+  position: fixed;
+  top: 80px;
+  bottom: 40px;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.sidebar-left h3 {
+  color: var(--primary);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.sidebar-left ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-left ul li {
+  padding: 8px 6px;
+  border-radius: 5px;
+  cursor: default;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-left ul li:hover {
+  background-color: #1a1a1a;
+  color: var(--primary);
+}
+
+/* Main vídeos */
+.main {
+  margin-left: 200px;
+  padding: 1rem 1rem 0 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Categoria cards abaixo do main */
+.category-bar {
+  margin-left: 200px;
+  padding: 1rem 1rem 2rem 1rem;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.stream-card-small {
+  background: var(--card);
+  border: 1px solid #222;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 180px;
+  flex-shrink: 0;
+  box-shadow: 0 0 5px #0f02;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.stream-card-small:hover {
+  transform: scale(1.05);
+  border-color: var(--primary);
+}
+
+.stream-card-small img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+}
+
+.info-small {
+  padding: 0.5rem 0.7rem;
+}
+
+.info-small h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--primary);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-small p {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.info-small p.viewers {
+  color: var(--green);
+  font-weight: 700;
+  margin-top: 0.3rem;
+}
+
+/* Sidebar direita fixa */
+.sidebar-right {
+  width: 220px;
+  background-color: #111;
+  border-left: 1px solid #222;
+  padding: 1rem;
+  overflow-y: auto;
+  position: fixed;
+  top: 80px;
+  bottom: 40px;
+  right: 0;
+  color: var(--text-muted);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-right-trigger {
+  position: fixed;
+  top: 80px;
+  bottom: 40px;
+  right: 0;
+  width: 12px;
+  cursor: pointer;
+  z-index: 60;
+  background: transparent;
+}
+
+.sidebar-right-trigger:hover + .sidebar-right,
+.sidebar-right:hover {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar-right h3 {
+  color: var(--primary);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.ranking-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ranking-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: default;
+  color: var(--text-muted);
+  transition: background 0.2s ease;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.ranking-list li:hover {
+  background-color: #1a1a1a;
+  color: var(--primary);
+}
+
+.ranking-list .username {
+  flex-grow: 1;
+}
+
+.ranking-list .flag {
+  width: 28px;
+  height: 18px;
+  border-radius: 2px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid #222;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #111;
+  color: var(--primary);
+  border-top: 1px solid #222;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  font-size: 0.9rem;
+}
+
+.sidebar-left::-webkit-scrollbar,
+.sidebar-right::-webkit-scrollbar,
+.main::-webkit-scrollbar,
+.category-bar::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.sidebar-left::-webkit-scrollbar-thumb,
+.sidebar-right::-webkit-scrollbar-thumb,
+.main::-webkit-scrollbar-thumb,
+.category-bar::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+@media (max-width: 900px) {
   .container {
-    display: flex;
-    margin-top: 80px;
-    height: calc(100vh - 80px);
+    flex-direction: column;
   }
 
-  /* Sidebars fixas */
   .sidebar-left,
   .sidebar-right {
-    width: 220px;
-    background-color: #111;
-    border: 1px solid #222;
-    padding: 1rem;
-    overflow-y: auto;
-    position: fixed;
-    top: 80px;
-    bottom: 0;
-    color: var(--text-muted);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary) #222;
-  }
-
-  .sidebar-left {
-    left: 0;
-  }
-
-  .sidebar-right {
-    right: 0;
-  }
-
-  /* Conteúdo principal entre as sidebars */
-  .main-content {
-    margin-left: 240px;
-    margin-right: 240px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    overflow-y: auto;
-    padding-bottom: 1rem;
-  }
-
-  /* Barras de scroll horizontal para cards */
-  .scroll-row {
-    display: flex;
-    overflow-x: auto;
-    gap: 1rem;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 8px;
-  }
-
-  .scroll-row::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  .scroll-row::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 4px;
-  }
-
-  /* Cards de stream */
-  .stream-card-small {
-    background: var(--card);
-    border: 1px solid #222;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 220px;
-    flex-shrink: 0;
-    scroll-snap-align: start;
-    box-shadow: 0 0 5px #0f02;
-    cursor: pointer;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    color: var(--text);
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .stream-card-small:hover {
-    transform: scale(1.05);
-    border-color: var(--primary);
-  }
-
-  .stream-card-small img {
+    position: relative;
     width: 100%;
-    height: 120px;
-    object-fit: cover;
-    display: block;
-    flex-shrink: 0;
-  }
-
-  .info-small {
-    padding: 0.5rem 0.7rem;
-    flex-grow: 1;
-  }
-
-  .info-small h4 {
-    margin: 0;
-    font-size: 1rem;
-    color: var(--primary);
-    font-weight: 700;
-  }
-
-  .info-small p {
-    margin: 0.25rem 0 0;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    font-weight: 600;
-  }
-
-  #profileSearch {
-    padding: 0.5rem;
-    border-radius: 6px;
+    height: auto;
     border: none;
-    font-size: 1rem;
-    background-color: #222;
-    color: var(--text);
-    outline: none;
-    border: 1px solid #444;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 
-  /* Listas da sidebar */
-  aside.sidebar-left ul {
-    list-style: none;
-    margin: 0;
-    padding-left: 1rem; /* para indentação dos subitens */
-  }
-
-  aside.sidebar-left ul ul {
-    padding-left: 1.5rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-  }
-
-  /* Ajuste para título ficar acima da lista e com espaçamento */
-  .list-section-title {
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 0.5rem;
-    cursor: default;
-  }
-
-  aside.sidebar-left ul > li {
-    padding: 0;
-  }
-
-  aside.sidebar-left ul > li > ul {
-    padding-left: 1.5rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-  }
-
-  aside.sidebar-left ul li {
-    padding: 6px 4px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--text-muted);
-    transition: background 0.2s ease, color 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  aside.sidebar-left ul li:hover {
-    background-color: #1a1a1a;
-    color: var(--primary);
-  }
-
-  /* Footer fixo no fim da página */
-  footer {
-    text-align: center;
+  .main,
+  .category-bar {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
     padding: 1rem;
-    background: #111;
-    color: var(--primary);
-    border-top: 1px solid #222;
-    font-size: 0.9rem;
-    margin-top: 1rem;
+    overflow-x: auto;
   }
-
-  /* Ajustes responsivos */
-  @media (max-width: 900px) {
-    .sidebar-left,
-    .sidebar-right {
-      display: none;
-    }
-
-    .main-content {
-      margin: 0;
-    }
-  }
+}
 </style>
 
 </head>
 <body>
-  <header>
-    <img src="z.png" alt="Logo OrisTV" style="height: 52px; margin-right: 12px;">
-    <div class="header-buttons">
-      <button class="btn-red" onclick="startStreaming()">🔴 Go Live</button>
-      <a href="https://github.com/login/oauth/authorize?client_id=Iv23liPBo37qNrfX2DgK&redirect_uri=https://brncinc.github.io/oris/oristvp.html&scope=read:user user:email" class="btn-orange">Login</a>
-      <a href="rabbit.html" class="btn-green">Get Key</a>
+
+<header>
+  <div class="header-left">
+    <img src="z.png" alt="Logo OrisTV" />
+    <div class="search-bar">
+      <input type="search" placeholder="Pesquisar..." aria-label="Pesquisar" />
     </div>
-  </header>
-
-<aside class="sidebar-left">
-  <section aria-label="Buscar Perfis e Categorias">
-    <h3>🔍 Buscar Perfis</h3>
-    <input type="text" id="profileSearch" placeholder="Digite nome para buscar..." autocomplete="off" />
-
-    <ul class="sidebar-list">
-      <li>
-        <h4 class="list-section-title">👑 Featured</h4>
-        <!-- Caso tenha itens nessa categoria, coloque aqui -->
-      </li>
-
-      <li>
-        <h4 class="list-section-title">📺 Live Channels</h4>
-        <ul>
-          <li>🎮 @GameZone</li>
-          <li>💻 @DevArena</li>
-          <li>🎨 @PixelBrush</li>
-          <li>📚 @OrisAcademy</li>
-          <li>🕹️ @RetroWave</li>
-        </ul>
-      </li>
-
-      <li>
-        <h4 class="list-section-title">🎓 Courses</h4>
-        <ul>
-          <li>🎮 Games</li>
-          <li>💻 Development</li>
-          <li>🎨 Design</li>
-          <li>💰 Finance</li>
-          <li>🪙 Crypto</li>
-        </ul>
-      </li>
-    </ul>
-  </section>
-</aside>
-
-
-    <main class="main-content" tabindex="0" aria-label="Main content area">
-      <div class="scroll-row" aria-label="Streamers">
-        <a href="#" class="stream-card-small" title="@BlazeMaster Live">
-          <img src="https://placehold.co/600x400/png?text=Streamer+1" alt="@BlazeMaster" />
-          <div class="info-small">
-            <h4>@BlazeMaster</h4>
-            <p>FPS Arena</p>
-            <p class="viewers">1200 viewers</p>
-          </div>
-        </a>
-        <a href="#" class="stream-card-small" title="@NightWolf Live">
-          <img src="https://placehold.co/600x400/png?text=Streamer+2" alt="@NightWolf" />
-          <div class="info-small">
-            <h4>@NightWolf</h4>
-            <p>Warzone</p>
-            <p class="viewers">950 viewers</p>
-          </div>
-        </a>
-        <a href="#" class="stream-card-small" title="@CyberNova Live">
-          <img src="https://placehold.co/600x400/png?text=Streamer+3" alt="@CyberNova" />
-          <div class="info-small">
-            <h4>@CyberNova</h4>
-            <p>Valorant</p>
-            <p class="viewers">670 viewers</p>
-          </div>
-        </a>
-      </div>
-
-      <div class="scroll-row" aria-label="Game Categories">
-        <a href="#" class="stream-card-small" title="GTA V">
-          <img src="1.png" alt="GTA V" />
-          <div class="info-small">
-            <h4>🚗 GTA V</h4>
-            <p>Ação & Roleplay</p>
-            <p class="viewers">Trending</p>
-          </div>
-        </a>
-        <a href="#" class="stream-card-small" title="League of Legends">
-          <img src="8.png" alt="LoL" />
-          <div class="info-small">
-            <h4>🧙 LoL</h4>
-            <p>MOBA Strategy</p>
-            <p class="viewers">Popular</p>
-          </div>
-        </a>
-        <a href="#" class="stream-card-small" title="Valorant">
-          <img src="7.png" alt="Valorant" />
-          <div class="info-small">
-            <h4>🎯 Valorant</h4>
-            <p>FPS Tático</p>
-            <p class="viewers">Esports</p>
-          </div>
-        </a>
-      </div>
-    </main>
-
-    <aside class="sidebar-right">
-      <h3>📊 Ranking</h3>
-      <ul>
-        <li>1. @TopStreamer1 - 1500 viewers</li>
-        <li>2. @TopStreamer2 - 1400 viewers</li>
-        <li>3. @TopStreamer3 - 1300 viewers</li>
-        <li>4. @TopStreamer4 - 1200 viewers</li>
-      </ul>
-    </aside>
   </div>
 
-  <footer>
-    © 2025 OrisTV Under Development | Powered by BTC-X + Meta Rabbit
-  </footer>
+  <button class="notification-btn" title="Notificações" aria-label="Notificações">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" >
+      <path d="M12 24c1.104 0 2-.897 2-2h-4c0 1.103.896 2 2 2zm6.707-6.293l-1.414-1.414V10c0-3.07-1.64-5.64-4.293-6.32V3a1 1 0 10-2 0v.68C6.647 4.36 5 6.93 5 10v6.293l-1.414 1.414A1 1 0 005 19h14a1 1 0 00.707-1.707z" />
+    </svg>
+  </button>
 
-  <script>
-    function startStreaming() {
-      const existingKey = localStorage.getItem("oris_stream_key");
-      if (!existingKey) {
-        if (confirm("Generate your key via Meta Rabbit?")) {
-          window.location.href = "rabbit.html";
-        }
-        return;
+  <div class="header-buttons">
+    <button class="btn-red" onclick="startStreaming()">🔴 Go Live</button>
+    <a href="https://github.com/login/oauth/authorize?client_id=Iv23liPBo37qNrfX2DgK&redirect_uri=https://brncinc.github.io/oris/oristvp.html&scope=read:user user:email" class="btn-orange">Login</a>
+    <a href="rabbit.html" class="btn-green">Get Key</a>
+  </div>
+</header>
+
+<div class="container">
+  <aside class="sidebar-left">
+    <h3>🏷️ Códigos Jans #1 a #5</h3>
+    <ul>
+      <li>#1 - Jans Alpha</li>
+      <li>#2 - Jans Beta</li>
+      <li>#3 - Jans Gamma</li>
+      <li>#4 - Jans Delta</li>
+      <li>#5 - Jans Epsilon</li>
+    </ul>
+    <hr style="border-color: #222; margin: 1rem 0;" />
+    <h3>👑 Featured</h3>
+    <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
+
+    <h3>📺 Live Channels</h3>
+    <ul>
+      <li>🎮 @GameZone</li>
+      <li>💻 @DevArena</li>
+      <li>🎨 @PixelBrush</li>
+      <li>📚 @OrisAcademy</li>
+      <li>🕹️ @RetroWave</li>
+    </ul>
+  </aside>
+<div class="horizontal-scroll-container">
+  <main class="main">
+    <!-- seus cards de stream pequenos -->
+    <a href="obs.html?channel=BlazeMaster" class="stream-card-small" title="BlazeMaster Live">
+      <img src="https://placehold.co/600x400/png?text=BlazeMaster" alt="BlazeMaster Live" />
+      <div class="info-small">
+        <h4>🔥 BlazeMaster</h4>
+        <p>Playing Elden Ring</p>
+        <p class="viewers">1200 viewers</p>
+      </div>
+    </a>
+    <!-- demais cards aqui -->
+    <a href="obs.html?channel=NightWolf" class="stream-card-small" title="NightWolf Live">
+      <img src="https://placehold.co/600x400/png?text=NightWolf" alt="NightWolf Live" />
+      <div class="info-small">
+        <h4>🌟 NightWolf</h4>
+        <p>Call of Duty: Warzone</p>
+        <p class="viewers">950 viewers</p>
+      </div>
+    </a>
+    <a href="obs.html?channel=CyberNova" class="stream-card-small" title="CyberNova Live">
+      <img src="https://placehold.co/600x400/png?text=CyberNova" alt="CyberNova Live" />
+      <div class="info-small">
+        <h4>⚡ CyberNova</h4>
+        <p>Valorant Ranked</p>
+        <p class="viewers">670 viewers</p>
+      </div>
+    </a>
+    <a href="obs.html?channel=SharpShooter" class="stream-card-small" title="SharpShooter Live">
+      <img src="https://placehold.co/600x400/png?text=SharpShooter" alt="SharpShooter Live" />
+      <div class="info-small">
+        <h4>🎯 SharpShooter</h4>
+        <p>Fortnite Battle Royale</p>
+        <p class="viewers">830 viewers</p>
+      </div>
+    </a>
+  </main>
+
+  <section class="category-bar">
+    <!-- cards da categoria -->
+    <a href="gta.html" class="stream-card-small" title="GTA V">
+      <img src="1.png" alt="GTA V" />
+      <div class="info-small">
+        <h4>🚗 GTA V</h4>
+        <p>Ação & Roleplay</p>
+        <p class="viewers">Trending</p>
+      </div>
+    </a>
+    <!-- demais cards aqui -->
+    <a href="lol.html" class="stream-card-small" title="League of Legends">
+      <img src="8.png" alt="LoL" />
+      <div class="info-small">
+        <h4>🧙 LoL</h4>
+        <p>MOBA Strategy</p>
+        <p class="viewers">Popular</p>
+      </div>
+    </a>
+    <a href="valorant.html" class="stream-card-small" title="Valorant">
+      <img src="7.png" alt="Valorant" />
+      <div class="info-small">
+        <h4>🎯 Valorant</h4>
+        <p>FPS Tático</p>
+        <p class="viewers">Esports</p>
+      </div>
+    </a>
+    <a href="csgo.html" class="stream-card-small" title="CS:GO">
+      <img src="4.png" alt="CSGO" />
+      <div class="info-small">
+        <h4>💣 CS:GO</h4>
+        <p>Competitivo</p>
+        <p class="viewers">Clássico</p>
+      </div>
+    </a>
+    <a href="codejam.html" class="stream-card-small" title="Code Jam">
+      <img src="6.png" alt="Code Jam" />
+      <div class="info-small">
+        <h4>👨‍💻 Code Jam</h4>
+        <p>Desafios Tech</p>
+        <p class="viewers">Dev Zone</p>
+      </div>
+    </a>
+    <a href="chat.html" class="stream-card-small" title="Just Chatting">
+      <img src="5.png" alt="Just Chatting" />
+      <div class="info-small">
+        <h4>💬 Chatting</h4>
+        <p>Conversa Livre</p>
+        <p class="viewers">Live Talk</p>
+      </div>
+    </a>
+  </section>
+</div>
+
+<!-- Faixa invisível para ativar hover -->
+<div class="sidebar-right-trigger"></div>
+
+<aside class="sidebar-right">
+  <h3>🏅 Ranking da Comunidade</h3>
+  <ul class="ranking-list">
+    <li><span class="username">@FPSMaster</span><img class="flag" src="https://flagcdn.com/br.svg" /></li>
+    <li><span class="username">@NightWolf</span><img class="flag" src="https://flagcdn.com/us.svg" /></li>
+    <li><span class="username">@BlazeMaster</span><img class="flag" src="https://flagcdn.com/jp.svg" /></li>
+    <li><span class="username">@CyberNova</span><img class="flag" src="https://flagcdn.com/ca.svg" /></li>
+    <li><span class="username">@SharpShooter</span><img class="flag" src="https://flagcdn.com/de.svg" /></li>
+  </ul>
+</aside>
+
+</div>
+
+<footer>
+  © 2025 OrisTV | Powered by BTC-X + Meta Rabbit
+</footer>
+
+<script>
+  function startStreaming() {
+    const existingKey = localStorage.getItem("oris_stream_key");
+    if (!existingKey) {
+      if (confirm("Generate your key via Meta Rabbit?")) {
+        window.location.href = "rabbit.html";
       }
-      alert("🔗 Streaming key: " + existingKey);
+      return;
     }
-  </script>
+    alert("🔗 Streaming key: " + existingKey);
+  }
+</script>
+
 </body>
 </html>
