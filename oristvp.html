@@ -189,6 +189,7 @@
       font-family: monospace;
       font-size: 0.9rem;
       user-select: all;
+      flex: 1;
     }
 
     .social-pane {
@@ -223,6 +224,29 @@
       color: var(--muted);
       font-weight: bold;
       margin-left: 0.5rem;
+      white-space: nowrap;
+    }
+
+    /* Container flex para URL + botão copiar */
+    .stream-url-container {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: -0.8rem;
+    }
+
+    .btn-copy {
+      background: var(--purple);
+      color: white;
+      padding: 0.6rem 0.9rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+    .btn-copy:hover {
+      background: var(--purple-dark);
     }
   </style>
 </head>
@@ -258,7 +282,10 @@
         <textarea id="bio" name="bio" placeholder="Fale sobre você..."></textarea>
 
         <label for="streamUrl">URL da Transmissão</label>
-        <input type="text" id="streamUrl" class="stream-url" readonly />
+        <div class="stream-url-container">
+          <input type="text" id="streamUrl" class="stream-url" readonly placeholder="https://brncinc.github.io/oris/obs.html?channel=usuario" />
+          <button type="button" class="btn-copy" id="btnCopyUrl" title="Copiar URL">📋</button>
+        </div>
       </form>
 
       <div class="social-pane" aria-label="Redes sociais">
@@ -282,6 +309,7 @@
 
     const btnGenerateUrl = document.getElementById('btnGenerateUrl');
     const btnSaveProfile = document.getElementById('btnSaveProfile');
+    const btnCopyUrl = document.getElementById('btnCopyUrl');
 
     const linkDiscord = document.getElementById('linkDiscord');
     const linkTwitter = document.getElementById('linkTwitter');
@@ -295,18 +323,19 @@
     function updatePreview() {
       const username = usernameInput.value.trim().toLowerCase().replace(/\s+/g, '');
       displayUsername.textContent = username || 'seu_usuario';
+      streamUrl.placeholder = username ? generateStreamUrl(username) : 'https://brncinc.github.io/oris/obs.html?channel=usuario';
       streamUrl.value = username ? generateStreamUrl(username) : '';
       avatarImg.src = photo.value || 'https://placehold.co/100x100/png?text=Foto';
       updateFollowUI(username);
     }
 
     function updateFollowUI(username) {
-      const followers = JSON.parse(localStorage.getItem("followersData") || "{}");
-      const isFollowing = followers[username] || false;
-      btnFollow.textContent = isFollowing ? "✔ Seguindo" : "➕ Seguir";
-      btnFollow.style.backgroundColor = isFollowing ? "#40c013" : "var(--green)";
-      const total = Object.values(followers).filter(f => f).length;
-      followersCount.textContent = `👥 ${total} seguidores`;
+      const data = JSON.parse(localStorage.getItem("followersData") || "{}");
+      const userData = data[username] || { following: false, count: 0 };
+
+      btnFollow.textContent = userData.following ? "✔ Seguindo" : "➕ Seguir";
+      btnFollow.style.backgroundColor = userData.following ? "#40c013" : "var(--green)";
+      followersCount.textContent = `👥 ${userData.count} seguidores`;
     }
 
     btnFollow.addEventListener("click", () => {
@@ -315,9 +344,22 @@
         alert("Insira o nome de usuário antes de seguir.");
         return;
       }
-      const followers = JSON.parse(localStorage.getItem("followersData") || "{}");
-      followers[username] = !followers[username];
-      localStorage.setItem("followersData", JSON.stringify(followers));
+
+      let data = JSON.parse(localStorage.getItem("followersData") || "{}");
+
+      if (!data[username]) {
+        data[username] = { count: 0, following: false };
+      }
+
+      if (data[username].following) {
+        data[username].count = Math.max(0, data[username].count - 1);
+        data[username].following = false;
+      } else {
+        data[username].count += 1;
+        data[username].following = true;
+      }
+
+      localStorage.setItem("followersData", JSON.stringify(data));
       updateFollowUI(username);
     });
 
@@ -344,6 +386,15 @@
       localStorage.setItem('profileData', JSON.stringify(data));
       alert('Perfil salvo com sucesso!');
       updatePreview();
+    });
+
+    btnCopyUrl.addEventListener('click', () => {
+      const url = streamUrl.value.trim();
+      if (!url) return alert("Nenhuma URL gerada ainda!");
+      navigator.clipboard.writeText(url).then(() => {
+        btnCopyUrl.textContent = '✅';
+        setTimeout(() => (btnCopyUrl.textContent = '📋'), 1500);
+      });
     });
 
     usernameInput.addEventListener('input', updatePreview);
