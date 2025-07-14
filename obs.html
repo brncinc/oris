@@ -245,49 +245,41 @@
         border-radius: 12px;
       }
       .follow-button {
-  background-color: var(--green);
-  color: var(--dark);
-  font-weight: bold;
-  border: none;
-  padding: 0.4rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.follow-button:hover {
-  background-color: #0c0;
-  color: #fff;
-}
-
+        background-color: var(--green);
+        color: var(--dark);
+        font-weight: bold;
+        border: none;
+        padding: 0.4rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .follow-button:hover {
+        background-color: #0c0;
+        color: #fff;
+      }
     }
   </style>
 </head>
 <body>
-<header>
-</header>
+<header></header>
 
- <aside class="sidebar-left">
-    <h3>🏷️ Códigos Jans #1 a #5</h3>
-    <ul>
-      <li>#1 - Jans Alpha</li>
-      <li>#2 - Jans Beta</li>
-      <li>#3 - Jans Gamma</li>
-      <li>#4 - Jans Delta</li>
-      <li>#5 - Jans Epsilon</li>
-    </ul>
-    <hr style="border-color: #222; margin: 1rem 0;" />
-    <h3>👑 Featured</h3>
-    <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
+<aside class="sidebar">
+  <h3>🔍 Buscar Perfis</h3>
+  <input type="text" id="profileSearch" placeholder="Digite nome para buscar..." autocomplete="off" />
 
-    <h3>📺 Live Channels</h3>
-    <ul>
-      <li>🎮 @GameZone</li>
-      <li>💻 @DevArena</li>
-      <li>🎨 @PixelBrush</li>
-      <li>📚 @OrisAcademy</li>
-      <li>🕹️ @RetroWave</li>
-    </ul>
-    
+  <h3>👑 Featured</h3>
+  <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
+
+  <h3>📺 Live Channels</h3>
+  <ul>
+    <li>🎮 @GameZone</li>
+    <li>💻 @DevArena</li>
+    <li>🎨 @PixelBrush</li>
+    <li>📚 @OrisAcademy</li>
+    <li>🕹️ @RetroWave</li>
+  </ul>
+
   <h3>🎓 Courses</h3>
   <ul>
     <li>🎮 Games</li>
@@ -296,7 +288,7 @@
     <li>💰 Finance</li>
     <li>🪙 Crypto</li>
   </ul>
-  </aside>
+</aside>
 
 <div class="content-wrapper">
   <div class="title-bar">
@@ -351,6 +343,11 @@
       return;
     }
 
+    // Aqui você pode implementar lógica para carregar dados do perfil salvo,
+    // ex: profileNameElem.textContent = JSON.parse(savedProfile).name;
+    // profilePhotoElem.src = JSON.parse(savedProfile).photoUrl;
+    // streamFrame.src = JSON.parse(savedProfile).streamUrl;
+  }
 
   loadProfile();
 
@@ -366,14 +363,28 @@
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
-const followBtn = document.getElementById('followBtn');
-let isFollowing = false;
 
-followBtn.addEventListener('click', () => {
-  isFollowing = !isFollowing;
-  followBtn.textContent = isFollowing ? '✔ Seguindo' : '➕ Seguir';
-  followBtn.style.backgroundColor = isFollowing ? '#0c0' : 'var(--green)';
-}
+  // --- Botão Seguir com persistência localStorage ---
+  const followBtn = document.getElementById('followBtn');
+  const FOLLOW_KEY = 'isFollowing';
+
+  // Função para atualizar visual do botão conforme estado
+  function updateFollowButton(isFollowing) {
+    followBtn.textContent = isFollowing ? '✔ Seguindo' : '➕ Seguir';
+    followBtn.style.backgroundColor = isFollowing ? '#0c0' : 'var(--green)';
+  }
+
+  // Inicializa botão com estado salvo
+  let isFollowing = localStorage.getItem(FOLLOW_KEY) === 'true';
+  updateFollowButton(isFollowing);
+
+  followBtn.addEventListener('click', () => {
+    isFollowing = !isFollowing;
+    updateFollowButton(isFollowing);
+    localStorage.setItem(FOLLOW_KEY, isFollowing);
+  });
+
+  // Chat simples (simulação)
   chatForm.addEventListener('submit', e => {
     e.preventDefault();
     const msg = chatInput.value.trim();
