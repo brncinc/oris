@@ -255,12 +255,11 @@
 <header>
   <img src="z.png" alt="Logo Oris TV" class="logo" />
 </header>
-<div class="container">
-  <aside class="sidebar-left">
-    <h3>🔍 Buscar Perfis</h3>
-    <input type="text" id="profileSearch" placeholder="Digite nome para buscar..." autocomplete="off" />
 
 <aside class="sidebar">
+  <h3>🔍 Buscar Perfis</h3>
+  <input type="text" id="profileSearch" placeholder="Digite nome para buscar..." autocomplete="off" />
+
   <h3>👑 Featured</h3>
   <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
 
@@ -296,6 +295,7 @@
       <video id="video" controls autoplay muted>
         <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4" />
       </video>
+      <div class="video-info">Oris TV - Gameplay Insano</div>
     </section>
 
     <section class="chat-container">
@@ -312,209 +312,6 @@
   </main>
 </div>
 
-<<script>
-  // Função para carregar dados salvos do perfil
-  function loadProfile() {
-    const savedProfile = localStorage.getItem('profile');
-
-    const profileNameElem = document.getElementById('profileName');
-    const profilePhotoElem = document.getElementById('profilePhoto');
-
-    if (!savedProfile) {
-      profileNameElem.textContent = 'Convidado';
-      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
-      return;
-    }
-
-    try {
-      const profile = JSON.parse(savedProfile);
-      profileNameElem.textContent = profile.name || 'Convidado';
-      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100/png?text=Perfil';
-      profilePhotoElem.alt = (profile.name || 'Convidado') + ' - Foto de perfil';
-    } catch {
-      profileNameElem.textContent = 'Convidado';
-      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
-    }
-  }
-
-  loadProfile();
-
-  // Simulação simples de chat para demo
-  const chatMessages = document.getElementById('chatMessages');
-  const chatForm = document.getElementById('chatForm');
-  const chatInput = document.getElementById('chatInput');
-
-  function addMessage(msg, isOwn = false) {
-    const div = document.createElement('div');
-    div.textContent = msg;
-    div.style.marginBottom = '0.5rem';
-    if (isOwn) div.style.color = 'var(--green)';
-    chatMessages.appendChild(div);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  chatForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const msg = chatInput.value.trim();
-    if (!msg) return;
-    addMessage('Você: ' + msg, true);
-    chatInput.value = '';
-<script>
-  // Função para carregar dados salvos do perfil
-  function loadProfile() {
-    const savedProfile = localStorage.getItem('profile');
-
-    const profileNameElem = document.getElementById('profileName');
-    const profilePhotoElem = document.getElementById('profilePhoto');
-
-    if (!savedProfile) {
-      profileNameElem.textContent = 'Convidado';
-      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
-      return;
-    }
-
-    try {
-      const profile = JSON.parse(savedProfile);
-      profileNameElem.textContent = profile.name || 'Convidado';
-      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100/png?text=Perfil';
-      profilePhotoElem.alt = (profile.name || 'Convidado') + ' - Foto de perfil';
-    } catch {
-      profileNameElem.textContent = 'Convidado';
-      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
-    }
-  }
-
-  loadProfile();
-
-  // Simulação simples de chat para demo
-  const chatMessages = document.getElementById('chatMessages');
-  const chatForm = document.getElementById('chatForm');
-  const chatInput = document.getElementById('chatInput');
-
-  function addMessage(msg, isOwn = false) {
-    const div = document.createElement('div');
-    div.textContent = msg;
-    div.style.marginBottom = '0.5rem';
-    if (isOwn) div.style.color = 'var(--green)';
-    chatMessages.appendChild(div);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  chatForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const msg = chatInput.value.trim();
-    if (!msg) return;
-    addMessage('Você: ' + msg, true);
-    chatInput.value = '';
-    chatInput.focus();
-<script>
-  // Função para carregar dados salvos do perfil
-  function loadProfile() {
-    const savedProfile = localStorage.getItem('profile');
-
-    const profileNameElem = document.getElementById('profileName');
-    const profilePhotoElem = document.getElementById('profilePhoto');
-
-    if (!savedProfile) {
-      profileNameElem.textContent = 'Convidado';
-      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
-      return;
-    }
-
-    try {
-      const profile = JSON.parse(savedProfile);
-      profileNameElem.textContent = profile.name || 'Convidado';
-      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100/png?text=Perfil';
-      profilePhotoElem.alt = (profile.name || 'Convidado') + ' - Foto de perfil';
-    } catch {
-      profileNameElem.textContent = 'Convidado';
-      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
-    }
-  }
-
-  loadProfile();
-
-  // Simulação simples de chat para demo
-  const chatMessages = document.getElementById('chatMessages');
-  const chatForm = document.getElementById('chatForm');
-  const chatInput = document.getElementById('chatInput');
-
-  function addMessage(msg, isOwn = false) {
-    const div = document.createElement('div');
-    div.textContent = msg;
-    div.style.marginBottom = '0.5rem';
-    if (isOwn) div.style.color = 'var(--green)';
-    chatMessages.appendChild(div);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  chatForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const msg = chatInput.value.trim();
-    if (!msg) return;
-    addMessage('Você: ' + msg, true);
-    chatInput.value = '';
-    chatInput.focus();
-
-    // Simula resposta reversa
-    setTimeout(() => {
-      addMessage('Outro usuário: ' + msg.split('').reverse().join(''));
-    }, 1500);
-  });
-</script><script>
-  // Função para carregar dados salvos do perfil
-  function loadProfile() {
-    const savedProfile = localStorage.getItem('profile');
-
-    const profileNameElem = document.getElementById('profileName');
-    const profilePhotoElem = document.getElementById('profilePhoto');
-
-    if (!savedProfile) {
-      profileNameElem.textContent = 'Convidado';
-      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
-      return;
-    }
-
-    try {
-      const profile = JSON.parse(savedProfile);
-      profileNameElem.textContent = profile.name || 'Convidado';
-      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100/png?text=Perfil';
-      profilePhotoElem.alt = (profile.name || 'Convidado') + ' - Foto de perfil';
-    } catch {
-      profileNameElem.textContent = 'Convidado';
-      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
-    }
-  }
-
-  loadProfile();
-
-  // Simulação simples de chat para demo
-  const chatMessages = document.getElementById('chatMessages');
-  const chatForm = document.getElementById('chatForm');
-  const chatInput = document.getElementById('chatInput');
-
-  function addMessage(msg, isOwn = false) {
-    const div = document.createElement('div');
-    div.textContent = msg;
-    div.style.marginBottom = '0.5rem';
-    if (isOwn) div.style.color = 'var(--green)';
-    chatMessages.appendChild(div);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  chatForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const msg = chatInput.value.trim();
-    if (!msg) return;
-    addMessage('Você: ' + msg, true);
-    chatInput.value = '';
-    chatInput.focus();
-
-    // Simula resposta reversa
-    setTimeout(() => {
-      addMessage('Outro usuário: ' + msg.split('').reverse().join(''));
-    }, 1500);
-  });
 <script>
   // Função para carregar dados salvos do perfil
   function loadProfile() {
