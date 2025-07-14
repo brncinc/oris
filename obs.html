@@ -16,10 +16,12 @@
     --green: #00ff00;
     --red: #ff0033;
   }
-  /* Básico para a estrutura */
+  * {
+    box-sizing: border-box;
+  }
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     background-color: var(--dark);
     color: var(--text);
     display: flex;
@@ -40,11 +42,11 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.6);
   }
   header img.logo {
-    height: 40px;
+    height: 48px;
     width: auto;
     object-fit: contain;
   }
-  aside.sidebar {
+  .sidebar {
     width: 240px;
     background-color: #111;
     border-right: 1px solid #222;
@@ -55,27 +57,35 @@
     left: 0;
     overflow-y: auto;
   }
-  aside.sidebar h3 {
+  .sidebar h3 {
     color: var(--primary);
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    margin: 1.5rem 0 0.5rem;
   }
-  aside.sidebar ul {
+  .top-streamer {
+    background-color: #1a1a1a;
+    padding: 12px;
+    border-left: 4px solid var(--primary);
+    margin-bottom: 1rem;
+    color: var(--primary);
+    font-weight: bold;
+  }
+  .sidebar ul {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
-  aside.sidebar ul li {
+  .sidebar ul li {
     padding: 8px 10px;
     border-radius: 6px;
     color: var(--text-muted);
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background 0.2s, color 0.2s;
   }
-  aside.sidebar ul li:hover {
-    background-color: #1a1a1a;
+  .sidebar ul li:hover {
+    background: #1a1a1a;
     color: var(--primary);
   }
-
   .content-wrapper {
     margin-top: 50px;
     margin-left: 240px;
@@ -86,10 +96,10 @@
   .title-bar {
     padding: 1rem 1.5rem 0.5rem;
     border-bottom: 1px solid #222;
-    background-color: var(--card);
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
+    background-color: var(--card);
   }
   .title-bar h1 {
     margin: 0;
@@ -100,17 +110,10 @@
   }
   .profile {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.25rem;
-    color: var(--text-muted);
-    font-weight: 600;
-    min-width: 150px;
-  }
-  .profile-row {
-    display: flex;
     align-items: center;
     gap: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
   }
   .profile img {
     width: 36px;
@@ -118,21 +121,6 @@
     border-radius: 50%;
     border: 2px solid var(--red);
     object-fit: cover;
-  }
-  .profile-name {
-    color: var(--primary);
-    font-weight: 700;
-    user-select: none;
-  }
-  .profile-bio {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-style: italic;
-    user-select: none;
-    max-width: 240px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
   main {
     flex: 1;
@@ -217,6 +205,33 @@
     background: var(--primary);
     border-radius: 4px;
   }
+  /* Responsividade */
+  @media (max-width: 900px) {
+    .sidebar {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid #222;
+      top: auto;
+    }
+    .content-wrapper {
+      margin-left: 0;
+      margin-top: 0;
+      height: auto;
+    }
+    main {
+      flex-direction: column;
+      padding: 1rem;
+      height: auto;
+    }
+    .player-container, .chat-container {
+      flex: none;
+      height: 300px;
+      margin-bottom: 1rem;
+      border-radius: 12px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -250,12 +265,9 @@
 <div class="content-wrapper">
   <div class="title-bar">
     <h1>Super Live: Gameplay Insano</h1>
-    <div class="profile" title="Perfil do usuário">
-      <div class="profile-row">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto perfil" id="profilePhoto" />
-        <div class="profile-name" id="profileName">Lucas Januário</div>
-      </div>
-      <div class="profile-bio" id="profileBio" title=""></div>
+    <div class="profile">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto perfil" id="profilePhoto" />
+      <div id="profileName">Lucas Januário</div>
     </div>
   </div>
   <main>
@@ -280,26 +292,18 @@
 </div>
 
 <script>
-  // Obtém o índice do perfil salvo no localStorage, 0 se não existir
+  // Função para obter índice do último perfil salvo (0 se não existir)
   function getCurrentProfileIndex() {
     return parseInt(localStorage.getItem('profile_last')) || 0;
   }
 
-  // Salva um novo perfil incrementando índice
-  function saveUserProfile(photo, name, bio) {
-    const index = getCurrentProfileIndex() + 1;
-    localStorage.setItem(`profile_${index}`, JSON.stringify({ photo, name, bio }));
-    localStorage.setItem('profile_last', index.toString());
-  }
-
-  // Carrega o perfil salvo ou usa fallback
+  // Função para carregar perfil salvo e aplicar na UI
   function loadUserProfile() {
     const index = getCurrentProfileIndex();
     if (index === 0) {
       setProfileDisplay(
         'https://randomuser.me/api/portraits/men/32.jpg',
-        'Lucas Januário',
-        'Fundador da Oris TV e entusiasta de streaming e desenvolvimento.'
+        'Lucas Januário'
       );
       return;
     }
@@ -307,48 +311,39 @@
     if (!dataRaw) {
       setProfileDisplay(
         'https://randomuser.me/api/portraits/men/32.jpg',
-        'Lucas Januário',
-        'Fundador da Oris TV e entusiasta de streaming e desenvolvimento.'
+        'Lucas Januário'
       );
       return;
     }
     try {
       const data = JSON.parse(dataRaw);
-      setProfileDisplay(data.photo, data.name, data.bio);
+      setProfileDisplay(data.photo || '', data.name || '');
     } catch {
       setProfileDisplay(
         'https://randomuser.me/api/portraits/men/32.jpg',
-        'Lucas Januário',
-        'Fundador da Oris TV e entusiasta de streaming e desenvolvimento.'
+        'Lucas Januário'
       );
     }
   }
 
-  // Atualiza os elementos visuais do perfil
-  function setProfileDisplay(photo, name, bio) {
+  // Atualiza a foto e nome no perfil da UI
+  function setProfileDisplay(photo, name) {
     const photoEl = document.getElementById('profilePhoto');
     const nameEl = document.getElementById('profileName');
-    const bioEl = document.getElementById('profileBio');
 
     photoEl.src = photo || 'https://randomuser.me/api/portraits/men/32.jpg';
     photoEl.alt = name ? `${name} - Foto de perfil` : 'Foto do perfil';
 
     nameEl.textContent = name || 'Usuário não logado';
     nameEl.title = name || '';
-
-    if (bio && bio.trim() !== '') {
-      bioEl.textContent = bio;
-      bioEl.title = bio;
-      bioEl.style.display = 'block';
-    } else {
-      bioEl.style.display = 'none';
-    }
   }
 
-  // Inicializa perfil
-  loadUserProfile();
+  // Inicializa o perfil assim que a página carrega
+  window.addEventListener('DOMContentLoaded', () => {
+    loadUserProfile();
+  });
 
-  // Chat simples frontend
+  // Chat simples no frontend para demo
   const chatMessages = document.getElementById('chatMessages');
   const chatForm = document.getElementById('chatForm');
   const chatInput = document.getElementById('chatInput');
@@ -370,13 +365,11 @@
     chatInput.value = '';
     chatInput.focus();
 
+    // Simula resposta após 1.5s
     setTimeout(() => {
       addMessage('Outro usuário: ' + msg.split('').reverse().join(''));
     }, 1500);
   });
-
-  // Para salvar um perfil (descomente para usar)
-  // saveUserProfile('https://avatars.githubusercontent.com/u/1024025?v=4', 'Lucas Januário', 'Fundador da Oris TV');
 </script>
 </body>
 </html>
