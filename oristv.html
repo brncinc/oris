@@ -51,14 +51,12 @@ header {
   gap: 1rem;
 }
 
-/* Logo */
 header img {
   height: 52px;
   margin-right: 12px;
   flex-shrink: 0;
 }
 
-/* Container para o lado esquerdo: logo + busca */
 .header-left {
   display: flex;
   align-items: center;
@@ -67,7 +65,6 @@ header img {
   min-width: 0;
 }
 
-/* Barra de busca */
 .search-bar {
   background-color: var(--gray-dark);
   border-radius: 6px;
@@ -94,7 +91,6 @@ header img {
   color: var(--text-muted);
 }
 
-/* Botão de notificação */
 .notification-btn {
   background: var(--gray-dark);
   border: none;
@@ -113,14 +109,12 @@ header img {
   background: #444;
 }
 
-/* Ícone sino preto (SVG) */
 .notification-btn svg {
   fill: var(--black);
   width: 20px;
   height: 20px;
 }
 
-/* Container dos botões à direita */
 .header-buttons {
   display: flex;
   gap: 1rem;
@@ -170,7 +164,6 @@ header img {
   background-color: darkorange;
 }
 
-/* Container com empilhamento vertical */
 .container {
   display: flex;
   flex-direction: column;
@@ -220,7 +213,7 @@ header img {
   color: var(--primary);
 }
 
-/* Main vídeos */
+/* Main vídeos - barra horizontal só com canais que sigo */
 .main {
   margin-left: 200px;
   padding: 1rem 1rem 0 1rem;
@@ -231,18 +224,11 @@ header img {
   gap: 1rem;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  height: 160px;
+  border-bottom: 1px solid var(--primary);
 }
 
-/* Categoria cards abaixo do main */
-.category-bar {
-  margin-left: 200px;
-  padding: 1rem 1rem 2rem 1rem;
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-}
-
+/* cards pequenos para canais */
 .stream-card-small {
   background: var(--card);
   border: 1px solid #222;
@@ -255,6 +241,9 @@ header img {
   transition: transform 0.3s ease, border-color 0.3s ease;
   color: var(--text);
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
 }
 
 .stream-card-small:hover {
@@ -271,6 +260,10 @@ header img {
 
 .info-small {
   padding: 0.5rem 0.7rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .info-small h4 {
@@ -296,7 +289,16 @@ header img {
   margin-top: 0.3rem;
 }
 
-/* Sidebar direita fixa */
+/* Categoria cards abaixo do main */
+.category-bar {
+  margin-left: 200px;
+  padding: 1rem 1rem 2rem 1rem;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
 .sidebar-right {
   width: 220px;
   background-color: #111;
@@ -437,7 +439,7 @@ footer {
   <div class="header-left">
     <img src="z.png" alt="Logo OrisTV" />
     <div class="search-bar">
-      <input type="search" placeholder="Pesquisar..." aria-label="Pesquisar" />
+      <input id="searchInput" type="search" placeholder="Pesquisar usuários..." aria-label="Pesquisar" />
     </div>
   </div>
 
@@ -486,46 +488,12 @@ footer {
     <li>🪙 Crypto</li>
   </ul>
   </aside>
-<div class="horizontal-scroll-container">
-  <main class="main">
-    <!-- seus cards de stream pequenos -->
-    <a href="obs.html?channel=BlazeMaster" class="stream-card-small" title="BlazeMaster Live">
-      <img src="https://placehold.co/600x400/png?text=BlazeMaster" alt="BlazeMaster Live" />
-      <div class="info-small">
-        <h4>🔥 BlazeMaster</h4>
-        <p>Playing Elden Ring</p>
-        <p class="viewers">1200 viewers</p>
-      </div>
-    </a>
-    <!-- demais cards aqui -->
-    <a href="obs.html?channel=NightWolf" class="stream-card-small" title="NightWolf Live">
-      <img src="https://placehold.co/600x400/png?text=NightWolf" alt="NightWolf Live" />
-      <div class="info-small">
-        <h4>🌟 NightWolf</h4>
-        <p>Call of Duty: Warzone</p>
-        <p class="viewers">950 viewers</p>
-      </div>
-    </a>
-    <a href="obs.html?channel=CyberNova" class="stream-card-small" title="CyberNova Live">
-      <img src="https://placehold.co/600x400/png?text=CyberNova" alt="CyberNova Live" />
-      <div class="info-small">
-        <h4>⚡ CyberNova</h4>
-        <p>Valorant Ranked</p>
-        <p class="viewers">670 viewers</p>
-      </div>
-    </a>
-    <a href="obs.html?channel=SharpShooter" class="stream-card-small" title="SharpShooter Live">
-      <img src="https://placehold.co/600x400/png?text=SharpShooter" alt="SharpShooter Live" />
-      <div class="info-small">
-        <h4>🎯 SharpShooter</h4>
-        <p>Fortnite Battle Royale</p>
-        <p class="viewers">830 viewers</p>
-      </div>
-    </a>
+
+  <main class="main" id="followingChannels">
+    <!-- Canais que sigo aqui serão renderizados dinamicamente -->
   </main>
 
   <section class="category-bar">
-    <!-- cards da categoria -->
     <a href="gta.html" class="stream-card-small" title="GTA V">
       <img src="1.png" alt="GTA V" />
       <div class="info-small">
@@ -534,7 +502,6 @@ footer {
         <p class="viewers">Trending</p>
       </div>
     </a>
-    <!-- demais cards aqui -->
     <a href="lol.html" class="stream-card-small" title="League of Legends">
       <img src="8.png" alt="LoL" />
       <div class="info-small">
@@ -578,7 +545,6 @@ footer {
   </section>
 </div>
 
-<!-- Faixa invisível para ativar hover -->
 <div class="sidebar-right-trigger"></div>
 
 <aside class="sidebar-right">
@@ -592,13 +558,86 @@ footer {
   </ul>
 </aside>
 
-</div>
-
 <footer>
   © 2025 OrisTV Under Development | Powered by BTC-X + Meta Rabbit
 </footer>
 
 <script>
+  const followingChannels = [
+    {
+      username: 'BlazeMaster',
+      game: 'Elden Ring',
+      viewers: 1200,
+      img: 'https://placehold.co/600x400/png?text=BlazeMaster',
+      url: 'obs.html?channel=BlazeMaster'
+    },
+    {
+      username: 'NightWolf',
+      game: 'Call of Duty: Warzone',
+      viewers: 950,
+      img: 'https://placehold.co/600x400/png?text=NightWolf',
+      url: 'obs.html?channel=NightWolf'
+    },
+    {
+      username: 'CyberNova',
+      game: 'Valorant Ranked',
+      viewers: 670,
+      img: 'https://placehold.co/600x400/png?text=CyberNova',
+      url: 'obs.html?channel=CyberNova'
+    },
+    {
+      username: 'SharpShooter',
+      game: 'Fortnite Battle Royale',
+      viewers: 830,
+      img: 'https://placehold.co/600x400/png?text=SharpShooter',
+      url: 'obs.html?channel=SharpShooter'
+    },
+  ];
+
+  const mainContainer = document.getElementById('followingChannels');
+  const searchInput = document.getElementById('searchInput');
+
+  function renderChannels(channels) {
+    mainContainer.innerHTML = '';
+    if (channels.length === 0) {
+      mainContainer.innerHTML = '<p style="color: var(--text-muted);">Nenhum canal encontrado.</p>';
+      return;
+    }
+    channels.forEach(channel => {
+      const a = document.createElement('a');
+      a.href = channel.url;
+      a.className = 'stream-card-small';
+      a.title = `${channel.username} Live`;
+
+      a.innerHTML = `
+        <img src="${channel.img}" alt="${channel.username} Live" />
+        <div class="info-small">
+          <h4>🔥 ${channel.username}</h4>
+          <p>${channel.game}</p>
+          <p class="viewers">${channel.viewers} viewers</p>
+        </div>
+      `;
+
+      mainContainer.appendChild(a);
+    });
+  }
+
+  // Evento da barra de busca: filtra os canais que sigo
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    const filtered = followingChannels.filter(channel =>
+      channel.username.toLowerCase().includes(query) ||
+      channel.game.toLowerCase().includes(query)
+    );
+    renderChannels(filtered);
+  });
+
+  // Renderiza tudo ao carregar
+  window.addEventListener('DOMContentLoaded', () => {
+    renderChannels(followingChannels);
+  });
+
+  // Função startStreaming que já existia
   function startStreaming() {
     const existingKey = localStorage.getItem("oris_stream_key");
     if (!existingKey) {
@@ -609,18 +648,6 @@ footer {
     }
     alert("🔗 Streaming key: " + existingKey);
   }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    const key = localStorage.getItem("oris_stream_key");
-
-    document.querySelectorAll(".stream-card-small").forEach(card => {
-      const href = card.getAttribute("href");
-      // Exibe somente se o link tem ?channel= e chave existe
-      if (!href.includes("?channel=") || !key) {
-        card.style.display = "none";
-      }
-    });
-  });
 </script>
 
 </body>
