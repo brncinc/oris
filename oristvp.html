@@ -204,17 +204,10 @@
   const savedMessage = document.getElementById('savedMessage');
   const form = document.getElementById('profileForm');
 
-  // Função para pegar o índice do último perfil salvo (ou 0)
-  function getLastProfileIndex() {
-    return parseInt(localStorage.getItem('profile_last')) || 0;
-  }
-
-  // Salva o perfil no localStorage com auto incremento do índice
-  function saveProfileAutoIncrement(photo, name, bio) {
-    let index = getLastProfileIndex() + 1;
+  // Salva o perfil com chave única (sobrescrevendo)
+  function saveProfile(photo, name, bio) {
     const profileData = { photo, name, bio };
-    localStorage.setItem(`profile_${index}`, JSON.stringify(profileData));
-    localStorage.setItem('profile_last', index.toString());
+    localStorage.setItem('profile', JSON.stringify(profileData));
   }
 
   // Atualiza visualização do perfil na página
@@ -226,22 +219,9 @@
     profileBio.textContent = bio || 'Sua descrição aqui...';
   }
 
-  // Carrega o último perfil salvo e atualiza a interface
+  // Carrega o perfil salvo (se houver)
   function loadProfile() {
-    const index = getLastProfileIndex();
-    if (index === 0) {
-      // Perfil default caso não tenha nada salvo
-      updateProfilePreview(
-        'https://placehold.co/140x140/png?text=Foto',
-        'Seu Nome',
-        'Sua descrição aqui...'
-      );
-      photoInput.value = '';
-      nameInput.value = '';
-      bioInput.value = '';
-      return;
-    }
-    const dataRaw = localStorage.getItem(`profile_${index}`);
+    const dataRaw = localStorage.getItem('profile');
     if (!dataRaw) {
       updateProfilePreview(
         'https://placehold.co/140x140/png?text=Foto',
@@ -260,6 +240,7 @@
       nameInput.value = data.name || '';
       bioInput.value = data.bio || '';
     } catch {
+      // Dados inválidos
       updateProfilePreview(
         'https://placehold.co/140x140/png?text=Foto',
         'Seu Nome',
@@ -278,7 +259,7 @@
     const nameVal = nameInput.value.trim();
     const bioVal = bioInput.value.trim();
 
-    saveProfileAutoIncrement(photoVal, nameVal, bioVal);
+    saveProfile(photoVal, nameVal, bioVal);
     updateProfilePreview(photoVal, nameVal, bioVal);
 
     savedMessage.style.display = 'block';
@@ -289,6 +270,5 @@
 
   loadProfile();
 </script>
-
 </body>
 </html>
