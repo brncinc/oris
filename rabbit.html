@@ -376,31 +376,28 @@
      </select>
   </div>
 
-    <label for="couponInput">Cupom de desconto:</label>
-    <input type="text" id="couponInput" value="omegalul100" placeholder="Digite seu cupom aqui">
-    <!-- Campo do código ORIS S2000 -->
+ <label for="couponInput">Cupom de desconto:</label>
+  <input type="text" id="couponInput" value="omegalul100" placeholder="Digite seu cupom aqui">
+
   <label for="operationKey">Código ORIS S2000 (Operation Key):</label>
   <input type="text" id="operationKey" placeholder="Cole aqui seu código ORIS S2000">
-
-  <label for="couponInput">Cupom de desconto:</label>
-  <input type="text" id="couponInput" value="omegalul100" placeholder="Digite seu cupom aqui">
 
   <label for="valueInput">Valor (ex: 1000):</label>
   <input type="number" id="valueInput" placeholder="Digite o valor" min="1">
 
   <button type="button" class="btn generate" onclick="generateQR()">Gerar QR Code</button>
+  <button type="button" class="btn generate" id="btnConfirmPayment" onclick="confirmPayment()" style="display:none; margin-top: 10px;">Confirmar Pagamento</button>
 
-
-    <label for="valueInput">Valor (ex: 1000):</label>
-    <input type="number" id="valueInput" placeholder="Digite o valor" min="1">
+  <div class="input-box" style="margin-top: 20px;">
+    <button type="button" class="btn generate" onclick="generateStreamKey()">Gerar Stream Key</button>
   </div>
 
-  <button type="button" class="btn generate" onclick="generateQR()">Gerar QR Code</button>
+  <div id="output">Aguardando ação do usuário...</div>
+  <div id="qrcode-pix"></div>
 
   <section class="drax-tech">
     <h2>Drax Technology</h2>
     <p>Unitas NBH Nature Scale + Dark HoloFi<br>Geminiositas Maxima — geminado,<br>qubits fracti in scala quantum maximi.</p>
-    <div id="qrcode-pix"></div>
     <p style="font-style: italic;">Pague via PIX para ativar bônus exclusivos.</p>
   </section>
 </form>
@@ -412,6 +409,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
   const variationText = document.getElementById("variationText");
+  const btnCreateFraction = document.getElementById("btnCreateFraction");
+  const btnConfirmPayment = document.getElementById("btnConfirmPayment");
+
+  let wallet = {};
+  let privateKey = null;
+  let paymentConfirmed = false;
+  let streamKey = null;
 
   function atualizarVariacao() {
     const variacao = (Math.random() * 2 - 1).toFixed(2);
@@ -421,14 +425,24 @@
 
   setInterval(atualizarVariacao, 3000);
 
-  let wallet = {};
-  let qrCodeInstance = null;
+  function generatePrivateKey() {
+    privateKey = 'PRV-' + Math.random().toString(36).substring(2, 14).toUpperCase();
+    document.getElementById('output').innerText = `Chave Privada gerada:\n${privateKey}\n\nAgora gere o QR Code e faça o pagamento para ativar a fração.`;
+    paymentConfirmed = false;
+    btnCreateFraction.disabled = true;
+  }
 
   function createWallet() {
+    if (!paymentConfirmed) {
+      alert("Pagamento não confirmado! Por favor, faça o pagamento via PIX e confirme antes de criar a fração.");
+      return;
+    }
     wallet = {
       publicKey: 'MRW-' + Math.random().toString(36).substring(2, 10).toUpperCase(),
+      privateKey: privateKey
     };
-    document.getElementById('output').innerText = `Frações criadas!\nChave Pública: ${wallet.publicKey}`;
+    document.getElementById('output').innerText = `Frações criadas!\nChave Pública: ${wallet.publicKey}\nChave Privada: ${wallet.privateKey}`;
+    btnCreateFraction.disabled = true;
   }
 
   function importWallet() {
@@ -436,8 +450,11 @@
     if (input) {
       wallet = {
         publicKey: 'MRW-' + input.slice(0, 8).toUpperCase(),
+        privateKey: input
       };
       document.getElementById('output').innerText = `Secreto importado!\nChave Pública: ${wallet.publicKey}`;
+      paymentConfirmed = true;
+      btnCreateFraction.disabled = false;
     }
   }
 
@@ -451,11 +468,17 @@
 
   function clearQRCode() {
     document.getElementById("qrcode-pix").innerHTML = "";
+    btnConfirmPayment.style.display = "none";
   }
 
   function generateQR() {
     clearQRCode();
-    const asset = document.getElementById("assetSelect").selectedOptions[0].text;
+    const assetSelect = document.getElementById("assetSelect");
+    if (!assetSelect.value) {
+      alert("Por favor, selecione um ativo.");
+      return;
+    }
+    const asset = assetSelect.selectedOptions[0].text;
     const coupon = document.getElementById("couponInput").value.trim();
     const value = document.getElementById("valueInput").value.trim();
 
@@ -464,16 +487,22 @@
       return;
     }
 
-    const pixKey = "11958849894";
+    if (!privateKey) {
+      alert("Por favor, gere sua chave privada antes de gerar o QR Code de pagamento.");
+      return;
+    }
+
+    const pixKey = "11958849894"; // seu PIX aqui
     let description = `Pagamento Meta Rabbit - ${asset}`;
     if (coupon) description += ` - Cupom: ${coupon}`;
 
+    // Payload simplificado para QR PIX (exemplo, sem CRC real)
     const pixPayload =
       `00020126360014BR.GOV.BCB.PIX0136${pixKey}` +
       `520400005303986540${Number(value).toFixed(2).replace('.', '')}5802BR` +
       `5913Meta Rabbit6009Sao Paulo62070503***6304`;
 
-    qrCodeInstance = new QRCode(document.getElementById("qrcode-pix"), {
+    new QRCode(document.getElementById("qrcode-pix"), {
       text: pixPayload,
       width: 180,
       height: 180,
@@ -483,7 +512,49 @@
     });
 
     document.getElementById('output').innerText = `QR Code gerado para:\nAtivo: ${asset}\nValor: ${value}\nCupom: ${coupon || "Nenhum"}`;
+
+    btnConfirmPayment.style.display = "block";
+    paymentConfirmed = false;
+    btnCreateFraction.disabled = true;
   }
+
+  function confirmPayment() {
+    // Validar streamKey antes de salvar
+    if (!streamKey || !validateStreamKey(streamKey)) {
+      alert("Por favor, gere uma Stream Key válida antes de confirmar o pagamento.");
+      return;
+    }
+    paymentConfirmed = true;
+    btnCreateFraction.disabled = false;
+    btnConfirmPayment.style.display = "none";
+
+    // Salvar streamKey no localStorage
+    localStorage.setItem("streamKey", streamKey);
+
+    document.getElementById('output').innerText += `\n\nPagamento confirmado!\nStream Key salva localmente:\n${streamKey}\nAgora você pode criar sua fração.`;
+  }
+
+  function generateStreamKey() {
+    streamKey = 'STREAM-' + Math.random().toString(36).substring(2, 18).toUpperCase();
+    document.getElementById('output').innerText = `Stream Key gerada:\n${streamKey}`;
+  }
+
+  function validateStreamKey(key) {
+    // Valida se começa com STREAM- e tem exatamente 23 caracteres (7 prefixo + 16 aleatórios)
+    const regex = /^STREAM-[A-Z0-9]{16}$/;
+    return regex.test(key);
+  }
+
+  // Tenta recuperar a streamKey do localStorage ao carregar a página
+  window.onload = () => {
+    const savedKey = localStorage.getItem("streamKey");
+    if (savedKey) {
+      streamKey = savedKey;
+      document.getElementById('output').innerText = `Stream Key carregada do armazenamento local:\n${streamKey}`;
+      paymentConfirmed = true;
+      btnCreateFraction.disabled = false;
+    }
+  };
 </script>
 </body>
 </html>
