@@ -1,482 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" href="logo.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OrisTV - Live Powered by BTC-X</title>
+<meta charset="UTF-8" />
+<link rel="icon" href="logo.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Oris TV - Transmissão</title>
 <style>
- :root {
-  --primary: #0f0;
-  --dark: #0a0a0a;
-  --card: #151515;
-  --text: #fff;
-  --text-muted: #aaa;
-  --purple: #6e00ff;
-  --green: #00ff00;
-  --red: #ff0033;
-  --orange: orange;
-  --gray-dark: #2f2f2f; /* para a barra de busca */
-  --black: #000;
-}
+  :root {
+    --primary: #0f0;
+    --dark: #0a0a0a;
+    --card: #151515;
+    --text: #fff;
+    --text-muted: #aaa;
+    --purple: #6e00ff;
+    --green: #00ff00;
+    --red: #ff0033;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--dark);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+  header {
+    background-color: var(--purple);
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 50px;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+  }
+  header img.logo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+  }
 
-* {
-  box-sizing: border-box;
-}
+  /* Sidebar */
+  .sidebar {
+    width: 240px;
+    background-color: #111;
+    border-right: 1px solid #222;
+    padding: 1rem;
+    position: fixed;
+    top: 50px; /* abaixo do header fixo */
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+  }
+  .sidebar h3 {
+    color: var(--primary);
+    font-size: 1rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .top-streamer {
+    background-color: #1a1a1a;
+    padding: 12px;
+    border-left: 4px solid var(--primary);
+    margin-bottom: 1rem;
+    color: var(--primary);
+    font-weight: bold;
+  }
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .sidebar ul li {
+    padding: 8px 10px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .sidebar ul li:hover {
+    background: #1a1a1a;
+    color: var(--primary);
+  }
 
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--dark);
-  color: var(--text);
-  overflow-x: hidden;
-}
-
-header {
-  background-color: var(--purple);
-  padding: 1rem 2rem;
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.6);
-  gap: 1rem;
-}
-
-/* Logo */
-header img {
-  height: 52px;
-  margin-right: 12px;
-  flex-shrink: 0;
-}
-
-/* Container para o lado esquerdo: logo + busca */
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-grow: 1;
-  min-width: 0;
-}
-
-/* Barra de busca */
-.search-bar {
-  background-color: var(--gray-dark);
-  border-radius: 6px;
-  padding: 0 0.75rem;
-  display: flex;
-  align-items: center;
-  max-width: 320px;
-  width: 100%;
-  height: 36px;
-  flex-shrink: 1;
-}
-
-.search-bar input {
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--text);
-  font-size: 1rem;
-  width: 100%;
-  padding: 6px 0;
-}
-
-.search-bar input::placeholder {
-  color: var(--text-muted);
-}
-
-/* Botão de notificação */
-.notification-btn {
-  background: var(--gray-dark);
-  border: none;
-  border-radius: 6px;
-  width: 36px;
-  height: 36px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: background-color 0.2s ease;
-}
-
-.notification-btn:hover {
-  background: #444;
-}
-
-/* Ícone sino preto (SVG) */
-.notification-btn svg {
-  fill: var(--black);
-  width: 20px;
-  height: 20px;
-}
-
-/* Container dos botões à direita */
-.header-buttons {
-  display: flex;
-  gap: 1rem;
-  flex-shrink: 0;
-}
-
-.header-buttons button,
-.header-buttons a {
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: 0.2s;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-}
-
-.btn-green {
-  background-color: var(--green);
-  color: #000;
-}
-
-.btn-green:hover {
-  background-color: #00cc00;
-}
-
-.btn-red {
-  background-color: var(--red);
-  color: #fff;
-}
-
-.btn-red:hover {
-  background-color: #cc0022;
-}
-
-.btn-orange {
-  background-color: var(--orange);
-  color: #000;
-}
-
-.btn-orange:hover {
-  background-color: darkorange;
-}
-
-/* Container com empilhamento vertical */
-.container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 80px;
-  padding-bottom: 40px;
-  width: 100%;
-}
-
-/* Sidebar esquerda fixa */
-.sidebar-left {
-  width: 200px;
-  background-color: #111;
-  border-right: 1px solid #222;
-  padding: 1rem;
-  overflow-y: auto;
-  position: fixed;
-  top: 80px;
-  bottom: 40px;
-  left: 0;
-  color: var(--text-muted);
-}
-
-.sidebar-left h3 {
-  color: var(--primary);
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-}
-
-.sidebar-left ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar-left ul li {
-  padding: 8px 6px;
-  border-radius: 5px;
-  cursor: default;
-  font-weight: 600;
-  color: var(--text-muted);
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.sidebar-left ul li:hover {
-  background-color: #1a1a1a;
-  color: var(--primary);
-}
-
-/* Main vídeos */
-.main {
-  margin-left: 200px;
-  padding: 1rem 1rem 0 1rem;
-  overflow-x: auto;
-  overflow-y: hidden;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Categoria cards abaixo do main */
-.category-bar {
-  margin-left: 200px;
-  padding: 1rem 1rem 2rem 1rem;
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-}
-
-.stream-card-small {
-  background: var(--card);
-  border: 1px solid #222;
-  border-radius: 8px;
-  overflow: hidden;
-  width: 180px;
-  flex-shrink: 0;
-  box-shadow: 0 0 5px #0f02;
-  cursor: pointer;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.stream-card-small:hover {
-  transform: scale(1.05);
-  border-color: var(--primary);
-}
-
-.stream-card-small img {
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
-  display: block;
-}
-
-.info-small {
-  padding: 0.5rem 0.7rem;
-}
-
-.info-small h4 {
-  margin: 0;
-  font-size: 1rem;
-  color: var(--primary);
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.info-small p {
-  margin: 0.25rem 0 0;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-.info-small p.viewers {
-  color: var(--green);
-  font-weight: 700;
-  margin-top: 0.3rem;
-}
-
-/* Sidebar direita fixa */
-.sidebar-right {
-  width: 220px;
-  background-color: #111;
-  border-left: 1px solid #222;
-  padding: 1rem;
-  overflow-y: auto;
-  position: fixed;
-  top: 80px;
-  bottom: 40px;
-  right: 0;
-  color: var(--text-muted);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.sidebar-right-trigger {
-  position: fixed;
-  top: 80px;
-  bottom: 40px;
-  right: 0;
-  width: 12px;
-  cursor: pointer;
-  z-index: 60;
-  background: transparent;
-}
-
-.sidebar-right-trigger:hover + .sidebar-right,
-.sidebar-right:hover {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.sidebar-right h3 {
-  color: var(--primary);
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-}
-
-.ranking-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.ranking-list li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 10px;
-  border-radius: 6px;
-  cursor: default;
-  color: var(--text-muted);
-  transition: background 0.2s ease;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-
-.ranking-list li:hover {
-  background-color: #1a1a1a;
-  color: var(--primary);
-}
-
-.ranking-list .username {
-  flex-grow: 1;
-}
-
-.ranking-list .flag {
-  width: 28px;
-  height: 18px;
-  border-radius: 2px;
-  object-fit: cover;
-  flex-shrink: 0;
-  border: 1px solid #222;
-}
-
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #111;
-  color: var(--primary);
-  border-top: 1px solid #222;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  font-size: 0.9rem;
-}
-
-.sidebar-left::-webkit-scrollbar,
-.sidebar-right::-webkit-scrollbar,
-.main::-webkit-scrollbar,
-.category-bar::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
-}
-
-.sidebar-left::-webkit-scrollbar-thumb,
-.sidebar-right::-webkit-scrollbar-thumb,
-.main::-webkit-scrollbar-thumb,
-.category-bar::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
-}
-
-@media (max-width: 900px) {
-  .container {
+  /* Content layout */
+  .content-wrapper {
+    margin-top: 50px; /* altura do header */
+    margin-left: 240px; /* largura da sidebar */
+    height: calc(100vh - 50px);
+    display: flex;
     flex-direction: column;
   }
 
-  .sidebar-left,
-  .sidebar-right {
-    position: relative;
-    width: 100%;
-    height: auto;
-    border: none;
-    opacity: 1 !important;
-    pointer-events: auto !important;
+  .title-bar {
+    padding: 1rem 1.5rem 0.5rem;
+    border-bottom: 1px solid #222;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--card);
+  }
+  .title-bar h1 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--primary);
+    flex-grow: 1;
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .profile img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--red);
+    object-fit: cover;
   }
 
-  .main,
-  .category-bar {
-    margin-left: 0;
-    margin-right: 0;
+  main {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    overflow: hidden;
+  }
+  .player-container {
+    flex: 3;
+    background: var(--card);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  video {
     width: 100%;
+    height: 100%;
+    border-radius: 12px 12px 0 0;
+    background: black;
+    outline: none;
+    flex-grow: 1;
+  }
+  .video-info {
+    padding: 0.75rem 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--primary);
+    background-color: #101010;
+    border-radius: 0 0 12px 12px;
+    user-select: none;
+  }
+
+  .chat-container {
+    flex: 1;
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 0 15px var(--primary);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .chat-header {
+    padding: 0.75rem 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    border-bottom: 1px solid #222;
+    color: var(--primary);
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .chat-messages {
+    flex: 1;
     padding: 1rem;
-    overflow-x: auto;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    color: var(--text);
   }
-}
-</style>
+  .chat-input {
+    display: flex;
+    border-top: 1px solid #222;
+  }
+  .chat-input input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: none;
+    background: #222;
+    color: var(--text);
+    font-size: 1rem;
+    border-radius: 0 0 0 12px;
+  }
+  .chat-input button {
+    background: var(--primary);
+    border: none;
+    padding: 0 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 0 0 12px 0;
+    color: var(--dark);
+    transition: background-color 0.3s;
+  }
+  .chat-input button:hover {
+    background: #0c0;
+    color: #fff;
+  }
+  .chat-messages::-webkit-scrollbar {
+    width: 8px;
+  }
+  .chat-messages::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+  }
 
+  /* Responsividade */
+  @media (max-width: 900px) {
+    .sidebar {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid #222;
+      top: auto;
+    }
+    .content-wrapper {
+      margin-left: 0;
+      margin-top: 0;
+      height: auto;
+    }
+    main {
+      flex-direction: column;
+      padding: 1rem;
+      height: auto;
+    }
+    .player-container, .chat-container {
+      flex: none;
+      height: 300px;
+      margin-bottom: 1rem;
+      border-radius: 12px;
+    }
+  }
+</style>
 </head>
 <body>
-
 <header>
-  <div class="header-left">
-    <img src="z.png" alt="Logo OrisTV" />
-    <div class="search-bar">
-      <input type="search" placeholder="Pesquisar..." aria-label="Pesquisar" />
-    </div>
-  </div>
-
-  <button class="notification-btn" title="Notificações" aria-label="Notificações">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" >
-      <path d="M12 24c1.104 0 2-.897 2-2h-4c0 1.103.896 2 2 2zm6.707-6.293l-1.414-1.414V10c0-3.07-1.64-5.64-4.293-6.32V3a1 1 0 10-2 0v.68C6.647 4.36 5 6.93 5 10v6.293l-1.414 1.414A1 1 0 005 19h14a1 1 0 00.707-1.707z" />
-    </svg>
-  </button>
-
-  <div class="header-buttons">
-    <button class="btn-red" onclick="startStreaming()">🔴 Go Live</button>
-    <a href="https://github.com/login/oauth/authorize?client_id=Iv23liPBo37qNrfX2DgK&redirect_uri=https://brncinc.github.io/oris/oristvp.html&scope=read:user user:email" class="btn-orange">Login</a>
-    <a href="rabbit.html" class="btn-green">Get Key</a>
-  </div>
+  <img src="z.png" alt="Logo Oris TV" class="logo" />
 </header>
 
-<div class="container">
-  <aside class="sidebar-left">
-    <h3>🏷️ Códigos Jans #1 a #5</h3>
-    <ul>
-      <li>#1 - Jans Alpha</li>
-      <li>#2 - Jans Beta</li>
-      <li>#3 - Jans Gamma</li>
-      <li>#4 - Jans Delta</li>
-      <li>#5 - Jans Epsilon</li>
-    </ul>
-    <hr style="border-color: #222; margin: 1rem 0;" />
-    <h3>👑 Featured</h3>
-    <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
+<aside class="sidebar">
+  <h3>🔍 Buscar Perfis</h3>
+  <input type="text" id="profileSearch" placeholder="Digite nome para buscar..." autocomplete="off" />
 
-    <h3>📺 Live Channels</h3>
-    <ul>
-      <li>🎮 @GameZone</li>
-      <li>💻 @DevArena</li>
-      <li>🎨 @PixelBrush</li>
-      <li>📚 @OrisAcademy</li>
-      <li>🕹️ @RetroWave</li>
-    </ul>
-    
+  <h3>👑 Featured</h3>
+  <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
+
+  <h3>📺 Live Channels</h3>
+  <ul>
+    <li>🎮 @GameZone</li>
+    <li>💻 @DevArena</li>
+    <li>🎨 @PixelBrush</li>
+    <li>📚 @OrisAcademy</li>
+    <li>🕹️ @RetroWave</li>
+  </ul>
+
   <h3>🎓 Courses</h3>
   <ul>
     <li>🎮 Games</li>
@@ -485,131 +280,92 @@ footer {
     <li>💰 Finance</li>
     <li>🪙 Crypto</li>
   </ul>
-  </aside>
-<div class="horizontal-scroll-container">
-  <main class="main">
-    <!-- seus cards de stream pequenos -->
-    <a href="obs.html?channel=BlazeMaster" class="stream-card-small" title="BlazeMaster Live">
-      <img src="https://placehold.co/600x400/png?text=BlazeMaster" alt="BlazeMaster Live" />
-      <div class="info-small">
-        <h4>🔥 BlazeMaster</h4>
-        <p>Playing Elden Ring</p>
-        <p class="viewers">1200 viewers</p>
-      </div>
-    </a>
-    <!-- demais cards aqui -->
-    <a href="obs.html?channel=NightWolf" class="stream-card-small" title="NightWolf Live">
-      <img src="https://placehold.co/600x400/png?text=NightWolf" alt="NightWolf Live" />
-      <div class="info-small">
-        <h4>🌟 NightWolf</h4>
-        <p>Call of Duty: Warzone</p>
-        <p class="viewers">950 viewers</p>
-      </div>
-    </a>
-    <a href="obs.html?channel=CyberNova" class="stream-card-small" title="CyberNova Live">
-      <img src="https://placehold.co/600x400/png?text=CyberNova" alt="CyberNova Live" />
-      <div class="info-small">
-        <h4>⚡ CyberNova</h4>
-        <p>Valorant Ranked</p>
-        <p class="viewers">670 viewers</p>
-      </div>
-    </a>
-    <a href="obs.html?channel=SharpShooter" class="stream-card-small" title="SharpShooter Live">
-      <img src="https://placehold.co/600x400/png?text=SharpShooter" alt="SharpShooter Live" />
-      <div class="info-small">
-        <h4>🎯 SharpShooter</h4>
-        <p>Fortnite Battle Royale</p>
-        <p class="viewers">830 viewers</p>
-      </div>
-    </a>
-  </main>
-
-  <section class="category-bar">
-    <!-- cards da categoria -->
-    <a href="gta.html" class="stream-card-small" title="GTA V">
-      <img src="1.png" alt="GTA V" />
-      <div class="info-small">
-        <h4>🚗 GTA V</h4>
-        <p>Ação & Roleplay</p>
-        <p class="viewers">Trending</p>
-      </div>
-    </a>
-    <!-- demais cards aqui -->
-    <a href="lol.html" class="stream-card-small" title="League of Legends">
-      <img src="8.png" alt="LoL" />
-      <div class="info-small">
-        <h4>🧙 LoL</h4>
-        <p>MOBA Strategy</p>
-        <p class="viewers">Popular</p>
-      </div>
-    </a>
-    <a href="valorant.html" class="stream-card-small" title="Valorant">
-      <img src="7.png" alt="Valorant" />
-      <div class="info-small">
-        <h4>🎯 Valorant</h4>
-        <p>FPS Tático</p>
-        <p class="viewers">Esports</p>
-      </div>
-    </a>
-    <a href="csgo.html" class="stream-card-small" title="CS:GO">
-      <img src="4.png" alt="CSGO" />
-      <div class="info-small">
-        <h4>💣 CS:GO</h4>
-        <p>Competitivo</p>
-        <p class="viewers">Clássico</p>
-      </div>
-    </a>
-    <a href="codejam.html" class="stream-card-small" title="Code Jam">
-      <img src="6.png" alt="Code Jam" />
-      <div class="info-small">
-        <h4>👨‍💻 Code Jam</h4>
-        <p>Desafios Tech</p>
-        <p class="viewers">Dev Zone</p>
-      </div>
-    </a>
-    <a href="chat.html" class="stream-card-small" title="Just Chatting">
-      <img src="5.png" alt="Just Chatting" />
-      <div class="info-small">
-        <h4>💬 Chatting</h4>
-        <p>Conversa Livre</p>
-        <p class="viewers">Live Talk</p>
-      </div>
-    </a>
-  </section>
-</div>
-
-<!-- Faixa invisível para ativar hover -->
-<div class="sidebar-right-trigger"></div>
-
-<aside class="sidebar-right">
-  <h3>🏅 Ranking da Comunidade</h3>
-  <ul class="ranking-list">
-    <li><span class="username">@FPSMaster</span><img class="flag" src="https://flagcdn.com/br.svg" /></li>
-    <li><span class="username">@NightWolf</span><img class="flag" src="https://flagcdn.com/us.svg" /></li>
-    <li><span class="username">@BlazeMaster</span><img class="flag" src="https://flagcdn.com/jp.svg" /></li>
-    <li><span class="username">@CyberNova</span><img class="flag" src="https://flagcdn.com/ca.svg" /></li>
-    <li><span class="username">@SharpShooter</span><img class="flag" src="https://flagcdn.com/de.svg" /></li>
-  </ul>
 </aside>
 
+<div class="content-wrapper">
+  <div class="title-bar">
+    <h1>Super Live: Gameplay Insano</h1>
+    <div class="profile">
+      <img id="profilePhoto" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto perfil" />
+      <div id="profileName">Lucas Januário</div>
+    </div>
+  </div>
+  <main>
+    <section class="player-container">
+      <video id="video" controls autoplay muted>
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4" />
+      </video>
+      <div class="video-info">Oris TV - Gameplay Insano</div>
+    </section>
+
+    <section class="chat-container">
+      <div class="chat-header">
+        Chat
+        <span id="viewerCount">👁 128 espectadores</span>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <form id="chatForm" class="chat-input">
+        <input type="text" id="chatInput" placeholder="Digite sua mensagem..." autocomplete="off" />
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
 </div>
 
-<footer>
-  © 2025 OrisTV Under Development | Powered by BTC-X + Meta Rabbit
-</footer>
-
 <script>
-  function startStreaming() {
-    const existingKey = localStorage.getItem("oris_stream_key");
-    if (!existingKey) {
-      if (confirm("Generate your key via Meta Rabbit?")) {
-        window.location.href = "rabbit.html";
-      }
+  // Função para carregar dados salvos do perfil
+  function loadProfile() {
+    const savedProfile = localStorage.getItem('profile');
+
+    const profileNameElem = document.getElementById('profileName');
+    const profilePhotoElem = document.getElementById('profilePhoto');
+
+    if (!savedProfile) {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
       return;
     }
-    alert("🔗 Streaming key: " + existingKey);
-  }
-</script>
 
+    try {
+      const profile = JSON.parse(savedProfile);
+      profileNameElem.textContent = profile.name || 'Convidado';
+      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100/png?text=Perfil';
+      profilePhotoElem.alt = (profile.name || 'Convidado') + ' - Foto de perfil';
+    } catch {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
+    }
+  }
+
+  loadProfile();
+
+  // Simulação simples de chat para demo
+  const chatMessages = document.getElementById('chatMessages');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+
+  function addMessage(msg, isOwn = false) {
+    const div = document.createElement('div');
+    div.textContent = msg;
+    div.style.marginBottom = '0.5rem';
+    if (isOwn) div.style.color = 'var(--green)';
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  chatForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+    addMessage('Você: ' + msg, true);
+    chatInput.value = '';
+    chatInput.focus();
+
+    // Simula resposta reversa
+    setTimeout(() => {
+      addMessage('Outro usuário: ' + msg.split('').reverse().join(''));
+    }, 1500);
+  });
+</script>
 </body>
 </html>
