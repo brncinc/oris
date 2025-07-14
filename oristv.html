@@ -229,15 +229,27 @@
   }
 
   aside.sidebar-left ul ul {
-    padding-left: 1rem;
-    margin-top: 0.25rem;
+    padding-left: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
   }
 
+  /* Ajuste para título ficar acima da lista e com espaçamento */
   .list-section-title {
     font-weight: 700;
-    margin-top: 1rem;
     color: var(--primary);
+    margin-bottom: 0.5rem;
     cursor: default;
+  }
+
+  aside.sidebar-left ul > li {
+    padding: 0;
+  }
+
+  aside.sidebar-left ul > li > ul {
+    padding-left: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
   }
 
   aside.sidebar-left ul li {
@@ -292,15 +304,19 @@
     </div>
   </header>
 
- <aside class="sidebar-left">
+<aside class="sidebar-left">
   <section aria-label="Buscar Perfis e Categorias">
     <h3>🔍 Buscar Perfis</h3>
     <input type="text" id="profileSearch" placeholder="Digite nome para buscar..." autocomplete="off" />
 
     <ul class="sidebar-list">
-      <li class="list-section-title">👑 Featured</li>
+      <li>
+        <h4 class="list-section-title">👑 Featured</h4>
+        <!-- Caso tenha itens nessa categoria, coloque aqui -->
+      </li>
 
-      <li class="list-section-title">📺 Live Channels
+      <li>
+        <h4 class="list-section-title">📺 Live Channels</h4>
         <ul>
           <li>🎮 @GameZone</li>
           <li>💻 @DevArena</li>
@@ -310,7 +326,8 @@
         </ul>
       </li>
 
-      <li class="list-section-title">🎓 Courses
+      <li>
+        <h4 class="list-section-title">🎓 Courses</h4>
         <ul>
           <li>🎮 Games</li>
           <li>💻 Development</li>
@@ -322,6 +339,7 @@
     </ul>
   </section>
 </aside>
+
 
     <main class="main-content" tabindex="0" aria-label="Main content area">
       <div class="scroll-row" aria-label="Streamers">
