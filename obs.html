@@ -308,27 +308,129 @@
   </main>
 </div>
 
-<script>
-  // Função para carregar nome e foto do localStorage
+<<script>
+  // Função para carregar dados salvos do perfil
   function loadProfile() {
-    const savedName = localStorage.getItem('profileName');
-    const savedPhoto = localStorage.getItem('profilePhoto');
+    const savedProfile = localStorage.getItem('profile');
 
     const profileNameElem = document.getElementById('profileName');
     const profilePhotoElem = document.getElementById('profilePhoto');
 
-    if (savedName && savedName.trim() !== '') {
-      profileNameElem.textContent = savedName;
+    if (!savedProfile) {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
+      return;
     }
-    if (savedPhoto && savedPhoto.trim() !== '') {
-      profilePhotoElem.src = savedPhoto;
-      profilePhotoElem.alt = savedName ? savedName + " - Foto de perfil" : "Foto de perfil";
+
+    try {
+      const profile = JSON.parse(savedProfile);
+      profileNameElem.textContent = profile.name || 'Convidado';
+      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100/png?text=Perfil';
+      profilePhotoElem.alt = (profile.name || 'Convidado') + ' - Foto de perfil';
+    } catch {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
     }
   }
 
   loadProfile();
 
-  // Código simples do chat só no frontend para demo
+  // Simulação simples de chat para demo
+  const chatMessages = document.getElementById('chatMessages');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+
+  function addMessage(msg, isOwn = false) {
+    const div = document.createElement('div');
+    div.textContent = msg;
+    div.style.marginBottom = '0.5rem';
+    if (isOwn) div.style.color = 'var(--green)';
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  chatForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+    addMessage('Você: ' + msg, true);
+    chatInput.value = '';
+<script>
+  // Função para carregar dados salvos do perfil
+  function loadProfile() {
+    const savedProfile = localStorage.getItem('profile');
+
+    const profileNameElem = document.getElementById('profileName');
+    const profilePhotoElem = document.getElementById('profilePhoto');
+
+    if (!savedProfile) {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
+      return;
+    }
+
+    try {
+      const profile = JSON.parse(savedProfile);
+      profileNameElem.textContent = profile.name || 'Convidado';
+      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100/png?text=Perfil';
+      profilePhotoElem.alt = (profile.name || 'Convidado') + ' - Foto de perfil';
+    } catch {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
+    }
+  }
+
+  loadProfile();
+
+  // Simulação simples de chat para demo
+  const chatMessages = document.getElementById('chatMessages');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+
+  function addMessage(msg, isOwn = false) {
+    const div = document.createElement('div');
+    div.textContent = msg;
+    div.style.marginBottom = '0.5rem';
+    if (isOwn) div.style.color = 'var(--green)';
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  chatForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+    addMessage('Você: ' + msg, true);
+    chatInput.value = '';
+    chatInput.focus();
+<script>
+  // Função para carregar dados salvos do perfil
+  function loadProfile() {
+    const savedProfile = localStorage.getItem('profile');
+
+    const profileNameElem = document.getElementById('profileName');
+    const profilePhotoElem = document.getElementById('profilePhoto');
+
+    if (!savedProfile) {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
+      return;
+    }
+
+    try {
+      const profile = JSON.parse(savedProfile);
+      profileNameElem.textContent = profile.name || 'Convidado';
+      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100/png?text=Perfil';
+      profilePhotoElem.alt = (profile.name || 'Convidado') + ' - Foto de perfil';
+    } catch {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
+    }
+  }
+
+  loadProfile();
+
+  // Simulação simples de chat para demo
   const chatMessages = document.getElementById('chatMessages');
   const chatForm = document.getElementById('chatForm');
   const chatInput = document.getElementById('chatInput');
@@ -350,7 +452,115 @@
     chatInput.value = '';
     chatInput.focus();
 
-    // Simula resposta do chat depois de 1.5s
+    // Simula resposta reversa
+    setTimeout(() => {
+      addMessage('Outro usuário: ' + msg.split('').reverse().join(''));
+    }, 1500);
+  });
+</script><script>
+  // Função para carregar dados salvos do perfil
+  function loadProfile() {
+    const savedProfile = localStorage.getItem('profile');
+
+    const profileNameElem = document.getElementById('profileName');
+    const profilePhotoElem = document.getElementById('profilePhoto');
+
+    if (!savedProfile) {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
+      return;
+    }
+
+    try {
+      const profile = JSON.parse(savedProfile);
+      profileNameElem.textContent = profile.name || 'Convidado';
+      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100/png?text=Perfil';
+      profilePhotoElem.alt = (profile.name || 'Convidado') + ' - Foto de perfil';
+    } catch {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
+    }
+  }
+
+  loadProfile();
+
+  // Simulação simples de chat para demo
+  const chatMessages = document.getElementById('chatMessages');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+
+  function addMessage(msg, isOwn = false) {
+    const div = document.createElement('div');
+    div.textContent = msg;
+    div.style.marginBottom = '0.5rem';
+    if (isOwn) div.style.color = 'var(--green)';
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  chatForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+    addMessage('Você: ' + msg, true);
+    chatInput.value = '';
+    chatInput.focus();
+
+    // Simula resposta reversa
+    setTimeout(() => {
+      addMessage('Outro usuário: ' + msg.split('').reverse().join(''));
+    }, 1500);
+  });
+<script>
+  // Função para carregar dados salvos do perfil
+  function loadProfile() {
+    const savedProfile = localStorage.getItem('profile');
+
+    const profileNameElem = document.getElementById('profileName');
+    const profilePhotoElem = document.getElementById('profilePhoto');
+
+    if (!savedProfile) {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
+      return;
+    }
+
+    try {
+      const profile = JSON.parse(savedProfile);
+      profileNameElem.textContent = profile.name || 'Convidado';
+      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100/png?text=Perfil';
+      profilePhotoElem.alt = (profile.name || 'Convidado') + ' - Foto de perfil';
+    } catch {
+      profileNameElem.textContent = 'Convidado';
+      profilePhotoElem.src = 'https://placehold.co/100x100/png?text=Perfil';
+    }
+  }
+
+  loadProfile();
+
+  // Simulação simples de chat para demo
+  const chatMessages = document.getElementById('chatMessages');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+
+  function addMessage(msg, isOwn = false) {
+    const div = document.createElement('div');
+    div.textContent = msg;
+    div.style.marginBottom = '0.5rem';
+    if (isOwn) div.style.color = 'var(--green)';
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  chatForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+    addMessage('Você: ' + msg, true);
+    chatInput.value = '';
+    chatInput.focus();
+
+    // Simula resposta reversa
     setTimeout(() => {
       addMessage('Outro usuário: ' + msg.split('').reverse().join(''));
     }, 1500);
