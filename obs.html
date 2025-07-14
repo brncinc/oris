@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Oris TV - Transmissão</title>
 <style>
-  /* (Seu CSS original continua igual, não vou repetir para economizar espaço) */
   :root {
     --primary: #0f0;
     --dark: #0a0a0a;
@@ -17,8 +16,7 @@
     --green: #00ff00;
     --red: #ff0033;
   }
-  /* resto do CSS igual ao que você mandou */
-  /* ... */
+  /* Adicione seu CSS completo aqui conforme já tinha */
 </style>
 </head>
 <body>
@@ -26,8 +24,28 @@
   <img src="z.png" alt="Logo Oris TV" class="logo" />
 </header>
 
+
 <aside class="sidebar">
-  <!-- conteúdo sidebar igual -->
+  <h3>👑 Featured</h3>
+  <div class="top-streamer">@FPSMaster<br><small>800 viewers</small></div>
+
+  <h3>📺 Live Channels</h3>
+  <ul>
+    <li>🎮 @GameZone</li>
+    <li>💻 @DevArena</li>
+    <li>🎨 @PixelBrush</li>
+    <li>📚 @OrisAcademy</li>
+    <li>🕹️ @RetroWave</li>
+  </ul>
+
+  <h3>🎓 Courses</h3>
+  <ul>
+    <li>🎮 Games</li>
+    <li>💻 Development</li>
+    <li>🎨 Design</li>
+    <li>💰 Finance</li>
+    <li>🪙 Crypto</li>
+  </ul>
 </aside>
 
 <div class="content-wrapper">
@@ -75,11 +93,11 @@
     localStorage.setItem('profile_last', index.toString());
   }
 
-  // Carrega último perfil salvo
+  // Carrega último perfil salvo ou fallback
   function loadUserProfile() {
     const index = getCurrentProfileIndex();
     if (index === 0) {
-      // Se não tiver perfil salvo, carrega dados default
+      // fallback padrão
       setProfileDisplay(
         'https://randomuser.me/api/portraits/men/32.jpg',
         'Lucas Januário',
@@ -89,7 +107,6 @@
     }
     const dataRaw = localStorage.getItem(`profile_${index}`);
     if (!dataRaw) {
-      // fallback caso o dado não exista
       setProfileDisplay(
         'https://randomuser.me/api/portraits/men/32.jpg',
         'Lucas Januário',
@@ -101,7 +118,6 @@
       const data = JSON.parse(dataRaw);
       setProfileDisplay(data.photo, data.name, data.bio);
     } catch {
-      // erro no parse, usa fallback
       setProfileDisplay(
         'https://randomuser.me/api/portraits/men/32.jpg',
         'Lucas Januário',
@@ -110,7 +126,7 @@
     }
   }
 
-  // Atualiza os elementos visuais do perfil
+  // Atualiza a interface com dados do perfil
   function setProfileDisplay(photo, name, bio) {
     const photoEl = document.getElementById('profilePhoto');
     const nameEl = document.getElementById('profileName');
@@ -131,9 +147,10 @@
     }
   }
 
+  // Carrega o perfil ao iniciar
   loadUserProfile();
 
-  // Código simples do chat frontend para demonstração
+  // Chat simples frontend
   const chatMessages = document.getElementById('chatMessages');
   const chatForm = document.getElementById('chatForm');
   const chatInput = document.getElementById('chatInput');
@@ -160,7 +177,7 @@
     }, 1500);
   });
 
-  // Exemplo: para salvar um perfil novo (pode ser chamado por um formulário)
+  // Exemplo para salvar um perfil (descomente para testar)
   // saveUserProfile('https://avatars.githubusercontent.com/u/1024025?v=4', 'Lucas Januário', 'Fundador da Oris TV');
 </script>
 </body>
