@@ -609,6 +609,18 @@ footer {
     }
     alert("🔗 Streaming key: " + existingKey);
   }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const key = localStorage.getItem("oris_stream_key");
+
+    document.querySelectorAll(".stream-card-small").forEach(card => {
+      const href = card.getAttribute("href");
+      // Exibe somente se o link tem ?channel= e chave existe
+      if (!href.includes("?channel=") || !key) {
+        card.style.display = "none";
+      }
+    });
+  });
 </script>
 
 </body>
