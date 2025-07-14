@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Perfil- Oris TV</title>
+  <title>Perfil - Oris TV</title>
   <link rel="icon" href="logo.ico" />
   <style>
     :root {
@@ -204,44 +204,88 @@
   const savedMessage = document.getElementById('savedMessage');
   const form = document.getElementById('profileForm');
 
-  function updateProfilePreview() {
-    const photoUrl = photoInput.value.trim();
-    const name = nameInput.value.trim() || 'Seu Nome';
-    const bio = bioInput.value.trim() || 'Sua descrição aqui...';
+  // Função para pegar o índice do último perfil salvo (ou 0)
+  function getLastProfileIndex() {
+    return parseInt(localStorage.getItem('profile_last')) || 0;
+  }
 
-    profilePhoto.src = photoUrl || 'https://placehold.co/140x140/png?text=Foto';
-    profilePhoto.alt = name + " - Foto do perfil";
+  // Salva o perfil no localStorage com auto incremento do índice
+  function saveProfileAutoIncrement(photo, name, bio) {
+    let index = getLastProfileIndex() + 1;
+    const profileData = { photo, name, bio };
+    localStorage.setItem(`profile_${index}`, JSON.stringify(profileData));
+    localStorage.setItem('profile_last', index.toString());
+  }
 
-    profileName.textContent = name;
-    profileBio.textContent = bio;
+  // Atualiza visualização do perfil na página
+  function updateProfilePreview(photo, name, bio) {
+    profilePhoto.src = photo || 'https://placehold.co/140x140/png?text=Foto';
+    profilePhoto.alt = (name || 'Seu Nome') + ' - Foto do perfil';
+
+    profileName.textContent = name || 'Seu Nome';
+    profileBio.textContent = bio || 'Sua descrição aqui...';
+  }
+
+  // Carrega o último perfil salvo e atualiza a interface
+  function loadProfile() {
+    const index = getLastProfileIndex();
+    if (index === 0) {
+      // Perfil default caso não tenha nada salvo
+      updateProfilePreview(
+        'https://placehold.co/140x140/png?text=Foto',
+        'Seu Nome',
+        'Sua descrição aqui...'
+      );
+      photoInput.value = '';
+      nameInput.value = '';
+      bioInput.value = '';
+      return;
+    }
+    const dataRaw = localStorage.getItem(`profile_${index}`);
+    if (!dataRaw) {
+      updateProfilePreview(
+        'https://placehold.co/140x140/png?text=Foto',
+        'Seu Nome',
+        'Sua descrição aqui...'
+      );
+      photoInput.value = '';
+      nameInput.value = '';
+      bioInput.value = '';
+      return;
+    }
+    try {
+      const data = JSON.parse(dataRaw);
+      updateProfilePreview(data.photo, data.name, data.bio);
+      photoInput.value = data.photo || '';
+      nameInput.value = data.name || '';
+      bioInput.value = data.bio || '';
+    } catch {
+      updateProfilePreview(
+        'https://placehold.co/140x140/png?text=Foto',
+        'Seu Nome',
+        'Sua descrição aqui...'
+      );
+      photoInput.value = '';
+      nameInput.value = '';
+      bioInput.value = '';
+    }
   }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    localStorage.setItem('profilePhoto', photoInput.value.trim());
-    localStorage.setItem('profileName', nameInput.value.trim());
-    localStorage.setItem('profileBio', bioInput.value.trim());
+    const photoVal = photoInput.value.trim();
+    const nameVal = nameInput.value.trim();
+    const bioVal = bioInput.value.trim();
 
-    updateProfilePreview();
+    saveProfileAutoIncrement(photoVal, nameVal, bioVal);
+    updateProfilePreview(photoVal, nameVal, bioVal);
 
     savedMessage.style.display = 'block';
     setTimeout(() => {
       savedMessage.style.display = 'none';
     }, 3000);
   });
-
-  function loadProfile() {
-    const photo = localStorage.getItem('profilePhoto') || '';
-    const name = localStorage.getItem('profileName') || '';
-    const bio = localStorage.getItem('profileBio') || '';
-
-    photoInput.value = photo;
-    nameInput.value = name;
-    bioInput.value = bio;
-
-    updateProfilePreview();
-  }
 
   loadProfile();
 </script>
