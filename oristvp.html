@@ -2,9 +2,9 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Perfil - OrisTV</title>
-  <link rel="icon" href="logo.ico">
+  <link rel="icon" href="logo.ico" />
   <style>
     :root {
       --purple: #9147ff;
@@ -53,8 +53,8 @@
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      border: 5px solid var(--card);
-      background-color: #222;
+      border: 4px solid var(--card);
+      background: #333;
       overflow: hidden;
     }
 
@@ -64,176 +64,159 @@
       object-fit: cover;
     }
 
-    .profile-info {
-      padding: 4rem 2rem 2rem 2rem;
+    .content {
+      padding: 70px 2rem 2rem 2rem;
     }
 
-    .name-row {
+    .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      margin-bottom: 1rem;
+      gap: 1rem;
     }
 
-    .name {
+    .username {
       font-size: 1.8rem;
-      font-weight: 800;
+      font-weight: bold;
       color: var(--purple);
     }
 
-    .follow-btn {
-      background: var(--green);
-      color: black;
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
       padding: 0.6rem 1.2rem;
       font-weight: bold;
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .follow-btn:hover {
-      background-color: #40e016;
-    }
-
-    .bio {
-      margin-top: 1rem;
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .form-section {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .form-section input,
-    .form-section textarea {
-      background: #222;
-      color: var(--text);
-      border: 1px solid #444;
-      border-radius: 6px;
-      padding: 0.6rem;
-      font-size: 1rem;
-    }
-
-    .form-section label {
-      font-weight: bold;
-      color: var(--green);
-    }
-
-    .social-links {
-      margin-top: 1.5rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .social-links a {
-      color: var(--text);
-      background: #333;
-      padding: 0.5rem 0.8rem;
-      border-radius: 5px;
+      transition: 0.2s ease;
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .social-links a:hover {
+    .btn-follow {
+      background: var(--green);
+      color: #000;
+    }
+
+    .btn-follow:hover {
+      background: #40c013;
+    }
+
+    .btn-key {
+      background: var(--purple);
+      color: white;
+    }
+
+    .btn-key:hover {
       background: var(--purple-dark);
     }
 
-    @media (max-width: 600px) {
-      .avatar {
-        left: 50%;
-        transform: translateX(-50%);
-      }
+    .search-bar {
+      background: #2c2c31;
+      border: 1px solid #444;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      color: var(--text);
+      font-size: 0.9rem;
+      width: 250px;
+    }
 
-      .name-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-      }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
 
-      .profile-info {
-        padding-top: 5rem;
-        text-align: center;
-      }
+    label {
+      color: var(--muted);
+      font-weight: 500;
+    }
 
-      .social-links {
-        justify-content: center;
-      }
+    input[type="text"], textarea {
+      background: #2c2c31;
+      border: 1px solid #444;
+      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    textarea {
+      min-height: 80px;
+    }
+
+    .stream-url {
+      background: #111;
+      border: 1px solid var(--green);
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      color: var(--green);
+      font-family: monospace;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
+  <div class="profile-container">
+    <div class="banner">
+      <div class="avatar">
+        <img src="https://placehold.co/100x100/png?text=Foto" id="avatarImg" alt="Avatar" />
+      </div>
+    </div>
 
-<div class="profile-container">
-  <div class="banner">
-    <div class="avatar">
-      <img id="photoPreview" src="https://placehold.co/100x100.png?text=Foto" alt="Foto de Perfil">
+    <div class="content">
+      <div class="header">
+        <div class="username" id="displayUsername">seu_usuario</div>
+        <input class="search-bar" type="text" placeholder="🔍 Buscar usuários..." id="searchUser" />
+        <div class="action-buttons">
+          <button class="btn btn-follow">Seguir</button>
+          <a href="https://brncinc.github.io/oris/rabbit.html" target="_blank" class="btn btn-key">Comprar Key</a>
+        </div>
+      </div>
+
+      <form id="profileForm">
+        <label for="username">Nome de usuário (ID primário)</label>
+        <input type="text" id="username" name="username" placeholder="Digite seu username" required />
+
+        <label for="photo">URL da Foto de Perfil</label>
+        <input type="text" id="photo" name="photo" placeholder="https://exemplo.com/avatar.jpg" />
+
+        <label for="bio">Bio</label>
+        <textarea id="bio" name="bio" placeholder="Fale sobre você..."></textarea>
+
+        <label for="streamUrl">URL da Transmissão</label>
+        <input type="text" id="streamUrl" class="stream-url" readonly />
+      </form>
     </div>
   </div>
 
-  <div class="profile-info">
-    <div class="name-row">
-      <div class="name" id="displayUsername">SeuNome</div>
-      <button class="follow-btn">Seguir</button>
-    </div>
+  <script>
+    const photo = document.getElementById('photo');
+    const avatarImg = document.getElementById('avatarImg');
+    const usernameInput = document.getElementById('username');
+    const bio = document.getElementById('bio');
+    const displayUsername = document.getElementById('displayUsername');
+    const streamUrl = document.getElementById('streamUrl');
 
-    <div class="bio" id="displayBio">
-      Sua bio aparecerá aqui. Escreva algo interessante sobre você 🎮
-    </div>
+    usernameInput.addEventListener('input', () => {
+      const username = usernameInput.value.trim().toLowerCase().replace(/\s+/g, '');
+      displayUsername.textContent = username || 'seu_usuario';
+      streamUrl.value = username ? `https://brncinc.github.io/oris/obs.html?channel=${username}` : '';
+    });
 
-    <form class="form-section" onsubmit="event.preventDefault(); saveProfile();">
-      <label for="username">Nome de Usuário (ID)</label>
-      <input type="text" id="username" placeholder="seunome123" required>
-
-      <label for="realname">Nome Completo</label>
-      <input type="text" id="realname" placeholder="Seu nome completo">
-
-      <label for="bio">Bio</label>
-      <textarea id="bio" placeholder="Escreva sua descrição pública..."></textarea>
-
-      <label for="photo">URL da Foto de Perfil</label>
-      <input type="text" id="photo" placeholder="https://exemplo.com/sua-foto.jpg">
-
-      <label for="twitter">Twitter</label>
-      <input type="text" id="twitter" placeholder="https://twitter.com/seuuser">
-
-      <label for="instagram">Instagram</label>
-      <input type="text" id="instagram" placeholder="https://instagram.com/seuuser">
-
-      <label for="discord">Discord</label>
-      <input type="text" id="discord" placeholder="https://discord.gg/seuservidor">
-
-      <button class="follow-btn" type="submit">Salvar Perfil</button>
-    </form>
-  </div>
-</div>
-
-<script>
-  function saveProfile() {
-    const username = document.getElementById("username").value.trim();
-    const bio = document.getElementById("bio").value.trim();
-    const photo = document.getElementById("photo").value.trim();
-
-    if (username) {
-      localStorage.setItem("oris_profile_" + username, JSON.stringify({
-        username,
-        bio,
-        photo
-      }));
-
-      document.getElementById("displayUsername").textContent = username;
-      document.getElementById("displayBio").textContent = bio || "Sua bio aparecerá aqui.";
-      document.getElementById("photoPreview").src = photo || "https://placehold.co/100x100.png?text=Foto";
-    }
-  }
-</script>
-
+    photo.addEventListener('input', () => {
+      avatarImg.src = photo.value || 'https://placehold.co/100x100/png?text=Foto';
+    });
+  </script>
 </body>
 </html>
