@@ -16,14 +16,213 @@
     --green: #00ff00;
     --red: #ff0033;
   }
-  /* Adicione seu CSS completo aqui conforme já tinha */
+  /* Básico para a estrutura */
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--dark);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+  header {
+    background-color: var(--purple);
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 50px;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+  }
+  header img.logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+  }
+  aside.sidebar {
+    width: 240px;
+    background-color: #111;
+    border-right: 1px solid #222;
+    padding: 1rem;
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+  }
+  aside.sidebar h3 {
+    color: var(--primary);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  aside.sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  aside.sidebar ul li {
+    padding: 8px 10px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  aside.sidebar ul li:hover {
+    background-color: #1a1a1a;
+    color: var(--primary);
+  }
+
+  .content-wrapper {
+    margin-top: 50px;
+    margin-left: 240px;
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+  }
+  .title-bar {
+    padding: 1rem 1.5rem 0.5rem;
+    border-bottom: 1px solid #222;
+    background-color: var(--card);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .title-bar h1 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--primary);
+    flex-grow: 1;
+  }
+  .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    min-width: 150px;
+  }
+  .profile-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .profile img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--red);
+    object-fit: cover;
+  }
+  .profile-name {
+    color: var(--primary);
+    font-weight: 700;
+    user-select: none;
+  }
+  .profile-bio {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    user-select: none;
+    max-width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    overflow: hidden;
+  }
+  .player-container {
+    flex: 3;
+    background: var(--card);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  video {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px 12px 0 0;
+    background: black;
+    outline: none;
+    flex-grow: 1;
+  }
+  .chat-container {
+    flex: 1;
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 0 15px var(--primary);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .chat-header {
+    padding: 0.75rem 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    border-bottom: 1px solid #222;
+    color: var(--primary);
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .chat-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .chat-input {
+    display: flex;
+    border-top: 1px solid #222;
+  }
+  .chat-input input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: none;
+    background: #222;
+    color: var(--text);
+    font-size: 1rem;
+    border-radius: 0 0 0 12px;
+  }
+  .chat-input button {
+    background: var(--primary);
+    border: none;
+    padding: 0 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 0 0 12px 0;
+    color: var(--dark);
+    transition: background-color 0.3s;
+  }
+  .chat-input button:hover {
+    background: #0c0;
+    color: #fff;
+  }
+  .chat-messages::-webkit-scrollbar {
+    width: 8px;
+  }
+  .chat-messages::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+  }
 </style>
 </head>
 <body>
 <header>
   <img src="z.png" alt="Logo Oris TV" class="logo" />
 </header>
-
 
 <aside class="sidebar">
   <h3>👑 Featured</h3>
@@ -81,23 +280,22 @@
 </div>
 
 <script>
-  // Lê o índice atual do localStorage, retorna 0 se não existir
+  // Obtém o índice do perfil salvo no localStorage, 0 se não existir
   function getCurrentProfileIndex() {
     return parseInt(localStorage.getItem('profile_last')) || 0;
   }
 
-  // Salva perfil com auto-incremento
+  // Salva um novo perfil incrementando índice
   function saveUserProfile(photo, name, bio) {
-    let index = getCurrentProfileIndex() + 1;
+    const index = getCurrentProfileIndex() + 1;
     localStorage.setItem(`profile_${index}`, JSON.stringify({ photo, name, bio }));
     localStorage.setItem('profile_last', index.toString());
   }
 
-  // Carrega último perfil salvo ou fallback
+  // Carrega o perfil salvo ou usa fallback
   function loadUserProfile() {
     const index = getCurrentProfileIndex();
     if (index === 0) {
-      // fallback padrão
       setProfileDisplay(
         'https://randomuser.me/api/portraits/men/32.jpg',
         'Lucas Januário',
@@ -126,7 +324,7 @@
     }
   }
 
-  // Atualiza a interface com dados do perfil
+  // Atualiza os elementos visuais do perfil
   function setProfileDisplay(photo, name, bio) {
     const photoEl = document.getElementById('profilePhoto');
     const nameEl = document.getElementById('profileName');
@@ -147,7 +345,7 @@
     }
   }
 
-  // Carrega o perfil ao iniciar
+  // Inicializa perfil
   loadUserProfile();
 
   // Chat simples frontend
@@ -177,7 +375,7 @@
     }, 1500);
   });
 
-  // Exemplo para salvar um perfil (descomente para testar)
+  // Para salvar um perfil (descomente para usar)
   // saveUserProfile('https://avatars.githubusercontent.com/u/1024025?v=4', 'Lucas Januário', 'Fundador da Oris TV');
 </script>
 </body>
