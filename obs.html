@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Oris TV - Transmissão</title>
+  <title>Oris TV </title>
   <style>
     :root {
       --primary: #0f0;
@@ -330,24 +329,6 @@
       return;
     }
 
-    try {
-      const profile = JSON.parse(savedProfile);
-      const name = profile.name || 'Convidado';
-      const slug = slugify(name);
-
-      profileNameElem.textContent = name;
-      profilePhotoElem.src = profile.photo || 'https://placehold.co/100x100';
-      streamFrame.src = `https://brncinc.github.io/oris/obs.html?channel=${slug}`;
-      videoInfo.textContent = `Transmissão de ${name}`;
-      liveTitle.textContent = `Live - ${name}`;
-    } catch {
-      profileNameElem.textContent = 'Convidado';
-      profilePhotoElem.src = 'https://placehold.co/100x100';
-      streamFrame.src = 'https://brncinc.github.io/oris/obs.html?channel=guest';
-      videoInfo.textContent = 'Transmissão de convidado';
-      liveTitle.textContent = 'Live - Convidado';
-    }
-  }
 
   loadProfile();
 
