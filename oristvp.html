@@ -164,7 +164,8 @@
       gap: 0.5rem;
     }
 
-    .stream-button {
+    .stream-button,
+    .generate-button {
       background: var(--green);
       color: #000;
       font-weight: 700;
@@ -176,7 +177,8 @@
       width: 100%;
     }
 
-    .stream-button:hover {
+    .stream-button:hover,
+    .generate-button:hover {
       background: #0f0;
     }
 
@@ -237,6 +239,7 @@
         <label for="streamKey">Stream Key</label>
         <input type="text" id="streamKey" class="stream-field" readonly />
 
+        <button type="button" class="generate-button" onclick="handleGenerate()">Gerar Stream URL</button>
         <button type="button" class="stream-button" onclick="buyKey()">Comprar Stream Key</button>
       </div>
 
@@ -279,14 +282,18 @@
     streamKey.value = key;
   }
 
-  nameInput.addEventListener('input', () => {
+  function handleGenerate() {
     const nameVal = nameInput.value.trim();
-    if (nameVal) generateStreamInfo(nameVal);
-    else {
-      streamUrl.value = '';
-      streamKey.value = '';
+    if (!nameVal) {
+      alert('Preencha seu nome para gerar a Stream URL!');
+      return;
     }
-  });
+    generateStreamInfo(nameVal);
+  }
+
+  function buyKey() {
+    window.open('https://brncinc.github.io/oris/rabbit.html', '_blank');
+  }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -295,51 +302,22 @@
     const bioVal = bioInput.value.trim();
     saveProfile(photoVal, nameVal, bioVal);
     updateProfilePreview(photoVal, nameVal, bioVal);
-    if (nameVal) generateStreamInfo(nameVal);
     savedMessage.style.display = 'block';
     setTimeout(() => {
       savedMessage.style.display = 'none';
     }, 3000);
   });
 
-  function buyKey() {
-    window.open('https://brncinc.github.io/oris/rabbit.html', '_blank');
-  }
-
   function loadProfile() {
     const dataRaw = localStorage.getItem('profile');
-    if (!dataRaw) {
-      updateProfilePreview(
-        'https://placehold.co/140x140/png?text=Foto',
-        'Seu Nome',
-        'Sua descrição aqui...'
-      );
-      photoInput.value = '';
-      nameInput.value = '';
-      bioInput.value = '';
-      streamUrl.value = '';
-      streamKey.value = '';
-      return;
-    }
+    if (!dataRaw) return;
     try {
       const data = JSON.parse(dataRaw);
       updateProfilePreview(data.photo, data.name, data.bio);
       photoInput.value = data.photo || '';
       nameInput.value = data.name || '';
       bioInput.value = data.bio || '';
-      if (data.name) generateStreamInfo(data.name);
-    } catch {
-      updateProfilePreview(
-        'https://placehold.co/140x140/png?text=Foto',
-        'Seu Nome',
-        'Sua descrição aqui...'
-      );
-      photoInput.value = '';
-      nameInput.value = '';
-      bioInput.value = '';
-      streamUrl.value = '';
-      streamKey.value = '';
-    }
+    } catch {}
   }
 
   loadProfile();
