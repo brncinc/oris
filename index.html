@@ -5,63 +5,49 @@
   <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login - ORIS OS</title>
-   <style>
+  <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0a2a43, #f0932b);
+      background: linear-gradient(135deg, #1e3c72, #f0932b); /* Azul para Laranja */
       color: #fff;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       user-select: none;
     }
-
-    .login-card {
-      background: #111;
-      border-radius: 20px;
-      padding: 40px 30px;
+    .login-container {
+      background: #000; /* Fundo preto sólido */
+      padding: 32px 48px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.6);
+      width: 320px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
-
-    .logo {
+    .login-container img {
       width: 100px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       user-select: none;
     }
-
-    .title {
-      font-size: 32px;
-      font-weight: 700;
-      color: #00ff66;
-      margin-bottom: 24px;
-    }
-
     .github-btn {
-      background-color: #000;
-      color: #fff;
+      margin-top: 12px;
+      padding: 10px 20px;
       border: none;
-      padding: 12px 24px;
       border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .github-btn:hover {
-      background-color: #222;
-    }
-
-    footer {
-      position: absolute;
-      bottom: 20px;
+      background-color: #333;
+      color: #fff;
+      font-weight: 700;
       font-size: 14px;
-      color: #ddd;
-      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s ease;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .github-btn:hover {
+      background-color: #444;
     }
   </style>
 </head>
