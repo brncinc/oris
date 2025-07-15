@@ -5,51 +5,56 @@
   <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login - ORIS OS</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #f0932b); /* Azul para Laranja */
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      user-select: none;
-    }
-    .login-container {
-      background: #000; /* Fundo preto sólido */
-      padding: 32px 48px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgb(0 0 0 / 0.6);
-      width: 320px;
-      text-align: center;
-    }
-    .login-container img {
-      width: 100px;
-      margin-bottom: 24px;
-      user-select: none;
-    }
-    .github-btn {
-      margin-top: 12px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background-color: #333;
-      color: #fff;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.2s ease;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .github-btn:hover {
-      background-color: #444;
-    }
-  </style>
+ <style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #002f9f, #ff6b00); /* Azul mais forte para laranja mais saturado */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    user-select: none;
+  }
+
+  .login-container {
+    background: #000;
+    padding: 32px 48px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+    width: 320px;
+    text-align: center;
+  }
+
+  .login-container img {
+    width: 130px; /* Aumentado em 30% */
+    margin-bottom: 24px;
+    user-select: none;
+  }
+
+  .github-btn {
+    margin-top: 12px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1a1a1a; /* Mais saturado que #333 */
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .github-btn:hover {
+    background-color: #2c2c2c; /* Mais saturado que #444 */
+  }
+</style>
+
 </head>
 <body>
   <form class="login-container" onsubmit="login(event)">
