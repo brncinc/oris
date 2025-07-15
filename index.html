@@ -2,38 +2,32 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-    <link rel="icon" href="logo.ico" />
+  <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login - ORIS OS</title>
   <style>
     body {
-      margin: 0; 
+      margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #1e3c72, #f0932b); /* Azul para Laranja */
-      color: #fff; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
       user-select: none;
     }
     .login-container {
-      background: rgba(34, 34, 34, 0.9); 
-      padding: 32px 48px; 
+      background: #000; /* Fundo preto sólido */
+      padding: 32px 48px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgb(0 0 0 / 0.6);
-      width: 320px; 
+      width: 320px;
       text-align: center;
     }
     .login-container img {
-      width: 80px;
+      width: 100px;
       margin-bottom: 24px;
-      user-select: none;
-    }
-    h1 {
-      margin-bottom: 24px; 
-      color: #1DB954; 
-      font-weight: 900;
       user-select: none;
     }
     .github-btn {
@@ -59,7 +53,7 @@
 </head>
 <body>
   <form class="login-container" onsubmit="login(event)">
-    <h1>ORIS OS</h1>
+    <img src="r.png" alt="Logo ORIS OS" />
     <button type="button" class="github-btn" onclick="loginWithGitHub()">
       Entrar com GitHub
     </button>
@@ -84,5 +78,4 @@
     }
   </script>
 </body>
-
 </html>
