@@ -398,40 +398,34 @@
       <!-- Seções dinâmicas -->
     </div>
 
- <div class="grid" id="appGrid" role="list" aria-label="Applications list">
+<div class="grid" id="appGrid" role="list" aria-label="Applications list">
 
   <!-- 🌐 Navegação Local -->
   <section aria-label="Navegação">
-    <div class="app-card" onclick="abrirPagina('home.html')" role="listitem" tabindex="0" title="Home">
+    <div class="app-card" onclick="abrirPagina('home.html')">
       <img src="https://cdnjs.cloudflare.com/ajax/libs/octicons/16.1.1/svg/home.svg" alt="Home" width="24" height="24">
       <div>🏠 Home</div>
     </div>
-
     <div class="app-card" onclick="abrirPagina('light.html')">
       <img src="https://cdn-icons-png.flaticon.com/512/168/168102.png" alt="Light" width="24" height="24">
       <div>💡 Light</div>
     </div>
-
     <div class="app-card" onclick="abrirPagina('air.html')">
       <img src="https://cdn-icons-png.flaticon.com/512/58/58900.png" alt="Air" width="24" height="24">
       <div>🌬️ Air</div>
     </div>
-
     <div class="app-card" onclick="abrirPagina('energy.html')">
       <img src="https://cdn-icons-png.flaticon.com/512/3159/3159083.png" alt="Energy" width="24" height="24">
       <div>⚡ Energy</div>
     </div>
-
     <div class="app-card" onclick="abrirPagina('akiles.html')">
       <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Store" width="24" height="24">
       <div>🛒 Store</div>
     </div>
-
     <div class="app-card" onclick="abrirPagina('rabbit.html')">
       <img src="https://cdn-icons-png.flaticon.com/512/616/616554.png" alt="Rabbit" width="24" height="24">
       <div>🐇 Meta Rabbit</div>
     </div>
-
     <div class="app-card" onclick="abrirPagina('configuracoes.html')">
       <img src="https://cdn-icons-png.flaticon.com/512/2099/2099074.png" alt="Settings" width="24" height="24">
       <div>⚙️ Settings</div>
@@ -441,102 +435,56 @@
   <!-- 🧰 Utilitários -->
   <section aria-label="Utilitários">
     <div class="app-card" onclick="window.open('https://calendar.google.com', '_blank')">
-      <img src="https://calendar.google.com/googlecalendar/images/favicon.ico" alt="Calendar" width="24" height="24">
+      <img src="https://calendar.google.com/googlecalendar/images/favicon.ico" alt="Agenda" width="24" height="24">
       <div>📅 Agenda</div>
     </div>
-
-    <div class="app-card" onclick="window.open('https://translate.google.com', '_blank')">
-      <img src="https://translate.google.com/favicon.ico" alt="Tradutor" width="24" height="24">
-      <div>🌐 Tradutor</div>
+    <div class="app-card" onclick="window.open('https://keep.google.com', '_blank')">
+      <img src="https://keep.google.com/favicon.ico" alt="Keep" width="24" height="24">
+      <div>📝 Keep</div>
     </div>
-
-    <div class="app-card" onclick="window.open('https://zoom.us', '_blank')">
-      <img src="https://zoom.us/favicon.ico" alt="Zoom" width="24" height="24">
-      <div>🎥 Zoom</div>
+    <div class="app-card" onclick="window.open('https://notion.so', '_blank')">
+      <img src="https://www.notion.so/favicon.ico" alt="Notion" width="24" height="24">
+      <div>🔔 Notion</div>
     </div>
-
-    <div class="app-card" onclick="window.open('https://monday.com', '_blank')">
-      <img src="https://monday.com/favicon.ico" alt="Monday" width="24" height="24">
-      <div>📅 Monday</div>
+    <div class="app-card" onclick="window.open('https://www.evernote.com', '_blank')">
+      <img src="https://evernote.com/favicon.ico" alt="Evernote" width="24" height="24">
+      <div>🧾 Evernote</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://todoist.com', '_blank')">
+      <img src="https://todoist.com/favicon.ico" alt="Todoist" width="24" height="24">
+      <div>🗓️ Todoist</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://bitwarden.com', '_blank')">
+      <img src="https://bitwarden.com/favicon.ico" alt="Bitwarden" width="24" height="24">
+      <div>🔑 Bitwarden</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://www.speedtest.net', '_blank')">
+      <img src="https://www.speedtest.net/favicon.ico" alt="Speedtest" width="24" height="24">
+      <div>📡 Speedtest</div>
     </div>
   </section>
 
-  <!-- 📂 Escritório -->
-  <section aria-label="Escritório">
-    <div class="app-card" onclick="window.open('https://docs.google.com/spreadsheets', '_blank')">
-      <img src="https://docs.google.com/favicon.ico" alt="Sheets" width="24" height="24">
-      <div>📊 Sheets</div>
-    </div>
-
-    <div class="app-card" onclick="window.open('https://docs.google.com/document', '_blank')">
-      <img src="https://docs.google.com/favicon.ico" alt="Docs" width="24" height="24">
-      <div>📄 Docs</div>
-    </div>
-
+  <!-- 💾 Arquivos & Backup -->
+  <section aria-label="Arquivos & Backup">
     <div class="app-card" onclick="window.open('https://drive.google.com', '_blank')">
       <img src="https://drive.google.com/favicon.ico" alt="Drive" width="24" height="24">
       <div>☁️ Drive</div>
     </div>
-
     <div class="app-card" onclick="window.open('https://onedrive.live.com', '_blank')">
       <img src="https://onedrive.live.com/favicon.ico" alt="OneDrive" width="24" height="24">
       <div>📁 OneDrive</div>
     </div>
-  </section>
-
-  <!-- 🎵 Mídia -->
-  <section aria-label="Mídia">
-    <div class="app-card" onclick="window.open('https://music.youtube.com', '_blank')">
-      <img src="https://music.youtube.com/favicon.ico" alt="YouTube Music" width="24" height="24">
-      <div>🎵 Music</div>
+    <div class="app-card" onclick="window.open('https://www.dropbox.com', '_blank')">
+      <img src="https://www.dropbox.com/favicon.ico" alt="Dropbox" width="24" height="24">
+      <div>🗃️ Dropbox</div>
     </div>
-
-    <div class="app-card" onclick="window.open('https://open.spotify.com', '_blank')">
-      <img src="https://open.spotify.com/favicon.ico" alt="Spotify" width="24" height="24">
-      <div>🎶 Spotify</div>
+    <div class="app-card" onclick="window.open('https://wetransfer.com', '_blank')">
+      <img src="https://wetransfer.com/favicon.ico" alt="WeTransfer" width="24" height="24">
+      <div>📤 WeTransfer</div>
     </div>
-
-    <div class="app-card" onclick="window.open('https://www.netflix.com', '_blank')">
-      <img src="https://www.netflix.com/favicon.ico" alt="Netflix" width="24" height="24">
-      <div>🎬 Netflix</div>
-    </div>
-
-    <div class="app-card" onclick="window.open('https://photos.google.com', '_blank')">
-      <img src="https://photos.google.com/favicon.ico" alt="Fotos" width="24" height="24">
-      <div>🖼️ Fotos</div>
-    </div>
-
-    <div class="app-card" onclick="window.open('https://www.streamelements.com/', '_blank')">
-      <img src="https://www.streamelements.com/favicon.ico" alt="StreamElements" width="24" height="24">
-      <div>🎥 StreamElements</div>
-    </div>
-  </section>
-
-  <!-- 💻 Desenvolvimento -->
-  <section aria-label="Desenvolvimento">
-    <div class="app-card" onclick="window.open('https://github.com', '_blank')">
-      <img src="https://github.githubassets.com/favicons/favicon.png" alt="GitHub" width="24" height="24">
-      <div>🐙 GitHub</div>
-    </div>
-
-    <div class="app-card" onclick="window.open('https://idx.dev', '_blank')">
-      <img src="https://developers.google.com/_static/images/favicon.png" alt="Google IDX" width="24" height="24">
-      <div>💻 Google IDX</div>
-    </div>
-
-    <div class="app-card" onclick="window.open('https://trello.com', '_blank')">
-      <img src="https://trello.com/favicon.ico" alt="Trello" width="24" height="24">
-      <div>📋 Trello</div>
-    </div>
-
-    <div class="app-card" onclick="window.open('https://www.stackoverflow.com', '_blank')">
-      <img src="https://stackoverflow.com/favicon.ico" alt="StackOverflow" width="24" height="24">
-      <div>❓ StackOverflow</div>
-    </div>
-
-    <div class="app-card" onclick="window.open('https://www.cloudflare.com', '_blank')">
-      <img src="https://www.cloudflare.com/favicon.ico" alt="Cloudflare" width="24" height="24">
-      <div>🛡️ Cloudflare</div>
+    <div class="app-card" onclick="window.open('https://sync.com', '_blank')">
+      <img src="https://sync.com/favicon.ico" alt="Sync" width="24" height="24">
+      <div>🔄 Sync.com</div>
     </div>
   </section>
 
@@ -546,60 +494,182 @@
       <img src="https://www.edx.org/favicon.ico" alt="edX" width="24" height="24">
       <div>📘 edX</div>
     </div>
-
     <div class="app-card" onclick="window.open('https://www.udemy.com', '_blank')">
       <img src="https://www.udemy.com/favicon.ico" alt="Udemy" width="24" height="24">
       <div>📚 Udemy</div>
     </div>
-
-    <div class="app-card" onclick="window.open('https://www.canva.com', '_blank')">
-      <img src="https://www.canva.com/favicon.ico" alt="Canva" width="24" height="24">
-      <div>🖌️ Canva</div>
+    <div class="app-card" onclick="window.open('https://www.coursera.org', '_blank')">
+      <img src="https://www.coursera.org/favicon.ico" alt="Coursera" width="24" height="24">
+      <div>🧠 Coursera</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://pt.khanacademy.org', '_blank')">
+      <img src="https://pt.khanacademy.org/favicon.ico" alt="Khan Academy" width="24" height="24">
+      <div>📖 Khan Academy</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://www.duolingo.com', '_blank')">
+      <img src="https://www.duolingo.com/favicon.ico" alt="Duolingo" width="24" height="24">
+      <div>👨‍🏫 Duolingo</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://figma.com', '_blank')">
+      <img src="https://www.figma.com/favicon.ico" alt="Figma" width="24" height="24">
+      <div>📸 Figma</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://codepen.io', '_blank')">
+      <img src="https://codepen.io/favicon.ico" alt="CodePen" width="24" height="24">
+      <div>🧪 CodePen</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://jsfiddle.net', '_blank')">
+      <img src="https://jsfiddle.net/favicon.ico" alt="JSFiddle" width="24" height="24">
+      <div>🧪 JSFiddle</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://devdocs.io', '_blank')">
+      <img src="https://devdocs.io/favicon.ico" alt="DevDocs" width="24" height="24">
+      <div>🔍 DevDocs</div>
     </div>
   </section>
 
-  <!-- 👥 Social -->
-  <section aria-label="Social">
+  <!-- 💻 Desenvolvimento -->
+  <section aria-label="Desenvolvimento">
+    <div class="app-card" onclick="window.open('https://github.com', '_blank')">
+      <img src="https://github.githubassets.com/favicons/favicon.png" alt="GitHub" width="24" height="24">
+      <div>🐙 GitHub</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://idx.dev', '_blank')">
+      <img src="https://developers.google.com/_static/images/favicon.png" alt="Google IDX" width="24" height="24">
+      <div>💻 Google IDX</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://www.cloudflare.com', '_blank')">
+      <img src="https://www.cloudflare.com/favicon.ico" alt="Cloudflare" width="24" height="24">
+      <div>🛡️ Cloudflare</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://analytics.google.com', '_blank')">
+      <img src="https://analytics.google.com/favicon.ico" alt="Google Analytics" width="24" height="24">
+      <div>📈 Google Analytics</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://vercel.com', '_blank')">
+      <img src="https://vercel.com/favicon.ico" alt="Vercel" width="24" height="24">
+      <div>⚡ Vercel</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://netlify.com', '_blank')">
+      <img src="https://netlify.com/favicon.ico" alt="Netlify" width="24" height="24">
+      <div>⚡ Netlify</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://npmjs.com', '_blank')">
+      <img src="https://www.npmjs.com/favicon.ico" alt="npm" width="24" height="24">
+      <div>📦 npm</div>
+    </div>
+  </section>
+
+  <!-- 🎵 Mídia & Entretenimento -->
+  <section aria-label="Mídia & Entretenimento">
+    <div class="app-card" onclick="window.open('https://www.youtube.com', '_blank')">
+      <img src="https://www.youtube.com/favicon.ico" alt="YouTube" width="24" height="24">
+      <div>🎥 YouTube</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://music.youtube.com', '_blank')">
+      <img src="https://music.youtube.com/favicon.ico" alt="YouTube Music" width="24" height="24">
+      <div>🎵 YouTube Music</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://open.spotify.com', '_blank')">
+      <img src="https://open.spotify.com/favicon.ico" alt="Spotify" width="24" height="24">
+      <div>🎶 Spotify</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://www.netflix.com', '_blank')">
+      <img src="https://www.netflix.com/favicon.ico" alt="Netflix" width="24" height="24">
+      <div>🎬 Netflix</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://www.streamelements.com', '_blank')">
+      <img src="https://www.streamelements.com/favicon.ico" alt="StreamElements" width="24" height="24">
+      <div>🎥 StreamElements</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://anchor.fm', '_blank')">
+      <img src="https://anchor.fm/favicon.ico" alt="Anchor" width="24" height="24">
+      <div>🎙️ Anchor</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://www.capcut.com', '_blank')">
+      <img src="https://www.capcut.com/favicon.ico" alt="CapCut" width="24" height="24">
+      <div>🎞️ CapCut</div>
+    </div>
+  </section>
+
+  <!-- 👥 Social & Comunicação -->
+  <section aria-label="Social & Comunicação">
     <div class="app-card" onclick="window.open('https://twitter.com', '_blank')">
       <img src="https://twitter.com/favicon.ico" alt="Twitter" width="24" height="24">
       <div>🐦 Twitter</div>
     </div>
-
-    <div class="app-card" onclick="window.open('https://www.pinterest.com/', '_blank')">
+    <div class="app-card" onclick="window.open('https://www.facebook.com', '_blank')">
+      <img src="https://facebook.com/favicon.ico" alt="Facebook" width="24" height="24">
+      <div>👤 Facebook</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://www.instagram.com', '_blank')">
+      <img src="https://instagram.com/favicon.ico" alt="Instagram" width="24" height="24">
+      <div>📷 Instagram</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://www.pinterest.com', '_blank')">
       <img src="https://www.pinterest.com/favicon.ico" alt="Pinterest" width="24" height="24">
       <div>📌 Pinterest</div>
     </div>
-
-    <div class="app-card" onclick="window.open('https://www.linkedin.com/company/linkedin/', '_blank')">
-      <img src="https://www.linkedin.com/favicon.ico" alt="LinkedIn Ações" width="24" height="24">
-      <div>📈 Ações LinkedIn</div>
+    <div class="app-card" onclick="window.open('https://www.reddit.com', '_blank')">
+      <img src="https://www.reddit.com/favicon.ico" alt="Reddit" width="24" height="24">
+      <div>📢 Reddit</div>
     </div>
-
+    <div class="app-card" onclick="window.open('https://web.whatsapp.com', '_blank')">
+      <img src="https://web.whatsapp.com/favicon.ico" alt="WhatsApp Web" width="24" height="24">
+      <div>📞 WhatsApp Web</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://discord.com', '_blank')">
+      <img src="https://discord.com/favicon.ico" alt="Discord" width="24" height="24">
+      <div>🗨️ Discord</div>
+    </div>
     <div class="app-card" onclick="window.open('https://chat.openai.com', '_blank')">
       <img src="https://chat.openai.com/favicon.ico" alt="ChatGPT" width="24" height="24">
       <div>🤖 ChatGPT</div>
     </div>
-  </section>
-
-  <!-- 🌍 Outros -->
-  <section aria-label="Outros">
-    <div class="app-card" onclick="window.open('https://www.kickstarter.com', '_blank')">
-      <img src="https://www.kickstarter.com/favicon.ico" alt="Kickstarter" width="24" height="24">
-      <div>🚀 Kickstarter</div>
-    </div>
-
     <div class="app-card" onclick="window.open('https://play.google.com/store', '_blank')">
       <img src="https://play.google.com/favicon.ico" alt="Play Store" width="24" height="24">
       <div>📱 Play Store</div>
     </div>
-
-    <div class="app-card" onclick="window.open('https://hub3.com.br/', '_blank')">
+    <div class="app-card" onclick="window.open('https://hub3.com.br', '_blank')">
       <img src="https://hub3.com.br/favicon.ico" alt="Hub3" width="24" height="24">
       <div>🌐 Hub3</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://www.linkedin.com', '_blank')">
+      <img src="https://www.linkedin.com/favicon.ico" alt="LinkedIn" width="24" height="24">
+      <div>📈 LinkedIn</div>
+    </div>
+  </section>
+
+  <!-- 💰 Finanças -->
+  <section aria-label="Finanças">
+    <div class="app-card" onclick="window.open('https://www.paypal.com', '_blank')">
+      <img src="https://www.paypal.com/favicon.ico" alt="PayPal" width="24" height="24">
+      <div>💰 PayPal</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://nubank.com.br', '_blank')">
+      <img src="https://nubank.com.br/favicon.ico" alt="Nubank" width="24" height="24">
+      <div>💳 Nubank</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://www.picpay.com', '_blank')">
+      <img src="https://www.picpay.com/favicon.ico" alt="PicPay" width="24" height="24">
+      <div>💸 PicPay</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://inter.com.br', '_blank')">
+      <img src="https://inter.com.br/favicon.ico" alt="Banco Inter" width="24" height="24">
+      <div>🏦 Banco Inter</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://www.tradingview.com', '_blank')">
+      <img src="https://www.tradingview.com/favicon.ico" alt="TradingView" width="24" height="24">
+      <div>📈 TradingView</div>
+    </div>
+    <div class="app-card" onclick="window.open('https://www.google.com/finance', '_blank')">
+      <img src="https://www.google.com/favicon.ico" alt="Google Finance" width="24" height="24">
+      <div>📈 Google Finance</div>
     </div>
   </section>
 
 </div>
+
 
 
   </main>
