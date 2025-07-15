@@ -1,693 +1,485 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="logo.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ORIS OS - Neon Glass UI</title>
+  <link rel="icon" href="logo.ico" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <style>
-  /* Reset básico */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121212;
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    overflow-x: hidden;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: background 0.4s ease, color 0.3s ease;
-    user-select: none;
-    backdrop-filter: blur(6px);
-    flex-direction: row;
-    padding-bottom: 40px;
-  }
-
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #1db954aa;
-    border-radius: 10px;
-    border: 1px solid #1db95455;
-  }
-
-  .sidebar {
-    width: 260px;
-    background: rgba(4, 4, 4, 0.85);
-    padding: 32px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    border-right: 1px solid #282828;
-    backdrop-filter: blur(10px);
-    flex-shrink: 0;
-  }
-
-  .sidebar h2 {
-    color: #1DB954;
-    font-size: 30px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    user-select: text;
-  }
-
-  .sidebar button {
-    background: transparent;
-    border: none;
-    color: #b3b3b3;
-    padding: 14px 18px;
-    text-align: left;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    position: relative;
-    transition: all 0.3s ease;
-    outline-offset: 2px;
-    user-select: none;
-  }
-
-  .sidebar button::after {
-    content: '';
-    position: absolute;
-    left: 10px;
-    bottom: 6px;
-    height: 3px;
-    width: 0;
-    background: #1DB954;
-    transition: width 0.25s ease;
-    border-radius: 2px;
-  }
-
-  .sidebar button:hover::after,
-  .sidebar button.active::after {
-    width: 80%;
-  }
-
-  .sidebar button:hover,
-  .sidebar button.active {
-    background: rgba(29, 185, 84, 0.2);
-    color: #fff;
-    transform: translateX(5px);
-    box-shadow: 0 0 10px #1db95488;
-  }
-
-  .sidebar button:focus-visible {
-    outline: 2px solid #1DB954;
-    outline-offset: 4px;
-    background: rgba(29, 185, 84, 0.3);
-    color: #fff;
-    transform: translateX(5px);
-  }
-
-  .sidebar button .material-icons {
-    font-size: 22px;
-    color: #1DB954;
-    transition: transform 0.3s, color 0.2s;
-    flex-shrink: 0;
-  }
-
-  .sidebar button:hover .material-icons,
-  .sidebar button.active .material-icons {
-    color: #1db954;
-    transform: scale(1.2);
-  }
-
-  .main {
-    flex: 1;
-    padding: 48px 64px;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(180deg, #121212 0%, #181818 100%);
-    overflow-y: auto;
-    scroll-behavior: smooth;
-    min-height: 100vh;
-  }
-
-  .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 32px;
-    gap: 16px;
-  }
-
-  .topbar h1 {
-    font-size: 34px;
-    font-weight: 900;
-    color: #1DB954;
-    letter-spacing: 0.5px;
-    user-select: text;
-  }
-
-  .topbar input[type="text"] {
-    padding: 12px 24px;
-    border-radius: 40px;
-    background: #1b1b1b;
-    border: 1px solid #333;
-    color: #fff;
-    width: 260px;
-    font-size: 15px;
-    box-shadow: inset 0 0 6px #000;
-    transition: border-color 0.3s ease;
-  }
-
-  .topbar input[type="text"]:focus {
-    outline: none;
-    border-color: #1DB954;
-    box-shadow: 0 0 8px #1DB954;
-  }
-
-  .topbar input::placeholder {
-    color: #888;
-  }
-
-  .topbar .controls {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .topbar .controls button {
-    padding: 12px 20px;
-    border-radius: 30px;
-    border: none;
-    font-weight: 700;
-    font-size: 16px;
-    background: #1DB954;
-    color: #121212;
-    transition: background 0.3s, transform 0.2s;
-    box-shadow: 0 0 10px #1db954bb;
-    cursor: pointer;
-    position: relative;
-    user-select: none;
-  }
-
-  .topbar .controls button:hover {
-    background: #1fd666;
-    transform: scale(1.1);
-    box-shadow: 0 0 15px #1fd666cc;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 22px;
-    padding-right: 8px;
-    scroll-behavior: smooth;
-    position: relative;
-  }
-
-  #noResults {
-    grid-column: 1/-1;
-    color: #888;
-    font-style: italic;
-    text-align: center;
-    user-select: none;
-    padding: 30px 0;
-    font-size: 18px;
-  }
-
-  .app-card {
-    background: rgba(24, 24, 24, 0.9);
-    border: 2px solid #1DB954;
-    border-radius: 20px;
-    padding: 28px 16px;
-    text-align: center;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    font-weight: 700;
-    color: #1DB954;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 8px #1db95425;
-    user-select: none;
-    position: relative;
-    outline-offset: 4px;
-  }
-
-  .app-card .material-icons {
-    font-size: 56px;
-    color: inherit;
-    transition: transform 0.3s;
-    pointer-events: none;
-  }
-
-  .app-card:hover,
-  .app-card:focus-visible {
-    background: #1DB954;
-    color: #121212;
-    transform: translateY(-6px) scale(1.05);
-    box-shadow: 0 0 20px #1DB954dd;
-    outline: none;
-    z-index: 2;
-  }
-
-  .app-card:hover .material-icons,
-  .app-card:focus-visible .material-icons {
-    transform: scale(1.3);
-    color: #121212;
-  }
-
-  .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 40px;
-    background: #0c0c0c;
-    color: #ccc;
-    border-top: 1px solid #222;
-    font-size: 14px;
-    line-height: 40px;
-    white-space: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 0 16px;
-    font-family: Arial, sans-serif;
-    user-select: text;
-    box-shadow: inset 0 1px 3px #0008;
-    z-index: 1000;
-  }
-
-  .footer strong {
-    color: #fff;
-  }
-
-  .footer p {
-    display: inline;
-    margin-right: 40px;
-  }
-
-  @media (max-width: 1200px) {
-    .grid {
-      grid-template-columns: repeat(4, 1fr);
+    /* Reset e temas */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-  }
-
-  @media (max-width: 900px) {
-    .grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  @media (max-width: 600px) {
     body {
-      flex-direction: column;
-    }
-
-    .sidebar {
-      width: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212;
+      color: #fff;
+      display: flex;
       flex-direction: row;
-      padding: 20px 10px;
-      gap: 12px;
-      overflow-x: auto;
-      border-bottom: 1px solid #282828;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
     }
-
-    .sidebar h2 {
-      flex-shrink: 0;
-      padding-right: 16px;
-      border-right: 1px solid #1DB954;
+    body.light-mode {
+      background: #f4f4f4;
+      color: #000;
     }
-
-    .sidebar button {
-      flex-shrink: 0;
-      padding: 12px;
-      font-size: 14px;
-      gap: 6px;
+    body.light-mode .sidebar {
+      background: #e0e0e0;
+      border-color: #ccc;
     }
-
-    .main {
-      padding: 24px 16px;
+    body.light-mode .main {
+      background: linear-gradient(180deg, #fff 0%, #eaeaea 100%);
     }
-
-    .topbar {
+    body.light-mode .footer {
+      background: #d0d0d0;
+      color: #333;
+    }
+    .sidebar {
+      width: 240px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      border-right: 1px solid #2c2c2c;
+      display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
+      gap: 10px;
+      position: fixed;
+      top: 0; bottom: 0; left: 0;
+      overflow-y: auto;
     }
-
-    .topbar input[type="text"] {
+    .sidebar h2 {
+      color: #1db954;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 1.6rem;
+      user-select: none;
+    }
+    .sidebar button {
+      display: block;
+      background: none;
+      color: #ccc;
+      border: none;
+      padding: 10px;
+      text-align: left;
       width: 100%;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 15px;
+      transition: background-color 0.3s, color 0.3s;
+      user-select: none;
     }
-
+    .sidebar button.active,
+    .sidebar button:hover {
+      background-color: #1db954;
+      color: #000;
+      font-weight: 600;
+    }
+    .main {
+      flex: 1;
+      padding: 20px;
+      margin-left: 240px;
+      overflow-y: auto;
+      background: transparent;
+      min-height: 100vh;
+      transition: background 0.3s;
+    }
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+    .topbar h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      user-select: none;
+      flex-grow: 1;
+      min-width: 200px;
+    }
+    .topbar .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .topbar input {
+      padding: 10px 15px;
+      width: 250px;
+      border-radius: 20px;
+      border: 1px solid #444;
+      font-size: 1rem;
+      outline-offset: 2px;
+      transition: border-color 0.3s;
+    }
+    .topbar input:focus {
+      border-color: #1db954;
+      outline: none;
+    }
+    .topbar .controls button {
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      background: #1db954;
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s;
+    }
+    .topbar .controls button:hover {
+      background: #17a444;
+    }
     .grid {
-      grid-template-columns: repeat(2, 1fr);
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 20px;
     }
-  }
-</style>
+    .app-card {
+      background: #1c1c1c;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-weight: 600;
+    }
+    .app-card:hover {
+      background: #1db954;
+      color: #000;
+      transform: scale(1.05);
+    }
+    .app-card img {
+      width: 32px;
+      height: 32px;
+      pointer-events: none;
+    }
+    .footer {
+      width: 100%;
+      background: #0c0c0c;
+      padding: 10px 20px;
+      font-size: 14px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      user-select: none;
+      color: #777;
+      z-index: 100;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.7);
+    }
 
+    /* Opcional: leitura modo (estilizar se quiser) */
+    body.reading-mode {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      background: #fafafa;
+      color: #222;
+    }
+  </style>
 </head>
-
 <body>
-  <nav class="sidebar" role="navigation" aria-label="Main Sidebar">
+  <nav class="sidebar" role="navigation" aria-label="Menu principal">
     <h2>ORIS OS</h2>
-  <button class="active" onclick="abrirPagina('dashboard.html', this)" aria-current="page" aria-label="Dashboard" tabindex="0">📊 Dashboard</button>
-
-<button onclick="abrirPagina('notificacoes.html', this)" aria-label="Notifications" tabindex="0">🔔 Notifications</button>
-
-<button onclick="abrirPagina('perfil.html', this)" aria-label="Profile" tabindex="0">👤 Profile</button>
-
-<button onclick="abrirPagina('configuracoes.html', this)" aria-label="Settings" tabindex="0">⚙️ Settings</button>
-
-<button onclick="abrirPagina('sobre.html', this)" aria-label="About" tabindex="0">ℹ️ About</button>
-
-<button onclick="abrirPagina('akiles.html', this)" aria-label="Store" tabindex="0">🏪 Store</button>
-
-<button onclick="abrirPagina('rabbit.html', this)" aria-label="Meta Rabbit" tabindex="0">🐰 Meta Rabbit</button>
-
-<button onclick="abrirPagina('oristv.html', this)" aria-label="Oris TV" tabindex="0">📺 oris tv</button>
-
-<button onclick="abrirPagina('homeb.html', this)" aria-label="Home Broker" tabindex="0">🏠📈 home broker</button>
-
-<button onclick="abrirPagina('oris.html', this)" aria-label="Oris SDK" tabindex="0">🤖 oris sdk</button>
-
-<button onclick="logout()" aria-label="Logout" tabindex="0">🚪 Logout</button>
-
-      
+    <button class="active" onclick="abrirPagina('dashboard.html', this)">📊 Dashboard</button>
+    <button onclick="abrirPagina('notificacoes.html', this)">🔔 Notificações</button>
+    <button onclick="abrirPagina('perfil.html', this)">👤 Perfil</button>
+    <button onclick="abrirPagina('configuracoes.html', this)">⚙️ Configurações</button>
+    <button onclick="abrirPagina('sobre.html', this)">ℹ️ Sobre</button>
+    <button onclick="abrirPagina('akiles.html', this)">🏪 Loja</button>
+    <button onclick="abrirPagina('rabbit.html', this)">🐰 Meta Rabbit</button>
+    <button onclick="abrirPagina('oristv.html', this)">📺 ORIS TV</button>
+    <button onclick="abrirPagina('homeb.html', this)">📈 Home Broker</button>
+    <button onclick="abrirPagina('oris.html', this)">🤖 ORIS SDK</button>
+    <button onclick="logout()">🚪 Sair</button>
   </nav>
-
-  <main class="main" role="main" tabindex="-1">
+  <main class="main" role="main">
     <div class="topbar">
-      <h1>Welcome to ORIS OS</h1>
-   
+      <h1>Bem-vindo ao ORIS OS</h1>
+      <div class="controls">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Buscar apps..."
+          aria-label="Buscar aplicativos"
+          oninput="filtrarApps()" />
+        <button onclick="toggleTheme()" aria-pressed="false" aria-label="Alternar tema claro e escuro">🌓 Tema</button>
+        <button onclick="toggleReadingMode()" aria-pressed="false" aria-label="Alternar modo de leitura">📖 Leitura</button>
+      </div>
     </div>
+  <div class="grid" id="appGrid" role="list" aria-label="Lista de aplicativos">
 
-    <div class="sections" role="region" aria-label="Sections">
-      <!-- Seções dinâmicas -->
-    </div>
+  <!-- Navegação Local -->
+  <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('home.html')">
+    <img src="https://cdnjs.cloudflare.com/ajax/libs/octicons/16.1.1/svg/home.svg" alt="Home" />
+    <div>🏠 Home</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('light.html')">
+    <img src="https://cdn-icons-png.flaticon.com/512/168/168102.png" alt="Light" />
+    <div>💡 Light</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('air.html')">
+    <img src="https://cdn-icons-png.flaticon.com/512/58/58900.png" alt="Air" />
+    <div>🌬️ Air</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('energy.html')">
+    <img src="https://cdn-icons-png.flaticon.com/512/3159/3159083.png" alt="Energy" />
+    <div>⚡ Energy</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('akiles.html')">
+    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Store" />
+    <div>🛒 Store</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('rabbit.html')">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616554.png" alt="Rabbit" />
+    <div>🐇 Meta Rabbit</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('configuracoes.html')">
+    <img src="https://cdn-icons-png.flaticon.com/512/2099/2099074.png" alt="Settings" />
+    <div>⚙️ Settings</div>
+  </div>
 
-<div class="grid" id="appGrid" role="list" aria-label="Applications list">
+  <!-- Utilitários -->
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://calendar.google.com', '_blank')">
+    <img src="https://calendar.google.com/googlecalendar/images/favicon.ico" alt="Agenda" />
+    <div>📅 Agenda</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://keep.google.com', '_blank')">
+    <img src="https://keep.google.com/favicon.ico" alt="Keep" />
+    <div>📝 Keep</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://notion.so', '_blank')">
+    <img src="https://www.notion.so/favicon.ico" alt="Notion" />
+    <div>🔔 Notion</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.evernote.com', '_blank')">
+    <img src="https://evernote.com/favicon.ico" alt="Evernote" />
+    <div>🧾 Evernote</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://todoist.com', '_blank')">
+    <img src="https://todoist.com/favicon.ico" alt="Todoist" />
+    <div>🗓️ Todoist</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://bitwarden.com', '_blank')">
+    <img src="https://bitwarden.com/favicon.ico" alt="Bitwarden" />
+    <div>🔑 Bitwarden</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.speedtest.net', '_blank')">
+    <img src="https://www.speedtest.net/favicon.ico" alt="Speedtest" />
+    <div>📡 Speedtest</div>
+  </div>
 
-  <!-- 🌐 Navegação Local -->
-  <section aria-label="Navegação">
-    <div class="app-card" onclick="abrirPagina('home.html')">
-      <img src="https://cdnjs.cloudflare.com/ajax/libs/octicons/16.1.1/svg/home.svg" alt="Home" width="24" height="24">
-      <div>🏠 Home</div>
-    </div>
-    <div class="app-card" onclick="abrirPagina('light.html')">
-      <img src="https://cdn-icons-png.flaticon.com/512/168/168102.png" alt="Light" width="24" height="24">
-      <div>💡 Light</div>
-    </div>
-    <div class="app-card" onclick="abrirPagina('air.html')">
-      <img src="https://cdn-icons-png.flaticon.com/512/58/58900.png" alt="Air" width="24" height="24">
-      <div>🌬️ Air</div>
-    </div>
-    <div class="app-card" onclick="abrirPagina('energy.html')">
-      <img src="https://cdn-icons-png.flaticon.com/512/3159/3159083.png" alt="Energy" width="24" height="24">
-      <div>⚡ Energy</div>
-    </div>
-    <div class="app-card" onclick="abrirPagina('akiles.html')">
-      <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Store" width="24" height="24">
-      <div>🛒 Store</div>
-    </div>
-    <div class="app-card" onclick="abrirPagina('rabbit.html')">
-      <img src="https://cdn-icons-png.flaticon.com/512/616/616554.png" alt="Rabbit" width="24" height="24">
-      <div>🐇 Meta Rabbit</div>
-    </div>
-    <div class="app-card" onclick="abrirPagina('configuracoes.html')">
-      <img src="https://cdn-icons-png.flaticon.com/512/2099/2099074.png" alt="Settings" width="24" height="24">
-      <div>⚙️ Settings</div>
-    </div>
-  </section>
+  <!-- Arquivos & Backup -->
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://drive.google.com', '_blank')">
+    <img src="https://drive.google.com/favicon.ico" alt="Drive" />
+    <div>☁️ Drive</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://onedrive.live.com', '_blank')">
+    <img src="https://onedrive.live.com/favicon.ico" alt="OneDrive" />
+    <div>📁 OneDrive</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.dropbox.com', '_blank')">
+    <img src="https://www.dropbox.com/favicon.ico" alt="Dropbox" />
+    <div>🗃️ Dropbox</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://wetransfer.com', '_blank')">
+    <img src="https://wetransfer.com/favicon.ico" alt="WeTransfer" />
+    <div>📤 WeTransfer</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://sync.com', '_blank')">
+    <img src="https://sync.com/favicon.ico" alt="Sync" />
+    <div>🔄 Sync.com</div>
+  </div>
 
-  <!-- 🧰 Utilitários -->
-  <section aria-label="Utilitários">
-    <div class="app-card" onclick="window.open('https://calendar.google.com', '_blank')">
-      <img src="https://calendar.google.com/googlecalendar/images/favicon.ico" alt="Agenda" width="24" height="24">
-      <div>📅 Agenda</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://keep.google.com', '_blank')">
-      <img src="https://keep.google.com/favicon.ico" alt="Keep" width="24" height="24">
-      <div>📝 Keep</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://notion.so', '_blank')">
-      <img src="https://www.notion.so/favicon.ico" alt="Notion" width="24" height="24">
-      <div>🔔 Notion</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.evernote.com', '_blank')">
-      <img src="https://evernote.com/favicon.ico" alt="Evernote" width="24" height="24">
-      <div>🧾 Evernote</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://todoist.com', '_blank')">
-      <img src="https://todoist.com/favicon.ico" alt="Todoist" width="24" height="24">
-      <div>🗓️ Todoist</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://bitwarden.com', '_blank')">
-      <img src="https://bitwarden.com/favicon.ico" alt="Bitwarden" width="24" height="24">
-      <div>🔑 Bitwarden</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.speedtest.net', '_blank')">
-      <img src="https://www.speedtest.net/favicon.ico" alt="Speedtest" width="24" height="24">
-      <div>📡 Speedtest</div>
-    </div>
-  </section>
+  <!-- Educação -->
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.edx.org', '_blank')">
+    <img src="https://www.edx.org/favicon.ico" alt="edX" />
+    <div>📘 edX</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.udemy.com', '_blank')">
+    <img src="https://www.udemy.com/favicon.ico" alt="Udemy" />
+    <div>📚 Udemy</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.coursera.org', '_blank')">
+    <img src="https://www.coursera.org/favicon.ico" alt="Coursera" />
+    <div>🧠 Coursera</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://pt.khanacademy.org', '_blank')">
+    <img src="https://pt.khanacademy.org/favicon.ico" alt="Khan Academy" />
+    <div>📖 Khan Academy</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.duolingo.com', '_blank')">
+    <img src="https://www.duolingo.com/favicon.ico" alt="Duolingo" />
+    <div>👨‍🏫 Duolingo</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://figma.com', '_blank')">
+    <img src="https://www.figma.com/favicon.ico" alt="Figma" />
+    <div>📸 Figma</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://codepen.io', '_blank')">
+    <img src="https://codepen.io/favicon.ico" alt="CodePen" />
+    <div>🧪 CodePen</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://jsfiddle.net', '_blank')">
+    <img src="https://jsfiddle.net/favicon.ico" alt="JSFiddle" />
+    <div>🧪 JSFiddle</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://devdocs.io', '_blank')">
+    <img src="https://devdocs.io/favicon.ico" alt="DevDocs" />
+    <div>🔍 DevDocs</div>
+  </div>
 
-  <!-- 💾 Arquivos & Backup -->
-  <section aria-label="Arquivos & Backup">
-    <div class="app-card" onclick="window.open('https://drive.google.com', '_blank')">
-      <img src="https://drive.google.com/favicon.ico" alt="Drive" width="24" height="24">
-      <div>☁️ Drive</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://onedrive.live.com', '_blank')">
-      <img src="https://onedrive.live.com/favicon.ico" alt="OneDrive" width="24" height="24">
-      <div>📁 OneDrive</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.dropbox.com', '_blank')">
-      <img src="https://www.dropbox.com/favicon.ico" alt="Dropbox" width="24" height="24">
-      <div>🗃️ Dropbox</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://wetransfer.com', '_blank')">
-      <img src="https://wetransfer.com/favicon.ico" alt="WeTransfer" width="24" height="24">
-      <div>📤 WeTransfer</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://sync.com', '_blank')">
-      <img src="https://sync.com/favicon.ico" alt="Sync" width="24" height="24">
-      <div>🔄 Sync.com</div>
-    </div>
-  </section>
+  <!-- Desenvolvimento -->
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://github.com', '_blank')">
+    <img src="https://github.githubassets.com/favicons/favicon.png" alt="GitHub" />
+    <div>🐙 GitHub</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://idx.dev', '_blank')">
+    <img src="https://developers.google.com/_static/images/favicon.png" alt="Google IDX" />
+    <div>💻 Google IDX</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.cloudflare.com', '_blank')">
+    <img src="https://www.cloudflare.com/favicon.ico" alt="Cloudflare" />
+    <div>🛡️ Cloudflare</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://analytics.google.com', '_blank')">
+    <img src="https://analytics.google.com/favicon.ico" alt="Google Analytics" />
+    <div>📈 Google Analytics</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://vercel.com', '_blank')">
+    <img src="https://vercel.com/favicon.ico" alt="Vercel" />
+    <div>⚡ Vercel</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://netlify.com', '_blank')">
+    <img src="https://netlify.com/favicon.ico" alt="Netlify" />
+    <div>⚡ Netlify</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://npmjs.com', '_blank')">
+    <img src="https://www.npmjs.com/favicon.ico" alt="npm" />
+    <div>📦 npm</div>
+  </div>
 
-  <!-- 🎓 Educação -->
-  <section aria-label="Educação">
-    <div class="app-card" onclick="window.open('https://www.edx.org', '_blank')">
-      <img src="https://www.edx.org/favicon.ico" alt="edX" width="24" height="24">
-      <div>📘 edX</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.udemy.com', '_blank')">
-      <img src="https://www.udemy.com/favicon.ico" alt="Udemy" width="24" height="24">
-      <div>📚 Udemy</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.coursera.org', '_blank')">
-      <img src="https://www.coursera.org/favicon.ico" alt="Coursera" width="24" height="24">
-      <div>🧠 Coursera</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://pt.khanacademy.org', '_blank')">
-      <img src="https://pt.khanacademy.org/favicon.ico" alt="Khan Academy" width="24" height="24">
-      <div>📖 Khan Academy</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.duolingo.com', '_blank')">
-      <img src="https://www.duolingo.com/favicon.ico" alt="Duolingo" width="24" height="24">
-      <div>👨‍🏫 Duolingo</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://figma.com', '_blank')">
-      <img src="https://www.figma.com/favicon.ico" alt="Figma" width="24" height="24">
-      <div>📸 Figma</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://codepen.io', '_blank')">
-      <img src="https://codepen.io/favicon.ico" alt="CodePen" width="24" height="24">
-      <div>🧪 CodePen</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://jsfiddle.net', '_blank')">
-      <img src="https://jsfiddle.net/favicon.ico" alt="JSFiddle" width="24" height="24">
-      <div>🧪 JSFiddle</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://devdocs.io', '_blank')">
-      <img src="https://devdocs.io/favicon.ico" alt="DevDocs" width="24" height="24">
-      <div>🔍 DevDocs</div>
-    </div>
-  </section>
+  <!-- Mídia & Entretenimento -->
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.youtube.com', '_blank')">
+    <img src="https://www.youtube.com/favicon.ico" alt="YouTube" />
+    <div>🎥 YouTube</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://music.youtube.com', '_blank')">
+    <img src="https://music.youtube.com/favicon.ico" alt="YouTube Music" />
+    <div>🎵 YouTube Music</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://open.spotify.com', '_blank')">
+    <img src="https://open.spotify.com/favicon.ico" alt="Spotify" />
+    <div>🎶 Spotify</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.netflix.com', '_blank')">
+    <img src="https://www.netflix.com/favicon.ico" alt="Netflix" />
+    <div>🎬 Netflix</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.streamelements.com', '_blank')">
+    <img src="https://www.streamelements.com/favicon.ico" alt="StreamElements" />
+    <div>🎥 StreamElements</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://anchor.fm', '_blank')">
+    <img src="https://anchor.fm/favicon.ico" alt="Anchor" />
+    <div>🎙️ Anchor</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.capcut.com', '_blank')">
+    <img src="https://www.capcut.com/favicon.ico" alt="CapCut" />
+    <div>🎞️ CapCut</div>
+  </div>
 
-  <!-- 💻 Desenvolvimento -->
-  <section aria-label="Desenvolvimento">
-    <div class="app-card" onclick="window.open('https://github.com', '_blank')">
-      <img src="https://github.githubassets.com/favicons/favicon.png" alt="GitHub" width="24" height="24">
-      <div>🐙 GitHub</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://idx.dev', '_blank')">
-      <img src="https://developers.google.com/_static/images/favicon.png" alt="Google IDX" width="24" height="24">
-      <div>💻 Google IDX</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.cloudflare.com', '_blank')">
-      <img src="https://www.cloudflare.com/favicon.ico" alt="Cloudflare" width="24" height="24">
-      <div>🛡️ Cloudflare</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://analytics.google.com', '_blank')">
-      <img src="https://analytics.google.com/favicon.ico" alt="Google Analytics" width="24" height="24">
-      <div>📈 Google Analytics</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://vercel.com', '_blank')">
-      <img src="https://vercel.com/favicon.ico" alt="Vercel" width="24" height="24">
-      <div>⚡ Vercel</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://netlify.com', '_blank')">
-      <img src="https://netlify.com/favicon.ico" alt="Netlify" width="24" height="24">
-      <div>⚡ Netlify</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://npmjs.com', '_blank')">
-      <img src="https://www.npmjs.com/favicon.ico" alt="npm" width="24" height="24">
-      <div>📦 npm</div>
-    </div>
-  </section>
+  <!-- Social & Comunicação -->
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://twitter.com', '_blank')">
+    <img src="https://twitter.com/favicon.ico" alt="Twitter" />
+    <div>🐦 Twitter</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.facebook.com', '_blank')">
+    <img src="https://facebook.com/favicon.ico" alt="Facebook" />
+    <div>👤 Facebook</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.instagram.com', '_blank')">
+    <img src="https://instagram.com/favicon.ico" alt="Instagram" />
+    <div>📷 Instagram</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.pinterest.com', '_blank')">
+    <img src="https://www.pinterest.com/favicon.ico" alt="Pinterest" />
+    <div>📌 Pinterest</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.reddit.com', '_blank')">
+    <img src="https://www.reddit.com/favicon.ico" alt="Reddit" />
+    <div>📢 Reddit</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://web.whatsapp.com', '_blank')">
+    <img src="https://web.whatsapp.com/favicon.ico" alt="WhatsApp Web" />
+    <div>📞 WhatsApp Web</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://discord.com', '_blank')">
+    <img src="https://discord.com/favicon.ico" alt="Discord" />
+    <div>🗨️ Discord</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://chat.openai.com', '_blank')">
+    <img src="https://chat.openai.com/favicon.ico" alt="ChatGPT" />
+    <div>🤖 ChatGPT</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://play.google.com/store', '_blank')">
+    <img src="https://play.google.com/favicon.ico" alt="Play Store" />
+    <div>📱 Play Store</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://hub3.com.br', '_blank')">
+    <img src="https://hub3.com.br/favicon.ico" alt="Hub3" />
+    <div>🌐 Hub3</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.linkedin.com', '_blank')">
+    <img src="https://www.linkedin.com/favicon.ico" alt="LinkedIn" />
+    <div>📈 LinkedIn</div>
+  </div>
 
-  <!-- 🎵 Mídia & Entretenimento -->
-  <section aria-label="Mídia & Entretenimento">
-    <div class="app-card" onclick="window.open('https://www.youtube.com', '_blank')">
-      <img src="https://www.youtube.com/favicon.ico" alt="YouTube" width="24" height="24">
-      <div>🎥 YouTube</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://music.youtube.com', '_blank')">
-      <img src="https://music.youtube.com/favicon.ico" alt="YouTube Music" width="24" height="24">
-      <div>🎵 YouTube Music</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://open.spotify.com', '_blank')">
-      <img src="https://open.spotify.com/favicon.ico" alt="Spotify" width="24" height="24">
-      <div>🎶 Spotify</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.netflix.com', '_blank')">
-      <img src="https://www.netflix.com/favicon.ico" alt="Netflix" width="24" height="24">
-      <div>🎬 Netflix</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.streamelements.com', '_blank')">
-      <img src="https://www.streamelements.com/favicon.ico" alt="StreamElements" width="24" height="24">
-      <div>🎥 StreamElements</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://anchor.fm', '_blank')">
-      <img src="https://anchor.fm/favicon.ico" alt="Anchor" width="24" height="24">
-      <div>🎙️ Anchor</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.capcut.com', '_blank')">
-      <img src="https://www.capcut.com/favicon.ico" alt="CapCut" width="24" height="24">
-      <div>🎞️ CapCut</div>
-    </div>
-  </section>
-
-  <!-- 👥 Social & Comunicação -->
-  <section aria-label="Social & Comunicação">
-    <div class="app-card" onclick="window.open('https://twitter.com', '_blank')">
-      <img src="https://twitter.com/favicon.ico" alt="Twitter" width="24" height="24">
-      <div>🐦 Twitter</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.facebook.com', '_blank')">
-      <img src="https://facebook.com/favicon.ico" alt="Facebook" width="24" height="24">
-      <div>👤 Facebook</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.instagram.com', '_blank')">
-      <img src="https://instagram.com/favicon.ico" alt="Instagram" width="24" height="24">
-      <div>📷 Instagram</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.pinterest.com', '_blank')">
-      <img src="https://www.pinterest.com/favicon.ico" alt="Pinterest" width="24" height="24">
-      <div>📌 Pinterest</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.reddit.com', '_blank')">
-      <img src="https://www.reddit.com/favicon.ico" alt="Reddit" width="24" height="24">
-      <div>📢 Reddit</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://web.whatsapp.com', '_blank')">
-      <img src="https://web.whatsapp.com/favicon.ico" alt="WhatsApp Web" width="24" height="24">
-      <div>📞 WhatsApp Web</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://discord.com', '_blank')">
-      <img src="https://discord.com/favicon.ico" alt="Discord" width="24" height="24">
-      <div>🗨️ Discord</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://chat.openai.com', '_blank')">
-      <img src="https://chat.openai.com/favicon.ico" alt="ChatGPT" width="24" height="24">
-      <div>🤖 ChatGPT</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://play.google.com/store', '_blank')">
-      <img src="https://play.google.com/favicon.ico" alt="Play Store" width="24" height="24">
-      <div>📱 Play Store</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://hub3.com.br', '_blank')">
-      <img src="https://hub3.com.br/favicon.ico" alt="Hub3" width="24" height="24">
-      <div>🌐 Hub3</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.linkedin.com', '_blank')">
-      <img src="https://www.linkedin.com/favicon.ico" alt="LinkedIn" width="24" height="24">
-      <div>📈 LinkedIn</div>
-    </div>
-  </section>
-
-  <!-- 💰 Finanças -->
-  <section aria-label="Finanças">
-    <div class="app-card" onclick="window.open('https://www.paypal.com', '_blank')">
-      <img src="https://www.paypal.com/favicon.ico" alt="PayPal" width="24" height="24">
-      <div>💰 PayPal</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://nubank.com.br', '_blank')">
-      <img src="https://nubank.com.br/favicon.ico" alt="Nubank" width="24" height="24">
-      <div>💳 Nubank</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.picpay.com', '_blank')">
-      <img src="https://www.picpay.com/favicon.ico" alt="PicPay" width="24" height="24">
-      <div>💸 PicPay</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://inter.com.br', '_blank')">
-      <img src="https://inter.com.br/favicon.ico" alt="Banco Inter" width="24" height="24">
-      <div>🏦 Banco Inter</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.tradingview.com', '_blank')">
-      <img src="https://www.tradingview.com/favicon.ico" alt="TradingView" width="24" height="24">
-      <div>📈 TradingView</div>
-    </div>
-    <div class="app-card" onclick="window.open('https://www.google.com/finance', '_blank')">
-      <img src="https://www.google.com/favicon.ico" alt="Google Finance" width="24" height="24">
-      <div>📈 Google Finance</div>
-    </div>
-  </section>
-
+  <!-- Finanças -->
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.paypal.com', '_blank')">
+    <img src="https://www.paypal.com/favicon.ico" alt="PayPal" />
+    <div>💰 PayPal</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://nubank.com.br', '_blank')">
+    <img src="https://nubank.com.br/favicon.ico" alt="Nubank" />
+    <div>💳 Nubank</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.picpay.com', '_blank')">
+    <img src="https://www.picpay.com/favicon.ico" alt="PicPay" />
+    <div>💸 PicPay</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://inter.com.br', '_blank')">
+    <img src="https://inter.com.br/favicon.ico" alt="Banco Inter" />
+    <div>🏦 Banco Inter</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.tradingview.com', '_blank')">
+    <img src="https://www.tradingview.com/favicon.ico" alt="TradingView" />
+    <div>📈 TradingView</div>
+  </div>
+  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.google.com/finance', '_blank')">
+    <img src="https://www.google.com/favicon.ico" alt="Google Finance" />
+    <div>📈 Google Finance</div>
+  </div>
 </div>
 
-
-
   </main>
-
-  <footer class="footer" role="contentinfo" aria-label="Footer">
-    <p><strong>ORIS OS</strong> © 2025 — Developed by Lucas Januário</p>
-    <p>Contact:lucasbrncinc@gmail.com</p>
-    <p>Version 3.10.0</p>
-    <p>Powered by Neon Glass UI</p>
-    <p>All rights reserved.</p>
+  <footer class="footer" role="contentinfo">
+    <p><strong>ORIS OS</strong> © 2025 — Desenvolvido por Lucas Januário</p>
+    <p>Contato: lucasbrncinc@gmail.com</p>
+    <p>Versão 3.10.0 — Neon Glass UI</p>
   </footer>
 
   <script>
     function abrirPagina(pagina, btn) {
-      // Navega para a página
       location.href = pagina;
-
-      // Atualiza botão ativo
       if (btn) {
         document.querySelectorAll('.sidebar button').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -698,43 +490,31 @@
     function logout() {
       if (confirm('Você realmente deseja sair?')) {
         alert('Logout realizado!');
-        // Aqui você pode colocar lógica real de logout, ex: limpar sessão
+        // Aqui você pode adicionar lógica real de logout
       }
     }
 
     function filtrarApps() {
       const filtro = document.getElementById('searchInput').value.toLowerCase();
       const apps = document.querySelectorAll('.app-card');
-      let anyVisible = false;
-
       apps.forEach(app => {
-        const text = app.textContent.toLowerCase();
-        if (text.includes(filtro)) {
-          app.style.display = 'flex';
-          anyVisible = true;
-        } else {
-          app.style.display = 'none';
-        }
+        const texto = app.textContent.toLowerCase();
+        app.style.display = texto.includes(filtro) ? 'flex' : 'none';
       });
-
-      let noResults = document.getElementById('noResults');
-      if (!noResults) {
-        noResults = document.createElement('div');
-        noResults.id = 'noResults';
-        noResults.textContent = 'Nenhum app encontrado.';
-        noResults.style.gridColumn = '1 / -1';
-        document.getElementById('appGrid').appendChild(noResults);
-      }
-
-      noResults.style.display = anyVisible ? 'none' : 'block';
     }
 
     function toggleTheme() {
-      document.body.classList.toggle('light-mode');
+      const body = document.body;
+      body.classList.toggle('light-mode');
+      const pressed = body.classList.contains('light-mode');
+      event.currentTarget.setAttribute('aria-pressed', pressed);
     }
 
     function toggleReadingMode() {
-      document.body.classList.toggle('reading-mode');
+      const body = document.body;
+      body.classList.toggle('reading-mode');
+      const pressed = body.classList.contains('reading-mode');
+      event.currentTarget.setAttribute('aria-pressed', pressed);
     }
   </script>
 </body>
