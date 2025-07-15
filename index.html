@@ -5,49 +5,63 @@
   <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login - ORIS OS</title>
-  <style>
+   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #f0932b); /* Azul para Laranja */
+      background: linear-gradient(135deg, #0a2a43, #f0932b);
       color: #fff;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       user-select: none;
     }
-    .login-container {
-      background: #000; /* Fundo preto sólido */
-      padding: 32px 48px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgb(0 0 0 / 0.6);
-      width: 320px;
+
+    .login-card {
+      background: #111;
+      border-radius: 20px;
+      padding: 40px 30px;
       text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
-    .login-container img {
+
+    .logo {
       width: 100px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       user-select: none;
     }
-    .github-btn {
-      margin-top: 12px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background-color: #333;
-      color: #fff;
+
+    .title {
+      font-size: 32px;
       font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.2s ease;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+      color: #00ff66;
+      margin-bottom: 24px;
     }
+
+    .github-btn {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
     .github-btn:hover {
-      background-color: #444;
+      background-color: #222;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 14px;
+      color: #ddd;
+      text-align: center;
     }
   </style>
 </head>
