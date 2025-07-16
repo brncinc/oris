@@ -213,7 +213,7 @@
   </nav>
   <main class="main" role="main">
     <div class="topbar">
-      <h1>Bem-vindo ao ORIS OS</h1>
+      <h1>Bem-vindo ao ORIS OS press f11 </h1>
       <div class="controls">
         <input
           type="text"
@@ -226,9 +226,7 @@
       </div>
     </div>
   <div class="grid" id="appGrid" role="list" aria-label="Lista de aplicativos">
-
   <!-- Navegação Local -->
-
  
   <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('air.html')">
     <img src="https://cdn-icons-png.flaticon.com/512/58/58900.png" alt="Air" />
@@ -433,30 +431,40 @@
     <p>Contato: lucasbrncinc@gmail.com</p>
     <p>Versão 3.10.0 — Neon Glass UI</p>
   </footer>
-
- <script>
+<script>
   // Abre todos os links externos via browser.html
   document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll('a[href]').forEach(link => {
-      const originalHref = link.getAttribute('href');
+    const currentHost = window.location.host;
 
-      // Ignora âncoras internas, javascript, mailto, tel, etc
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+
+      // Ignorar âncoras internas, javascript, mailto, tel, e arquivos locais .html
       if (
-        originalHref.startsWith('#') ||
-        originalHref.startsWith('javascript:') ||
-        originalHref.startsWith('mailto:') ||
-        originalHref.startsWith('tel:') ||
-        originalHref.endsWith('.html') // Se quiser abrir locais direto
+        href.startsWith('#') ||
+        href.startsWith('javascript:') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:') ||
+        href.endsWith('.html')
       ) return;
 
+      // Criar um link temporário para analisar o host
+      const tempLink = document.createElement('a');
+      tempLink.href = href;
+
+      // Ignora links que pertencem ao mesmo host (links internos)
+      if (tempLink.host === currentHost) return;
+
+      // Substitui o clique padrão por redirecionamento via browser.html
       link.addEventListener('click', function (e) {
         e.preventDefault();
-        const destino = encodeURIComponent(originalHref);
+        const destino = encodeURIComponent(href);
         window.location.href = `browser.html?url=${destino}`;
       });
     });
   });
 </script>
+
 
 </body>
 </html>
