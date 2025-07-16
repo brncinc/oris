@@ -99,28 +99,38 @@
     Desenvolvido por Lucas Januário • ORIS OS 3.0 • Interface neo genesis 
 
   <script>
-    const input = document.getElementById('urlInput');
-    const frame = document.getElementById('browserFrame');
+  const input = document.getElementById('urlInput');
+  const frame = document.getElementById('browserFrame');
 
-    function goToUrl() {
-      let url = input.value.trim();
-      if (!url.startsWith('http://') && !url.startsWith('https://')) {
-        url = 'https://' + url;
-      }
+  // Verifica se existe um parâmetro ?url=
+  const params = new URLSearchParams(window.location.search);
+  const urlParam = params.get('url');
+  if (urlParam) {
+    const decoded = decodeURIComponent(urlParam);
+    input.value = decoded;
+    frame.src = decoded;
+  }
 
-      try {
-        const parsedUrl = new URL(url);
-        frame.src = parsedUrl.href;
-      } catch (e) {
-        alert("URL inválida. Verifique o endereço digitado.");
-      }
+  function goToUrl() {
+    let url = input.value.trim();
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      url = 'https://' + url;
     }
 
-    input.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        goToUrl();
-      }
-    });
-  </script>
+    try {
+      const parsedUrl = new URL(url);
+      frame.src = parsedUrl.href;
+    } catch (e) {
+      alert("URL inválida. Verifique o endereço digitado.");
+    }
+  }
+
+  input.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      goToUrl();
+    }
+  });
+</script>
+
 </body>
 </html>
