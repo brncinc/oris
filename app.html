@@ -449,45 +449,29 @@
     <p>Versão 3.10.0 — Neon Glass UI</p>
   </footer>
 
-  <script>
-    function abrirPagina(pagina, btn) {
-      location.href = pagina;
-      if (btn) {
-        document.querySelectorAll('.sidebar button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        btn.focus();
-      }
-    }
+ <script>
+  // Abre todos os links externos via browser.html
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('a[href]').forEach(link => {
+      const originalHref = link.getAttribute('href');
 
-    function logout() {
-      if (confirm('Você realmente deseja sair?')) {
-        alert('Logout realizado!');
-        // Aqui você pode adicionar lógica real de logout
-      }
-    }
+      // Ignora âncoras internas, javascript, mailto, tel, etc
+      if (
+        originalHref.startsWith('#') ||
+        originalHref.startsWith('javascript:') ||
+        originalHref.startsWith('mailto:') ||
+        originalHref.startsWith('tel:') ||
+        originalHref.endsWith('.html') // Se quiser abrir locais direto
+      ) return;
 
-    function filtrarApps() {
-      const filtro = document.getElementById('searchInput').value.toLowerCase();
-      const apps = document.querySelectorAll('.app-card');
-      apps.forEach(app => {
-        const texto = app.textContent.toLowerCase();
-        app.style.display = texto.includes(filtro) ? 'flex' : 'none';
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const destino = encodeURIComponent(originalHref);
+        window.location.href = `browser.html?url=${destino}`;
       });
-    }
+    });
+  });
+</script>
 
-    function toggleTheme() {
-      const body = document.body;
-      body.classList.toggle('light-mode');
-      const pressed = body.classList.contains('light-mode');
-      event.currentTarget.setAttribute('aria-pressed', pressed);
-    }
-
-    function toggleReadingMode() {
-      const body = document.body;
-      body.classList.toggle('reading-mode');
-      const pressed = body.classList.contains('reading-mode');
-      event.currentTarget.setAttribute('aria-pressed', pressed);
-    }
-  </script>
 </body>
 </html>
