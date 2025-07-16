@@ -2,9 +2,15 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>🌐 ORIS Browser</title>
+  <title>ORIS Browser</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    :root {
+      --neon-green: #00ff00;
+      --black: #0a0a0a;
+      --dark: #111;
+    }
+
     * {
       box-sizing: border-box;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,85 +18,62 @@
 
     body {
       margin: 0;
-      background-color: #0a0a0a;
-      color: #00ff00;
+      background-color: var(--black);
+      color: var(--neon-green);
       display: flex;
       flex-direction: column;
       height: 100vh;
-    }
-
-    header {
-      background: #000;
-      padding: 12px 20px;
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #00ff00;
-      border-bottom: 1px solid #00ff00;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    header img {
-      height: 24px;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-around;
-      background-color: #111;
-      border-bottom: 1px solid #00ff00;
-      padding: 8px;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    nav button {
-      background: transparent;
-      border: 1px solid #00ff00;
-      color: #00ff00;
-      padding: 8px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    nav button:hover {
-      background: #00ff00;
-      color: #000;
+      overflow: hidden;
     }
 
     .address-bar {
-      background: #111;
-      padding: 10px;
+      background: var(--dark);
+      padding: 12px;
       display: flex;
       gap: 10px;
-      border-bottom: 1px solid #00ff00;
+      border-bottom: 1px solid var(--neon-green);
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 255, 0, 0.2);
     }
 
     .address-bar input {
       flex: 1;
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px solid #00ff00;
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: 1px solid var(--neon-green);
       background: #000;
-      color: #0f0;
-      font-size: 0.95rem;
+      color: var(--neon-green);
+      font-size: 1rem;
+      outline: none;
+      transition: box-shadow 0.3s ease, border 0.3s ease;
+    }
+
+    .address-bar input:focus {
+      box-shadow: 0 0 10px var(--neon-green);
+      border-color: #44ff44;
     }
 
     .address-bar button {
-      padding: 8px 14px;
-      background: #00ff00;
+      padding: 10px 20px;
+      background: var(--neon-green);
       color: #000;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .address-bar button:hover {
+      background: #44ff44;
+      transform: scale(1.05);
     }
 
     iframe {
       flex: 1;
       width: 100%;
       border: none;
+      background: #000;
     }
 
     footer {
@@ -98,33 +81,13 @@
       padding: 10px;
       background-color: #000;
       font-size: 0.8rem;
-      color: #00ff00;
-      border-top: 1px solid #00ff00;
-    }
-
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        align-items: stretch;
-      }
+      color: var(--neon-green);
+      border-top: 1px solid var(--neon-green);
+      box-shadow: 0 -2px 10px rgba(0, 255, 0, 0.1);
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Razer_logo_green.png" alt="Logo">
-    ORIS Browser - Dark WebOS
-  </header>
-
-  <nav>
-    <button onclick="navigate('https://holofi.vercel.app')">HoloFi</button>
-    <button onclick="navigate('https://herculles.vercel.app')">Herculles</button>
-    <button onclick="navigate('https://tridentev1.vercel.app')">Tridente</button>
-    <button onclick="navigate('https://www.google.com')">Google</button>
-    <button onclick="navigate('https://www.youtube.com')">YouTube</button>
-    <button onclick="navigate('formulario.html')">Formulário</button>
-  </nav>
-
   <div class="address-bar">
     <input type="text" id="urlInput" placeholder="Digite a URL (https://...)" />
     <button onclick="goToUrl()">Ir</button>
@@ -133,17 +96,11 @@
   <iframe id="browserFrame" src="https://holofi.vercel.app"></iframe>
 
   <footer>
-    Desenvolvido por Lucas Januário • ORIS OS 3.0 • Navegador Estilo Razer
-  </footer>
+    Desenvolvido por Lucas Januário • ORIS OS 3.0 • Interface neo genesis 
 
   <script>
     const input = document.getElementById('urlInput');
     const frame = document.getElementById('browserFrame');
-
-    function navigate(url) {
-      input.value = url;
-      frame.src = url;
-    }
 
     function goToUrl() {
       let url = input.value.trim();
