@@ -6,192 +6,202 @@
   <title>ORIS OS - Aplicativos</title>
   <link rel="icon" href="logo.ico" />
   <style>
-  /* Reset e temas */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121212;
-    color: #fff;
-    display: flex;
-    flex-direction: row;
-    min-height: 100vh;
-    transition: background 0.3s, color 0.3s;
-  }
-  body.light-mode {
-    background: #f4f4f4;
-    color: #000;
-  }
-  body.light-mode .sidebar {
-    background: #e0e0e0;
-    border-color: #ccc;
-  }
-  body.light-mode .main {
-    background: linear-gradient(180deg, #fff 0%, #eaeaea 100%);
-  }
-  body.light-mode .footer {
-    background: #d0d0d0;
-    color: #333;
-  }
-  .sidebar {
-    width: 240px;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.9);
-    border-right: 1px solid #2c2c2c;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    position: fixed;
-    top: 0; bottom: 0; left: 0;
-    overflow-y: auto;
-  }
-  .sidebar h2 {
-    color: #1db954;
-    margin-bottom: 20px;
-    font-weight: 700;
-    font-size: 1.6rem;
-    user-select: none;
-  }
-  .sidebar button {
-    display: block;
-    background: none;
-    color: #ccc;
-    border: none;
-    padding: 10px;
-    text-align: left;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 15px;
-    transition: background-color 0.3s, color 0.3s;
-    user-select: none;
-  }
-  .sidebar button.active,
-  .sidebar button:hover {
-    background-color: #1db954;
-    color: #000;
-    font-weight: 600;
-  }
-  .main {
-    flex: 1;
-    padding: 20px;
-    margin-left: 240px;
-    overflow-y: auto;
-    background: transparent;
-    min-height: 100vh;
-    transition: background 0.3s;
-  }
-  .topbar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 10px;
-  }
-  .topbar h1 {
-    font-weight: 700;
-    font-size: 1.8rem;
-    user-select: none;
-    flex-grow: 1;
-    min-width: 200px;
-  }
-  .topbar .controls {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .topbar input {
-    padding: 10px 15px;
-    width: 250px;
-    border-radius: 20px;
-    border: 1px solid #444;
-    font-size: 1rem;
-    outline-offset: 2px;
-    transition: border-color 0.3s;
-  }
-  .topbar input:focus {
-    border-color: #1db954;
-    outline: none;
-  }
-  .topbar .controls button {
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
-    background: #1db954;
-    color: #000;
-    font-weight: 600;
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.3s;
-  }
-  .topbar .controls button:hover {
-    background: #17a444;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 20px;
-  }
-  .app-card {
-    background: #1c1c1c;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    user-select: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    color: #fff;
-    font-weight: 600;
-  }
-  .app-card:hover {
-    background: #1db954;
-    color: #000;
-    transform: scale(1.05);
-  }
-  .app-card img {
-    width: 32px;
-    height: 32px;
-    pointer-events: none;
-  }
-  .footer {
-    width: 100%;
-    background: #0c0c0c;
-    padding: 10px 20px;
-    font-size: 14px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    user-select: none;
-    color: #777;
-    z-index: 100;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.7);
+  :root {
+  --primary: #1db954;
+  --dark-bg: #121212;
+  --light-bg: #f4f4f4;
+  --text-dark: #000;
+  --text-light: #fff;
+  --accent: #00ffb2;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.1);
+  --radius: 12px;
+}
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-  .footer p {
-    margin: 0;
-    white-space: nowrap;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  /* Opcional: leitura modo (estilizar se quiser) */
-  body.reading-mode {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    background: #fafafa;
-    color: #222;
-  }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--dark-bg);
+  color: var(--text-light);
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+  scroll-behavior: smooth;
+}
+
+body.light-mode {
+  background: var(--light-bg);
+  color: var(--text-dark);
+}
+
+body.light-mode .sidebar {
+  background: #ffffffcc;
+  backdrop-filter: blur(8px);
+  border-color: #ccc;
+}
+
+.sidebar {
+  width: 260px;
+  padding: 24px;
+  background: #1a1a1a80;
+  backdrop-filter: blur(12px);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: fixed;
+  top: 0; bottom: 0; left: 0;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.sidebar h2 {
+  color: var(--primary);
+  font-size: clamp(1.5rem, 2vw, 1.8rem);
+  font-weight: bold;
+}
+
+.sidebar button {
+  background: transparent;
+  border: none;
+  color: #ddd;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.sidebar button.active,
+.sidebar button:hover {
+  background: var(--primary);
+  color: var(--text-dark);
+  transform: scale(1.02);
+}
+
+.main {
+  flex: 1;
+  margin-left: 260px;
+  padding: 32px;
+  background: transparent;
+  min-height: 100vh;
+  transition: background 0.3s;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.topbar h1 {
+  font-size: clamp(1.6rem, 2vw, 2rem);
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.topbar .controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.topbar input {
+  padding: 12px 18px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-light);
+  transition: border-color 0.3s;
+}
+
+.topbar input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.topbar .controls button {
+  padding: 12px 24px;
+  background: var(--primary);
+  border: none;
+  color: var(--text-dark);
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.topbar .controls button:hover {
+  background: #18a24a;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 24px;
+}
+
+.app-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  color: var(--text-light);
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border);
+}
+
+.app-card:hover {
+  background: var(--primary);
+  color: var(--text-dark);
+  transform: scale(1.05);
+}
+
+.app-card img {
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  margin-bottom: 8px;
+}
+
+.footer {
+  width: 100%;
+  background: #0c0c0cbf;
+  padding: 14px 24px;
+  font-size: 14px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: #aaa;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  backdrop-filter: blur(6px);
+  border-top: 1px solid var(--border);
+}
+
+.footer p {
+  margin: 0;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
 </style>
 
 </head>
