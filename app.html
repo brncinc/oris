@@ -209,6 +209,9 @@
   <div class="main">
     <div class="search-container">
       <input type="text" id="searchInput" oninput="filtrarApps()" placeholder="🔎 Buscar aplicativos..." />
+      <button onclick="toggleTheme()" aria-pressed="false" aria-label="Alternar tema claro e escuro">🌓 Tema</button>
+        <button onclick="toggleReadingMode()" aria-pressed="false" aria-label="Alternar modo de leitura">📖 Leitura</button>
+      </div>
     </div>
 
     <div class="grid" id="appGrid" role="list" aria-label="Lista de aplicativos">
@@ -461,11 +464,15 @@
   <img src="https://figmaresource.com/favicon.ico" alt="Figma Resources - Recursos para Figma" width="48" height="48" />
   <div>📁 Figma Resources</div>
 </div>
-
+      
 
   </div>
+<footer class="footer" role="contentinfo">
+    <p><strong>ORIS OS</strong> © 2025 — Desenvolvido por Lucas Januário</p>
+    <p>Contato: lucasbrncinc@gmail.com</p>
+    <p>Versão 4.00.0 — Neon Glass UI</p>
+  </footer>
 
-  <!-- Scripts -->
   <script>
     function abrirPagina(pagina) {
       window.location.href = pagina;
