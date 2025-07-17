@@ -2,231 +2,141 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ORIS OS - Neon Glass UI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ORIS OS - Aplicativos</title>
   <link rel="icon" href="logo.ico" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
- <style>
-  /* Reset e temas */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121212;
-    color: #fff;
-    display: flex;
-    flex-direction: row;
-    min-height: 100vh;
-    transition: background 0.3s, color 0.3s;
-  }
-  body.light-mode {
-    background: #f4f4f4;
-    color: #000;
-  }
-  body.light-mode .sidebar {
-    background: #e0e0e0;
-    border-color: #ccc;
-  }
-  body.light-mode .main {
-    background: linear-gradient(180deg, #fff 0%, #eaeaea 100%);
-  }
-  body.light-mode .footer {
-    background: #d0d0d0;
-    color: #333;
-  }
-  .sidebar {
-    width: 240px;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.9);
-    border-right: 1px solid #2c2c2c;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    position: fixed;
-    top: 0; bottom: 0; left: 0;
-    overflow-y: auto;
-  }
-  .sidebar h2 {
-    color: #1db954;
-    margin-bottom: 20px;
-    font-weight: 700;
-    font-size: 1.6rem;
-    user-select: none;
-  }
-  .sidebar button {
-    display: block;
-    background: none;
-    color: #ccc;
-    border: none;
-    padding: 10px;
-    text-align: left;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 15px;
-    transition: background-color 0.3s, color 0.3s;
-    user-select: none;
-  }
-  .sidebar button.active,
-  .sidebar button:hover {
-    background-color: #1db954;
-    color: #000;
-    font-weight: 600;
-  }
-  .main {
-    flex: 1;
-    padding: 20px;
-    margin-left: 240px;
-    overflow-y: auto;
-    background: transparent;
-    min-height: 100vh;
-    transition: background 0.3s;
-  }
-  .topbar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 10px;
-  }
-  .topbar h1 {
-    font-weight: 700;
-    font-size: 1.8rem;
-    user-select: none;
-    flex-grow: 1;
-    min-width: 200px;
-  }
-  .topbar .controls {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .topbar input {
-    padding: 10px 15px;
-    width: 250px;
-    border-radius: 20px;
-    border: 1px solid #444;
-    font-size: 1rem;
-    outline-offset: 2px;
-    transition: border-color 0.3s;
-  }
-  .topbar input:focus {
-    border-color: #1db954;
-    outline: none;
-  }
-  .topbar .controls button {
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
-    background: #1db954;
-    color: #000;
-    font-weight: 600;
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.3s;
-  }
-  .topbar .controls button:hover {
-    background: #17a444;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 20px;
-  }
-  .app-card {
-    background: #1c1c1c;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    user-select: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    color: #fff;
-    font-weight: 600;
-  }
-  .app-card:hover {
-    background: #1db954;
-    color: #000;
-    transform: scale(1.05);
-  }
-  .app-card img {
-    width: 32px;
-    height: 32px;
-    pointer-events: none;
-  }
-  .footer {
-    width: 100%;
-    background: #0c0c0c;
-    padding: 10px 20px;
-    font-size: 14px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    user-select: none;
-    color: #777;
-    z-index: 100;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.7);
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      display: flex;
+    }
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-  .footer p {
-    margin: 0;
-    white-space: nowrap;
-  }
+    .sidebar {
+      width: 240px;
+      background: #1f1f1f;
+      padding: 1rem;
+      height: 100vh;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    }
 
-  /* Opcional: leitura modo (estilizar se quiser) */
-  body.reading-mode {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    background: #fafafa;
-    color: #222;
-  }
-</style>
+    .sidebar h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #00e5ff;
+    }
 
+    .sidebar button {
+      display: block;
+      background: #333;
+      color: #fff;
+      border: none;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .sidebar button:hover {
+      background: #444;
+    }
+
+    .main {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    .search-container {
+      margin-bottom: 1rem;
+    }
+
+    .search-container input {
+      padding: 0.5rem;
+      width: 100%;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+
+    .app-card {
+      background: #1f1f1f;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .app-card:hover {
+      background: #333;
+    }
+
+    .app-card img {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 0.5rem;
+    }
+
+    .light-mode {
+      background: #f5f5f5;
+      color: #000;
+    }
+
+    .light-mode .sidebar {
+      background: #e0e0e0;
+    }
+
+    .light-mode .app-card {
+      background: #fff;
+    }
+
+    .light-mode .app-card:hover {
+      background: #ccc;
+    }
+
+    .reading-mode {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
-  <nav class="sidebar" role="navigation" aria-label="Menu principal">
-    <h2>ORIS OS</h2>
-    <button class="active" onclick="abrirPagina('dashboard.html', this)">📊 Dashboard</button>
-    <button onclick="abrirPagina('notificacoes.html', this)">🔔 Notificações</button>
-    <button onclick="abrirPagina('perfil.html', this)">👤 Perfil</button>
-    <button onclick="abrirPagina('sobre.html', this)">ℹ️ Sobre</button>
-    <button onclick="abrirPagina('akiles.html', this)">🏪 Loja</button>
-    <button onclick="abrirPagina('rabbit.html', this)">🐰 Meta Rabbit</button>
-<button onclick="abrirPagina('oristv.html', this)">📺 ORIS TV</button>
-<button onclick="abrirPagina('homeb.html', this)">📈 Home Broker</button>
-<button onclick="abrirPagina('browser.html', this)">🌐 ORIS Browser</button>
 
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>📂 Navegação</h2>
+    <button onclick="abrirPagina('home.html')">🏠 Home</button>
+    <button onclick="abrirPagina('oristv.html')">📺 ORIS TV</button>
+    <button onclick="abrirPagina('homeb.html')">📈 Home Broker</button>
+    <button onclick="abrirPagina('oris.html')">🤖 ORIS SDK</button>
+    <button onclick="abrirPagina('browser.html')">🌍 Navegador</button>
+    <hr />
+    <button onclick="toggleTheme()">🌓 Alternar Tema</button>
+    <button onclick="toggleReadingMode()">📖 Modo Leitura</button>
+  </div>
 
-  </nav>
-  <main class="main" role="main">
-    <div class="topbar">
-      <h1>Bem-vindo ao ORIS OS press f11 </h1>
-      <div class="controls">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Buscar apps..."
-          aria-label="Buscar aplicativos"
-          oninput="filtrarApps()" />
-        <button onclick="toggleTheme()" aria-pressed="false" aria-label="Alternar tema claro e escuro">🌓 Tema</button>
-        <button onclick="toggleReadingMode()" aria-pressed="false" aria-label="Alternar modo de leitura">📖 Leitura</button>
-      </div>
+  <!-- Main content -->
+  <div class="main">
+    <div class="search-container">
+      <input type="text" id="searchInput" oninput="filtrarApps()" placeholder="🔎 Buscar aplicativos..." />
     </div>
-  <div class="grid" id="appGrid" role="list" aria-label="Lista de aplicativos">
-  <!-- Navegação Local -->
+
+    <div class="grid" id="appGrid" role="list" aria-label="Lista de aplicativos">
+
+    <!-- Navegação Local -->
  
   <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('air.html')">
     <img src="https://cdn-icons-png.flaticon.com/512/58/58900.png" alt="Air" />
@@ -423,147 +333,144 @@
     <img src="https://www.google.com/favicon.ico" alt="Google Finance" />
     <div>📈 Google Finance</div>
   </div>
-    <!-- Viagens & Hospedagem -->
+<!-- Viagens & Hospedagem -->
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.airbnb.com', '_blank')">
-  <img src="https://www.airbnb.com/favicon.ico" alt="Airbnb" />
+  <img src="https://www.airbnb.com/favicon.ico" alt="Airbnb - Aluguéis por temporada" width="48" height="48" />
   <div>🏡 Airbnb</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.trivago.com', '_blank')">
-  <img src="https://www.trivago.com/favicon.ico" alt="Trivago" />
+  <img src="https://www.trivago.com/favicon.ico" alt="Trivago - Comparador de hotéis" width="48" height="48" />
   <div>🏨 Trivago</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.booking.com', '_blank')">
-  <img src="https://www.booking.com/favicon.ico" alt="Booking" />
+  <img src="https://www.booking.com/favicon.ico" alt="Booking - Reservas de hospedagem" width="48" height="48" />
   <div>🛏️ Booking</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.kayak.com', '_blank')">
-  <img src="https://www.kayak.com/favicon.ico" alt="Kayak" />
+  <img src="https://www.kayak.com/favicon.ico" alt="Kayak - Passagens e hotéis" width="48" height="48" />
   <div>✈️ Kayak</div>
 </div>
 
 <!-- Carreiras & Empregos -->
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.glassdoor.com', '_blank')">
-  <img src="https://www.glassdoor.com/favicon.ico" alt="Glassdoor" />
+  <img src="https://www.glassdoor.com/favicon.ico" alt="Glassdoor - Vagas e empresas" width="48" height="48" />
   <div>💼 Glassdoor</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.indeed.com', '_blank')">
-  <img src="https://www.indeed.com/favicon.ico" alt="Indeed" />
+  <img src="https://www.indeed.com/favicon.ico" alt="Indeed - Busca de empregos" width="48" height="48" />
   <div>🔍 Indeed</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://remoteok.com', '_blank')">
-  <img src="https://remoteok.com/favicon.ico" alt="Remote OK" />
+  <img src="https://remoteok.com/favicon.ico" alt="Remote OK - Trabalhos remotos" width="48" height="48" />
   <div>🌍 Remote OK</div>
 </div>
 
 <!-- Serviços & Utilidades -->
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.canva.com', '_blank')">
-  <img src="https://www.canva.com/favicon.ico" alt="Canva" />
+  <img src="https://www.canva.com/favicon.ico" alt="Canva - Design gráfico online" width="48" height="48" />
   <div>🎨 Canva</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.remove.bg', '_blank')">
-  <img src="https://www.remove.bg/favicon.ico" alt="RemoveBG" />
+  <img src="https://www.remove.bg/favicon.ico" alt="RemoveBG - Remover fundo de imagem" width="48" height="48" />
   <div>✂️ RemoveBG</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://pixabay.com', '_blank')">
-  <img src="https://pixabay.com/favicon.ico" alt="Pixabay" />
+  <img src="https://pixabay.com/favicon.ico" alt="Pixabay - Banco de imagens gratuitas" width="48" height="48" />
   <div>🖼️ Pixabay</div>
 </div>
+
 <!-- Design Gráfico e Web -->
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://express.adobe.com', '_blank')">
-  <img src="https://express.adobe.com/favicon.ico" alt="Adobe Express" />
+  <img src="https://express.adobe.com/favicon.ico" alt="Adobe Express - Criador de conteúdo" width="48" height="48" />
   <div>🅰️ Adobe Express</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://vectary.com', '_blank')">
-  <img src="https://www.vectary.com/favicon.ico" alt="Vectary 3D" />
+  <img src="https://www.vectary.com/favicon.ico" alt="Vectary - Design 3D online" width="48" height="48" />
   <div>🧊 Vectary 3D</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.figma.com', '_blank')">
-  <img src="https://www.figma.com/favicon.ico" alt="Figma" />
+  <img src="https://www.figma.com/favicon.ico" alt="Figma - Design colaborativo" width="48" height="48" />
   <div>🎨 Figma</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://framer.com', '_blank')">
-  <img src="https://framer.com/favicon.ico" alt="Framer" />
+  <img src="https://framer.com/favicon.ico" alt="Framer - Protótipos interativos" width="48" height="48" />
   <div>📐 Framer</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://spline.design', '_blank')">
-  <img src="https://spline.design/favicon.ico" alt="Spline" />
+  <img src="https://spline.design/favicon.ico" alt="Spline - Design 3D real-time" width="48" height="48" />
   <div>🌀 Spline 3D</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.lottiefiles.com', '_blank')">
-  <img src="https://www.lottiefiles.com/favicon.ico" alt="LottieFiles" />
+  <img src="https://www.lottiefiles.com/favicon.ico" alt="LottieFiles - Animações JSON" width="48" height="48" />
   <div>🎞️ LottieFiles</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.desygner.com', '_blank')">
-  <img src="https://www.desygner.com/favicon.ico" alt="Desygner" />
+  <img src="https://www.desygner.com/favicon.ico" alt="Desygner - Editor gráfico online" width="48" height="48" />
   <div>🖌️ Desygner</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://coolors.co', '_blank')">
-  <img src="https://coolors.co/favicon.ico" alt="Coolors" />
+  <img src="https://coolors.co/favicon.ico" alt="Coolors - Paletas de cores" width="48" height="48" />
   <div>🌈 Coolors</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://undraw.co/illustrations', '_blank')">
-  <img src="https://undraw.co/favicon.ico" alt="unDraw" />
+  <img src="https://undraw.co/favicon.ico" alt="unDraw - Ilustrações vetoriais" width="48" height="48" />
   <div>🎨 unDraw</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.haikei.app', '_blank')">
-  <img src="https://www.haikei.app/favicon.ico" alt="Haikei" />
+  <img src="https://www.haikei.app/favicon.ico" alt="Haikei - Gerador de fundos SVG" width="48" height="48" />
   <div>🖼️ Haikei</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://fonts.google.com', '_blank')">
-  <img src="https://fonts.google.com/favicon.ico" alt="Google Fonts" />
+  <img src="https://fonts.google.com/favicon.ico" alt="Google Fonts - Fontes gratuitas" width="48" height="48" />
   <div>🔠 Google Fonts</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://fontawesome.com', '_blank')">
-  <img src="https://fontawesome.com/favicon.ico" alt="Font Awesome" />
+  <img src="https://fontawesome.com/favicon.ico" alt="Font Awesome - Ícones vetoriais" width="48" height="48" />
   <div>⭐ Font Awesome</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://figmaresource.com', '_blank')">
-  <img src="https://figmaresource.com/favicon.ico" alt="Figma Resources" />
+  <img src="https://figmaresource.com/favicon.ico" alt="Figma Resources - Recursos para Figma" width="48" height="48" />
   <div>📁 Figma Resources</div>
 </div>
 
-</div>
 
-  </main>
-  <footer class="footer" role="contentinfo">
-    <p><strong>ORIS OS</strong> © 2025 — Desenvolvido por Lucas Januário</p>
-    <p>Contato: lucasbrncinc@gmail.com</p>
-    <p>Versão 3.10.0 — Neon Glass UI</p>
-  </footer>
-<script>
-  // Abre todos os links externos via browser.html
-  document.addEventListener("DOMContentLoaded", function () {
-    const currentHost = window.location.host;
+  </div>
 
-    document.querySelectorAll('a[href]').forEach(link => {
-      const href = link.getAttribute('href');
+  <!-- Scripts -->
+  <script>
+    function abrirPagina(pagina) {
+      window.location.href = pagina;
+    }
 
-      // Ignorar âncoras internas, javascript, mailto, tel, e arquivos locais .html
-      if (
-        href.startsWith('#') ||
-        href.startsWith('javascript:') ||
-        href.startsWith('mailto:') ||
-        href.startsWith('tel:') ||
-        href.endsWith('.html')
-      ) return;
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
 
-      // Criar um link temporário para analisar o host
-      const tempLink = document.createElement('a');
-      tempLink.href = href;
+    function toggleReadingMode() {
+      document.body.classList.toggle('reading-mode');
+    }
 
-      // Ignora links que pertencem ao mesmo host (links internos)
-      if (tempLink.host === currentHost) return;
+    function filtrarApps() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.querySelectorAll(".app-card");
+      cards.forEach(card => {
+        const nomeApp = card.innerText.toLowerCase();
+        card.style.display = nomeApp.includes(input) ? "flex" : "none";
+      });
+    }
 
-      // Substitui o clique padrão por redirecionamento via browser.html
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        const destino = encodeURIComponent(href);
-        window.location.href = `browser.html?url=${destino}`;
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll('.app-card').forEach(card => {
+        const onClickAttr = card.getAttribute('onclick');
+        if (onClickAttr && onClickAttr.includes('window.open')) {
+          const match = onClickAttr.match(/'([^']+)'/);
+          if (match && match[1]) {
+            const originalUrl = match[1];
+            card.setAttribute('onclick', `abrirPagina('browser.html?url=${encodeURIComponent(originalUrl)}')`);
+          }
+        }
       });
     });
-  });
-</script>
-
-
+  </script>
 </body>
 </html>
