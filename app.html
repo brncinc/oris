@@ -261,16 +261,17 @@ body.light-mode .footer {
     <button onclick="abrirPagina('homeb.html')">📈 Home Broker</button>
     <button onclick="abrirPagina('oris.html')">🤖 ORIS SDK</button>
     <button onclick="abrirPagina('browser.html')">🌍 Navegador</button>
-    <hr />
-    <button onclick="toggleTheme()">🌓 Alternar Tema</button>
-    <button onclick="toggleReadingMode()">📖 Modo Leitura</button>
-  </div>
+    <h2/>
+    
 
   <!-- Main content -->
   <div class="main">
-    <div class="search-container">
-      <input type="text" id="searchInput" oninput="filtrarApps()" placeholder="🔎 Buscar aplicativos..." />
-    </div>
+  <div class="search-controls">
+  <input type="text" id="searchInput" oninput="filtrarApps()" placeholder="🔎 Buscar aplicativos..." />
+  <button onclick="toggleTheme()">🌓 Alternar Tema</button>
+  <button onclick="toggleReadingMode()">📖 Modo Leitura</button>
+</div>
+
 
     <div class="grid" id="appGrid" role="list" aria-label="Lista de aplicativos">
 
