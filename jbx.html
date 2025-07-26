@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  
 <head>
   <meta charset="UTF-8">
-   <link rel="icon" href="logo.ico" />
+     <link rel="icon" href="logo.ico" />
   <title>JBX Stock Market</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
@@ -21,9 +20,7 @@
       font-size: 24px;
       color: #00FF7F;
       font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      text-align: center;
     }
 
     .quotes-bar {
@@ -119,10 +116,8 @@
 </head>
 <body>
 
-<!-- Barra superior -->
 <div class="topbar">JBX Stock Market</div>
 
-<!-- Barra de cotação -->
 <div class="quotes-bar">
   <div class="quote"><span class="up">🔺 BTC 2.3%</span></div>
   <div class="quote"><span class="down">🔻 ETH -1.2%</span></div>
@@ -133,7 +128,6 @@
   <div class="quote"><span class="up">🟢 TRIXUSD +5.6%</span></div>
 </div>
 
-<!-- Cards -->
 <div class="container">
   <div class="card">
     Diamond500<br><small>R$5.000 - R$15.000</small>
@@ -173,7 +167,6 @@
   </div>
 </div>
 
-<!-- Modal QR -->
 <div id="qrModal" onclick="closeQR()">
   <div id="qrModalContent">
     <h3>Pagamento via Pix</h3>
@@ -182,25 +175,21 @@
   </div>
 </div>
 
-<!-- Rodapé -->
 <div class="footer">
   © 2025 JBX Exchange • Powered by Oris OS & HoloFi • Desenvolvido por Lucas Januário
 </div>
 
 <script>
-  function buy(data) {
+  function buy(basePix) {
     const nome = prompt("Digite seu nome:");
-    const valor = prompt("Digite o valor do investimento (ex: 5000):");
-    const chavePix = prompt("Digite sua chave Pix:");
+    const valor = prompt("Digite o valor do pagamento:");
+    const chave = prompt("Digite sua chave Pix:");
 
-    if (nome && valor && chavePix) {
-      const pagamentoInfo = `Nome: ${nome}\nValor: R$${valor}\nPix: ${chavePix}`;
-      console.log(pagamentoInfo);
-
-      // Gerar QR
-      showQR(data + '?valor=' + valor + '&nome=' + encodeURIComponent(nome));
+    if (nome && valor && chave) {
+      const conteudoPix = `pix:${basePix}?nome=${encodeURIComponent(nome)}&valor=${valor}&chave=${encodeURIComponent(chave)}`;
+      showQR(conteudoPix);
     } else {
-      alert("Informações incompletas. Operação cancelada.");
+      alert("Informações incompletas. Cancelado.");
     }
   }
 
