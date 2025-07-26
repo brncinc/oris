@@ -1,3 +1,4 @@
+<!-- CÓDIGO HTML PRONTO PARA PAGAMENTO PIX REAL COM QR -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -170,59 +171,55 @@
   function buy(produto) {
     const nome = prompt("Seu nome completo:");
     const valor = prompt("Digite o valor (em reais):");
-    const cidade = "SP"; // Opcional, pode personalizar
+    const cidade = "São Paulo";
 
-    if (!nome || !valor) {
-      alert("Informações incompletas. Cancelado.");
+    if (!nome || !valor || isNaN(parseFloat(valor))) {
+      alert("Informações inválidas.");
       return;
     }
 
     const chavePix = "48761013889";
-    const merchant = "Lucas Januario"; // Nome registrado na chave Pix
-    const txid = "JBX" + Math.floor(Math.random() * 100000); // ID aleatório
-
-    const payload = geraPix(chavePix, merchant, valor, cidade, produto, txid);
+    const txid = "JBX" + Math.floor(Math.random() * 99999);
+    const payload = gerarPix(chavePix, nome, parseFloat(valor).toFixed(2), cidade, produto, txid);
     showQR(payload);
   }
 
-  function geraPix(chave, nome, valor, cidade, descricao, txid) {
-    // Formatação do Pix Copia e Cola
-    const pad = (val) => (val.length < 10 ? "0" + val.length : val.length) + val;
-    const campo = (id, val) => id + pad(val) + val;
+  function gerarPix(chave, nome, valor, cidade, descricao, txid) {
+    const f = (id, val) => {
+      const len = val.length.toString().padStart(2, '0');
+      return id + len + val;
+    };
 
-    const merchantAccountInfo =
-      campo("26", campo("00", "BR.GOV.BCB.PIX") + campo("01", chave));
-    const txFields =
-      campo("52", "0000") +
-      campo("53", "986") +
-      campo("54", valor) +
-      campo("58", "BR") +
-      campo("59", nome.substring(0, 25)) +
-      campo("60", cidade.substring(0, 15)) +
-      campo("62", campo("05", txid));
-    
-    let payload = "000201" + merchantAccountInfo + txFields;
-    let crc = crc16(payload + "6304");
-    return payload + "6304" + crc;
+    const gui = f("00", "BR.GOV.BCB.PIX");
+    const chaveField = f("01", chave);
+    const merchantAccountInfo = f("26", gui + chaveField);
+    const txidField = f("05", txid);
+    const additionalData = f("62", txidField);
+    const payloadSemCRC = "000201" + merchantAccountInfo +
+      f("52", "0000") + f("53", "986") + f("54", valor) + f("58", "BR") +
+      f("59", nome.substring(0,25)) + f("60", cidade.substring(0,15)) +
+      additionalData + "6304";
+    const crc = crc16(payloadSemCRC);
+    return payloadSemCRC + crc;
   }
 
-  function crc16(str) {
+  function crc16(payload) {
     let crc = 0xFFFF;
-    for (let c of str) {
-      crc ^= c.charCodeAt(0) << 8;
-      for (let i = 0; i < 8; i++) {
-        crc = crc & 0x8000 ? (crc << 1) ^ 0x1021 : crc << 1;
+    for (let i = 0; i < payload.length; i++) {
+      crc ^= payload.charCodeAt(i) << 8;
+      for (let j = 0; j < 8; j++) {
+        crc = (crc & 0x8000) ? (crc << 1) ^ 0x1021 : crc << 1;
       }
     }
     return ((crc ^ 0) & 0xFFFF).toString(16).toUpperCase().padStart(4, "0");
   }
 
-  function showQR(data) {
+  function showQR(payload) {
     document.getElementById("qrModal").style.display = "flex";
     new QRious({
       element: document.getElementById("qr"),
       size: 250,
-      value: data
+      value: payload
     });
   }
 
