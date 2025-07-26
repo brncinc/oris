@@ -8,98 +8,143 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #121212;
-      color: #fff;
-    }
-    .topbar {
-      background-color: #000;
-      padding: 10px 20px;
-      font-size: 24px;
-      color: #00FF7F;
-      font-weight: bold;
-      text-align: center;
-    }
-    .quotes-bar {
-      background-color: #111;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 8px 10px;
-      font-size: 14px;
-    }
-    .quote {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .up { color: #00ff00; }
-    .down { color: #ff4444; }
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      padding: 20px;
-    }
-    .card {
-      background-color: #2f2f2f;
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      border: 1px solid #00ff99;
-      transition: 0.3s;
-    }
-    .card:hover {
-      background-color: #3a3a3a;
-      border-color: #ff00ff;
-    }
-    .buy-btn {
-      margin-top: 10px;
-      background-color: #00FF7F;
-      border: none;
-      color: #000;
-      font-weight: bold;
-      padding: 8px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .buy-btn:hover {
-      background-color: #00cc66;
-    }
-    #qrModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-    #qrModalContent {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      color: #000;
-      text-align: center;
-    }
-    .footer {
-      background: linear-gradient(45deg, #ff0000, #ffff00);
-      color: #000;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      font-weight: bold;
-      text-shadow: 0 0 5px #000;
-    }
-    @media (max-width: 600px) {
-      .topbar { font-size: 20px; }
-      .quotes-bar { font-size: 12px; }
-      .card { font-size: 14px; }
-    }
+  body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  background-color: #121212;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar {
+  background-color: #000;
+  padding: 10px 20px;
+  font-size: 24px;
+  color: #00FF7F;
+  font-weight: bold;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.quotes-bar {
+  background-color: #111;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 8px 10px;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.quote {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.up { color: #00ff00; }
+.down { color: #ff4444; }
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  flex-grow: 1; /* Faz container crescer para ocupar espaço disponível */
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: #2f2f2f;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #00ff99;
+  transition: 0.3s;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  background-color: #3a3a3a;
+  border-color: #ff00ff;
+}
+
+.buy-btn {
+  margin-top: 10px;
+  background-color: #00FF7F;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  align-self: center;
+  min-width: 100px;
+}
+
+.buy-btn:hover {
+  background-color: #00cc66;
+}
+
+#qrModal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#qrModalContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  color: #000;
+  text-align: center;
+}
+
+.footer {
+  background: linear-gradient(45deg, #ff0000, #ffff00);
+  color: #000;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 0 0 5px #000;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .topbar { font-size: 20px; }
+  .quotes-bar { font-size: 12px; }
+  .card { font-size: 14px; }
+  .container {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    padding: 10px;
+  }
+  .buy-btn {
+    padding: 6px 12px;
+    min-width: 80px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -118,6 +163,29 @@
 
 <div class="container">
   <div class="card">
+    <h2>Planos de Investimento Iniciais</h2>
+<div class="container">
+  <div class="card">
+    Starter50<br><small>R$50 - R$200</small>
+    <button class="buy-btn" onclick="buy('Starter50')">Comprar</button>
+  </div>
+  <div class="card">
+    Basic201<br><small>R$201 - R$500</small>
+    <button class="buy-btn" onclick="buy('Basic201')">Comprar</button>
+  </div>
+  <div class="card">
+    Growth500<br><small>R$501 - R$1.000</small>
+    <button class="buy-btn" onclick="buy('Growth500')">Comprar</button>
+  </div>
+  <div class="card">
+    Pro1000<br><small>R$1.001 - R$2.000</small>
+    <button class="buy-btn" onclick="buy('Pro1000')">Comprar</button>
+  </div>
+  <div class="card">
+    Advanced2000<br><small>R$2.001 - R$4.000</small>
+    <button class="buy-btn" onclick="buy('Advanced2000')">Comprar</button>
+  </div>
+</div>
     Diamond500<br><small>R$5.000 - R$15.000</small>
     <button class="buy-btn" onclick="buy('Diamond500')">Comprar</button>
   </div>
