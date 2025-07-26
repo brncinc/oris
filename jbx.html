@@ -1,158 +1,130 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>JBX Stock Market</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: white;
-    }
-
-    /* Topo estilo NASDAQ */
-    .top-bar {
-      background-color: #111;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #00ff00;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #00ff00;
-    }
-
-    .pix-info {
-      font-size: 14px;
+      font-family: 'Arial', sans-serif;
+      background-color: #121212;
       color: #fff;
     }
-
-    /* Cotação tipo ticker */
-    .ticker {
-      background: #222;
-      color: #0f0;
-      padding: 10px;
-      white-space: nowrap;
-      overflow: hidden;
-      box-sizing: border-box;
+    .navbar {
+      background-color: #000;
+      padding: 10px 20px;
+      font-size: 24px;
+      color: #00FF7F;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-
-    .ticker-content {
-      display: inline-block;
-      padding-left: 100%;
-      animation: ticker 30s linear infinite;
+    .quotes {
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
     }
-
-    @keyframes ticker {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
+    .quote {
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
-
-    /* Grade de ativos */
-    .grid-container {
+    .up { color: #00ff00; }
+    .down { color: #ff4444; }
+    .container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 15px;
       padding: 20px;
     }
-
     .card {
-      background-color: #333;
-      border-radius: 8px;
-      padding: 15px;
-      color: #fff;
-      box-shadow: 0 0 10px rgba(0,255,0,0.1);
-      transition: transform 0.3s;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    .invest-button {
-      background-color: #00c853;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      margin-top: 10px;
+      background-color: #2f2f2f;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
       cursor: pointer;
-      border-radius: 5px;
+      transition: 0.3s;
     }
-
-    .invest-button:hover {
-      background-color: #009624;
+    .card:hover {
+      background-color: #3a3a3a;
+    }
+    #qrModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    #qrModalContent {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      color: #000;
+      text-align: center;
+    }
+    .footer {
+      background-color: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Barra superior estilo Nasdaq -->
-  <div class="top-bar">
-    <div class="logo">JBX Stock Market</div>
-    <div class="pix-info">Pagamento exclusivo via Pix Dinâmico</div>
+<div class="navbar">
+  JBX Stock Market
+  <div class="quotes">
+    <div class="quote"><span class="up">🔺 BTC 2.3%</span></div>
+    <div class="quote"><span class="down">🔻 ETH -1.2%</span></div>
+    <div class="quote"><span class="up">🔺 JBX 4.8%</span></div>
   </div>
+</div>
 
-  <!-- Ticker de cotações -->
-  <div class="ticker">
-    <div class="ticker-content">
-      🔹 DarkBTC: R$265.000 | 🔸 EntherPrime: R$25,300 | 💠 JBXF500: R$500,00 | ⚡ UltraEnther: R$1.050,00 | 💎 QZDiamond: R$15.000,00 | ...
-    </div>
-  </div>
+<div class="container">
+  <!-- 9 cards -->
+  <div class="card" onclick="showQR('pix://jbx500')">Diamond500<br><small>R$5.000 - R$15.000</small></div>
+  <div class="card" onclick="showQR('pix://ultraenther')">UltraEnther<br><small>R$10.000 - R$30.000</small></div>
+  <div class="card" onclick="showQR('pix://qzdiamond')">QZDiamond<br><small>R$7.000 - R$20.000</small></div>
+  <div class="card" onclick="showQR('pix://enterprime')">EntherPrime<br><small>R$3.000 - R$9.000</small></div>
+  <div class="card" onclick="showQR('pix://jbxbr')">JBX-BR<br><small>R$1.000 - R$5.000</small></div>
+  <div class="card" onclick="showQR('pix://darkusd')">DarkUSD<br><small>R$2.000 - R$8.000</small></div>
+  <div class="card" onclick="showQR('pix://darkbtc')">DarkBTC<br><small>R$10.000 - R$50.000</small></div>
+  <div class="card" onclick="showQR('pix://trixusd')">TrixUSD<br><small>R$5.000 - R$25.000</small></div>
+  <div class="card" onclick="showQR('pix://jbxdiamond')">JBX Diamond<br><small>R$20.000 - R$60.000</small></div>
+</div>
 
-  <!-- Container dos ativos -->
-  <div class="grid-container">
-    <div class="card">
-      <h3>DarkBTC</h3>
-      <p>Ativo baseado em BTC com camadas HoloFi Trix</p>
-      <button class="invest-button">Investir</button>
-    </div>
-    <div class="card">
-      <h3>JBXF500</h3>
-      <p>Token com 10% anual | Linhagem Diamond</p>
-      <button class="invest-button">Investir</button>
-    </div>
-    <div class="card">
-      <h3>EntherPrime</h3>
-      <p>Ativo com liquidez rápida e rendimento constante</p>
-      <button class="invest-button">Investir</button>
-    </div>
-    <div class="card">
-      <h3>UltraEnther</h3>
-      <p>Base DarkUSD + Geminiosidade máxima Trix</p>
-      <button class="invest-button">Investir</button>
-    </div>
-    <div class="card">
-      <h3>QZDiamond</h3>
-      <p>Token ultra raro com escalonamento Fibonacci</p>
-      <button class="invest-button">Investir</button>
-    </div>
-    <div class="card">
-      <h3>DarkUSD</h3>
-      <p>Stablecoin com paridade dinâmica baseada em DarkBTC</p>
-      <button class="invest-button">Investir</button>
-    </div>
-    <div class="card">
-      <h3>JBX Health</h3>
-      <p>Fundo vinculado à saúde e previdência privada</p>
-      <button class="invest-button">Investir</button>
-    </div>
-    <div class="card">
-      <h3>JBX Gold Flex</h3>
-      <p>Composição em ouro tokenizado + HoloFi</p>
-      <button class="invest-button">Investir</button>
-    </div>
-    <div class="card">
-      <h3>JBX AI Quantum</h3>
-      <p>Token baseado em dados quânticos e IA para hedge</p>
-      <button class="invest-button">Investir</button>
-    </div>
+<!-- Modal QR -->
+<div id="qrModal" onclick="closeQR()">
+  <div id="qrModalContent">
+    <h3>Pagamento via Pix</h3>
+    <canvas id="qr"></canvas>
+    <p>Escaneie para pagar</p>
   </div>
+</div>
+
+<div class="footer">
+  © 2025 JBX Exchange • Powered by Oris OS & HoloFi • Desenvolvido por Lucas Januário
+</div>
+
+<script>
+  function showQR(data) {
+    document.getElementById('qrModal').style.display = 'flex';
+    var qr = new QRious({
+      element: document.getElementById('qr'),
+      size: 200,
+      value: data
+    });
+  }
+  function closeQR() {
+    document.getElementById('qrModal').style.display = 'none';
+  }
+</script>
 
 </body>
 </html>
