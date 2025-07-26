@@ -12,7 +12,8 @@
       background-color: #121212;
       color: #fff;
     }
-    .navbar {
+
+    .topbar {
       background-color: #000;
       padding: 10px 20px;
       font-size: 24px;
@@ -20,37 +21,65 @@
       font-weight: bold;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
     }
-    .quotes {
+
+    .quotes-bar {
+      background-color: #111;
       display: flex;
-      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 8px 10px;
       font-size: 14px;
     }
+
     .quote {
       display: flex;
       align-items: center;
       gap: 5px;
     }
+
     .up { color: #00ff00; }
     .down { color: #ff4444; }
+
     .container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px;
       padding: 20px;
     }
+
     .card {
       background-color: #2f2f2f;
-      padding: 10px;
-      border-radius: 10px;
+      padding: 15px;
+      border-radius: 12px;
       text-align: center;
-      cursor: pointer;
+      border: 1px solid #00ff99;
       transition: 0.3s;
     }
+
     .card:hover {
       background-color: #3a3a3a;
+      border-color: #ff00ff;
     }
+
+    .buy-btn {
+      margin-top: 10px;
+      background-color: #00FF7F;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .buy-btn:hover {
+      background-color: #00cc66;
+    }
+
     #qrModal {
       display: none;
       position: fixed;
@@ -58,7 +87,9 @@
       background-color: rgba(0,0,0,0.8);
       justify-content: center;
       align-items: center;
+      z-index: 999;
     }
+
     #qrModalContent {
       background-color: #fff;
       padding: 20px;
@@ -66,37 +97,78 @@
       color: #000;
       text-align: center;
     }
+
     .footer {
-      background-color: #111;
-      color: #aaa;
+      background: linear-gradient(45deg, #ff0000, #ffff00);
+      color: #000;
       text-align: center;
-      padding: 15px;
+      padding: 20px;
       font-size: 14px;
+      font-weight: bold;
+      text-shadow: 0 0 5px #000;
+    }
+
+    @media (max-width: 600px) {
+      .topbar { font-size: 20px; }
+      .quotes-bar { font-size: 12px; }
+      .card { font-size: 14px; }
     }
   </style>
 </head>
 <body>
 
-<div class="navbar">
-  JBX Stock Market
-  <div class="quotes">
-    <div class="quote"><span class="up">🔺 BTC 2.3%</span></div>
-    <div class="quote"><span class="down">🔻 ETH -1.2%</span></div>
-    <div class="quote"><span class="up">🔺 JBX 4.8%</span></div>
-  </div>
+<!-- Barra superior -->
+<div class="topbar">JBX Stock Market</div>
+
+<!-- Barra de cotação -->
+<div class="quotes-bar">
+  <div class="quote"><span class="up">🔺 BTC 2.3%</span></div>
+  <div class="quote"><span class="down">🔻 ETH -1.2%</span></div>
+  <div class="quote"><span class="up">🔺 JBX 4.8%</span></div>
+  <div class="quote"><span class="up">🟢 JBX500 +3.2%</span></div>
+  <div class="quote"><span class="up">🟢 DARKUSD +2.1%</span></div>
+  <div class="quote"><span class="down">🔻 QZDIAMOND -0.5%</span></div>
+  <div class="quote"><span class="up">🟢 TRIXUSD +5.6%</span></div>
 </div>
 
+<!-- Cards -->
 <div class="container">
-  <!-- 9 cards -->
-  <div class="card" onclick="showQR('pix://jbx500')">Diamond500<br><small>R$5.000 - R$15.000</small></div>
-  <div class="card" onclick="showQR('pix://ultraenther')">UltraEnther<br><small>R$10.000 - R$30.000</small></div>
-  <div class="card" onclick="showQR('pix://qzdiamond')">QZDiamond<br><small>R$7.000 - R$20.000</small></div>
-  <div class="card" onclick="showQR('pix://enterprime')">EntherPrime<br><small>R$3.000 - R$9.000</small></div>
-  <div class="card" onclick="showQR('pix://jbxbr')">JBX-BR<br><small>R$1.000 - R$5.000</small></div>
-  <div class="card" onclick="showQR('pix://darkusd')">DarkUSD<br><small>R$2.000 - R$8.000</small></div>
-  <div class="card" onclick="showQR('pix://darkbtc')">DarkBTC<br><small>R$10.000 - R$50.000</small></div>
-  <div class="card" onclick="showQR('pix://trixusd')">TrixUSD<br><small>R$5.000 - R$25.000</small></div>
-  <div class="card" onclick="showQR('pix://jbxdiamond')">JBX Diamond<br><small>R$20.000 - R$60.000</small></div>
+  <div class="card">
+    Diamond500<br><small>R$5.000 - R$15.000</small>
+    <button class="buy-btn" onclick="buy('pix://jbx500')">Comprar</button>
+  </div>
+  <div class="card">
+    UltraEnther<br><small>R$10.000 - R$30.000</small>
+    <button class="buy-btn" onclick="buy('pix://ultraenther')">Comprar</button>
+  </div>
+  <div class="card">
+    QZDiamond<br><small>R$7.000 - R$20.000</small>
+    <button class="buy-btn" onclick="buy('pix://qzdiamond')">Comprar</button>
+  </div>
+  <div class="card">
+    EntherPrime<br><small>R$3.000 - R$9.000</small>
+    <button class="buy-btn" onclick="buy('pix://enterprime')">Comprar</button>
+  </div>
+  <div class="card">
+    JBX-BR<br><small>R$1.000 - R$5.000</small>
+    <button class="buy-btn" onclick="buy('pix://jbxbr')">Comprar</button>
+  </div>
+  <div class="card">
+    DarkUSD<br><small>R$2.000 - R$8.000</small>
+    <button class="buy-btn" onclick="buy('pix://darkusd')">Comprar</button>
+  </div>
+  <div class="card">
+    DarkBTC<br><small>R$10.000 - R$50.000</small>
+    <button class="buy-btn" onclick="buy('pix://darkbtc')">Comprar</button>
+  </div>
+  <div class="card">
+    TrixUSD<br><small>R$5.000 - R$25.000</small>
+    <button class="buy-btn" onclick="buy('pix://trixusd')">Comprar</button>
+  </div>
+  <div class="card">
+    JBX Diamond<br><small>R$20.000 - R$60.000</small>
+    <button class="buy-btn" onclick="buy('pix://jbxdiamond')">Comprar</button>
+  </div>
 </div>
 
 <!-- Modal QR -->
@@ -108,19 +180,37 @@
   </div>
 </div>
 
+<!-- Rodapé -->
 <div class="footer">
   © 2025 JBX Exchange • Powered by Oris OS & HoloFi • Desenvolvido por Lucas Januário
 </div>
 
 <script>
+  function buy(data) {
+    const nome = prompt("Digite seu nome:");
+    const valor = prompt("Digite o valor do investimento (ex: 5000):");
+    const chavePix = prompt("Digite sua chave Pix:");
+
+    if (nome && valor && chavePix) {
+      const pagamentoInfo = `Nome: ${nome}\nValor: R$${valor}\nPix: ${chavePix}`;
+      console.log(pagamentoInfo);
+
+      // Gerar QR
+      showQR(data + '?valor=' + valor + '&nome=' + encodeURIComponent(nome));
+    } else {
+      alert("Informações incompletas. Operação cancelada.");
+    }
+  }
+
   function showQR(data) {
     document.getElementById('qrModal').style.display = 'flex';
-    var qr = new QRious({
+    new QRious({
       element: document.getElementById('qr'),
       size: 200,
       value: data
     });
   }
+
   function closeQR() {
     document.getElementById('qrModal').style.display = 'none';
   }
