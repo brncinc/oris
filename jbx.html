@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JBX Corretora - Enther Diamond</title>
+  <style>
+    /* (estilos anteriores mantidos, só resumo aqui para foco) */
+    body { margin: 0; background-color: #000; font-family: 'Rajdhani', 'Orbitron', Arial, sans-serif; color: #eee; }
+    header { background-color: #0b0b0b; padding: 20px; text-align: center; font-size: 28px; font-weight: 700; letter-spacing: 3px; color: #00ffff; border-bottom: 1px solid #111; }
+    main { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+    /* ... Demais estilos iguais ... */
+    /* Modal */
+    #pix-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    #pix-modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: #111;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 25px #00ffffcc;
+      max-width: 350px;
+      width: 90%;
+      color: #0ff;
+      user-select: none;
+    }
+    .modal-content h3 {
+      margin-top: 0;
+      font-weight: 700;
+    }
+    .modal-content p {
+      margin: 15px 0 20px 0;
+      font-size: 16px;
+      color: #aaa;
+    }
+    .close-btn {
+      background: #00ff99;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 15px;
+      font-weight: 700;
+      color: #000;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 0 10px #00ff99aa;
+    }
+    .close-btn:hover {
+      background: #00cc77;
+      box-shadow: 0 0 15px #00cc77cc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>JBX Corretora • Powered by Dark BTC • Geminiosidade Máxima TRIX</header>
+
+  <main>
+
+    <!-- Hero e tokens cards (mantidos iguais, só modificado botão para usar data-atributos) -->
+    <section class="hero" aria-label="Apresentação da corretora JBX Enther Diamond">
+      <h1>JBX Enther Diamond</h1>
+      <p>Tokens premium baseados em Dark BTC, operando com Geminiosidade Máxima TRIX para máximo rendimento e estabilidade.</p>
+    </section>
+
+    <section class="tokens-grid" aria-label="Lista de tokens da linhagem JBX Enther Diamond">
+      <article class="token-card" role="region" aria-labelledby="jbxf500-title">
+        <h2 id="jbxf500-title">JBXF500</h2>
+        <p>Token híbrido fractal de R$500 com 12% a.a. e simbiose em quarkz.</p>
+        <button class="btn invest-btn" data-token="JBXF500" data-amount="500">Investir via Pix</button>
+      </article>
+      <article class="token-card" role="region" aria-labelledby="diamond500-title">
+        <h2 id="diamond500-title">Diamond500</h2>
+        <p>Fundo agrícola simbiótico baseado em Dark BTC com 10% a.a.</p>
+        <button class="btn invest-btn" data-token="Diamond500" data-amount="500">Investir via Pix</button>
+      </article>
+      <article class="token-card" role="region" aria-labelledby="entherprime-title">
+        <h2 id="entherprime-title">EntherPrime</h2>
+        <p>Cashback + Staking com auto rendimento. Retorno: 14% a.a.</p>
+        <button class="btn invest-btn" data-token="EntherPrime" data-amount="1000">Investir via Pix</button>
+      </article>
+      <article class="token-card" role="region" aria-labelledby="qzdiamond-title">
+        <h2 id="qzdiamond-title">QZDiamond</h2>
+        <p>IA + Geometria quântica. Token inteligente com 18% a.a.</p>
+        <button class="btn invest-btn" data-token="QZDiamond" data-amount="2000">Investir via Pix</button>
+      </article>
+      <article class="token-card" role="region" aria-labelledby="ultraenther-title">
+        <h2 id="ultraenther-title">UltraEnther</h2>
+        <p>NFT de luxo com TRIX ativo. Rendimento de 24% a.a.</p>
+        <button class="btn invest-btn" data-token="UltraEnther" data-amount="5000">Investir via Pix</button>
+      </article>
+    </section>
+
+    <button class="trix-btn" aria-pressed="false" id="activate-trix-btn" title="Ativar Geminiosidade Máxima TRIX">
+      Ativar Geminiosidade Máxima TRIX
+    </button>
+
+    <section class="variables-panel" aria-label="Painel de variáveis do Dark Trade Diário">
+      <h3>Variáveis do Dark Trade Diário</h3>
+      <div class="variables-grid" id="variables-grid">
+        <!-- Variáveis inseridas pelo JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    &copy; 2025 JBX Corretora • Oris OS • Tecnologia Dark BTC com Geminiosidade Máxima TRIX
+  </footer>
+
+  <!-- Modal Pix -->
+  <div id="pix-modal" role="dialog" aria-modal="true" aria-labelledby="pix-modal-title" aria-describedby="pix-modal-desc">
+    <div class="modal-content">
+      <h3 id="pix-modal-title">Pagamento via Pix</h3>
+      <p id="pix-modal-desc">Use o QR Code abaixo para pagar e investir no token <span id="modal-token-name"></span> no valor de R$ <span id="modal-amount"></span>.</p>
+      <div id="pix-qr-code" style="margin: auto;"></div>
+      <button class="close-btn" id="close-modal-btn">Fechar</button>
+    </div>
+  </div>
+
+  <!-- QRCode.js library - CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script>
+    // Dados do Pix (exemplo)
+    const pixKey = "48761013889"; // Sua chave Pix
+    const pixDescription = "Investimento JBX Enther Diamond";
+    const pixReceiverName = "JBX Corretora";
+
+    // Variáveis do Dark Trade Diário
+    const darkTradeVars = {
+      dark_liquidity: "1.245.678,90 USD",
+      btc_simbio_score: 98.7,
+      trix_cycle: 87,
+      fractal_output: "4.567",
+      reentry_index: 72.3,
+      rotation_flux: 45.9,
+      stake_rebound_rate: 68.4,
+      volatility_suppression: true,
+      dark_imbalance: 0.06,
+      smart_sell_pressure: 12.3,
+      dark_fusion_rate: 0.88,
+      reward_drift: 0.014,
+      qz_entropy_level: 0.035,
+      nft_activity_ratio: "21%",
+      gem_lock_status: false,
+      dark_reserve_ratio: 0.45,
+      stake_renewal_cycle: 36,
+      quarkz_conversion_rate: 1.15,
+      user_reflection_index: 0.87,
+      auto_geminis_trigger: true
+    };
+
+    // Exibir variáveis na grid
+    const grid = document.getElementById('variables-grid');
+    for (const [key, value] of Object.entries(darkTradeVars)) {
+      const varDiv = document.createElement('div');
+      varDiv.className = 'variable';
+      varDiv.innerHTML = `<b>${key}</b>: ${value}`;
+      grid.appendChild(varDiv);
+    }
+
+    // TRIX button toggle
+    const trixBtn = document.getElementById('activate-trix-btn');
+    trixBtn.addEventListener('click', () => {
+      const pressed = trixBtn.getAttribute('aria-pressed') === 'true';
+      if(!pressed) {
+        trixBtn.textContent = "TRIX Ativado! Geminiosidade Máxima em operação";
+        trixBtn.style.background = 'linear-gradient(90deg, #00ffaa, #009944)';
+      } else {
+        trixBtn.textContent = "Ativar Geminiosidade Máxima TRIX";
+        trixBtn.style.background = 'linear-gradient(90deg, #00fff7, #00aaff)';
+      }
+      trixBtn.setAttribute('aria-pressed', (!pressed).toString());
+    });
+
+    // PIX Modal lógica
+    const modal = document.getElementById('pix-modal');
+    const modalTokenName = document.getElementById('modal-token-name');
+    const modalAmount = document.getElementById('modal-amount');
+    const qrCodeContainer = document.getElementById('pix-qr-code');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+
+    // Função para montar o payload Pix dinâmico simples
+    // Aqui é um exemplo simplificado, para Pix real precisa gerar payload com CRC etc via API própria.
+    function gerarPixPayload(key, amount, description) {
+      // payload básico Pix (copiado simplificado)
+      return `00020126580014BR.GOV.BCB.PIX0136${key}0208${amount.toFixed(2).replace('.', '')}520400005303986540${amount.toFixed(2)}5802BR5925${pixReceiverName}6009SAO PAULO61080540900062070503***6304B14F`;
+    }
+
+    // Alternativa para gerar payload Pix real, pode usar libs específicas (ex: pix-payload-generator)
+
+    // Para demo, geramos um QR Code com uma string Pix simulada
+    function gerarPixQRCode(token, amount) {
+      qrCodeContainer.innerHTML = ''; // limpa anterior
+
+      const payload = `00020126580014BR.GOV.BCB.PIX0136${pixKey}520400005303986540${amount.toFixed(2)}5802BR5925${pixReceiverName}6009SAO PAULO61080540900062070503***6304B14F`;
+
+      new QRCode(qrCodeContainer, {
+        text: payload,
+        width: 200,
+        height: 200,
+        colorDark: "#00ffff",
+        colorLight: "#00000000",
+        correctLevel
