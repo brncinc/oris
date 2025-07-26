@@ -7,253 +7,250 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
   <style>
-  /* Reset e base */
-  body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-    background-color: #121212;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+    /* Reset e base */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+      background-color: #121212;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-  .topbar {
-    background-color: #000;
-    padding: 14px 20px;
-    font-size: 26px;
-    color: #00FF7F;
-    font-weight: bold;
-    text-align: center;
-    flex-shrink: 0;
-    user-select: none;
-    letter-spacing: 1.2px;
-  }
+    .topbar {
+      background-color: #000;
+      padding: 14px 20px;
+      font-size: 26px;
+      color: #00FF7F;
+      font-weight: bold;
+      text-align: center;
+      flex-shrink: 0;
+      user-select: none;
+      letter-spacing: 1.2px;
+    }
 
-  .quotes-bar {
-    background-color: #111;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 18px;
-    padding: 10px 15px;
-    font-size: 15px;
-    flex-shrink: 0;
-    user-select: none;
-  }
+    .quotes-bar {
+      background-color: #111;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      padding: 10px 15px;
+      font-size: 15px;
+      flex-shrink: 0;
+      user-select: none;
+    }
 
-  .quote {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-    font-weight: 600;
-  }
+    .quote {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      font-weight: 600;
+    }
 
-  .up { color: #00ff00; }
-  .down { color: #ff4444; }
+    .up { color: #00ff00; }
+    .down { color: #ff4444; }
 
-  /* Container principal com 4 colunas fixas */
-  .container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    padding: 25px 20px;
-    flex-grow: 1;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-
-  .card {
-    background-color: #2f2f2f;
-    padding: 20px 15px;
-    border-radius: 12px;
-    text-align: center;
-    border: 1.5px solid #00ff99;
-    transition: background-color 0.3s, border-color 0.3s;
-    font-size: 16.5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 120px;
-    box-shadow: 0 0 8px rgba(0, 255, 153, 0.2);
-    cursor: default;
-  }
-
-  .card:hover {
-    background-color: #3a3a3a;
-    border-color: #ff00ff;
-    box-shadow: 0 0 12px rgba(255, 0, 255, 0.5);
-  }
-
-  .card h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #00ff7f;
-  }
-
-  .card small {
-    font-size: 0.9rem;
-    color: #bbb;
-    margin-top: 4px;
-    margin-bottom: 10px;
-    display: block;
-  }
-
-  .buy-btn {
-    margin-top: auto;
-    background-color: #00FF7F;
-    border: none;
-    color: #000;
-    font-weight: 700;
-    padding: 10px 22px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.25s ease;
-    align-self: center;
-    min-width: 110px;
-    box-shadow: 0 3px 7px rgba(0, 255, 127, 0.5);
-    user-select: none;
-  }
-
-  .buy-btn:hover {
-    background-color: #00cc66;
-    box-shadow: 0 5px 15px rgba(0, 204, 102, 0.8);
-  }
-
-  /* Modal QR Code */
-  #qrModal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0,0,0,0.85);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    padding: 15px;
-  }
-
-  #qrModalContent {
-    background-color: #fff;
-    padding: 25px 30px;
-    border-radius: 14px;
-    color: #000;
-    text-align: center;
-    max-width: 320px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    user-select: none;
-  }
-
-  #qrModalContent h3 {
-    margin-top: 0;
-    margin-bottom: 18px;
-    font-size: 22px;
-    color: #333;
-  }
-
-  #qrModalContent p {
-    margin-top: 18px;
-    font-size: 16px;
-    color: #555;
-  }
-
-  #qr {
-    border-radius: 12px;
-    margin: 0 auto;
-    display: block;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Footer */
-  .footer {
-    background: linear-gradient(45deg, #ff0000, #ffff00);
-    color: #000;
-    text-align: center;
-    padding: 18px 15px;
-    font-size: 14.5px;
-    font-weight: bold;
-    text-shadow: 0 0 5px #000;
-    position: sticky;
-    bottom: 0;
-    width: 100%;
-    flex-shrink: 0;
-    box-sizing: border-box;
-    user-select: none;
-  }
-
-  /* Responsividade */
-  @media (max-width: 900px) {
-    /* Container reduz para 2 colunas para telas médias */
+    /* Container principal com 4 colunas fixas */
     .container {
-      grid-template-columns: repeat(2, 1fr);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      padding: 25px 20px;
+      flex-grow: 1;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .card {
+      background-color: #2f2f2f;
       padding: 20px 15px;
+      border-radius: 12px;
+      text-align: center;
+      border: 1.5px solid #00ff99;
+      transition: background-color 0.3s, border-color 0.3s;
+      font-size: 16.5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 120px;
+      box-shadow: 0 0 8px rgba(0, 255, 153, 0.2);
+      cursor: default;
     }
 
-    .card {
-      font-size: 15.5px;
-      min-height: 110px;
-      padding: 18px 12px;
-    }
-
-    .buy-btn {
-      padding: 9px 18px;
-      min-width: 95px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .topbar { font-size: 22px; padding: 12px 15px; }
-    .quotes-bar { font-size: 13px; gap: 12px; padding: 8px 12px; }
-
-    /* Container para telas pequenas fica 1 coluna */
-    .container {
-      grid-template-columns: 1fr;
-      padding: 15px 10px;
-    }
-
-    .card {
-      font-size: 14px;
-      min-height: 100px;
-      padding: 14px 10px;
+    .card:hover {
+      background-color: #3a3a3a;
+      border-color: #ff00ff;
+      box-shadow: 0 0 12px rgba(255, 0, 255, 0.5);
     }
 
     .card h2 {
-      font-size: 18px;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #00ff7f;
+    }
+
+    .card small {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      display: block;
     }
 
     .buy-btn {
-      padding: 8px 14px;
-      min-width: 80px;
+      margin-top: auto;
+      background-color: #00FF7F;
+      border: none;
+      color: #000;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+      align-self: center;
+      min-width: 110px;
+      box-shadow: 0 3px 7px rgba(0, 255, 127, 0.5);
+      user-select: none;
+    }
+
+    .buy-btn:hover {
+      background-color: #00cc66;
+      box-shadow: 0 5px 15px rgba(0, 204, 102, 0.8);
+    }
+
+    /* Modal QR Code */
+    #qrModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 15px;
     }
 
     #qrModalContent {
-      max-width: 280px;
-      padding: 18px 20px;
+      background-color: #fff;
+      padding: 25px 30px;
+      border-radius: 14px;
+      color: #000;
+      text-align: center;
+      max-width: 320px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      user-select: none;
     }
 
     #qrModalContent h3 {
-      font-size: 20px;
-      margin-bottom: 14px;
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-size: 22px;
+      color: #333;
     }
 
     #qrModalContent p {
-      font-size: 14px;
-      margin-top: 14px;
+      margin-top: 18px;
+      font-size: 16px;
+      color: #555;
     }
 
     #qr {
-      width: 220px !important;
-      height: 220px !important;
+      border-radius: 12px;
+      margin: 0 auto;
+      display: block;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     }
-  }
-</style>
 
+    /* Footer */
+    .footer {
+      background: linear-gradient(45deg, #ff0000, #ffff00);
+      color: #000;
+      text-align: center;
+      padding: 18px 15px;
+      font-size: 14.5px;
+      font-weight: bold;
+      text-shadow: 0 0 5px #000;
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    /* Responsividade */
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px 15px;
+      }
+
+      .card {
+        font-size: 15.5px;
+        min-height: 110px;
+        padding: 18px 12px;
+      }
+
+      .buy-btn {
+        padding: 9px 18px;
+        min-width: 95px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .topbar { font-size: 22px; padding: 12px 15px; }
+      .quotes-bar { font-size: 13px; gap: 12px; padding: 8px 12px; }
+
+      .container {
+        grid-template-columns: 1fr;
+        padding: 15px 10px;
+      }
+
+      .card {
+        font-size: 14px;
+        min-height: 100px;
+        padding: 14px 10px;
+      }
+
+      .card h2 {
+        font-size: 18px;
+      }
+
+      .buy-btn {
+        padding: 8px 14px;
+        min-width: 80px;
+      }
+
+      #qrModalContent {
+        max-width: 280px;
+        padding: 18px 20px;
+      }
+
+      #qrModalContent h3 {
+        font-size: 20px;
+        margin-bottom: 14px;
+      }
+
+      #qrModalContent p {
+        font-size: 14px;
+        margin-top: 14px;
+      }
+
+      #qr {
+        width: 220px !important;
+        height: 220px !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -346,6 +343,8 @@
   </div>
 
   <script>
+    let qrInstance = null;
+
     function buy(produto) {
       const nome = prompt("Seu nome completo:");
       const valor = prompt("Digite o valor (em reais):");
@@ -358,7 +357,9 @@
 
       const chavePix = "48761013889";
       const txid = "JBX" + Math.floor(Math.random() * 99999).toString().padStart(5, '0');
-      const payload = gerarPix(chavePix, nome, parseFloat(valor).toFixed(2), cidade, produto, txid);
+      const valorFormatado = parseFloat(valor).toFixed(2);
+
+      const payload = gerarPix(chavePix, nome, valorFormatado, cidade, produto, txid);
       showQR(payload);
     }
 
@@ -377,24 +378,37 @@
         f("52", "0000") + f("53", "986") + f("54", valor) + f("58", "BR") +
         f("59", nome.substring(0,25)) + f("60", cidade.substring(0,15)) +
         additionalData + "6304";
+
       const crc = crc16(payloadSemCRC);
       return payloadSemCRC + crc;
     }
 
-    function crc16(payload) {
+    function crc16(str) {
       let crc = 0xFFFF;
-      for (let i = 0; i < payload.length; i++) {
-        crc ^= payload.charCodeAt(i) << 8;
+      for (let i = 0; i < str.length; i++) {
+        crc ^= str.charCodeAt(i) << 8;
         for (let j = 0; j < 8; j++) {
-          crc = (crc & 0x8000) ? (crc << 1) ^ 0x1021 : crc << 1;
+          if ((crc & 0x8000) !== 0) {
+            crc = (crc << 1) ^ 0x1021;
+          } else {
+            crc <<= 1;
+          }
+          crc &= 0xFFFF;
         }
       }
-      return ((crc ^ 0) & 0xFFFF).toString(16).toUpperCase().padStart(4, "0");
+      return crc.toString(16).toUpperCase().padStart(4, "0");
     }
 
     function showQR(payload) {
       document.getElementById("qrModal").style.display = "flex";
-      new QRious({
+
+      // Destrói o QR anterior para evitar sobreposição
+      if (qrInstance) {
+        qrInstance.set({value: ''});
+        qrInstance = null;
+      }
+
+      qrInstance = new QRious({
         element: document.getElementById("qr"),
         size: 280,
         value: payload
