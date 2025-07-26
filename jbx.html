@@ -73,21 +73,21 @@
       padding: 20px 15px;
       border-radius: 12px;
       text-align: center;
-      border: 1.5px solid #00cc66; /* cor igual ao JBX500 */
+      border: 1.5px solid #9b00ff; /* contorno roxo neon */
       transition: background-color 0.3s, border-color 0.3s;
       font-size: 16.5px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       min-height: 120px;
-      box-shadow: 0 0 8px rgba(0, 204, 102, 0.4);
+      box-shadow: 0 0 8px rgba(155, 0, 255, 0.6); /* sombra roxa neon */
       cursor: default;
     }
 
     .card:hover {
       background-color: #3a3a3a;
-      border-color: #00aa55;
-      box-shadow: 0 0 12px rgba(0, 170, 85, 0.7);
+      border-color: #7a00cc;
+      box-shadow: 0 0 12px rgba(122, 0, 204, 0.8);
     }
 
     .card h2 {
@@ -95,7 +95,7 @@
       margin-bottom: 15px;
       font-size: 20px;
       font-weight: bold;
-      color: #00ff7f;
+      color: #9b00ff;
     }
 
     .card small {
@@ -108,9 +108,9 @@
 
     .buy-btn {
       margin-top: auto;
-      background-color: #00FF7F;
+      background-color: #9b00ff;
       border: none;
-      color: #000;
+      color: #fff;
       font-weight: 700;
       padding: 10px 22px;
       border-radius: 10px;
@@ -118,13 +118,13 @@
       transition: background-color 0.25s ease;
       align-self: center;
       min-width: 110px;
-      box-shadow: 0 3px 7px rgba(0, 255, 127, 0.5);
+      box-shadow: 0 3px 7px rgba(155, 0, 255, 0.6);
       user-select: none;
     }
 
     .buy-btn:hover {
-      background-color: #00cc66;
-      box-shadow: 0 5px 15px rgba(0, 204, 102, 0.8);
+      background-color: #7a00cc;
+      box-shadow: 0 5px 15px rgba(122, 0, 204, 0.8);
     }
 
     /* Modal QR Code */
@@ -267,6 +267,16 @@
   </div>
 
   <div class="container">
+    <div class="card">
+      <h2>Mini10</h2>
+      <small>R$10 - R$49</small>
+      <button class="buy-btn" onclick="buy('Mini10')">Comprar</button>
+    </div>
+    <div class="card">
+      <h2>Basic25</h2>
+      <small>R$25 - R$49</small>
+      <button class="buy-btn" onclick="buy('Basic25')">Comprar</button>
+    </div>
     <div class="card">
       <h2>Starter50</h2>
       <small>R$50 - R$200</small>
