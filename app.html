@@ -235,12 +235,35 @@
   <!-- Sidebar -->
   <aside class="sidebar" role="navigation" aria-label="Menu lateral">
     <h2>PRESS F11</h2>
-    <button onclick="abrirPagina('oristv.html')" aria-label="ORIS TV">📺 ORIS TV</button>
-    <button onclick="abrirPagina('homeb.html')" aria-label="Home Broker">📈 Home Broker</button>
-       <button onclick="abrirPagina('jbx.html')" aria-label="Home Broker">📈 stock market</button>
-    <button onclick="abrirPagina('oris.html')" aria-label="ORIS SDK">🤖 ORIS SDK</button>
-    <button onclick="abrirPagina('browser.html')" aria-label="Navegador">🌍 Navegador</button>
-  </aside>
+ <!-- Adicione no <head> -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<aside>
+  <button onclick="abrirPagina('oristv.html')" aria-label="ORIS TV">
+    <i data-lucide="tv"></i> ORIS TV
+  </button>
+  
+  <button onclick="abrirPagina('homeb.html')" aria-label="Home Broker">
+    <i data-lucide="trending-up"></i> Home Broker
+  </button>
+  
+  <button onclick="abrirPagina('jbx.html')" aria-label="Stock Market">
+    <i data-lucide="bar-chart-2"></i> Stock Market
+  </button>
+  
+  <button onclick="abrirPagina('oris.html')" aria-label="ORIS SDK">
+    <i data-lucide="cpu"></i> ORIS SDK
+  </button>
+  
+  <button onclick="abrirPagina('browser.html')" aria-label="Navegador">
+    <i data-lucide="globe"></i> Navegador
+  </button>
+</aside>
+
+<!-- Inicialização dos ícones -->
+<script>
+  lucide.createIcons();
+</script>
 
   <!-- Main content -->
   <main class="main" role="main" tabindex="0" aria-label="Conteúdo principal">
