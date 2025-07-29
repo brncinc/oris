@@ -6,16 +6,19 @@
   <title>ORIS OS - Aplicativos</title>
   <link rel="icon" href="logo.ico" />
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
   :root {
     --primary: #1db954;
-    --dark-bg: #000000;
-    --text-light: #fff;
+    --primary-light: #1ed760;
+    --dark-bg: #0e0e0e;
+    --text-light: #f5f5f5;
     --accent: #00ffb2;
-    --card-bg: rgba(255, 255, 255, 0.06);
-    --border: rgba(255, 255, 255, 0.12);
-    --radius: 16px;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.08);
+    --radius: 20px;
     --shadow: rgba(0, 0, 0, 0.6);
-    --shadow-hover: rgba(29, 185, 84, 0.7);
+    --shadow-hover: rgba(29, 185, 84, 0.5);
   }
 
   * {
@@ -25,8 +28,8 @@
   }
 
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--dark-bg);
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(145deg, #0a0a0a, #121212);
     color: var(--text-light);
     min-height: 100vh;
     display: flex;
@@ -38,13 +41,13 @@
 
   .sidebar {
     width: 280px;
-    padding: 28px 24px;
-    background: #0a0a0add;
-    backdrop-filter: blur(16px);
+    padding: 32px 26px;
+    background: rgba(15, 15, 15, 0.85);
+    backdrop-filter: blur(18px);
     border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -55,20 +58,19 @@
 
   .sidebar h2 {
     color: var(--primary);
-    font-size: clamp(1.8rem, 2.2vw, 2rem);
+    font-size: 2rem;
     font-weight: 900;
     letter-spacing: 2px;
-    margin-bottom: 24px;
-    user-select: none;
+    margin-bottom: 30px;
   }
 
   .sidebar button {
     background: transparent;
     border: none;
     color: var(--text-light);
-    padding: 14px 18px;
+    padding: 14px 20px;
     border-radius: var(--radius);
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
     text-align: left;
     cursor: pointer;
@@ -79,38 +81,37 @@
   .sidebar button:hover {
     background: var(--primary);
     color: var(--dark-bg);
-    transform: translateX(4px);
-    box-shadow: 0 0 12px var(--primary);
+    box-shadow: 0 0 14px var(--primary);
+    transform: translateX(6px);
   }
 
   .main {
     flex: 1;
     margin-left: 280px;
-    padding: 32px 40px 100px;
+    padding: 40px 48px 100px;
     overflow-y: auto;
-    min-height: 100vh;
   }
 
   .search-container {
-    margin-bottom: 30px;
+    margin-bottom: 32px;
     display: flex;
-    gap: 14px;
+    gap: 16px;
     align-items: center;
     flex-wrap: wrap;
   }
 
   .search-container input {
     flex-grow: 1;
-    min-width: 220px;
+    min-width: 240px;
     padding: 14px 24px;
     border-radius: 40px;
     border: 1.5px solid var(--border);
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.04);
     color: var(--text-light);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 500;
     transition: 0.3s;
-    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.05);
   }
 
   .search-container input::placeholder {
@@ -129,63 +130,63 @@
     background: var(--primary);
     border: none;
     border-radius: 40px;
-    padding: 12px 22px;
+    padding: 12px 24px;
     color: var(--dark-bg);
     font-weight: 700;
     font-size: 1rem;
     cursor: pointer;
     transition: 0.3s ease;
-    box-shadow: 0 4px 12px rgba(29, 185, 84, 0.4);
+    box-shadow: 0 4px 16px var(--shadow-hover);
   }
 
   .search-container button:hover {
-    background: #1ed760;
+    background: var(--primary-light);
     transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(29, 185, 84, 0.6);
+    box-shadow: 0 6px 20px var(--shadow-hover);
   }
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 32px;
   }
 
   .app-card {
     background: var(--card-bg);
     border-radius: var(--radius);
-    padding: 28px 18px;
+    padding: 30px 20px;
     text-align: center;
     transition: transform 0.3s ease, background 0.3s ease;
-    backdrop-filter: blur(10px);
-    border: 1.2px solid var(--border);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
     color: var(--text-light);
-    font-weight: 700;
+    font-weight: 600;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
-    box-shadow: 0 2px 10px var(--shadow);
+    gap: 16px;
+    box-shadow: 0 2px 12px var(--shadow);
     cursor: pointer;
   }
 
   .app-card:hover {
     background: var(--primary);
     color: var(--dark-bg);
-    transform: scale(1.06);
-    box-shadow: 0 0 18px var(--shadow-hover);
+    transform: scale(1.07);
+    box-shadow: 0 0 20px var(--primary);
     border-color: var(--primary);
   }
 
   .app-card img {
-    width: 48px;
-    height: 48px;
-    filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+    width: 52px;
+    height: 52px;
+    filter: drop-shadow(0 0 4px rgba(0,0,0,0.3));
   }
 
   .footer {
     width: 100%;
-    background: #0f0f0fee;
-    padding: 16px 28px;
+    background: rgba(10, 10, 10, 0.95);
+    padding: 18px 32px;
     font-size: 14px;
     position: fixed;
     bottom: 0;
@@ -196,7 +197,7 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     border-top: 1px solid var(--border);
     font-weight: 500;
   }
@@ -204,7 +205,7 @@
   .footer p {
     margin: 0;
     white-space: nowrap;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 
   .sidebar::-webkit-scrollbar {
@@ -221,10 +222,10 @@
   }
 
   body.light-mode {
-    --dark-bg: #f4f4f4;
+    --dark-bg: #f2f2f2;
     --text-light: #111;
-    --card-bg: rgba(0, 0, 0, 0.05);
-    --border: rgba(0, 0, 0, 0.1);
+    --card-bg: rgba(0, 0, 0, 0.04);
+    --border: rgba(0, 0, 0, 0.08);
   }
 </style>
 
