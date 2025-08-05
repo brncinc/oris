@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Câmera - Tirar Foto</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    video, canvas {
+      border-radius: 10px;
+      max-width: 100%;
+      max-height: 400px;
+      background: #222;
+    }
+    #buttons {
+      margin-top: 15px;
+    }
+    button {
+      background-color: #1db954;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 0 10px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #17a74a;
+    }
+    #foto-tirada {
+      margin-top: 15px;
+      max-width: 100%;
+      border: 2px solid #1db954;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tirar Foto com a Webcam</h1>
+  <video id="video" autoplay playsinline></video>
+  
+  <div id="buttons">
+    <button id="btnTirarFoto">Tirar Foto</button>
+    <button id="btnResetar" disabled>Resetar</button>
+  </div>
+
+  <canvas id="canvas" style="display:none;"></canvas>
+
+  <img id="foto-tirada" alt="Foto tirada aparecerá aqui" />
+
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const btnTirarFoto = document.getElementById('btnTirarFoto');
+    const btnResetar = document.getElementById('btnResetar');
+    const fotoTirada = document.getElementById('foto-tirada');
+
+    // Pede permissão para acessar a webcam e exibe no <video>
+    async function iniciarCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+      } catch (err) {
+        alert('Erro ao acessar a câmera: ' + err.message);
+      }
+    }
+
+    // Captura uma foto do vídeo e exibe na tag <img>
+    function tirarFoto() {
+      const largura = video.videoWidth;
+      const altura = video.videoHeight;
+
+      canvas.width = largura;
+      canvas.height = altura;
+
+      const contexto = canvas.getContext('2d');
+      contexto.drawImage(video, 0, 0, largura, altura);
+
+      const dataUrl = canvas.toDataURL('image/png');
+      fotoTirada.src = dataUrl;
+      fotoTirada.style.display = 'block';
+
+      btnResetar.disabled = false;
+      btnTirarFoto.disabled = true;
+    }
+
+    // Reseta a foto tirada para poder tirar outra
+    function resetarFoto() {
+      fotoTirada.src = '';
+      fotoTirada.style.display = 'none';
+      btnResetar.disabled = true;
+      btnTirarFoto.disabled = false;
+    }
+
+    btnTirarFoto.addEventListener('click', tirarFoto);
+    btnResetar.addEventListener('click', resetarFoto);
+
+    iniciarCamera();
+  </script>
+</body>
+</html>
