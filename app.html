@@ -6,13 +6,7 @@
     <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ORIS OS - Aplicativos</title>
-   <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    integrity="sha512-papC4z+2SzG0FjqVndw5a4/2MmZ8P9+Q3NPWPR1ib1rZ5jB/Vo/ExVoY+yd+zP5G5oUUsD75Ke1osFrZjJcHKQ=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+ 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
 
@@ -243,30 +237,40 @@
   <!-- Sidebar -->
  <aside class="sidebar" role="navigation" aria-label="Menu lateral">
   <h2>PRESS F11</h2>
-<aside class="sidebar" role="navigation" aria-label="Menu lateral">
+
+  <!-- Adicione isso no <head> do seu HTML para carregar os ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Botões com ícones substituindo os emojis -->
   <button onclick="abrirPagina('oristv.html')" aria-label="ORIS TV">
     <i class="fas fa-tv"></i> ORIS TV
   </button>
+
   <button onclick="abrirPagina('homeb.html')" aria-label="Home Broker">
     <i class="fas fa-chart-line"></i> Home Broker
   </button>
+
   <button onclick="abrirPagina('jbx.html')" aria-label="Stock Market">
     <i class="fas fa-chart-bar"></i> Stock Market
   </button>
+
   <button onclick="abrirPagina('browser.html')" aria-label="Navegador">
     <i class="fas fa-globe"></i> Navegador
   </button>
+
+  <!-- Novos botões adicionados -->
   <button onclick="abrirPagina('camera.html')" aria-label="Câmera">
     <i class="fas fa-camera"></i> Câmera
   </button>
-  <button onclick="abrirPagina('adobe.html')" aria-label="Adobe Suite">
-    <i class="fas fa-paint-brush"></i> Adobe Suite
+
+  <button onclick="abrirPagina('adobeexpress.html')" aria-label="Adobe Express">
+    <i class="fab fa-adobe"></i> Adobe Express
   </button>
-  <button onclick="abrirPagina('arquivos.html')" aria-label="Gerenciador de Arquivos">
+
+  <button onclick="abrirPagina('arquivos.html')" aria-label="Arquivos">
     <i class="fas fa-folder-open"></i> Arquivos
   </button>
 </aside>
-
 
   <!-- Main content -->
   <main class="main" role="main" tabindex="0" aria-label="Conteúdo principal">
