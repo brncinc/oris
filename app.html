@@ -14,11 +14,11 @@
     --dark-bg: #0e0e0e;
     --text-light: #f5f5f5;
     --accent: #00ffb2;
-    --card-bg: #000000;
-    --border: rgba(0, 255, 102, 0.25); /* neon green edge */
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.08);
     --radius: 20px;
     --shadow: rgba(0, 0, 0, 0.6);
-    --shadow-hover: rgba(0, 255, 102, 0.4);
+    --shadow-hover: rgba(29, 185, 84, 0.5);
   }
 
   * {
@@ -29,7 +29,7 @@
 
   body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(145deg, #0a0a0a, #1a1a1a, #0d0d0d); /* metallic black gradient */
+    background: linear-gradient(145deg, #0a0a0a, #121212);
     color: var(--text-light);
     min-height: 100vh;
     display: flex;
@@ -156,24 +156,24 @@
     border-radius: var(--radius);
     padding: 30px 20px;
     text-align: center;
+    transition: transform 0.3s ease, background 0.3s ease;
     backdrop-filter: blur(12px);
-    border: 2px solid var(--border);
+    border: 1px solid var(--border);
     color: var(--text-light);
     font-weight: 600;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    box-shadow: 0 0 10px var(--border), 0 0 20px var(--shadow-hover); /* neon glow effect */
+    box-shadow: 0 2px 12px var(--shadow);
     cursor: pointer;
-    transition: all 0.3s ease;
   }
 
   .app-card:hover {
-    background: #0f0f0f;
-    color: var(--primary);
+    background: var(--primary);
+    color: var(--dark-bg);
     transform: scale(1.07);
-    box-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary-light);
+    box-shadow: 0 0 20px var(--primary);
     border-color: var(--primary);
   }
 
@@ -229,39 +229,18 @@
   }
 </style>
 
-
 </head>
 <body>
 
   <!-- Sidebar -->
-<aside class="sidebar" role="navigation" aria-label="Menu lateral">
-  <h2>PRESS F11</h2>
-
-  <button onclick="abrirPagina('oristv.html')" aria-label="ORIS TV">
-    <img src="https://lucide.dev/icons/tv.svg" alt="TV Icon" width="20" style="margin-right: 10px; filter: invert(1);" />
-    ORIS TV
-  </button>
-
-  <button onclick="abrirPagina('homeb.html')" aria-label="Home Broker">
-    <img src="https://lucide.dev/icons/bar-chart-2.svg" alt="Chart Icon" width="20" style="margin-right: 10px; filter: invert(1);" />
-    Home Broker
-  </button>
-
-  <button onclick="abrirPagina('jbx.html')" aria-label="Stock Market">
-    <img src="https://lucide.dev/icons/line-chart.svg" alt="Stock Market Icon" width="20" style="margin-right: 10px; filter: invert(1);" />
-    Stock Market
-  </button>
-
-  <button onclick="abrirPagina('oris.html')" aria-label="ORIS SDK">
-    <img src="https://lucide.dev/icons/cpu.svg" alt="SDK Icon" width="20" style="margin-right: 10px; filter: invert(1);" />
-    ORIS SDK
-  </button>
-
-  <button onclick="abrirPagina('browser.html')" aria-label="Navegador">
-    <img src="https://lucide.dev/icons/globe.svg" alt="Browser Icon" width="20" style="margin-right: 10px; filter: invert(1);" />
-    Navegador
-  </button>
-</aside>
+  <aside class="sidebar" role="navigation" aria-label="Menu lateral">
+    <h2>PRESS F11</h2>
+    <button onclick="abrirPagina('oristv.html')" aria-label="ORIS TV">📺 ORIS TV</button>
+    <button onclick="abrirPagina('homeb.html')" aria-label="Home Broker">📈 Home Broker</button>
+       <button onclick="abrirPagina('jbx.html')" aria-label="Home Broker">📈 stock market</button>
+    <button onclick="abrirPagina('oris.html')" aria-label="ORIS SDK">🤖 ORIS SDK</button>
+    <button onclick="abrirPagina('browser.html')" aria-label="Navegador">🌍 Navegador</button>
+  </aside>
 
   <!-- Main content -->
   <main class="main" role="main" tabindex="0" aria-label="Conteúdo principal">
