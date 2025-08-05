@@ -6,260 +6,234 @@
     <link rel="icon" href="logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ORIS OS - Aplicativos</title>
- 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
 
-  :root {
-    --primary: #1db954;
-    --primary-light: #1ed760;
-    --dark-bg: #0e0e0e;
-    --text-light: #f5f5f5;
-    --accent: #00ffb2;
-    --card-bg: rgba(255, 255, 255, 0.05);
-    --border: rgba(255, 255, 255, 0.08);
-    --radius: 20px;
-    --shadow: rgba(0, 0, 0, 0.6);
-    --shadow-hover: rgba(29, 185, 84, 0.5);
-  }
+    :root {
+      --primary: #1db954;
+      --primary-light: #1ed760;
+      --dark-bg: #0e0e0e;
+      --text-light: #f5f5f5;
+      --accent: #00ffb2;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.08);
+      --radius: 20px;
+      --shadow: rgba(0, 0, 0, 0.6);
+      --shadow-hover: rgba(29, 185, 84, 0.5);
+    }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(145deg, #0a0a0a, #121212);
-    color: var(--text-light);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: row;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    transition: background 0.3s ease;
-  }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #0a0a0a, #121212);
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      transition: background 0.3s ease;
+    }
 
-  .sidebar {
-    width: 280px;
-    padding: 32px 26px;
-    background: rgba(15, 15, 15, 0.85);
-    backdrop-filter: blur(18px);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    overflow-y: auto;
-    z-index: 1000;
-  }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 280px;
+      right: 0;
+      height: 64px;
+      background: #0a0a0a;
+      border-bottom: 1px solid var(--border);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      gap: 24px;
+    }
 
-  .sidebar h2 {
-    color: var(--primary);
-    font-size: 2rem;
-    font-weight: 900;
-    letter-spacing: 2px;
-    margin-bottom: 30px;
-  }
+    .navbar button {
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
 
-  .sidebar button {
-    background: transparent;
-    border: none;
-    color: var(--text-light);
-    padding: 14px 20px;
-    border-radius: var(--radius);
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
+    .navbar button:hover {
+      color: var(--primary-light);
+    }
 
-  .sidebar button.active,
-  .sidebar button:hover {
-    background: var(--primary);
-    color: var(--dark-bg);
-    box-shadow: 0 0 14px var(--primary);
-    transform: translateX(6px);
-  }
+    .sidebar {
+      width: 280px;
+      padding: 32px 26px;
+      background: rgba(15, 15, 15, 0.85);
+      backdrop-filter: blur(18px);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      z-index: 1000;
+    }
 
-  .main {
-    flex: 1;
-    margin-left: 280px;
-    padding: 40px 48px 100px;
-    overflow-y: auto;
-  }
+    .sidebar h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
 
-  .search-container {
-    margin-bottom: 32px;
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+    .sidebar button {
+      background: transparent;
+      border: none;
+      color: var(--text-light);
+      padding: 14px 20px;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
 
-  .search-container input {
-    flex-grow: 1;
-    min-width: 240px;
-    padding: 14px 24px;
-    border-radius: 40px;
-    border: 1.5px solid var(--border);
-    background: rgba(255, 255, 255, 0.04);
-    color: var(--text-light);
-    font-size: 1.05rem;
-    font-weight: 500;
-    transition: 0.3s;
-    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.05);
-  }
+    .sidebar button.active,
+    .sidebar button:hover {
+      background: var(--primary);
+      color: var(--dark-bg);
+      box-shadow: 0 0 14px var(--primary);
+      transform: translateX(6px);
+    }
 
-  .search-container input::placeholder {
-    color: #aaa;
-    font-weight: 400;
-  }
+    .main {
+      flex: 1;
+      margin-left: 280px;
+      padding: 120px 48px 100px;
+      overflow-y: auto;
+    }
 
-  .search-container input:focus {
-    outline: none;
-    border-color: var(--primary);
-    background: #111;
-    box-shadow: 0 0 12px var(--primary);
-  }
+    .search-container {
+      margin-bottom: 32px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-  .search-container button {
-    background: var(--primary);
-    border: none;
-    border-radius: 40px;
-    padding: 12px 24px;
-    color: var(--dark-bg);
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s ease;
-    box-shadow: 0 4px 16px var(--shadow-hover);
-  }
+    .search-container input {
+      flex-grow: 1;
+      min-width: 240px;
+      padding: 14px 24px;
+      border-radius: 40px;
+      border: 1.5px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-light);
+      font-size: 1.05rem;
+      font-weight: 500;
+      transition: 0.3s;
+      box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.05);
+    }
 
-  .search-container button:hover {
-    background: var(--primary-light);
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px var(--shadow-hover);
-  }
+    .search-container input::placeholder {
+      color: #aaa;
+      font-weight: 400;
+    }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 32px;
-  }
+    .search-container input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #111;
+      box-shadow: 0 0 12px var(--primary);
+    }
 
-  .app-card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    padding: 30px 20px;
-    text-align: center;
-    transition: transform 0.3s ease, background 0.3s ease;
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border);
-    color: var(--text-light);
-    font-weight: 600;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    box-shadow: 0 2px 12px var(--shadow);
-    cursor: pointer;
-  }
+    .footer {
+      width: 100%;
+      background: rgba(10, 10, 10, 0.95);
+      padding: 18px 32px;
+      font-size: 14px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      color: var(--text-light);
+      z-index: 10000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      font-weight: 500;
+    }
 
-  .app-card:hover {
-    background: var(--primary);
-    color: var(--dark-bg);
-    transform: scale(1.07);
-    box-shadow: 0 0 20px var(--primary);
-    border-color: var(--primary);
-  }
+    .footer p {
+      margin: 0;
+      white-space: nowrap;
+      font-size: 0.95rem;
+    }
 
-  .app-card img {
-    width: 52px;
-    height: 52px;
-    filter: drop-shadow(0 0 4px rgba(0,0,0,0.3));
-  }
+    .sidebar::-webkit-scrollbar {
+      width: 10px;
+    }
 
-  .footer {
-    width: 100%;
-    background: rgba(10, 10, 10, 0.95);
-    padding: 18px 32px;
-    font-size: 14px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    color: var(--text-light);
-    z-index: 10000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    backdrop-filter: blur(12px);
-    border-top: 1px solid var(--border);
-    font-weight: 500;
-  }
+    .sidebar::-webkit-scrollbar-thumb {
+      background-color: var(--primary);
+      border-radius: 10px;
+    }
 
-  .footer p {
-    margin: 0;
-    white-space: nowrap;
-    font-size: 0.95rem;
-  }
-
-  .sidebar::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  .sidebar::-webkit-scrollbar-thumb {
-    background-color: var(--primary);
-    border-radius: 10px;
-  }
-
-  .sidebar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  body.light-mode {
-    --dark-bg: #f2f2f2;
-    --text-light: #111;
-    --card-bg: rgba(0, 0, 0, 0.04);
-    --border: rgba(0, 0, 0, 0.08);
-  }
-</style>
-
+    .sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  </style>
 </head>
+
 <body>
 
   <!-- Sidebar -->
   <aside class="sidebar" role="navigation" aria-label="Menu lateral">
     <h2>PRESS F11</h2>
-    <!-- Adicione isso no <head> do seu HTML para carregar os ícones -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- Botões com ícones substituindo os emojis -->
-<button onclick="abrirPagina('oristv.html')" aria-label="ORIS TV">
-  <i class="fas fa-tv"></i> ORIS TV
-</button>
-
-<button onclick="abrirPagina('homeb.html')" aria-label="Home Broker">
-  <i class="fas fa-chart-line"></i> Home Broker
-</button>
-
-<button onclick="abrirPagina('jbx.html')" aria-label="Stock Market">
-  <i class="fas fa-chart-bar"></i> Stock Market
-</button>
-
-<button onclick="abrirPagina('browser.html')" aria-label="Navegador">
-  <i class="fas fa-globe"></i> Navegador
-</button>
-
+    <button onclick="abrirPagina('oristv.html')" aria-label="ORIS TV">
+      <i class="fas fa-tv"></i> ORIS TV
+    </button>
+    <button onclick="abrirPagina('homeb.html')" aria-label="Home Broker">
+      <i class="fas fa-chart-line"></i> Home Broker
+    </button>
+    <button onclick="abrirPagina('jbx.html')" aria-label="Stock Market">
+      <i class="fas fa-chart-bar"></i> Stock Market
+    </button>
+    <button onclick="abrirPagina('browser.html')" aria-label="Navegador">
+      <i class="fas fa-globe"></i> Navegador
+    </button>
   </aside>
 
-  <!-- Main content -->
+  <!-- Navbar -->
+  <div class="navbar" role="navigation" aria-label="Barra de navegação superior">
+    <button onclick="abrirPagina('camera.html')">
+      <i class="fas fa-camera"></i> Câmera
+    </button>
+    <button onclick="abrirPagina('express.html')">
+      <i class="fas fa-wand-magic-sparkles"></i> Adobe Express
+    </button>
+    <button onclick="abrirPagina('config.html')">
+      <i class="fas fa-cog"></i> Configurações
+    </button>
+  </div>
+
+  <!-- Main -->
   <main class="main" role="main" tabindex="0" aria-label="Conteúdo principal">
     <section class="search-container" role="search" aria-label="Busca de aplicativos">
       <input
@@ -270,9 +244,7 @@
         aria-describedby="searchHelp"
         aria-label="Buscar aplicativos"
       />
-
     </section>
-
     <section class="grid" id="appGrid" role="list" aria-label="Lista de aplicativos">
 
       <!-- Apps cards aqui (mantive seu conteúdo original) -->
