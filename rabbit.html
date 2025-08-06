@@ -445,7 +445,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
   const variationText = document.getElementById("variationText");
-  const btnCreateFraction = document.querySelector(".btn.generate"); // botão criar fração
+  const btnCreateFraction = document.querySelector(".btn.generate");
   const btnConfirmPayment = document.getElementById("btnConfirmPayment");
 
   let wallet = {};
@@ -453,7 +453,6 @@
   let paymentConfirmed = false;
   let streamKey = null;
 
-  // Atualiza variação aleatória na barra
   function atualizarVariacao() {
     const variacao = (Math.random() * 2 - 1).toFixed(2);
     variationText.textContent = `${variacao > 0 ? '+' : ''}${variacao}%`;
@@ -468,10 +467,9 @@
     btnCreateFraction.disabled = true;
   }
 
-  // Função corrigida para criar fração (ativa só se pagamento confirmado)
   function createWallet() {
     if (!paymentConfirmed) {
-      alert("Pagamento não confirmado! Por favor, faça o pagamento via PIX e confirme antes de criar a fração.");
+      alert("Pagamento não confirmado! Por favor, confirme o pagamento via PIX.");
       return;
     }
     wallet = {
@@ -503,13 +501,11 @@
     }
   }
 
-  // Limpa QR Code e botão de confirmação
   function clearQRCode() {
     document.getElementById("qrcode-pix").innerHTML = "";
     btnConfirmPayment.style.display = "none";
   }
 
-  // Gera QR Code PIX
   function generateQR() {
     clearQRCode();
     const assetSelect = document.getElementById("assetSelect");
@@ -517,6 +513,7 @@
       alert("Por favor, selecione um ativo.");
       return;
     }
+
     const asset = assetSelect.selectedOptions[0].text;
     const coupon = document.getElementById("couponInput").value.trim();
     const value = document.getElementById("valueInput").value.trim();
@@ -527,18 +524,17 @@
     }
 
     if (!privateKey) {
-      alert("Por favor, gere sua chave privada antes de gerar o QR Code de pagamento.");
+      alert("Por favor, gere sua chave privada antes de gerar o QR Code.");
       return;
     }
 
-    const pixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b"; // chave PIX fixa sua
+    const isGeminiosidade = asset.includes("Σ");
+    const pixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b";
     let description = `Pagamento Meta Rabbit - ${asset}`;
     if (coupon) description += ` - Cupom: ${coupon}`;
 
-    // Valor no formato com 2 casas decimais, sem ponto (ex: 1000.50 vira 100050)
     const valorPix = Number(value).toFixed(2).replace('.', '');
 
-    // Payload PIX simplificado (exemplo - não contém CRC real)
     const pixPayload =
       `00020126360014BR.GOV.BCB.PIX0136${pixKey}` +
       `520400005303986540${valorPix}5802BR` +
@@ -548,58 +544,60 @@
       text: pixPayload,
       width: 180,
       height: 180,
-      colorDark: "#2e7d32",
+      colorDark: isGeminiosidade ? "#ff007f" : "#2e7d32",
       colorLight: "#1c1c1c",
       correctLevel: QRCode.CorrectLevel.H
     });
 
     document.getElementById('output').innerText = `QR Code gerado para:\nAtivo: ${asset}\nValor: R$ ${Number(value).toFixed(2)}\nCupom: ${coupon || "Nenhum"}`;
 
+    if (isGeminiosidade) {
+      document.getElementById('output').innerText += `\n\n🌌 Token com Geminosidade Máxima detectado! Você receberá bônus de ressonância fractal.`;
+    }
+
     btnConfirmPayment.style.display = "block";
     paymentConfirmed = false;
     btnCreateFraction.disabled = true;
   }
 
-  // Confirma pagamento após validação de streamKey
   function confirmPayment() {
     if (!streamKey || !validateStreamKey(streamKey)) {
-      alert("Por favor, gere uma Stream Key válida antes de confirmar o pagamento.");
+      alert("Por favor, gere uma Stream Key válida antes.");
       return;
     }
     paymentConfirmed = true;
     btnCreateFraction.disabled = false;
     btnConfirmPayment.style.display = "none";
-
     localStorage.setItem("streamKey", streamKey);
 
-    document.getElementById('output').innerText += `\n\nPagamento confirmado!\nStream Key salva localmente:\n${streamKey}\nAgora você pode criar sua fração.`;
+    document.getElementById('output').innerText += `\n\n✅ Pagamento confirmado!\nStream Key:\n${streamKey}\nFração pronta para ativação.`;
   }
 
-  // Gera stream key aleatória para ativar depois do pagamento
   function generateStreamKey() {
-    streamKey = 'STREAM-' + Math.random().toString(36).substring(2, 18).toUpperCase();
+    const assetSelect = document.getElementById("assetSelect");
+    const assetValue = assetSelect.value || "GEN";
+    const tokenLabel = assetValue.replace("sDark", "").substring(0, 4).toUpperCase();
+    streamKey = `STREAM-${tokenLabel}-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
     document.getElementById('output').innerText = `Stream Key gerada:\n${streamKey}`;
   }
 
-  // Valida formato da streamKey
   function validateStreamKey(key) {
-    const regex = /^STREAM-[A-Z0-9]{16}$/;
-    return regex.test(key);
+    return /^STREAM-[A-Z0-9\-]{10,20}$/.test(key);
   }
 
-  // Recupera streamKey do localStorage no load
   window.onload = () => {
     atualizarVariacao();
 
     const savedKey = localStorage.getItem("streamKey");
     if (savedKey) {
       streamKey = savedKey;
-      document.getElementById('output').innerText = `Stream Key carregada do armazenamento local:\n${streamKey}`;
+      document.getElementById('output').innerText = `Stream Key carregada:\n${streamKey}`;
       paymentConfirmed = true;
       btnCreateFraction.disabled = false;
     }
   };
 </script>
+
 
 </body>
 </html>
