@@ -210,9 +210,13 @@
 
 <form>
   <div class="input-box">
-  <label for="assetSelect">Selecione seu ativo:</label>
-<select id="assetSelect" name="investmentPlan" required>
-  <option value="" disabled selected hidden>Selecione seu ativo simbólico</option>
+    <label for="assetSelect">Selecione seu ativo:</label>
+    <select id="assetSelect" name="investmentPlan" required>
+      <option value="" disabled selected hidden>Selecione seu ativo</option>
+option disabled hidden selected value="">
+  🩷 Pynk BTC — Selecione seu ativo simbólico
+</option>
+
 
   <optgroup label="🪙 Pynk BTC - Geminus Cryptos">
     <option value="pynk_dark_btc">Pynk BTC — 0.0033 BTC (Satoshi Matrixum)</option>
@@ -299,12 +303,41 @@
     <option value="pynk_sfractio_heroica">Pynk BTC — 980 MPLAN24 Σ (Fractio Heroica Σ)</option>
     <option value="pynk_sfractio_nbhdarkbtc">Pynk BTC — 1000 NBH-S Σ (Fractio NBH DarkBTC Supreme Σ)</option>
   </optgroup>
-
-  <optgroup label="⚫ Pynk BTC - Dark Assets γ(p)">
-    <option value="pynk_dark_vertex">Pynk BTC — 3000 USD (Dark Vertex)</option>
-  </optgroup>
+<optgroup label="⚫ Pynk BTC - Dark Assets γ(p)">
+  <!-- Converteu para Pynk BTC nomes e mantidos valores simbólicos -->
+  <!-- Exemplo resumido apenas -->
+  <option value="pynk_dark_vertex">Pynk BTC — 3000 USD (Dark Vertex)</option>
+  <!-- outros similares -->
+</optgroup>
 </select>
+</optgroup>
+     </select>
+  </div>
 
+ <label for="couponInput">Cupom de desconto:</label>
+  <input type="text" id="couponInput" value="omegalul100" placeholder="Digite seu cupom aqui">
+
+  <label for="operationKey">Código ORIS S2000 (Operation Key):</label>
+  <input type="text" id="operationKey" placeholder="Cole aqui seu código ORIS S2000">
+
+  <label for="valueInput">Valor (ex: 1000):</label>
+  <input type="number" id="valueInput" placeholder="Digite o valor" min="1">
+
+  <button type="button" class="btn generate" onclick="generateQR()">Gerar QR Code</button>
+  <button type="button" class="btn generate" id="btnConfirmPayment" onclick="confirmPayment()" style="display:none; margin-top: 10px;">Confirmar Pagamento</button>
+
+  <div class="input-box" style="margin-top: 20px;">
+    <button type="button" class="btn generate" onclick="generateStreamKey()">Gerar Stream Key</button>
+  </div>
+
+  <div id="output">Aguardando ação do usuário...</div>
+  <div id="qrcode-pix"></div>
+
+  <section class="drax-tech">
+    <h2>Drax Technology</h2>
+    <p>Unitas NBH Nature Scale + Dark HoloFi<br>Geminiositas Maxima — geminado,<br>qubits fracti in scala quantum maximi.</p>
+    <p style="font-style: italic;">Pague via PIX para ativar bônus exclusivos.</p>
+  </section>
 </form>
 
 <footer>
