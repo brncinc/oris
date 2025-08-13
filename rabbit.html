@@ -300,7 +300,7 @@ option disabled hidden selected value="">
   <div id="qrcode-pix"></div>
 
   <section class="drax-tech">
-    <h2>Drax Technology</h2>
+    <h2>oblivium Technology</h2>
     <p>Unitas NBH Nature Scale + Dark HoloFi<br>Geminiositas Maxima — geminado,<br>qubits fracti in scala quantum maximi.</p>
     <p style="font-style: italic;">Pague via PIX para ativar bônus exclusivos.</p>
   </section>
@@ -384,10 +384,10 @@ option disabled hidden selected value="">
     btnConfirmPayment.style.display = "none";
   }
 
-  // 📌 Detecta se é OBTC e extrai atributos
+  // 📌 Detecta OBTC e força sempre Σ (escala máxima)
   function parseOBTC(assetText) {
     let isOBTC = assetText.toLowerCase().includes("obtc");
-    let isSigma = assetText.includes("Σ");
+    let isSigma = isOBTC; // Sempre true para escala máxima
     let gemMatch = assetText.match(/Gema\s(\dQ\d)/);
     let gema = gemMatch ? gemMatch[1] : null;
     return { isOBTC, isSigma, gema };
@@ -419,10 +419,9 @@ option disabled hidden selected value="">
       `520400005303986540${valorPix}5802BR` +
       `5913Meta Rabbit6009Sao Paulo62070503***6304`;
 
-    // 🎨 Cor do QR Code
-    let qrColor = "#2e7d32"; // padrão verde
-    if (isOBTC) qrColor = "#ffcc00"; // OBTC normal
-    if (isSigma) qrColor = "#ff007f"; // OBTC Σ
+    // 🎨 Cor do QR Code sempre OBTC Σ
+    let qrColor = "#ff007f"; // OBTC Σ
+    let tipoOBTC = "OBTC Σ (Escala Máxima)";
 
     new QRCode(document.getElementById("qrcode-pix"), {
       text: pixPayload,
@@ -434,11 +433,8 @@ option disabled hidden selected value="">
     });
 
     // 📝 Texto de saída
-    let outputText = `📲 QR Code gerado para:\nAtivo: ${asset}\nValor: R$ ${value.toFixed(2)}\nCupom: ${coupon || "Nenhum"}`;
-    if (isOBTC) {
-      outputText += `\n🔹 Tipo: OBTC ${isSigma ? "Σ (Escala Máxima)" : "(Normal)"}`;
-      if (gema) outputText += `\n💎 Gema: ${gema}`;
-    }
+    let outputText = `📲 QR Code gerado para:\nAtivo: ${asset}\nValor: R$ ${value.toFixed(2)}\nCupom: ${coupon || "Nenhum"}\n🔹 Tipo: ${tipoOBTC}`;
+    if (gema) outputText += `\n💎 Gema: ${gema}`;
     document.getElementById('output').innerText = outputText;
 
     btnConfirmPayment.style.display = "block";
@@ -488,7 +484,6 @@ option disabled hidden selected value="">
     }
   };
 </script>
-
 
 </body>
 </html>
