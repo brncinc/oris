@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="la">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="logo.ico" />
+  <title>Meta Rabbit Wallet - Drax Geminiositas Maxima</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: 'Roboto', sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    form.wallet {
+      background-color: #141414;
+      border-radius: 16px;
+      padding: 30px 24px;
+      width: 95%;
+      max-width: 480px;
+      margin: 30px 0;
+      box-shadow: 0 0 12px #000;
+    }
+
+    .header { text-align: center; margin-bottom: 24px; }
+    .header h1 { font-size: 2rem; color: #00ff66; margin-bottom: 10px; }
+    .header img { width: 80px; height: 80px; object-fit: contain; }
+
+    .input-box {
+      background-color: #121212;
+      border: 2px solid #00ff66;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #00ff66;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    select, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      background-color: #1e1e1e;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    select:focus, input:focus {
+      outline: 2px solid #00ff66;
+      background-color: #0d0d0d;
+    }
+
+    .buttons-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      flex: 1 1 30%;
+      background-color: #00ff66;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover { background-color: #00cc55; }
+    .btn.generate {
+      width: 100%;
+      margin-top: 10px;
+      border: 2px solid #00ff66;
+      box-shadow: 0 0 10px #00ff66;
+    }
+    .btn.generate:hover { background-color: #009944; }
+
+    #output {
+      background-color: #1a1a1a;
+      color: #c0c0c0;
+      font-family: monospace;
+      font-size: 0.95rem;
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      white-space: pre-wrap;
+    }
+
+    #qrcode-pix { margin: 16px auto; width: 180px; height: 180px; }
+
+    footer { margin-top: auto; padding: 20px; color: #888; font-size: 0.9rem; text-align: center; }
+
+    @media (max-width: 480px) {
+      .buttons-container { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<form class="wallet" onsubmit="return false;">
+  <div class="header">
+    <h1>Meta Rabbit</h1>
+    <img src="t.png" alt="Meta Rabbit Logo">
+  </div>
+
+  <div class="input-box">
+    <label for="balance">Saldo Atual:</label>
+    <input type="text" id="balance" readonly value="0 FRACTIO">
+  </div>
+
+  <div class="buttons-container">
+    <button type="button" class="btn" onclick="createWallet()">Criar Fração</button>
+    <button type="button" class="btn" onclick="importWallet()">Importar Secreto</button>
+    <button type="button" class="btn" onclick="showPublicKey()">Mostrar Chave Pública</button>
+  </div>
+
+  <div class="input-box">
+    <label for="assetSelect">Selecione seu ativo:</label>
+    <select id="assetSelect" required>
+      <option value="" disabled selected hidden>Selecione Z-OBTC</option>
+     <!-- Z-OBTC Σ planos correspondentes aos Z-BTC -->
+<option value="zobtc_starter50">Z-OBTC — $10 - $40 (Starter50 Σ • Comece sua jornada no Z-OBTC e descubra o futuro das finanças)</option>
+<option value="zobtc_growth500">Z-OBTC — $100 - $200 (Growth500 Σ • Expanda seus ativos com o Z-OBTC e maximize seu potencial)</option>
+<option value="zobtc_pro1000">Z-OBTC — $200 - $400 (Pro1000 Σ • Para investidores profissionais que buscam excelência no Z-OBTC)</option>
+<option value="zobtc_advanced2000">Z-OBTC — $400 - $800 (Advanced2000 Σ • Avance para níveis superiores com Z-OBTC e conquiste novos horizontes)</option>
+<option value="zobtc_diamond500">Z-OBTC — $1,000 - $3,000 (Diamond500 Σ • Entre no seleto grupo de investidores Z-OBTC com Diamond500)</option>
+<option value="zobtc_ultraenther">Z-OBTC — $2,000 - $6,000 (UltraEnther Σ • Experimente a máxima performance e exclusividade do Z-OBTC)</option>
+<option value="zobtc_qzdiamond">Z-OBTC — $1,400 - $4,000 (QZDiamond Σ • Transforme seus investimentos com QZDiamond no Z-OBTC)</option>
+<option value="zobtc_entherprime">Z-OBTC — $600 - $1,800 (EntherPrime Σ • Alcance novos patamares financeiros com EntherPrime Z-OBTC)</option>
+
+<!-- Dark / Fractio / Σ -->
+<option value="zobtc_darkusd">Z-OBTC — $400 - $1,600 (DarkUSD Σ • Potencial máximo com segurança e performance em Z-OBTC)</option>
+<option value="zobtc_darkbtc">Z-OBTC — $2,000 - $10,000 (DarkBTC Σ • O poder do Bitcoin no universo Z-OBTC com DarkBTC)</option>
+<option value="zobtc_trixusd">Z-OBTC — $1,000 - $5,000 (TrixUSD Σ • Estratégia avançada e retorno elevado com TrixUSD Z-OBTC)</option>
+<option value="zobtc_jbxdiamond">Z-OBTC — $4,000 - $12,000 (JBX Diamond Σ • A experiência premium em Z-OBTC para investidores exigentes)</option>
+
+<!-- Fractio padrão -->
+<option value="zobtc_fractio_lux">Z-OBTC — 1000 HF Σ (Fractio Lux Σ • A excelência do Z-OBTC em forma de Fractio Lux, escala máxima)</option>
+<option value="zobtc_fractio_flexus">Z-OBTC — 500 QFX Σ (Fractio Flexus Σ • Flexibilidade máxima em seus investimentos Z-OBTC, escala máxima)</option>
+<option value="zobtc_fractio_scala">Z-OBTC — 500 JBXF Σ (Fractio Scala Σ • Crescimento contínuo com Fractio Scala do Z-OBTC, escala máxima)</option>
+<option value="zobtc_fractio_vox">Z-OBTC — 400 QOOP Σ (Fractio Vox Σ • Voz do futuro financeiro Z-OBTC com Fractio Vox, escala máxima)</option>
+<option value="zobtc_fractio_valoris">Z-OBTC — 300 QVALFX Σ (Fractio Valoris Σ • Valor real e potencial máximo com Fractio Valoris Z-OBTC)</option>
+<option value="zobtc_fractio_mens">Z-OBTC — 100 NBH Σ (Fractio Mens Σ • Inteligência financeira e estratégia máxima com Fractio Mens Z-OBTC)</option>
+<option value="zobtc_fractio_yenensis">Z-OBTC — $15,000 Σ (Fractio Yenensis Σ • Investimento internacional com Fractio Yenensis Z-OBTC, escala máxima)</option>
+<option value="zobtc_fractio_eurox">Z-OBTC — $5,000 Σ (Fractio Eurox Σ • Exclusividade global com Fractio Eurox no Z-OBTC, escala máxima)</option>
+
+<!-- Novas opções variadas Z-OBTC -->
+<option value="zobtc_nova_start">Z-OBTC — $50 - $150 (NovaStart Σ • Inicie sua jornada Z-OBTC com segurança e inovação, escala máxima)</option>
+<option value="zobtc_techboost">Z-OBTC — $300 - $900 (TechBoost Σ • Potencialize seus investimentos com tecnologias emergentes em Z-OBTC, escala máxima)</option>
+<option value="zobtc_greenfund">Z-OBTC — $200 - $600 (GreenFund Σ • Invista em sustentabilidade e crescimento sólido com Z-OBTC, escala máxima)</option>
+<option value="zobtc_futurevault">Z-OBTC — $500 - $2,000 (FutureVault Σ • Proteja e multiplique seus ativos com estratégia de longo prazo Z-OBTC, escala máxima)</option>
+<option value="zobtc_quantumrise">Z-OBTC — $1,000 - $4,000 (QuantumRise Σ • Alcance novos patamares de rentabilidade com Z-OBTC QuantumRise, escala máxima)</option>
+<option value="zobtc_globalelite">Z-OBTC — $5,000 - $15,000 (GlobalElite Σ • Exclusividade e máximo retorno no universo Z-OBTC, escala máxima)</option>
+<option value="zobtc_innovaflex">Z-OBTC — $700 - $2,500 (InnovaFlex Σ • Estratégias flexíveis e inovadoras para investidores Z-OBTC, escala máxima)</option>
+<option value="zobtc_digitalgem">Z-OBTC — $1,500 - $5,000 (DigitalGem Σ • Transforme ativos digitais em oportunidades com Z-OBTC, escala máxima)</option>
+<option value="zobtc_ventureprime">Z-OBTC — $3,000 - $10,000 (VenturePrime Σ • Entre no mercado premium de Z-OBTC com VenturePrime, escala máxima)</option>
+<option value="zobtc_stellarflux">Z-OBTC — $2,000 - $8,000 (StellarFlux Σ • Maximize ganhos e conecte-se a oportunidades globais Z-OBTC, escala máxima)</option>
+
+
+      <!-- Adicione outros planos Z-OBTC aqui conforme necessário -->
+    </select>
+
+    <label for="valueInput">Valor por unidade (ex: 1000):</label>
+    <input type="number" id="valueInput" placeholder="Digite o valor" min="1">
+
+    <label for="quantityInput">Quantidade de unidades:</label>
+    <input type="number" id="quantityInput" placeholder="Digite a quantidade" min="1" value="1">
+
+    <button type="button" class="btn generate" id="generateBtn">Gerar QR Code</button>
+  </div>
+
+  <div id="output">Aguardando ação do usuário...</div>
+  <div id="qrcode-pix"></div>
+</form>
+
+<footer>
+  © 2025 lucasjanuario14. Todos os direitos reservados.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+<script>
+(() => {
+  const generateBtn = document.getElementById("generateBtn");
+  const qrContainer = document.getElementById("qrcode-pix");
+  const output = document.getElementById("output");
+
+  async function generateQR() {
+    qrContainer.innerHTML = "";
+    output.innerText = "";
+
+    const value = parseFloat(document.getElementById("valueInput").value);
+    const quantity = parseInt(document.getElementById("quantityInput").value) || 1;
+
+    if (!value || value <= 0) return alert("⚠️ Valor inválido.");
+    if (quantity <= 0) return alert("⚠️ Quantidade inválida.");
+
+    const totalValue = value * quantity;
+
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ value, quantity })
+      });
+
+      const data = await response.json();
+      if (!response.ok) return alert(data.error || "Erro ao gerar QR Code.");
+
+      const { pixPayload, streamKey } = data;
+
+      new QRCode(qrContainer, {
+        text: pixPayload,
+        width: 180,
+        height: 180,
+        colorDark: "#ff7f00",  // Cor Z-OBTC
+        colorLight: "#1c1c1c",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      localStorage.setItem("streamKey", streamKey);
+      output.innerText = `📲 QR Code Z-OBTC gerado\nValor total: R$${totalValue.toFixed(2)}\n🔁 Stream Key: ${streamKey}`;
+
+    } catch (err) {
+      console.error(err);
+      alert("Erro de conexão com o servidor.");
+    }
+  }
+
+  generateBtn?.addEventListener("click", generateQR);
+})();
+</script>
+
+</body>
+</html>
