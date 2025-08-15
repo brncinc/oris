@@ -282,19 +282,16 @@ option disabled hidden selected value="">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 <script>
 (() => {
-  const btnConfirmPayment = document.getElementById("btnConfirmPayment");
   const generateBtn = document.getElementById("generateBtn");
-  let streamKey = null;
-
-  function clearQRCode() {
-    document.getElementById("qrcode-pix").innerHTML = "";
-    btnConfirmPayment.style.display = "none";
-  }
+  const qrContainer = document.getElementById("qrcode-pix");
+  const output = document.getElementById("output");
 
   async function generateQR() {
-    clearQRCode();
+    qrContainer.innerHTML = "";
+    output.innerText = "";
 
     const value = parseFloat(document.getElementById("valueInput").value);
     const quantity = parseInt(document.getElementById("quantityInput").value) || 1;
@@ -305,46 +302,30 @@ option disabled hidden selected value="">
     const totalValue = value * quantity;
 
     // Apenas Z-OBTC
-    const pixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b"; 
-    const valorPix = totalValue.toFixed(2).replace(".", "");
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ totalValue })
+    });
 
-    const pixPayload =
-      `00020126360014BR.GOV.BCB.PIX0136${pixKey}` +
-      `520400005303986540${valorPix}5802BR` +
-      `5913Meta Rabbit6009Sao Paulo62070503***6304`;
+    const data = await response.json();
+    const { pixPayload, streamKey } = data;
 
-    // Cor do QR Code para Z-OBTC
-    const qrColor = "#ff7f00";
-
-    new QRCode(document.getElementById("qrcode-pix"), {
+    new QRCode(qrContainer, {
       text: pixPayload,
       width: 180,
       height: 180,
-      colorDark: qrColor,
+      colorDark: "#ff7f00",
       colorLight: "#1c1c1c",
       correctLevel: QRCode.CorrectLevel.H
     });
 
-    streamKey = `STREAM-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
-
-    document.getElementById("output").innerText =
-      `📲 QR Code Z-OBTC gerado\nValor total: R$${totalValue.toFixed(2)}\n🔁 Stream Key: ${streamKey}`;
-
-    btnConfirmPayment.style.display = "block";
-  }
-
-  function confirmPayment() {
-    if (!streamKey) return alert("⚠️ Nenhuma Stream Key gerada!");
-    localStorage.setItem("streamKey", streamKey);
-    document.getElementById("output").innerText += "\n✅ Pagamento confirmado!";
-    btnConfirmPayment.style.display = "none";
+    output.innerText = `📲 QR Code Z-OBTC gerado\nValor total: R$${totalValue.toFixed(2)}\n🔁 Stream Key: ${streamKey}`;
   }
 
   generateBtn?.addEventListener("click", generateQR);
-  btnConfirmPayment?.addEventListener("click", confirmPayment);
 })();
 </script>
-
 
 </body>
 </html>
