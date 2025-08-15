@@ -281,50 +281,31 @@ option disabled hidden selected value="">
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 <script>
 (() => {
   const btnConfirmPayment = document.getElementById("btnConfirmPayment");
-  let paymentConfirmed = false;
+  const generateBtn = document.getElementById("generateBtn");
   let streamKey = null;
 
-  // Detecta tipo de ativo
-  function parseAsset(assetText) {
-    const isZBTC = assetText.toLowerCase().includes("z-btc");
-    const isOBTC = assetText.toLowerCase().includes("obtc") && !assetText.toLowerCase().includes("z-obs");
-    const isZOBTC = assetText.toLowerCase().includes("z-obtc");
-    const gemMatch = assetText.match(/Gema\s(\dQ\d)/);
-    const gema = gemMatch ? gemMatch[1] : null;
-    let tokenType = "TOKEN";
-    if (isZBTC) tokenType = "Z-BTC";
-    else if (isOBTC) tokenType = "OBTC";
-    else if (isZOBTC) tokenType = "Z-OBTC";
-    return { isZBTC, isOBTC, isZOBTC, isSigma: isZBTC || isOBTC || isZOBTC, gema, tokenType };
-  }
-
-  // Limpa QR Code
   function clearQRCode() {
-    const qrContainer = document.getElementById("qrcode-pix");
-    qrContainer.innerHTML = "";
+    document.getElementById("qrcode-pix").innerHTML = "";
     btnConfirmPayment.style.display = "none";
   }
 
-  // Gera QR Code PIX
-  function generateQR() {
+  async function generateQR() {
     clearQRCode();
 
-    const assetSelect = document.getElementById("assetSelect");
-    const assetText = assetSelect.selectedOptions[0]?.text || "";
-    const assetValue = assetSelect.value;
-    const valueInput = parseFloat(document.getElementById("valueInput").value.trim());
-    const quantityInput = parseInt(document.getElementById("quantityInput").value.trim()) || 1;
+    const value = parseFloat(document.getElementById("valueInput").value);
+    const quantity = parseInt(document.getElementById("quantityInput").value) || 1;
 
-    if (!assetValue) return alert("⚠️ Selecione um ativo.");
-    if (!valueInput || isNaN(valueInput) || valueInput <= 0) return alert("⚠️ Valor inválido.");
-    if (quantityInput <= 0) return alert("⚠️ Quantidade inválida.");
+    if (!value || value <= 0) return alert("⚠️ Valor inválido.");
+    if (quantity <= 0) return alert("⚠️ Quantidade inválida.");
 
-    const totalValue = valueInput * quantityInput;
-    const { isZBTC, isOBTC, isZOBTC, gema, tokenType } = parseAsset(assetText);
-    const pixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b";
+    const totalValue = value * quantity;
+
+    // Apenas Z-OBTC
+    const pixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b"; 
     const valorPix = totalValue.toFixed(2).replace(".", "");
 
     const pixPayload =
@@ -332,11 +313,8 @@ option disabled hidden selected value="">
       `520400005303986540${valorPix}5802BR` +
       `5913Meta Rabbit6009Sao Paulo62070503***6304`;
 
-    // Define a cor do QR Code (verde padrão)
-    let qrColor = "#00ff00";
-    if (isZBTC) qrColor = "#ff007f";
-    else if (isOBTC) qrColor = "#007fff";
-    else if (isZOBTC) qrColor = "#ff7f00";
+    // Cor do QR Code para Z-OBTC
+    const qrColor = "#ff7f00";
 
     new QRCode(document.getElementById("qrcode-pix"), {
       text: pixPayload,
@@ -347,30 +325,26 @@ option disabled hidden selected value="">
       correctLevel: QRCode.CorrectLevel.H
     });
 
-    let outputText = `📲 QR Code gerado:\nAtivo: ${assetText}\nValor por unidade: R$${valueInput.toFixed(2)}\nQuantidade: ${quantityInput}\nValor total: R$${totalValue.toFixed(2)}\n🔹 Tipo: ${tokenType}`;
-    if (gema) outputText += `\n💎 Gema: ${gema}`;
-    document.getElementById("output").innerText = outputText;
+    streamKey = `STREAM-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
+
+    document.getElementById("output").innerText =
+      `📲 QR Code Z-OBTC gerado\nValor total: R$${totalValue.toFixed(2)}\n🔁 Stream Key: ${streamKey}`;
 
     btnConfirmPayment.style.display = "block";
-    paymentConfirmed = false;
   }
 
-  // Confirma pagamento
   function confirmPayment() {
-    if (!streamKey) {
-      streamKey = `STREAM-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
-    }
-    paymentConfirmed = true;
-    btnConfirmPayment.style.display = "none";
+    if (!streamKey) return alert("⚠️ Nenhuma Stream Key gerada!");
     localStorage.setItem("streamKey", streamKey);
-    document.getElementById("output").innerText += `\n\n✅ Pagamento confirmado!\n🔁 Stream Key: ${streamKey}`;
+    document.getElementById("output").innerText += "\n✅ Pagamento confirmado!";
+    btnConfirmPayment.style.display = "none";
   }
 
-  // Eventos
-  document.getElementById("generateBtn")?.addEventListener("click", generateQR);
+  generateBtn?.addEventListener("click", generateQR);
   btnConfirmPayment?.addEventListener("click", confirmPayment);
 })();
 </script>
+
 
 </body>
 </html>
