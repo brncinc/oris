@@ -280,8 +280,6 @@ option disabled hidden selected value="">
   © 2025 lucasjanuario14. Todos os direitos reservados.
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 <script>
 (() => {
@@ -301,26 +299,36 @@ option disabled hidden selected value="">
 
     const totalValue = value * quantity;
 
-    // Apenas Z-OBTC
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ totalValue })
-    });
+    try {
+      // Chamada para o backend
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ value, quantity })
+      });
 
-    const data = await response.json();
-    const { pixPayload, streamKey } = data;
+      const data = await response.json();
+      if (!response.ok) return alert(data.error || "Erro ao gerar QR Code.");
 
-    new QRCode(qrContainer, {
-      text: pixPayload,
-      width: 180,
-      height: 180,
-      colorDark: "#ff7f00",
-      colorLight: "#1c1c1c",
-      correctLevel: QRCode.CorrectLevel.H
-    });
+      const { pixPayload, streamKey } = data;
 
-    output.innerText = `📲 QR Code Z-OBTC gerado\nValor total: R$${totalValue.toFixed(2)}\n🔁 Stream Key: ${streamKey}`;
+      new QRCode(qrContainer, {
+        text: pixPayload,
+        width: 180,
+        height: 180,
+        colorDark: "#ff7f00",  // Cor Z-OBTC
+        colorLight: "#1c1c1c",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      // Exibe informações
+      localStorage.setItem("streamKey", streamKey);
+      output.innerText = `📲 QR Code Z-OBTC gerado\nValor total: R$${totalValue.toFixed(2)}\n🔁 Stream Key: ${streamKey}`;
+
+    } catch (err) {
+      console.error(err);
+      alert("Erro de conexão com o servidor.");
+    }
   }
 
   generateBtn?.addEventListener("click", generateQR);
