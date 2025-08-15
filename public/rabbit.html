@@ -204,7 +204,7 @@
   const qrContainer = document.getElementById("qrcode-pix");
   const output = document.getElementById("output");
 
-  async function generateQR() {
+  generateBtn?.addEventListener("click", () => {
     qrContainer.innerHTML = "";
     output.innerText = "";
 
@@ -216,37 +216,25 @@
 
     const totalValue = value * quantity;
 
-    try {
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ value, quantity })
-      });
+    // Chave Pix fixa
+    const pixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b";
 
-      const data = await response.json();
-      if (!response.ok) return alert(data.error || "Erro ao gerar QR Code.");
+    // Monta um payload Pix simples (simulação)
+    const pixPayload = `
+00020101021226850014br.gov.bcb.pix0114${pixKey}520400005303986540${totalValue.toFixed(2).replace('.', '')}5802BR5913Meta Rabbit6009Cidade61080540900062070503***6304ABCD
+    `.replace(/\s+/g, ""); // remove quebras de linha
 
-      const { pixPayload, streamKey } = data;
+    new QRCode(qrContainer, {
+      text: pixPayload,
+      width: 180,
+      height: 180,
+      colorDark: "#ff7f00",
+      colorLight: "#1c1c1c",
+      correctLevel: QRCode.CorrectLevel.H
+    });
 
-      new QRCode(qrContainer, {
-        text: pixPayload,
-        width: 180,
-        height: 180,
-        colorDark: "#ff7f00",  // Cor Z-OBTC
-        colorLight: "#1c1c1c",
-        correctLevel: QRCode.CorrectLevel.H
-      });
-
-      localStorage.setItem("streamKey", streamKey);
-      output.innerText = `📲 QR Code Z-OBTC gerado\nValor total: R$${totalValue.toFixed(2)}\n🔁 Stream Key: ${streamKey}`;
-
-    } catch (err) {
-      console.error(err);
-      alert("Erro de conexão com o servidor.");
-    }
-  }
-
-  generateBtn?.addEventListener("click", generateQR);
+    output.innerText = `📲 QR Code Z-OBTC gerado\nValor total: R$${totalValue.toFixed(2)}\n🔑 Pix Key: ${pixKey}`;
+  });
 })();
 </script>
 
