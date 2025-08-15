@@ -1,26 +1,33 @@
 // server.js
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middlewares
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json()); // body-parser já incluso no express >= 4.16
 
 // Endpoint para gerar PIX e Stream Key
 app.post("/api/generate", (req, res) => {
   try {
-    const { value } = req.body;
+    const { value, quantity } = req.body;
+    const qty = parseInt(quantity) || 1;
+    const val = parseFloat(value);
 
-    if (!value || isNaN(value) || value <= 0) {
+    if (!val || isNaN(val) || val <= 0) {
       return res.status(400).json({ error: "Valor inválido" });
     }
 
-    const pixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b"; 
-    const valorPix = value.toFixed(2).replace(".", "");
+    if (qty <= 0) return res.status(400).json({ error: "Quantidade inválida" });
+
+    const totalValue = val * qty;
+
+    // Chave PIX Z-OBTC
+    const pixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b";
+    const valorPix = totalValue.toFixed(2).replace(".", "");
 
     const pixPayload =
       `00020126360014BR.GOV.BCB.PIX0136${pixKey}` +
@@ -36,8 +43,8 @@ app.post("/api/generate", (req, res) => {
   }
 });
 
-// Servir arquivos estáticos (HTML/JS)
-app.use(express.static("public"));
+// Servir arquivos estáticos (HTML/JS/CSS)
+app.use(express.static(path.join(__dirname, "public")));
 
 // Inicia servidor
 app.listen(PORT, () => {
