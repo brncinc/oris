@@ -5,187 +5,119 @@
   <link rel="icon" href="logo.ico" />
   <title>Meta Rabbit Wallet - Drax Geminiositas Maxima</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
- <style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-  * {
-    box-sizing: border-box;
-  }
+    * { box-sizing: border-box; }
 
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #000000;
-    font-family: 'Roboto', sans-serif;
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-  }
-
-  form.wallet {
-    background-color: #141414;
-    border-radius: 16px;
-    padding: 30px 24px;
-    width: 95%;
-    max-width: 480px;
-    margin: 30px 0;
-    box-shadow: 0 0 12px #000;
-  }
-
-  .header {
-    text-align: center;
-    margin-bottom: 24px;
-  }
-
-  .header h1 {
-    font-size: 2rem;
-    color: #00ff66;
-    margin-bottom: 10px;
-  }
-
-  .header img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-  }
-
-  .input-box {
-    background-color: #121212;
-    border: 2px solid #00ff66;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 24px;
-  }
-
-  label {
-    font-weight: bold;
-    color: #00ff66;
-    display: block;
-    margin-bottom: 6px;
-  }
-
-  select, input[type="text"], input[type="number"] {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    background-color: #1e1e1e;
-    border: none;
-    color: #fff;
-    font-size: 1rem;
-  }
-
-  select:focus, input:focus {
-    outline: 2px solid #00ff66;
-    background-color: #0d0d0d;
-  }
-
-  .buttons-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-
-  .btn {
-    flex: 1 1 30%;
-    background-color: #00ff66;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    padding: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-
-  .btn:hover {
-    background-color: #00cc55;
-  }
-
-  .btn.generate {
-    width: 100%;
-    margin-top: 10px;
-    border: 2px solid #00ff66;
-    box-shadow: 0 0 10px #00ff66;
-  }
-
-  .btn.generate:hover {
-    background-color: #009944;
-  }
-
-  #output {
-    background-color: #1a1a1a;
-    color: #c0c0c0;
-    font-family: monospace;
-    font-size: 0.95rem;
-    padding: 14px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    white-space: pre-wrap;
-  }
-
-  #qrcode-pix {
-    margin: 16px auto;
-    width: 180px;
-    height: 180px;
-  }
-
-  .drax-tech {
-    background: linear-gradient(145deg, #00cc55, #007f33);
-    color: #fff;
-    text-align: center;
-    border-radius: 16px;
-    padding: 20px;
-    margin-top: 30px;
-  }
-
-  .drax-tech h2 {
-    margin-bottom: 8px;
-    font-size: 1.5rem;
-  }
-
-  footer {
-    margin-top: auto;
-    padding: 20px;
-    color: #888;
-    font-size: 0.9rem;
-    text-align: center;
-  }
-
-  #dollarVariationBar {
-    background: #000;
-    padding: 5px 10px;
-    font-weight: bold;
-    font-family: monospace;
-    border-radius: 6px;
-    animation: blink 1s infinite;
-    margin-top: -10px;
-    margin-bottom: 18px;
-    width: fit-content;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-
-  @media (max-width: 480px) {
-    .buttons-container {
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: 'Roboto', sans-serif;
+      color: #fff;
+      display: flex;
       flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
-    .btn {
-      width: 100%;
-    }
-  }
-</style>
 
+    form.wallet {
+      background-color: #141414;
+      border-radius: 16px;
+      padding: 30px 24px;
+      width: 95%;
+      max-width: 480px;
+      margin: 30px 0;
+      box-shadow: 0 0 12px #000;
+    }
+
+    .header { text-align: center; margin-bottom: 24px; }
+    .header h1 { font-size: 2rem; color: #00ff66; margin-bottom: 10px; }
+    .header img { width: 80px; height: 80px; object-fit: contain; }
+
+    .input-box {
+      background-color: #121212;
+      border: 2px solid #00ff66;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #00ff66;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    select, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      background-color: #1e1e1e;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    select:focus, input:focus {
+      outline: 2px solid #00ff66;
+      background-color: #0d0d0d;
+    }
+
+    .buttons-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      flex: 1 1 30%;
+      background-color: #00ff66;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover { background-color: #00cc55; }
+    .btn.generate {
+      width: 100%;
+      margin-top: 10px;
+      border: 2px solid #00ff66;
+      box-shadow: 0 0 10px #00ff66;
+    }
+    .btn.generate:hover { background-color: #009944; }
+
+    #output {
+      background-color: #1a1a1a;
+      color: #c0c0c0;
+      font-family: monospace;
+      font-size: 0.95rem;
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      white-space: pre-wrap;
+    }
+
+    #qrcode-pix { margin: 16px auto; width: 180px; height: 180px; }
+
+    footer { margin-top: auto; padding: 20px; color: #888; font-size: 0.9rem; text-align: center; }
+
+    @media (max-width: 480px) {
+      .buttons-container { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
 </head>
 <body>
 
 <form class="wallet" onsubmit="return false;">
-
   <div class="header">
     <h1>Meta Rabbit</h1>
     <img src="t.png" alt="Meta Rabbit Logo">
@@ -194,10 +126,6 @@
   <div class="input-box">
     <label for="balance">Saldo Atual:</label>
     <input type="text" id="balance" readonly value="0 FRACTIO">
-
-    <div id="dollarVariationBar">
-      <span id="variationText">+0.00%</span>
-    </div>
   </div>
 
   <div class="buttons-container">
@@ -206,17 +134,11 @@
     <button type="button" class="btn" onclick="showPublicKey()">Mostrar Chave Pública</button>
   </div>
 
-  <div id="output">Aguardando ação do usuário...</div>
-
-<form>
   <div class="input-box">
     <label for="assetSelect">Selecione seu ativo:</label>
-    <select id="assetSelect" name="investmentPlan" required>
-      <option value="" disabled selected hidden>Selecione seu ativo</option>
-option disabled hidden selected value="">
-  🩷 Z- BTC — Selecione seu ativo simbólico
-</option>
-<!-- Z-OBTC Σ planos correspondentes aos Z-BTC -->
+    <select id="assetSelect" required>
+      <option value="" disabled selected hidden>Selecione Z-OBTC</option>
+     <!-- Z-OBTC Σ planos correspondentes aos Z-BTC -->
 <option value="zobtc_starter50">Z-OBTC — $10 - $40 (Starter50 Σ • Comece sua jornada no Z-OBTC e descubra o futuro das finanças)</option>
 <option value="zobtc_growth500">Z-OBTC — $100 - $200 (Growth500 Σ • Expanda seus ativos com o Z-OBTC e maximize seu potencial)</option>
 <option value="zobtc_pro1000">Z-OBTC — $200 - $400 (Pro1000 Σ • Para investidores profissionais que buscam excelência no Z-OBTC)</option>
@@ -255,26 +177,21 @@ option disabled hidden selected value="">
 <option value="zobtc_stellarflux">Z-OBTC — $2,000 - $8,000 (StellarFlux Σ • Maximize ganhos e conecte-se a oportunidades globais Z-OBTC, escala máxima)</option>
 
 
-  </optgroup>
-</select>
-</optgroup>
-     </select>
+      <!-- Adicione outros planos Z-OBTC aqui conforme necessário -->
+    </select>
+
+    <label for="valueInput">Valor por unidade (ex: 1000):</label>
+    <input type="number" id="valueInput" placeholder="Digite o valor" min="1">
+
+    <label for="quantityInput">Quantidade de unidades:</label>
+    <input type="number" id="quantityInput" placeholder="Digite a quantidade" min="1" value="1">
+
+    <button type="button" class="btn generate" id="generateBtn">Gerar QR Code</button>
   </div>
 
-
-<label for="valueInput">Valor por unidade (ex: 1000):</label>
-<input type="number" id="valueInput" placeholder="Digite o valor" min="1">
-
-<label for="quantityInput">Quantidade de unidades:</label>
-<input type="number" id="quantityInput" placeholder="Digite a quantidade" min="1" value="1">
-
-<button type="button" class="btn generate" onclick="generateQR()">Gerar QR Code</button>
-<button type="button" class="btn generate" id="btnConfirmPayment" onclick="confirmPayment()" style="display:none; margin-top: 10px;">Confirmar Pagamento</button>
-
-</div>
-
-<div id="output">Aguardando ação do usuário...</div>
-<div id="qrcode-pix"></div>
+  <div id="output">Aguardando ação do usuário...</div>
+  <div id="qrcode-pix"></div>
+</form>
 
 <footer>
   © 2025 lucasjanuario14. Todos os direitos reservados.
@@ -300,7 +217,6 @@ option disabled hidden selected value="">
     const totalValue = value * quantity;
 
     try {
-      // Chamada para o backend
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -321,7 +237,6 @@ option disabled hidden selected value="">
         correctLevel: QRCode.CorrectLevel.H
       });
 
-      // Exibe informações
       localStorage.setItem("streamKey", streamKey);
       output.innerText = `📲 QR Code Z-OBTC gerado\nValor total: R$${totalValue.toFixed(2)}\n🔁 Stream Key: ${streamKey}`;
 
