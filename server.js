@@ -1,31 +1,26 @@
 // server.js
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
+const bodyParser = require("body-parser");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 // Middlewares
 app.use(cors());
-app.use(express.json()); // body-parser já incluso no express >= 4.16
+app.use(bodyParser.json());
+app.use(express.static("public")); // Servir arquivos estáticos da pasta "public"
 
 // Endpoint para gerar PIX e Stream Key
 app.post("/api/generate", (req, res) => {
   try {
     const { value, quantity } = req.body;
-    const qty = parseInt(quantity) || 1;
-    const val = parseFloat(value);
 
-    if (!val || isNaN(val) || val <= 0) {
+    if (!value || isNaN(value) || value <= 0) {
       return res.status(400).json({ error: "Valor inválido" });
     }
 
-    if (qty <= 0) return res.status(400).json({ error: "Quantidade inválida" });
-
-    const totalValue = val * qty;
-
-    // Chave PIX Z-OBTC
+    const totalValue = value * (quantity || 1);
     const pixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b";
     const valorPix = totalValue.toFixed(2).replace(".", "");
 
@@ -42,9 +37,6 @@ app.post("/api/generate", (req, res) => {
     return res.status(500).json({ error: "Erro no servidor" });
   }
 });
-
-// Servir arquivos estáticos (HTML/JS/CSS)
-app.use(express.static(path.join(__dirname, "public")));
 
 // Inicia servidor
 app.listen(PORT, () => {
