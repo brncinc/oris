@@ -1,46 +1,46 @@
 (() => {
   const generateBtn = document.getElementById("generateBtn");
-
-  function clearQRCode() {
-    document.getElementById("qrcode-pix").innerHTML = "";
-    document.getElementById("output").innerText = "";
-  }
+  const qrContainer = document.getElementById("qrcode-pix");
+  const output = document.getElementById("output");
+  const assetSelect = document.getElementById("assetSelect");
+  const valueInput = document.getElementById("valueInput");
+  const quantityInput = document.getElementById("quantityInput");
 
   async function generateQR() {
-    clearQRCode();
+    qrContainer.innerHTML = "";
+    output.innerText = "";
 
-    const value = parseFloat(document.getElementById("valueInput").value);
-    const quantity = parseInt(document.getElementById("quantityInput").value) || 1;
+    const value = parseFloat(valueInput.value);
+    const quantity = parseInt(quantityInput.value) || 1;
 
     if (!value || value <= 0) return alert("⚠️ Valor inválido.");
     if (quantity <= 0) return alert("⚠️ Quantidade inválida.");
+    if (!assetSelect.value) return alert("⚠️ Selecione um ativo.");
 
     try {
-      const res = await fetch("/api/generate", {
+      const response = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ value, quantity })
       });
 
-      const data = await res.json();
+      const data = await response.json();
+      if (!response.ok) return alert(data.error || "Erro ao gerar QR Code.");
 
-      if (res.ok) {
-        new QRCode(document.getElementById("qrcode-pix"), {
-          text: data.pixPayload,
-          width: 180,
-          height: 180,
-          colorDark: "#ff7f00",
-          colorLight: "#1c1c1c",
-          correctLevel: QRCode.CorrectLevel.H
-        });
+      const { pixPayload, streamKey } = data;
 
-        localStorage.setItem("streamKey", data.streamKey);
+      new QRCode(qrContainer, {
+        text: pixPayload,
+        width: 180,
+        height: 180,
+        colorDark: "#ff7f00",
+        colorLight: "#1c1c1c",
+        correctLevel: QRCode.CorrectLevel.H
+      });
 
-        document.getElementById("output").innerText =
-          `📲 QR Code Z-OBTC gerado\nValor total: R$${data.totalValue.toFixed(2)}\n🔁 Stream Key: ${data.streamKey}`;
-      } else {
-        alert(data.error || "Erro ao gerar QR Code.");
-      }
+      localStorage.setItem("streamKey", streamKey);
+      output.innerText = `📲 QR Code Z-OBTC gerado\nValor total: R$${(value*quantity).toFixed(2)}\n🔁 Stream Key: ${streamKey}`;
+
     } catch (err) {
       console.error(err);
       alert("Erro de conexão com o servidor.");
