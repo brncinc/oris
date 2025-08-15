@@ -4,7 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middlewares
 app.use(cors());
@@ -38,7 +38,7 @@ app.post("/api/generate", (req, res) => {
   }
 });
 
-// Inicia servidor
-app.listen(PORT, () => {
+// Inicia servidor em todas as interfaces
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
