@@ -260,9 +260,6 @@ option disabled hidden selected value="">
 </optgroup>
      </select>
   </div>
-<label for="couponInput">Cupom de desconto:</label>
-<input type="text" id="couponInput" value="omegalul100" placeholder="Digite seu cupom aqui">
-
 <label for="operationKey">Código ORIS S2000 (Operation Key):</label>
 <input type="text" id="operationKey" placeholder="Cole aqui seu código ORIS S2000">
 
@@ -282,89 +279,22 @@ option disabled hidden selected value="">
 <div id="output">Aguardando ação do usuário...</div>
 <div id="qrcode-pix"></div>
 
-  <section class="drax-tech">
-    <h2>ZENNETI Technology</h2>
-    <p>Unitas NBH Nature Scale + Dark HoloFi<br>Geminiositas Maxima — geminado,<br>qubits fracti in scala quantum maximi.</p>
-    <p style="font-style: italic;">Pague via PIX para ativar bônus exclusivos.</p>
-  </section>
-</form>
-
 <footer>
   © 2025 lucasjanuario14. Todos os direitos reservados.
 </footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-  // ELEMENTOS HTML
-  const variationText = document.getElementById("variationText");
-  const btnCreateFraction = document.querySelector(".btn.generate");
   const btnConfirmPayment = document.getElementById("btnConfirmPayment");
-
-  // VARIÁVEIS DE CONTROLE
-  let wallet = {};
-  let privateKey = null;
   let paymentConfirmed = false;
   let streamKey = null;
 
-  // 🟣 Atualiza a variação percentual do token periodicamente
-  function atualizarVariacao() {
-    const variacao = (Math.random() * 2 - 1).toFixed(2);
-    variationText.textContent = `${variacao > 0 ? '+' : ''}${variacao}%`;
-    variationText.style.color = variacao > 0 ? 'limegreen' : 'red';
-  }
-  setInterval(atualizarVariacao, 3000);
-
-  // 🛡️ Gera uma chave privada aleatória
-  function generatePrivateKey(tokenType = 'Z-OBTC') {
-    privateKey = `${tokenType}-` + Math.random().toString(36).substring(2, 14).toUpperCase();
-    document.getElementById('output').innerText =
-      `🔐 Chave Privada ${tokenType} gerada:\n${privateKey}\n\nAgora gere o QR Code e confirme o pagamento.`;
-    paymentConfirmed = false;
-    btnCreateFraction.disabled = true;
-  }
-
-  // 💼 Cria uma carteira com chave pública baseada na chave privada
-  function createWallet(tokenType = 'Z-OBTC') {
-    if (!paymentConfirmed) {
-      alert(`⚠️ Pagamento não confirmado! Confirme via PIX.`);
-      return;
-    }
-
-    wallet = {
-      publicKey: `${tokenType}-` + Math.random().toString(36).substring(2, 10).toUpperCase(),
-      privateKey: privateKey
-    };
-
-    document.getElementById('output').innerText =
-      `✅ Frações ${tokenType} ativadas!\n🔑 Chave Pública: ${wallet.publicKey}\n🔐 Chave Privada: ${wallet.privateKey}`;
-
-    btnCreateFraction.disabled = true;
-  }
-
-  // 📥 Importa uma carteira a partir da chave privada do usuário
-  function importWallet() {
-    const input = prompt("🔑 Insira sua chave privada:");
-    if (!input) return;
-
-    let tokenType = "Z-OBTC";
-    if (input.toUpperCase().includes("OBTC")) tokenType = "OBTC";
-    else if (input.toUpperCase().includes("Z-BTC")) tokenType = "Z-BTC";
-
-    wallet = {
-      publicKey: `${tokenType}-` + input.slice(0, 8).toUpperCase(),
-      privateKey: input
-    };
-    document.getElementById('output').innerText =
-      `📦 Carteira ${tokenType} importada com sucesso!\nChave Pública: ${wallet.publicKey}`;
-    paymentConfirmed = true;
-    btnCreateFraction.disabled = false;
-  }
-
-  // 🔎 Detecta Z-BTC, OBTC ou Z-OBTC e força sempre Σ (escala máxima)
+  // Detecta tipo de ativo
   function parseAsset(assetText) {
     const isZBTC = assetText.toLowerCase().includes("z-btc");
     const isOBTC = assetText.toLowerCase().includes("obtc") && !assetText.toLowerCase().includes("z-obs");
     const isZOBTC = assetText.toLowerCase().includes("z-obtc");
-    const isSigma = isZBTC || isOBTC || isZOBTC; // Sempre true para escala máxima
+    const isSigma = isZBTC || isOBTC || isZOBTC;
     const gemMatch = assetText.match(/Gema\s(\dQ\d)/);
     const gema = gemMatch ? gemMatch[1] : null;
     let tokenType = "TOKEN";
@@ -374,26 +304,24 @@ option disabled hidden selected value="">
     return { isZBTC, isOBTC, isZOBTC, isSigma, gema, tokenType };
   }
 
-  // 🧹 Limpa o QR Code e o botão de confirmação
+  // Limpa QR Code
   function clearQRCode() {
     document.getElementById("qrcode-pix").innerHTML = "";
     btnConfirmPayment.style.display = "none";
   }
 
-  // 🧾 Gera um QR Code PIX com dados da transação
+  // Gera QR Code PIX
   function generateQR() {
     clearQRCode();
 
     const assetSelect = document.getElementById("assetSelect");
     const asset = assetSelect.selectedOptions[0]?.text || "";
     const assetValue = assetSelect.value;
-    const coupon = document.getElementById("couponInput").value.trim();
     const value = parseFloat(document.getElementById("valueInput").value.trim());
     const quantity = parseInt(document.getElementById("quantityInput").value.trim()) || 1;
 
     if (!assetValue) return alert("⚠️ Selecione um ativo.");
     if (!value || isNaN(value) || value <= 0) return alert("⚠️ Valor inválido.");
-    if (!privateKey) return alert("⚠️ Gere sua chave privada antes de criar QR Code.");
     if (quantity <= 0) return alert("⚠️ Quantidade inválida.");
 
     const totalValue = value * quantity;
@@ -401,15 +329,12 @@ option disabled hidden selected value="">
     const pixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b";
     const valorPix = totalValue.toFixed(2).replace('.', '');
 
-    let description = `Pagamento ${tokenType} - ${asset} x${quantity}`;
-    if (coupon) description += ` - Cupom: ${coupon}`;
-
     const pixPayload =
       `00020126360014BR.GOV.BCB.PIX0136${pixKey}` +
       `520400005303986540${valorPix}5802BR` +
       `5913Meta Rabbit6009Sao Paulo62070503***6304`;
 
-    // 🎨 Cor do QR Code
+    // Cor do QR Code
     let qrColor = "#ffffff";
     if (isZBTC) qrColor = "#ff007f";
     else if (isOBTC) qrColor = "#007fff";
@@ -426,29 +351,25 @@ option disabled hidden selected value="">
       correctLevel: QRCode.CorrectLevel.H
     });
 
-    let outputText = `📲 QR Code gerado para:\nAtivo: ${asset}\nValor por unidade: $${value.toFixed(2)}\nQuantidade: ${quantity}\nValor total: $${totalValue.toFixed(2)}\nCupom: ${coupon || "Nenhum"}\n🔹 Tipo: ${tipoToken}`;
+    let outputText = `📲 QR Code gerado para:\nAtivo: ${asset}\nValor por unidade: $${value.toFixed(2)}\nQuantidade: ${quantity}\nValor total: $${totalValue.toFixed(2)}\n🔹 Tipo: ${tipoToken}`;
     if (gema) outputText += `\n💎 Gema: ${gema}`;
     document.getElementById('output').innerText = outputText;
 
     btnConfirmPayment.style.display = "block";
     paymentConfirmed = false;
-    btnCreateFraction.disabled = true;
   }
 
-  // ✅ Confirma o pagamento e ativa a fração
+  // Confirma pagamento
   function confirmPayment() {
     if (!streamKey || streamKey.trim() === "") {
       alert("⚠️ Gere uma Stream Key válida antes.");
       return;
     }
-
     paymentConfirmed = true;
-    btnCreateFraction.disabled = false;
     btnConfirmPayment.style.display = "none";
     localStorage.setItem("streamKey", streamKey);
-
     document.getElementById('output').innerText +=
-      `\n\n✅ Pagamento confirmado!\n🔁 Stream Key: ${streamKey}\n🔓 Fração pronta para ativação.`;
+      `\n\n✅ Pagamento confirmado!\n🔁 Stream Key: ${streamKey}`;
   }
 </script>
 
