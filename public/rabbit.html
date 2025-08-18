@@ -1,73 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" href="logo.ico" />
-  <title>Meta Rabbit Wallet - Drax Geminiositas Maxima</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; padding: 0;
-      background-color: #000;
-      font-family: 'Roboto', sans-serif;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
-    form.wallet {
-      background-color: #141414;
-      border-radius: 16px;
-      padding: 30px 24px;
-      width: 95%;
-      max-width: 480px;
-      margin: 30px 0;
-      box-shadow: 0 0 12px #000;
-    }
-    .header { text-align: center; margin-bottom: 24px; }
-    .header h1 { font-size: 2rem; color: #00ff66; margin-bottom: 10px; }
-    .header img { width: 80px; height: 80px; object-fit: contain; }
-    .input-box {
-      background-color: #121212;
-      border: 2px solid #00ff66;
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 24px;
-    }
-    label { font-weight: bold; color: #00ff66; display: block; margin-bottom: 6px; }
-    select, input[type="text"], input[type="number"] {
-      width: 100%; padding: 12px;
-      border-radius: 10px; background-color: #1e1e1e;
-      border: none; color: #fff; font-size: 1rem;
-    }
-    select:focus, input:focus { outline: 2px solid #00ff66; background-color: #0d0d0d; }
-    .buttons-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-    .btn {
-      flex: 1 1 30%;
-      background-color: #00ff66; color: #fff;
-      border: none; border-radius: 30px; padding: 12px;
-      font-weight: bold; cursor: pointer; transition: background 0.3s;
-    }
-    .btn:hover { background-color: #00cc55; }
-    .btn.generate { width: 100%; margin-top: 10px; border: 2px solid #00ff66; box-shadow: 0 0 10px #00ff66; }
-    .btn.generate:hover { background-color: #009944; }
-    #output {
-      background-color: #1a1a1a;
-      color: #c0c0c0;
-      font-family: monospace;
-      font-size: 0.95rem;
-      padding: 14px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      white-space: pre-wrap;
-    }
-    #qrcode-pix { margin: 16px auto; width: 220px; height: 220px; }
-    footer { margin-top: auto; padding: 20px; color: #888; font-size: 0.9rem; text-align: center; }
-    @media (max-width: 480px) { .buttons-container { flex-direction: column; } .btn { width: 100%; } }
-  </style>
+<meta charset="UTF-8">
+<title>Meta Rabbit Wallet - Z-OBTC</title>
+<link rel="icon" href="logo.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  * { box-sizing: border-box; }
+  body {
+    margin:0; padding:0; background:#000; color:#fff;
+    font-family:'Roboto',sans-serif; display:flex;
+    flex-direction:column; align-items:center; min-height:100vh;
+  }
+  form.wallet {
+    background:#141414; border-radius:16px; padding:30px 24px;
+    width:95%; max-width:480px; margin:30px 0; box-shadow:0 0 12px #000;
+  }
+  .header{text-align:center;margin-bottom:24px;}
+  .header h1{font-size:2rem;color:#00ff66;margin-bottom:10px;}
+  .header img{width:80px;height:80px;object-fit:contain;}
+  .input-box{background:#121212;border:2px solid #00ff66;border-radius:12px;padding:16px;margin-bottom:24px;}
+  label{font-weight:bold;color:#00ff66;display:block;margin-bottom:6px;}
+  select,input[type="text"],input[type="number"]{width:100%;padding:12px;border-radius:10px;background:#1e1e1e;border:none;color:#fff;font-size:1rem;}
+  select:focus,input:focus{outline:2px solid #00ff66;background:#0d0d0d;}
+  .buttons-container{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;}
+  .btn{flex:1 1 30%;background:#00ff66;color:#fff;border:none;border-radius:30px;padding:12px;font-weight:bold;cursor:pointer;transition:0.3s;}
+  .btn:hover{background:#00cc55;}
+  .btn.generate{width:100%;margin-top:10px;border:2px solid #00ff66;box-shadow:0 0 10px #00ff66;}
+  .btn.generate:hover{background:#009944;}
+  #output{background:#1a1a1a;color:#c0c0c0;font-family:monospace;font-size:0.95rem;padding:14px;border-radius:10px;margin-bottom:20px;white-space:pre-wrap;}
+  #qrcode-pix{margin:16px auto;width:220px;height:220px;}
+  footer{margin-top:auto;padding:20px;color:#888;font-size:0.9rem;text-align:center;}
+  @media(max-width:480px){.buttons-container{flex-direction:column}.btn{width:100%}}
+</style>
 </head>
 <body>
 
@@ -130,13 +96,13 @@
 
     </select>
 
-    <label for="valueInput">Valor por unidade (ex: 1000):</label>
+    <label for="valueInput">Valor por unidade (R$):</label>
     <input type="number" id="valueInput" placeholder="Digite o valor" min="1">
 
     <label for="quantityInput">Quantidade de unidades:</label>
     <input type="number" id="quantityInput" placeholder="Digite a quantidade" min="1" value="1">
 
-    <button type="button" class="btn generate" id="generateBtn">Gerar QR Code</button>
+    <button type="button" class="btn generate" id="generateBtn">Gerar QR Code / Comprar</button>
   </div>
 
   <div id="output">Aguardando ação do usuário...</div>
@@ -153,9 +119,9 @@
   const qrContainer = document.getElementById("qrcode-pix");
   const output = document.getElementById("output");
 
-  // ======= WALLET FUNÇÕES SIMULADAS =======
+  // ======= WALLET =======
   function createWallet() {
-    const seed = "seed-" + Math.random().toString(36).substr(2, 12);
+    const seed = "seed-" + Math.random().toString(36).substr(2,12);
     localStorage.setItem("walletSeed", seed);
     localStorage.setItem("walletBalance", 0);
     alert("✅ Fração criada!\nSeed: " + seed);
@@ -164,24 +130,24 @@
 
   function importWallet() {
     const seed = prompt("Digite sua seed:");
-    if (!seed) return alert("⚠️ Seed não informada.");
+    if(!seed) return alert("⚠️ Seed não informada.");
     localStorage.setItem("walletSeed", seed);
     const balance = parseFloat(prompt("Digite saldo atual:")) || 0;
     localStorage.setItem("walletBalance", balance);
     updateBalance();
-    alert("✅ Carteira importada com sucesso!");
+    alert("✅ Carteira importada!");
   }
 
   function showPublicKey() {
     const seed = localStorage.getItem("walletSeed");
-    if (!seed) return alert("⚠️ Nenhuma carteira criada.");
-    const pubKey = "PUB-" + seed.substr(0, 8).toUpperCase();
+    if(!seed) return alert("⚠️ Nenhuma carteira criada.");
+    const pubKey = "PUB-" + seed.substr(0,8).toUpperCase();
     alert("🔑 Chave Pública: " + pubKey);
   }
 
   function updateBalance() {
-    const bal = localStorage.getItem("walletBalance") || 0;
-    balanceInput.value = bal + " FRACTIO";
+    const bal = parseFloat(localStorage.getItem("walletBalance")) || 0;
+    balanceInput.value = bal.toFixed(2) + " FRACTIO";
   }
 
   // ======= PIX / QR CODE =======
@@ -191,42 +157,54 @@
     `.replace(/\s+/g,"");
   }
 
-  generateBtn.addEventListener("click", async () => {
+  // Simulação API Z-OBTC
+  async function getZOBTCPrice() {
+    // Pode ser substituída por API real
+    return 1.0; // 1 FRACTIO = R$1 para MVP
+  }
+
+  generateBtn.addEventListener("click", async ()=>{
     qrContainer.innerHTML = "";
     output.innerText = "";
 
     const value = parseFloat(document.getElementById("valueInput").value);
     const quantity = parseInt(document.getElementById("quantityInput").value) || 1;
-    if (!value || value <= 0) return alert("⚠️ Valor inválido.");
-    if (quantity <= 0) return alert("⚠️ Quantidade inválida.");
+    if(!value||value<=0) return alert("⚠️ Valor inválido.");
+    if(quantity<=0) return alert("⚠️ Quantidade inválida.");
 
     const pixKey = prompt("Digite sua chave Pix para depósito:");
-    if (!pixKey) return alert("⚠️ Nenhuma chave Pix informada.");
+    if(!pixKey) return alert("⚠️ Nenhuma chave Pix informada.");
 
-    const total = value * quantity;
-    const fee = total * 0.0075; // taxa 0,75%
-    const finalValue = total - fee;
+    const baseAmount = value*quantity;
+    const pricePerUnit = await getZOBTCPrice();
+    const adjustedValue = baseAmount * pricePerUnit;
+    const fee = adjustedValue*0.0075;
+    const finalValue = adjustedValue - fee;
 
     const brCode = makeBRCode(pixKey, finalValue);
-
-    new QRCode(qrContainer, {
-      text: brCode,
-      width: 220,
-      height: 220,
-      colorDark: "#00ff66",
-      colorLight: "#1c1c1c",
-      correctLevel: QRCode.CorrectLevel.H
+    new QRCode(qrContainer,{
+      text:brCode,
+      width:220,
+      height:220,
+      colorDark:"#00ff66",
+      colorLight:"#1c1c1c",
+      correctLevel:QRCode.CorrectLevel.H
     });
 
     output.innerText = `📲 QR Code pronto!
-💰 Valor total: R$${total.toFixed(2)}
+💰 Valor total: R$${baseAmount.toFixed(2)}
+📈 Ajustado: R$${adjustedValue.toFixed(2)}
 🧾 Taxa (0,75%): R$${fee.toFixed(2)}
 ✅ Valor final: R$${finalValue.toFixed(2)}
 🔑 Pix: ${pixKey}
 🆔 TXID: TX${Date.now()}`;
+
+    // Atualiza saldo simulado após "compra"
+    const prevBal = parseFloat(localStorage.getItem("walletBalance"))||0;
+    localStorage.setItem("walletBalance", prevBal + quantity);
+    updateBalance();
   });
 
-  // Inicializa saldo
   updateBalance();
 })();
 </script>
