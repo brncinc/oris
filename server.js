@@ -1,26 +1,44 @@
-app.post("/api/generate", (req, res) => {
-  try {
-    const { value, quantity } = req.body;
-    const qty = parseInt(quantity) || 1;
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY); // Chave secreta Stripe
 
-    if (!value || isNaN(value) || value <= 0 || qty <= 0) {
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static("public"));
+
+app.post("/api/create-checkout-session", async (req, res) => {
+  const { asset, value, quantity } = req.body;
+  try {
+    if (!value || value <= 0 || !quantity) {
       return res.status(400).json({ error: "Valor ou quantidade inválida" });
     }
 
-    const totalValue = value * qty;
-    const pixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b";
-    const valorPix = Math.round(totalValue * 100); // em centavos
+    const totalAmount = Math.round(value * quantity * 100); // centavos
 
-    const pixPayload =
-      `00020126360014BR.GOV.BCB.PIX01${pixKey}` +
-      `520400005303986540${valorPix}` +
-      `5802BR5913Meta Rabbit6009Sao Paulo62070503***6304`;
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [{
+        price_data: {
+          currency: "usd",
+          product_data: { name: `Compra de ${asset}` },
+          unit_amount: totalAmount,
+        },
+        quantity,
+      }],
+      mode: "payment",
+      success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${req.headers.origin}/cancel.html`,
+    });
 
-    const streamKey = `STREAM-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
-
-    return res.json({ pixPayload, streamKey, totalValue: totalValue.toFixed(2) });
+    res.json({ url: session.url });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: "Erro no servidor" });
+    res.status(500).json({ error: "Erro ao criar sessão Stripe" });
   }
+});
+
+app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
+  console.log("Servidor rodando...");
 });
