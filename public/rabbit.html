@@ -48,11 +48,6 @@
     <input type="text" id="balance" readonly value="0 FRACTIO">
   </div>
 
-  <div class="buttons-container">
-    <button type="button" class="btn" onclick="createWallet()">Criar Fração</button>
-    <button type="button" class="btn" onclick="importWallet()">Importar Secreto</button>
-    <button type="button" class="btn" onclick="showPublicKey()">Mostrar Chave Pública</button>
-  </div>
 
   <div class="input-box">
     <label for="assetSelect">Selecione seu ativo:</label>
@@ -101,83 +96,68 @@
 
     <label for="quantityInput">Quantidade de unidades:</label>
     <input type="number" id="quantityInput" placeholder="Digite a quantidade" min="1" value="1">
+<button id="generateBtn">Gerar QR Code</button>
+<div id="qrcode-stripe"></div>
+<div id="output"></div>
+<select id="assetSelect">
+  <option value="">Selecione um ativo</option>
+  <option value="Z-OBTC">Z-OBTC</option>
+</select>
+<input id="valueInput" type="number" placeholder="Valor (USD)">
+<input id="quantityInput" type="number" placeholder="Quantidade">
 
-    <button type="button" class="btn generate" id="generateBtn">Gerar QR Code / Comprar</button>
-  </div>
-
-  <div id="output">Aguardando ação do usuário...</div>
-  <div id="qrcode-pix"></div>
-</form>
-
-<footer>© 2025 lucasjanuario14. Todos os direitos reservados.</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-<!-- Adicione antes do fechamento do body -->
-<script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 <script>
 (() => {
-  const balanceInput = document.getElementById("balance");
   const generateBtn = document.getElementById("generateBtn");
+  const qrContainer = document.getElementById("qrcode-stripe");
   const output = document.getElementById("output");
+  const assetSelect = document.getElementById("assetSelect");
+  const valueInput = document.getElementById("valueInput");
+  const quantityInput = document.getElementById("quantityInput");
 
-  function updateBalance() {
-    const bal = parseFloat(localStorage.getItem("walletBalance")) || 0;
-    balanceInput.value = bal.toFixed(2) + " FRACTIO";
-  }
-
-  async function getZOBTCPrice() {
-    return 1.0; // preço simulado
-  }
-
-  generateBtn.addEventListener("click", async () => {
+  async function generateQR() {
+    qrContainer.innerHTML = "";
     output.innerText = "";
-    const value = parseFloat(document.getElementById("valueInput").value);
-    const quantity = parseInt(document.getElementById("quantityInput").value) || 1;
-    if(!value||value<=0) return alert("⚠️ Valor inválido.");
-    if(quantity<=0) return alert("⚠️ Quantidade inválida.");
 
-    // Calcula valor final
-    const baseAmount = value*quantity;
-    const pricePerUnit = await getZOBTCPrice();
-    const adjustedValue = baseAmount * pricePerUnit;
-    const fee = adjustedValue * 0.0075;
-    const finalValue = adjustedValue - fee;
+    const value = parseFloat(valueInput.value);
+    const quantity = parseInt(quantityInput.value) || 1;
 
-    // Chave pública Stripe
-    const stripe = Stripe("pk_test_SEU_PUBLIC_KEY_AQUI");
+    if (!value || value <= 0) return alert("⚠️ Valor inválido.");
+    if (quantity <= 0) return alert("⚠️ Quantidade inválida.");
+    if (!assetSelect.value) return alert("⚠️ Selecione um ativo.");
 
-    // Cria sessão de checkout via backend (simulação frontend)
-    // Aqui você chamaria fetch('/create-checkout-session', {method:'POST', body: JSON.stringify({...})})
-    // Mas para teste, podemos abrir o checkout simulando
-    output.innerText = `🔄 Redirecionando para Stripe...
-💰 Valor final: R$${finalValue.toFixed(2)}`;
+    try {
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ asset: assetSelect.value, value, quantity })
+      });
 
-    // Redireciona para Stripe Checkout (simulação)
-    stripe.redirectToCheckout({
-      lineItems: [{
-        price_data: {
-          currency: 'brl',
-          product_data: { name: 'Z-OBTC Purchase' },
-          unit_amount: Math.round(finalValue*100) // em centavos
-        },
-        quantity: 1
-      }],
-      mode: 'payment',
-      successUrl: window.location.href + '?success=true',
-      cancelUrl: window.location.href + '?canceled=true'
-    }).then(function (result) {
-      if(result.error){
-        alert(result.error.message);
-      }
-    });
+      const data = await res.json();
+      if (!res.ok) return alert(data.error || "Erro ao criar sessão Stripe.");
 
-    // Atualiza saldo simulado
-    const prevBal = parseFloat(localStorage.getItem("walletBalance"))||0;
-    localStorage.setItem("walletBalance", prevBal + quantity);
-    updateBalance();
-  });
+      const stripeURL = data.url;
 
-  updateBalance();
+      // Gera QR Code verde para Stripe Checkout
+      QRCode.toCanvas(stripeURL, { 
+        width: 220, 
+        color: { dark: "#00ff66", light: "#1c1c1c" } 
+      }, (err, canvas) => {
+        if (err) return console.error(err);
+        qrContainer.appendChild(canvas);
+      });
+
+      output.innerText = `📲 QR Code Stripe gerado!
+💰 Valor total: $${(value*quantity).toFixed(2)}
+🔁 Ativo: ${assetSelect.value}`;
+    } catch (err) {
+      console.error(err);
+      alert("Erro de conexão com o servidor.");
+    }
+  }
+
+  generateBtn.addEventListener("click", generateQR);
 })();
 </script>
 
