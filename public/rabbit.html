@@ -112,94 +112,66 @@
 <footer>© 2025 lucasjanuario14. Todos os direitos reservados.</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+<!-- Adicione antes do fechamento do body -->
+<script src="https://js.stripe.com/v3/"></script>
 <script>
 (() => {
   const balanceInput = document.getElementById("balance");
   const generateBtn = document.getElementById("generateBtn");
-  const qrContainer = document.getElementById("qrcode-pix");
   const output = document.getElementById("output");
-
-  // ======= WALLET =======
-  function createWallet() {
-    const seed = "seed-" + Math.random().toString(36).substr(2,12);
-    localStorage.setItem("walletSeed", seed);
-    localStorage.setItem("walletBalance", 0);
-    alert("✅ Fração criada!\nSeed: " + seed);
-    updateBalance();
-  }
-
-  function importWallet() {
-    const seed = prompt("Digite sua seed:");
-    if(!seed) return alert("⚠️ Seed não informada.");
-    localStorage.setItem("walletSeed", seed);
-    const balance = parseFloat(prompt("Digite saldo atual:")) || 0;
-    localStorage.setItem("walletBalance", balance);
-    updateBalance();
-    alert("✅ Carteira importada!");
-  }
-
-  function showPublicKey() {
-    const seed = localStorage.getItem("walletSeed");
-    if(!seed) return alert("⚠️ Nenhuma carteira criada.");
-    const pubKey = "PUB-" + seed.substr(0,8).toUpperCase();
-    alert("🔑 Chave Pública: " + pubKey);
-  }
 
   function updateBalance() {
     const bal = parseFloat(localStorage.getItem("walletBalance")) || 0;
     balanceInput.value = bal.toFixed(2) + " FRACTIO";
   }
 
-  // ======= PIX / QR CODE =======
-  function makeBRCode(pixKey, amount, txid="TX"+Date.now()) {
-    return `
-00020101021226850014br.gov.bcb.pix0114${pixKey}520400005303986540${amount.toFixed(2).replace('.', '')}5802BR5913Meta Rabbit6009Cidade62070503${txid}6304ABCD
-    `.replace(/\s+/g,"");
-  }
-
-  // Simulação API Z-OBTC
   async function getZOBTCPrice() {
-    // Pode ser substituída por API real
-    return 1.0; // 1 FRACTIO = R$1 para MVP
+    return 1.0; // preço simulado
   }
 
-  generateBtn.addEventListener("click", async ()=>{
-    qrContainer.innerHTML = "";
+  generateBtn.addEventListener("click", async () => {
     output.innerText = "";
-
     const value = parseFloat(document.getElementById("valueInput").value);
     const quantity = parseInt(document.getElementById("quantityInput").value) || 1;
     if(!value||value<=0) return alert("⚠️ Valor inválido.");
     if(quantity<=0) return alert("⚠️ Quantidade inválida.");
 
-    const pixKey = prompt("Digite sua chave Pix para depósito:");
-    if(!pixKey) return alert("⚠️ Nenhuma chave Pix informada.");
-
+    // Calcula valor final
     const baseAmount = value*quantity;
     const pricePerUnit = await getZOBTCPrice();
     const adjustedValue = baseAmount * pricePerUnit;
-    const fee = adjustedValue*0.0075;
+    const fee = adjustedValue * 0.0075;
     const finalValue = adjustedValue - fee;
 
-    const brCode = makeBRCode(pixKey, finalValue);
-    new QRCode(qrContainer,{
-      text:brCode,
-      width:220,
-      height:220,
-      colorDark:"#00ff66",
-      colorLight:"#1c1c1c",
-      correctLevel:QRCode.CorrectLevel.H
+    // Chave pública Stripe
+    const stripe = Stripe("pk_test_SEU_PUBLIC_KEY_AQUI");
+
+    // Cria sessão de checkout via backend (simulação frontend)
+    // Aqui você chamaria fetch('/create-checkout-session', {method:'POST', body: JSON.stringify({...})})
+    // Mas para teste, podemos abrir o checkout simulando
+    output.innerText = `🔄 Redirecionando para Stripe...
+💰 Valor final: R$${finalValue.toFixed(2)}`;
+
+    // Redireciona para Stripe Checkout (simulação)
+    stripe.redirectToCheckout({
+      lineItems: [{
+        price_data: {
+          currency: 'brl',
+          product_data: { name: 'Z-OBTC Purchase' },
+          unit_amount: Math.round(finalValue*100) // em centavos
+        },
+        quantity: 1
+      }],
+      mode: 'payment',
+      successUrl: window.location.href + '?success=true',
+      cancelUrl: window.location.href + '?canceled=true'
+    }).then(function (result) {
+      if(result.error){
+        alert(result.error.message);
+      }
     });
 
-    output.innerText = `📲 QR Code pronto!
-💰 Valor total: R$${baseAmount.toFixed(2)}
-📈 Ajustado: R$${adjustedValue.toFixed(2)}
-🧾 Taxa (0,75%): R$${fee.toFixed(2)}
-✅ Valor final: R$${finalValue.toFixed(2)}
-🔑 Pix: ${pixKey}
-🆔 TXID: TX${Date.now()}`;
-
-    // Atualiza saldo simulado após "compra"
+    // Atualiza saldo simulado
     const prevBal = parseFloat(localStorage.getItem("walletBalance"))||0;
     localStorage.setItem("walletBalance", prevBal + quantity);
     updateBalance();
@@ -208,5 +180,6 @@
   updateBalance();
 })();
 </script>
+
 </body>
 </html>
