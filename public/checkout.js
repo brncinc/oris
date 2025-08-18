@@ -22,9 +22,7 @@
       const data = await res.json();
       if (!res.ok) return alert(data.error || "Erro ao iniciar pagamento.");
 
-      // Redireciona para Stripe Checkout
-      window.location.href = data.url;
-
+      window.location.href = data.url; // Redireciona para Stripe Checkout
     } catch (err) {
       console.error(err);
       alert("Erro ao conectar com o servidor.");
