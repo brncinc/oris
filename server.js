@@ -1,15 +1,17 @@
-// server.js
 import express from "express";
 import cors from "cors";
 import Stripe from "stripe";
+import dotenv from "dotenv";
+
+dotenv.config(); // lê .env
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // configure a chave no .env
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public")); // sua pasta com HTML/JS
+app.use(express.static("public")); // pasta com HTML/JS
 
 app.post("/api/create-checkout-session", async (req, res) => {
   const { asset, value, quantity } = req.body;
@@ -26,7 +28,7 @@ app.post("/api/create-checkout-session", async (req, res) => {
           price_data: {
             currency: "usd",
             product_data: { name: asset },
-            unit_amount: Math.round(value * 100), // valor em centavos
+            unit_amount: Math.round(value * 100),
           },
           quantity: quantity || 1,
         },
