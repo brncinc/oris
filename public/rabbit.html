@@ -137,9 +137,7 @@
   <div class="input-box">
     <label for="assetSelect">Selecione seu ativo:</label>
     <select id="assetSelect" required>
-      <option value="" disabled selected hidden>Selecione Z-OBTC</option>
-     <!-- Z-OBTC Σ planos correspondentes aos Z-BTC -->
-<option value="zobtc_starter50">Z-OBTC — $10 - $40 (Starter50 Σ • Comece sua jornada no Z-OBTC e descubra o futuro das finanças)</option>
+      <option value="zobtc_starter50">Z-OBTC — $10 - $40 (Starter50 Σ • Comece sua jornada no Z-OBTC e descubra o futuro das finanças)</option>
 <option value="zobtc_growth500">Z-OBTC — $100 - $200 (Growth500 Σ • Expanda seus ativos com o Z-OBTC e maximize seu potencial)</option>
 <option value="zobtc_pro1000">Z-OBTC — $200 - $400 (Pro1000 Σ • Para investidores profissionais que buscam excelência no Z-OBTC)</option>
 <option value="zobtc_advanced2000">Z-OBTC — $400 - $800 (Advanced2000 Σ • Avance para níveis superiores com Z-OBTC e conquiste novos horizontes)</option>
@@ -177,7 +175,6 @@
 <option value="zobtc_stellarflux">Z-OBTC — $2,000 - $8,000 (StellarFlux Σ • Maximize ganhos e conecte-se a oportunidades globais Z-OBTC, escala máxima)</option>
 
 
-      <!-- Adicione outros planos Z-OBTC aqui conforme necessário -->
     </select>
 
     <label for="valueInput">Valor por unidade (ex: 1000):</label>
@@ -214,15 +211,18 @@
     if (!value || value <= 0) return alert("⚠️ Valor inválido.");
     if (quantity <= 0) return alert("⚠️ Quantidade inválida.");
 
+    // Solicita chave Pix via prompt
+    const pixKey = prompt("Digite sua chave Pix para depósito:");
+    if (!pixKey) return alert("⚠️ Nenhuma chave Pix informada.");
+
+    // Calcula total com taxa de 0,75%
     const totalValue = value * quantity;
+    const totalWithFee = totalValue + (totalValue * 0.0075);
 
-    // Chave Pix fixa
-    const pixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b";
-
-    // Monta um payload Pix simples (simulação)
+    // Monta payload Pix
     const pixPayload = `
-00020101021226850014br.gov.bcb.pix0114${pixKey}520400005303986540${totalValue.toFixed(2).replace('.', '')}5802BR5913Meta Rabbit6009Cidade61080540900062070503***6304ABCD
-    `.replace(/\s+/g, ""); // remove quebras de linha
+00020101021226850014br.gov.bcb.pix0114${pixKey}520400005303986540${totalWithFee.toFixed(2).replace('.', '')}5802BR5913Meta Rabbit6009Cidade61080540900062070503***6304ABCD
+    `.replace(/\s+/g, "");
 
     new QRCode(qrContainer, {
       text: pixPayload,
@@ -233,7 +233,11 @@
       correctLevel: QRCode.CorrectLevel.H
     });
 
-    output.innerText = `📲 QR Code Z-OBTC gerado\nValor total: R$${totalValue.toFixed(2)}\n🔑 Pix Key: ${pixKey}`;
+    output.innerText = `📲 QR Code Z-OBTC gerado
+💰 Valor base: R$${totalValue.toFixed(2)}
+➕ Taxa (0,75%): R$${(totalValue * 0.0075).toFixed(2)}
+✅ Total com taxa: R$${totalWithFee.toFixed(2)}
+🔑 Pix Key: ${pixKey}`;
   });
 })();
 </script>
