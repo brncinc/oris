@@ -1,54 +1,46 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+// server.js
+import express from "express";
+import cors from "cors";
+import Stripe from "stripe";
 
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
-app.use(express.static("public"));
+const PORT = process.env.PORT || 3000;
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // configure a chave no .env
 
-// Função para simular preço Z-OBTC
-async function getZOBTCPrice(asset) {
-  return 1.2; // 1 Z-OBTC = 1,2 USD
-}
+app.use(cors());
+app.use(express.json());
+app.use(express.static("public")); // sua pasta com HTML/JS
 
 app.post("/api/create-checkout-session", async (req, res) => {
+  const { asset, value, quantity } = req.body;
+
+  if (!value || value <= 0 || !asset) {
+    return res.status(400).json({ error: "Dados inválidos" });
+  }
+
   try {
-    const { asset, value, quantity } = req.body;
-    if (!value || value <= 0 || !quantity || !asset) {
-      return res.status(400).json({ error: "Dados inválidos" });
-    }
-
-    const baseAmountUSD = value * quantity;
-    const pricePerUnit = await getZOBTCPrice(asset);
-    const adjustedAmount = baseAmountUSD * pricePerUnit;
-    const fee = adjustedAmount * 0.0075; // taxa 0,75%
-    const finalAmountUSD = adjustedAmount + fee;
-    const totalCents = Math.round(finalAmountUSD * 100);
-
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: [{
-        price_data: {
-          currency: "usd",
-          product_data: { name: `Compra de ${asset} (Z-OBTC)` },
-          unit_amount: totalCents,
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: { name: asset },
+            unit_amount: Math.round(value * 100), // valor em centavos
+          },
+          quantity: quantity || 1,
         },
-        quantity: 1,
-      }],
+      ],
       mode: "payment",
-      success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${req.headers.origin}/success.html`,
       cancel_url: `${req.headers.origin}/cancel.html`,
     });
 
     res.json({ url: session.url });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Erro ao criar sessão Stripe" });
+    res.status(500).json({ error: err.message });
   }
 });
 
-app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
-  console.log("Servidor rodando...");
-});
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
