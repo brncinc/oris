@@ -24,15 +24,11 @@
   label{font-weight:bold;color:#00ff66;display:block;margin-bottom:6px;}
   select,input[type="text"],input[type="number"]{width:100%;padding:12px;border-radius:10px;background:#1e1e1e;border:none;color:#fff;font-size:1rem;}
   select:focus,input:focus{outline:2px solid #00ff66;background:#0d0d0d;}
-  .buttons-container{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;}
-  .btn{flex:1 1 30%;background:#00ff66;color:#fff;border:none;border-radius:30px;padding:12px;font-weight:bold;cursor:pointer;transition:0.3s;}
+  .btn{width:100%;background:#00ff66;color:#fff;border:none;border-radius:30px;padding:12px;font-weight:bold;cursor:pointer;transition:0.3s;margin-bottom:20px;}
   .btn:hover{background:#00cc55;}
-  .btn.generate{width:100%;margin-top:10px;border:2px solid #00ff66;box-shadow:0 0 10px #00ff66;}
-  .btn.generate:hover{background:#009944;}
   #output{background:#1a1a1a;color:#c0c0c0;font-family:monospace;font-size:0.95rem;padding:14px;border-radius:10px;margin-bottom:20px;white-space:pre-wrap;}
-  #qrcode-pix{margin:16px auto;width:220px;height:220px;}
+  #qrcode-stripe{margin:16px auto;width:220px;height:220px;}
   footer{margin-top:auto;padding:20px;color:#888;font-size:0.9rem;text-align:center;}
-  @media(max-width:480px){.buttons-container{flex-direction:column}.btn{width:100%}}
 </style>
 </head>
 <body>
@@ -48,63 +44,29 @@
     <input type="text" id="balance" readonly value="0 FRACTIO">
   </div>
 
-
   <div class="input-box">
     <label for="assetSelect">Selecione seu ativo:</label>
     <select id="assetSelect">
-    <option value="zobtc_starter50">Z-OBTC — $10 - $40 (Starter50 Σ • Comece sua jornada no Z-OBTC e descubra o futuro das finanças)</option>
-<option value="zobtc_growth500">Z-OBTC — $100 - $200 (Growth500 Σ • Expanda seus ativos com o Z-OBTC e maximize seu potencial)</option>
-<option value="zobtc_pro1000">Z-OBTC — $200 - $400 (Pro1000 Σ • Para investidores profissionais que buscam excelência no Z-OBTC)</option>
-<option value="zobtc_advanced2000">Z-OBTC — $400 - $800 (Advanced2000 Σ • Avance para níveis superiores com Z-OBTC e conquiste novos horizontes)</option>
-<option value="zobtc_diamond500">Z-OBTC — $1,000 - $3,000 (Diamond500 Σ • Entre no seleto grupo de investidores Z-OBTC com Diamond500)</option>
-<option value="zobtc_ultraenther">Z-OBTC — $2,000 - $6,000 (UltraEnther Σ • Experimente a máxima performance e exclusividade do Z-OBTC)</option>
-<option value="zobtc_qzdiamond">Z-OBTC — $1,400 - $4,000 (QZDiamond Σ • Transforme seus investimentos com QZDiamond no Z-OBTC)</option>
-<option value="zobtc_entherprime">Z-OBTC — $600 - $1,800 (EntherPrime Σ • Alcance novos patamares financeiros com EntherPrime Z-OBTC)</option>
-
-<!-- Dark / Fractio / Σ -->
-<option value="zobtc_darkusd">Z-OBTC — $400 - $1,600 (DarkUSD Σ • Potencial máximo com segurança e performance em Z-OBTC)</option>
-<option value="zobtc_darkbtc">Z-OBTC — $2,000 - $10,000 (DarkBTC Σ • O poder do Bitcoin no universo Z-OBTC com DarkBTC)</option>
-<option value="zobtc_trixusd">Z-OBTC — $1,000 - $5,000 (TrixUSD Σ • Estratégia avançada e retorno elevado com TrixUSD Z-OBTC)</option>
-<option value="zobtc_jbxdiamond">Z-OBTC — $4,000 - $12,000 (JBX Diamond Σ • A experiência premium em Z-OBTC para investidores exigentes)</option>
-
-<!-- Fractio padrão -->
-<option value="zobtc_fractio_lux">Z-OBTC — 1000 HF Σ (Fractio Lux Σ • A excelência do Z-OBTC em forma de Fractio Lux, escala máxima)</option>
-<option value="zobtc_fractio_flexus">Z-OBTC — 500 QFX Σ (Fractio Flexus Σ • Flexibilidade máxima em seus investimentos Z-OBTC, escala máxima)</option>
-<option value="zobtc_fractio_scala">Z-OBTC — 500 JBXF Σ (Fractio Scala Σ • Crescimento contínuo com Fractio Scala do Z-OBTC, escala máxima)</option>
-<option value="zobtc_fractio_vox">Z-OBTC — 400 QOOP Σ (Fractio Vox Σ • Voz do futuro financeiro Z-OBTC com Fractio Vox, escala máxima)</option>
-<option value="zobtc_fractio_valoris">Z-OBTC — 300 QVALFX Σ (Fractio Valoris Σ • Valor real e potencial máximo com Fractio Valoris Z-OBTC)</option>
-<option value="zobtc_fractio_mens">Z-OBTC — 100 NBH Σ (Fractio Mens Σ • Inteligência financeira e estratégia máxima com Fractio Mens Z-OBTC)</option>
-<option value="zobtc_fractio_yenensis">Z-OBTC — $15,000 Σ (Fractio Yenensis Σ • Investimento internacional com Fractio Yenensis Z-OBTC, escala máxima)</option>
-<option value="zobtc_fractio_eurox">Z-OBTC — $5,000 Σ (Fractio Eurox Σ • Exclusividade global com Fractio Eurox no Z-OBTC, escala máxima)</option>
-
-<!-- Novas opções variadas Z-OBTC -->
-<option value="zobtc_nova_start">Z-OBTC — $50 - $150 (NovaStart Σ • Inicie sua jornada Z-OBTC com segurança e inovação, escala máxima)</option>
-<option value="zobtc_techboost">Z-OBTC — $300 - $900 (TechBoost Σ • Potencialize seus investimentos com tecnologias emergentes em Z-OBTC, escala máxima)</option>
-<option value="zobtc_greenfund">Z-OBTC — $200 - $600 (GreenFund Σ • Invista em sustentabilidade e crescimento sólido com Z-OBTC, escala máxima)</option>
-<option value="zobtc_futurevault">Z-OBTC — $500 - $2,000 (FutureVault Σ • Proteja e multiplique seus ativos com estratégia de longo prazo Z-OBTC, escala máxima)</option>
-<option value="zobtc_quantumrise">Z-OBTC — $1,000 - $4,000 (QuantumRise Σ • Alcance novos patamares de rentabilidade com Z-OBTC QuantumRise, escala máxima)</option>
-<option value="zobtc_globalelite">Z-OBTC — $5,000 - $15,000 (GlobalElite Σ • Exclusividade e máximo retorno no universo Z-OBTC, escala máxima)</option>
-<option value="zobtc_innovaflex">Z-OBTC — $700 - $2,500 (InnovaFlex Σ • Estratégias flexíveis e inovadoras para investidores Z-OBTC, escala máxima)</option>
-<option value="zobtc_digitalgem">Z-OBTC — $1,500 - $5,000 (DigitalGem Σ • Transforme ativos digitais em oportunidades com Z-OBTC, escala máxima)</option>
-<option value="zobtc_ventureprime">Z-OBTC — $3,000 - $10,000 (VenturePrime Σ • Entre no mercado premium de Z-OBTC com VenturePrime, escala máxima)</option>
-<option value="zobtc_stellarflux">Z-OBTC — $2,000 - $8,000 (StellarFlux Σ • Maximize ganhos e conecte-se a oportunidades globais Z-OBTC, escala máxima)</option>
-
+      <option value="">Selecione um ativo</option>
+      <option value="Z-OBTC">Z-OBTC</option>
     </select>
+  </div>
 
-    <label for="valueInput">Valor por unidade (R$):</label>
+  <div class="input-box">
+    <label for="valueInput">Valor por unidade (USD):</label>
     <input type="number" id="valueInput" placeholder="Digite o valor" min="1">
+  </div>
 
+  <div class="input-box">
     <label for="quantityInput">Quantidade de unidades:</label>
     <input type="number" id="quantityInput" placeholder="Digite a quantidade" min="1" value="1">
-<button id="generateBtn">Gerar QR Code</button>
-<div id="qrcode-stripe"></div>
-<div id="output"></div>
-<select id="assetSelect">
-  <option value="">Selecione um ativo</option>
-  <option value="Z-OBTC">Z-OBTC</option>
-</select>
-<input id="valueInput" type="number" placeholder="Valor (USD)">
-<input id="quantityInput" type="number" placeholder="Quantidade">
+  </div>
+
+  <button id="generateBtn" class="btn">Gerar QR Code</button>
+
+  <div id="qrcode-stripe"></div>
+  <div id="output"></div>
+</form>
 
 <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 <script>
@@ -139,7 +101,6 @@
 
       const stripeURL = data.url;
 
-      // Gera QR Code verde para Stripe Checkout
       QRCode.toCanvas(stripeURL, { 
         width: 220, 
         color: { dark: "#00ff66", light: "#1c1c1c" } 
@@ -151,6 +112,7 @@
       output.innerText = `📲 QR Code Stripe gerado!
 💰 Valor total: $${(value*quantity).toFixed(2)}
 🔁 Ativo: ${assetSelect.value}`;
+
     } catch (err) {
       console.error(err);
       alert("Erro de conexão com o servidor.");
@@ -161,5 +123,6 @@
 })();
 </script>
 
+<footer>Meta Rabbit © 2025 BY LUCAS JANUARIO </footer>
 </body>
 </html>
