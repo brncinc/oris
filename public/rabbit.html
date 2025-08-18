@@ -195,6 +195,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 <script>
 (async () => {
   const generateBtn = document.getElementById("generateBtn");
@@ -205,11 +206,18 @@
     try {
       const res = await fetch("https://api.coindesk.com/v1/bpi/currentprice/BRL.json");
       const data = await res.json();
-      return data.bpi.BRL.rate_float; // preço do BTC em BRL
+      return data.bpi.BRL.rate_float;
     } catch (err) {
       console.error("Erro ao buscar preço BTC", err);
       return null;
     }
+  }
+
+  function makeBRCode(pixKey, amount, txid = "TX" + Date.now()) {
+    // Payload Pix compatível com BR Code padrão
+    return `
+00020101021226850014br.gov.bcb.pix0114${pixKey}520400005303986540${amount.toFixed(2).replace('.', '')}5802BR5913Meta Rabbit6009Cidade62070503${txid}6304ABCD
+    `.replace(/\s+/g, "");
   }
 
   generateBtn?.addEventListener("click", async () => {
@@ -222,47 +230,38 @@
     if (!value || value <= 0) return alert("⚠️ Valor inválido.");
     if (quantity <= 0) return alert("⚠️ Quantidade inválida.");
 
-    // Solicita chave Pix via prompt
     const userPixKey = prompt("Digite sua chave Pix para depósito:");
     if (!userPixKey) return alert("⚠️ Nenhuma chave Pix informada.");
 
-    // Preço do BTC atual
     const btcPrice = await getBTCPrice();
     if (!btcPrice) return alert("⚠️ Não foi possível obter o preço do BTC.");
 
-    // Valor base ajustado pelo preço do BTC
     const baseValue = value * quantity;
-    const adjustedValue = baseValue * (btcPrice / 100000); // exemplo de ajuste proporcional
-
-    // Taxa 0,75% (já descontada do valor final)
+    const adjustedValue = baseValue * (btcPrice / 100000);
     const feeValue = adjustedValue * 0.0075;
     const finalValue = adjustedValue - feeValue;
 
-    // Monta payload Pix
-    const pixPayload = `
-00020101021226850014br.gov.bcb.pix0114${userPixKey}520400005303986540${finalValue.toFixed(2).replace('.', '')}5802BR5913Meta Rabbit6009Cidade61080540900062070503***6304ABCD
-    `.replace(/\s+/g, "");
+    const brCode = makeBRCode(userPixKey, finalValue);
 
-    // Gera QR Code único (verde)
     new QRCode(qrContainer, {
-      text: pixPayload,
+      text: brCode,
       width: 220,
       height: 220,
       colorDark: "#00ff66",   // verde
-      colorLight: "#1c1c1c", // fundo escuro
+      colorLight: "#1c1c1c",
       correctLevel: QRCode.CorrectLevel.H
     });
 
-    output.innerText = `📲 QR Code gerado com sucesso
+    output.innerText = `📲 QR Code pronto para escanear
 💰 Valor base: R$${baseValue.toFixed(2)}
 📈 Ajustado pelo BTC: R$${adjustedValue.toFixed(2)}
 🧾 Taxa (0,75%): R$${feeValue.toFixed(2)}
 ✅ Valor final (líquido): R$${finalValue.toFixed(2)}
-🔑 Pix Usuário: ${userPixKey}`;
+🔑 Pix Usuário: ${userPixKey}
+🆔 TXID: ${"TX" + Date.now()}`;
   });
 })();
 </script>
-
 
 </body>
 </html>
