@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="la">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" href="logo.ico" />
@@ -7,12 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
     * { box-sizing: border-box; }
-
     body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background-color: #000;
       font-family: 'Roboto', sans-serif;
       color: #fff;
@@ -21,7 +18,6 @@
       align-items: center;
       min-height: 100vh;
     }
-
     form.wallet {
       background-color: #141414;
       border-radius: 16px;
@@ -31,11 +27,9 @@
       margin: 30px 0;
       box-shadow: 0 0 12px #000;
     }
-
     .header { text-align: center; margin-bottom: 24px; }
     .header h1 { font-size: 2rem; color: #00ff66; margin-bottom: 10px; }
     .header img { width: 80px; height: 80px; object-fit: contain; }
-
     .input-box {
       background-color: #121212;
       border: 2px solid #00ff66;
@@ -43,57 +37,23 @@
       padding: 16px;
       margin-bottom: 24px;
     }
-
-    label {
-      font-weight: bold;
-      color: #00ff66;
-      display: block;
-      margin-bottom: 6px;
-    }
-
+    label { font-weight: bold; color: #00ff66; display: block; margin-bottom: 6px; }
     select, input[type="text"], input[type="number"] {
-      width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      background-color: #1e1e1e;
-      border: none;
-      color: #fff;
-      font-size: 1rem;
+      width: 100%; padding: 12px;
+      border-radius: 10px; background-color: #1e1e1e;
+      border: none; color: #fff; font-size: 1rem;
     }
-
-    select:focus, input:focus {
-      outline: 2px solid #00ff66;
-      background-color: #0d0d0d;
-    }
-
-    .buttons-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
+    select:focus, input:focus { outline: 2px solid #00ff66; background-color: #0d0d0d; }
+    .buttons-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
     .btn {
       flex: 1 1 30%;
-      background-color: #00ff66;
-      color: #fff;
-      border: none;
-      border-radius: 30px;
-      padding: 12px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
+      background-color: #00ff66; color: #fff;
+      border: none; border-radius: 30px; padding: 12px;
+      font-weight: bold; cursor: pointer; transition: background 0.3s;
     }
-
     .btn:hover { background-color: #00cc55; }
-    .btn.generate {
-      width: 100%;
-      margin-top: 10px;
-      border: 2px solid #00ff66;
-      box-shadow: 0 0 10px #00ff66;
-    }
+    .btn.generate { width: 100%; margin-top: 10px; border: 2px solid #00ff66; box-shadow: 0 0 10px #00ff66; }
     .btn.generate:hover { background-color: #009944; }
-
     #output {
       background-color: #1a1a1a;
       color: #c0c0c0;
@@ -104,15 +64,9 @@
       margin-bottom: 20px;
       white-space: pre-wrap;
     }
-
-    #qrcode-pix { margin: 16px auto; width: 180px; height: 180px; }
-
+    #qrcode-pix { margin: 16px auto; width: 220px; height: 220px; }
     footer { margin-top: auto; padding: 20px; color: #888; font-size: 0.9rem; text-align: center; }
-
-    @media (max-width: 480px) {
-      .buttons-container { flex-direction: column; }
-      .btn { width: 100%; }
-    }
+    @media (max-width: 480px) { .buttons-container { flex-direction: column; } .btn { width: 100%; } }
   </style>
 </head>
 <body>
@@ -136,8 +90,8 @@
 
   <div class="input-box">
     <label for="assetSelect">Selecione seu ativo:</label>
-    <select id="assetSelect" required>
-      <option value="zobtc_starter50">Z-OBTC — $10 - $40 (Starter50 Σ • Comece sua jornada no Z-OBTC e descubra o futuro das finanças)</option>
+    <select id="assetSelect">
+    <option value="zobtc_starter50">Z-OBTC — $10 - $40 (Starter50 Σ • Comece sua jornada no Z-OBTC e descubra o futuro das finanças)</option>
 <option value="zobtc_growth500">Z-OBTC — $100 - $200 (Growth500 Σ • Expanda seus ativos com o Z-OBTC e maximize seu potencial)</option>
 <option value="zobtc_pro1000">Z-OBTC — $200 - $400 (Pro1000 Σ • Para investidores profissionais que buscam excelência no Z-OBTC)</option>
 <option value="zobtc_advanced2000">Z-OBTC — $400 - $800 (Advanced2000 Σ • Avance para níveis superiores com Z-OBTC e conquiste novos horizontes)</option>
@@ -174,7 +128,6 @@
 <option value="zobtc_ventureprime">Z-OBTC — $3,000 - $10,000 (VenturePrime Σ • Entre no mercado premium de Z-OBTC com VenturePrime, escala máxima)</option>
 <option value="zobtc_stellarflux">Z-OBTC — $2,000 - $8,000 (StellarFlux Σ • Maximize ganhos e conecte-se a oportunidades globais Z-OBTC, escala máxima)</option>
 
-
     </select>
 
     <label for="valueInput">Valor por unidade (ex: 1000):</label>
@@ -190,78 +143,92 @@
   <div id="qrcode-pix"></div>
 </form>
 
-<footer>
-  © 2025 lucasjanuario14. Todos os direitos reservados.
-</footer>
+<footer>© 2025 lucasjanuario14. Todos os direitos reservados.</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 <script>
-(async () => {
+(() => {
+  const balanceInput = document.getElementById("balance");
   const generateBtn = document.getElementById("generateBtn");
   const qrContainer = document.getElementById("qrcode-pix");
   const output = document.getElementById("output");
 
-  async function getBTCPrice() {
-    try {
-      const res = await fetch("https://api.coindesk.com/v1/bpi/currentprice/BRL.json");
-      const data = await res.json();
-      return data.bpi.BRL.rate_float;
-    } catch (err) {
-      console.error("Erro ao buscar preço BTC", err);
-      return null;
-    }
+  // ======= WALLET FUNÇÕES SIMULADAS =======
+  function createWallet() {
+    const seed = "seed-" + Math.random().toString(36).substr(2, 12);
+    localStorage.setItem("walletSeed", seed);
+    localStorage.setItem("walletBalance", 0);
+    alert("✅ Fração criada!\nSeed: " + seed);
+    updateBalance();
   }
 
-  function makeBRCode(pixKey, amount, txid = "TX" + Date.now()) {
-    // Payload Pix compatível com BR Code padrão
+  function importWallet() {
+    const seed = prompt("Digite sua seed:");
+    if (!seed) return alert("⚠️ Seed não informada.");
+    localStorage.setItem("walletSeed", seed);
+    const balance = parseFloat(prompt("Digite saldo atual:")) || 0;
+    localStorage.setItem("walletBalance", balance);
+    updateBalance();
+    alert("✅ Carteira importada com sucesso!");
+  }
+
+  function showPublicKey() {
+    const seed = localStorage.getItem("walletSeed");
+    if (!seed) return alert("⚠️ Nenhuma carteira criada.");
+    const pubKey = "PUB-" + seed.substr(0, 8).toUpperCase();
+    alert("🔑 Chave Pública: " + pubKey);
+  }
+
+  function updateBalance() {
+    const bal = localStorage.getItem("walletBalance") || 0;
+    balanceInput.value = bal + " FRACTIO";
+  }
+
+  // ======= PIX / QR CODE =======
+  function makeBRCode(pixKey, amount, txid="TX"+Date.now()) {
     return `
 00020101021226850014br.gov.bcb.pix0114${pixKey}520400005303986540${amount.toFixed(2).replace('.', '')}5802BR5913Meta Rabbit6009Cidade62070503${txid}6304ABCD
-    `.replace(/\s+/g, "");
+    `.replace(/\s+/g,"");
   }
 
-  generateBtn?.addEventListener("click", async () => {
+  generateBtn.addEventListener("click", async () => {
     qrContainer.innerHTML = "";
     output.innerText = "";
 
     const value = parseFloat(document.getElementById("valueInput").value);
     const quantity = parseInt(document.getElementById("quantityInput").value) || 1;
-
     if (!value || value <= 0) return alert("⚠️ Valor inválido.");
     if (quantity <= 0) return alert("⚠️ Quantidade inválida.");
 
-    const userPixKey = prompt("Digite sua chave Pix para depósito:");
-    if (!userPixKey) return alert("⚠️ Nenhuma chave Pix informada.");
+    const pixKey = prompt("Digite sua chave Pix para depósito:");
+    if (!pixKey) return alert("⚠️ Nenhuma chave Pix informada.");
 
-    const btcPrice = await getBTCPrice();
-    if (!btcPrice) return alert("⚠️ Não foi possível obter o preço do BTC.");
+    const total = value * quantity;
+    const fee = total * 0.0075; // taxa 0,75%
+    const finalValue = total - fee;
 
-    const baseValue = value * quantity;
-    const adjustedValue = baseValue * (btcPrice / 100000);
-    const feeValue = adjustedValue * 0.0075;
-    const finalValue = adjustedValue - feeValue;
-
-    const brCode = makeBRCode(userPixKey, finalValue);
+    const brCode = makeBRCode(pixKey, finalValue);
 
     new QRCode(qrContainer, {
       text: brCode,
       width: 220,
       height: 220,
-      colorDark: "#00ff66",   // verde
+      colorDark: "#00ff66",
       colorLight: "#1c1c1c",
       correctLevel: QRCode.CorrectLevel.H
     });
 
-    output.innerText = `📲 QR Code pronto para escanear
-💰 Valor base: R$${baseValue.toFixed(2)}
-📈 Ajustado pelo BTC: R$${adjustedValue.toFixed(2)}
-🧾 Taxa (0,75%): R$${feeValue.toFixed(2)}
-✅ Valor final (líquido): R$${finalValue.toFixed(2)}
-🔑 Pix Usuário: ${userPixKey}
-🆔 TXID: ${"TX" + Date.now()}`;
+    output.innerText = `📲 QR Code pronto!
+💰 Valor total: R$${total.toFixed(2)}
+🧾 Taxa (0,75%): R$${fee.toFixed(2)}
+✅ Valor final: R$${finalValue.toFixed(2)}
+🔑 Pix: ${pixKey}
+🆔 TXID: TX${Date.now()}`;
   });
+
+  // Inicializa saldo
+  updateBalance();
 })();
 </script>
-
 </body>
 </html>
