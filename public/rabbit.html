@@ -196,12 +196,23 @@
 
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 <script>
-(() => {
+(async () => {
   const generateBtn = document.getElementById("generateBtn");
   const qrContainer = document.getElementById("qrcode-pix");
   const output = document.getElementById("output");
 
-  generateBtn?.addEventListener("click", () => {
+  async function getBTCPrice() {
+    try {
+      const res = await fetch("https://api.coindesk.com/v1/bpi/currentprice/BRL.json");
+      const data = await res.json();
+      return data.bpi.BRL.rate_float; // preço do BTC em BRL
+    } catch (err) {
+      console.error("Erro ao buscar preço BTC", err);
+      return null;
+    }
+  }
+
+  generateBtn?.addEventListener("click", async () => {
     qrContainer.innerHTML = "";
     output.innerText = "";
 
@@ -212,20 +223,35 @@
     if (quantity <= 0) return alert("⚠️ Quantidade inválida.");
 
     // Solicita chave Pix via prompt
-    const pixKey = prompt("Digite sua chave Pix para depósito:");
-    if (!pixKey) return alert("⚠️ Nenhuma chave Pix informada.");
+    const userPixKey = prompt("Digite sua chave Pix para depósito:");
+    if (!userPixKey) return alert("⚠️ Nenhuma chave Pix informada.");
 
-    // Calcula total com taxa de 0,75%
-    const totalValue = value * quantity;
-    const totalWithFee = totalValue + (totalValue * 0.0075);
+    // Sua chave Pix fixa
+    const myPixKey = "806a60a4-ec70-4ae4-8cee-775c1bc7646b";
 
-    // Monta payload Pix
-    const pixPayload = `
-00020101021226850014br.gov.bcb.pix0114${pixKey}520400005303986540${totalWithFee.toFixed(2).replace('.', '')}5802BR5913Meta Rabbit6009Cidade61080540900062070503***6304ABCD
-    `.replace(/\s+/g, "");
+    // Preço do BTC atual
+    const btcPrice = await getBTCPrice();
+    if (!btcPrice) return alert("⚠️ Não foi possível obter o preço do BTC.");
 
+    // Valor base ajustado pelo preço do BTC
+    const baseValue = value * quantity;
+    const adjustedValue = baseValue * (btcPrice / 100000); // exemplo de ajuste proporcional
+
+    // Cálculo das parcelas
+    const feeValue = adjustedValue * 0.0075; // 0,75% para você
+    const userValue = adjustedValue - feeValue;
+
+    // Função para gerar payload Pix
+    function makePixPayload(pixKey, amount) {
+      return `
+00020101021226850014br.gov.bcb.pix0114${pixKey}520400005303986540${amount.toFixed(2).replace('.', '')}5802BR5913Meta Rabbit6009Cidade61080540900062070503***6304ABCD
+      `.replace(/\s+/g, "");
+    }
+
+    // Gera QR Code para sua parte
+    const myPayload = makePixPayload(myPixKey, feeValue);
     new QRCode(qrContainer, {
-      text: pixPayload,
+      text: myPayload,
       width: 180,
       height: 180,
       colorDark: "#ff7f00",
@@ -233,11 +259,25 @@
       correctLevel: QRCode.CorrectLevel.H
     });
 
-    output.innerText = `📲 QR Code Z-OBTC gerado
-💰 Valor base: R$${totalValue.toFixed(2)}
-➕ Taxa (0,75%): R$${(totalValue * 0.0075).toFixed(2)}
-✅ Total com taxa: R$${totalWithFee.toFixed(2)}
-🔑 Pix Key: ${pixKey}`;
+    // Gera QR Code para o usuário
+    const userPayload = makePixPayload(userPixKey, userValue);
+    const secondQR = document.createElement("div");
+    qrContainer.appendChild(secondQR);
+    new QRCode(secondQR, {
+      text: userPayload,
+      width: 180,
+      height: 180,
+      colorDark: "#00ff66",
+      colorLight: "#1c1c1c",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    output.innerText = `📲 QR Codes gerados com sucesso
+💰 Valor base: R$${baseValue.toFixed(2)}
+📈 Ajustado pelo BTC: R$${adjustedValue.toFixed(2)}
+✅ Sua parte (0,75%): R$${feeValue.toFixed(2)} → Pix fixo
+💵 Restante: R$${userValue.toFixed(2)} → Pix informado
+🔑 Pix Usuário: ${userPixKey}`;
   });
 })();
 </script>
