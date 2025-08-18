@@ -3,15 +3,15 @@ import cors from "cors";
 import Stripe from "stripe";
 import dotenv from "dotenv";
 
-dotenv.config(); // lê .env
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public")); // pasta com HTML/JS
+app.use(express.static("public"));
 
 app.post("/api/create-checkout-session", async (req, res) => {
   const { asset, value, quantity } = req.body;
