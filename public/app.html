@@ -1,675 +1,289 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  
 <head>
   <meta charset="UTF-8" />
-       <link rel="icon" href="logo.png" />
+  <link rel="icon" href="logo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ORIS OS - Aplicativos</title>
-<style>
-/* ===================== */
-/* FONTES & VARIÁVEIS    */
-/* ===================== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
 
-:root {
-  --primary: #00ff66; /* verde mais vibrante */
-  --primary-light: #1eff85; /* verde claro mais forte */
-  --dark-bg: #000000; /* preto puro */
-  --text-light: #e6e6e6; /* cinza claro para melhor contraste */
-  --accent: #00ffb2;
-  --card-bg: rgba(255, 255, 255, 0.07); /* mais visível */
-  --border: rgba(255, 255, 255, 0.12); /* mais destacado */
-  --radius: 20px;
-  --shadow: rgba(0, 0, 0, 0.8);
-  --shadow-hover: rgba(0, 255, 102, 0.6);
-  --transition: all 0.3s ease;
-}
+  <!-- Fontes & Ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-/* ===================== */
-/* RESET BÁSICO          */
-/* ===================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  <style>
+    /* Variáveis */
+    :root {
+      --primary: #00ff66;
+      --primary-light: #1eff85;
+      --dark-bg: #000000;
+      --text-light: #e6e6e6;
+      --accent: #00ffb2;
+      --card-bg: rgba(255, 255, 255, 0.07);
+      --border: rgba(255, 255, 255, 0.12);
+      --radius: 20px;
+      --shadow: rgba(0, 0, 0, 0.8);
+      --shadow-hover: rgba(0, 255, 102, 0.6);
+      --transition: all 0.3s ease;
+    }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(145deg, #000000, #0d0d0d);
-  color: var(--text-light);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: row;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  transition: background 0.3s ease;
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ===================== */
-/* SIDEBAR               */
-/* ===================== */
-.sidebar {
-  width: 280px;
-  padding: 32px 26px;
-  background: rgba(5, 5, 5, 0.9);
-  backdrop-filter: blur(18px);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  overflow-y: auto;
-  z-index: 1000;
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #000000, #0d0d0d);
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+      overflow-x: hidden;
+    }
 
-.sidebar h2 {
-  color: var(--primary);
-  font-size: 2rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-  margin-bottom: 30px;
-}
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      padding: 32px 26px;
+      background: rgba(5, 5, 5, 0.9);
+      backdrop-filter: blur(18px);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: fixed;
+      top: 0; bottom: 0; left: 0;
+      overflow-y: auto;
+    }
 
-.sidebar button {
-  background: transparent;
-  border: none;
-  color: var(--text-light);
-  padding: 14px 20px;
-  border-radius: var(--radius);
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: left;
-  cursor: pointer;
-  transition: var(--transition);
-}
+    .sidebar h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
 
-.sidebar button.active,
-.sidebar button:hover {
-  background: var(--primary);
-  color: var(--dark-bg);
-  box-shadow: 0 0 14px var(--primary);
-  transform: translateX(6px);
-}
+    .sidebar button {
+      background: transparent;
+      border: none;
+      color: var(--text-light);
+      padding: 14px 20px;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: var(--transition);
+    }
 
-/* ===================== */
-/* ÁREA PRINCIPAL        */
-/* ===================== */
-.main {
-  flex: 1;
-  margin-left: 280px;
-  padding: 40px 48px 100px;
-  overflow-y: auto;
-}
+    .sidebar button.active,
+    .sidebar button:hover {
+      background: var(--primary);
+      color: var(--dark-bg);
+      box-shadow: 0 0 14px var(--primary);
+      transform: translateX(6px);
+    }
 
-/* ===================== */
-/* BARRA DE PESQUISA     */
-/* ===================== */
-.search-container {
-  margin-bottom: 32px;
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  flex-wrap: wrap;
-}
+    /* Área Principal */
+    .main {
+      flex: 1;
+      margin-left: 280px;
+      padding: 40px 48px 100px;
+      overflow-y: auto;
+    }
 
-.search-container input {
-  flex-grow: 1;
-  min-width: 240px;
-  padding: 14px 24px;
-  border-radius: 40px;
-  border: 1.5px solid var(--border);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text-light);
-  font-size: 1.05rem;
-  font-weight: 500;
-  transition: var(--transition);
-}
+    /* Busca */
+    .search-container {
+      margin-bottom: 32px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-.search-container input::placeholder {
-  color: #aaa;
-  font-weight: 400;
-}
+    .search-container input {
+      flex-grow: 1;
+      min-width: 240px;
+      padding: 14px 24px;
+      border-radius: 40px;
+      border: 1.5px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-light);
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
 
-.search-container input:focus {
-  outline: none;
-  border-color: var(--primary);
-  background: #0d0d0d;
-  box-shadow: 0 0 12px var(--primary);
-}
+    .search-container input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #0d0d0d;
+      box-shadow: 0 0 12px var(--primary);
+    }
 
-.search-container button {
-  background: var(--primary);
-  border: none;
-  border-radius: 40px;
-  padding: 12px 24px;
-  color: var(--dark-bg);
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: var(--transition);
-  box-shadow: 0 4px 16px var(--shadow-hover);
-}
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 32px;
+    }
 
-.search-container button:hover {
-  background: var(--primary-light);
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px var(--shadow-hover);
-}
+    .app-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 30px 20px;
+      text-align: center;
+      transition: var(--transition);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 2px 16px var(--shadow);
+      cursor: pointer;
+    }
 
-/* ===================== */
-/* CARDS                 */
-/* ===================== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 32px;
-}
+    .app-card:hover {
+      background: var(--primary);
+      color: var(--dark-bg);
+      transform: scale(1.07);
+      box-shadow: 0 0 25px var(--primary);
+      border-color: var(--primary);
+    }
 
-.app-card {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 30px 20px;
-  text-align: center;
-  transition: var(--transition);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  box-shadow: 0 2px 16px var(--shadow);
-  cursor: pointer;
-}
+    .app-card img {
+      width: 52px;
+      height: 52px;
+      filter: contrast(1.3) brightness(1.1);
+      transition: var(--transition);
+    }
 
-.app-card:hover {
-  background: var(--primary);
-  color: var(--dark-bg);
-  transform: scale(1.07);
-  box-shadow: 0 0 25px var(--primary);
-  border-color: var(--primary);
-}
-
-.app-card img {
-  width: 52px;
-  height: 52px;
-  filter: contrast(1.3) brightness(1.1) drop-shadow(0 0 4px rgba(0,0,0,0.6));
-  transition: var(--transition);
-}
-
-.app-card img:hover {
-  filter: contrast(1.5) brightness(1.2) drop-shadow(0 0 6px var(--primary));
-}
-
-/* ===================== */
-/* RODAPÉ                */
-/* ===================== */
-.footer {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.95);
-  padding: 18px 32px;
-  font-size: 14px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  color: var(--text-light);
-  z-index: 10000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--border);
-  font-weight: 500;
-}
-
-.footer p {
-  margin: 0;
-  white-space: nowrap;
-  font-size: 0.95rem;
-}
-
-/* ===================== */
-/* SCROLLBAR             */
-/* ===================== */
-.sidebar::-webkit-scrollbar {
-  width: 10px;
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
-  border-radius: 10px;
-}
-
-.sidebar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* ===================== */
-/* MODO CLARO            */
-/* ===================== */
-body.light-mode {
-  --dark-bg: #f2f2f2;
-  --text-light: #111;
-  --card-bg: rgba(0, 0, 0, 0.04);
-  --border: rgba(0, 0, 0, 0.08);
-}
-</style>
-
+    /* Footer */
+    .footer {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      padding: 18px 32px;
+      font-size: 14px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      color: var(--text-light);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
 
   <!-- Sidebar -->
- <aside class="sidebar" role="navigation" aria-label="Menu lateral">
-  <h2>PRESS F11</h2>
+  <aside class="sidebar">
+    <h2>PRESS F11</h2>
 
-  <!-- Adicione isso no <head> do seu HTML para carregar os ícones -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <button onclick="abrirPagina('oristv.html')"><i class="fas fa-tv"></i> ORIS TV</button>
+    <button onclick="abrirPagina('homeb.html')"><i class="fas fa-chart-line"></i> Home Broker</button>
+    <button onclick="abrirPagina('jbx.html')"><i class="fas fa-chart-bar"></i> Stock Market</button>
+    <button onclick="abrirPagina('browser.html')"><i class="fas fa-globe"></i> Navegador</button>
+    <button onclick="abrirPagina('camera.html')"><i class="fas fa-camera"></i> Câmera</button>
+    <button onclick="abrirPagina('arquivos.html')"><i class="fas fa-folder-open"></i> Arquivos</button>
+  </aside>
 
-  <!-- Botões com ícones substituindo os emojis -->
-  <button onclick="abrirPagina('oristv.html')" aria-label="ORIS TV">
-    <i class="fas fa-tv"></i> ORIS TV
-  </button>
-
-  <button onclick="abrirPagina('homeb.html')" aria-label="Home Broker">
-    <i class="fas fa-chart-line"></i> Home Broker
-  </button>
-
-  <button onclick="abrirPagina('jbx.html')" aria-label="Stock Market">
-    <i class="fas fa-chart-bar"></i> Stock Market
-  </button>
-
-  <button onclick="abrirPagina('browser.html')" aria-label="Navegador">
-    <i class="fas fa-globe"></i> Navegador
-  </button>
-
-  <!-- Novos botões adicionados -->
-  <button onclick="abrirPagina('camera.html')" aria-label="Câmera">
-    <i class="fas fa-camera"></i> Câmera
-  </button>
-  <button onclick="abrirPagina('arquivos.html')" aria-label="Arquivos">
-    <i class="fas fa-folder-open"></i> Arquivos
-  </button>
-</aside>
-
-  <!-- Main content -->
-  <main class="main" role="main" tabindex="0" aria-label="Conteúdo principal">
-    <section class="search-container" role="search" aria-label="Busca de aplicativos">
-      <input
-        type="search"
-        id="searchInput"
-        oninput="filtrarApps()"
-        placeholder="🔎 Buscar aplicativos..."
-        aria-describedby="searchHelp"
-        aria-label="Buscar aplicativos"
-      />
-
+  <!-- Conteúdo Principal -->
+  <main class="main">
+    <section class="search-container">
+      <input type="search" id="searchInput" oninput="filtrarApps()" placeholder="🔎 Buscar aplicativos...">
     </section>
 
-    <section class="grid" id="appGrid" role="list" aria-label="Lista de aplicativos">
+    <section class="grid" id="appGrid">
+      <!-- Exemplo de Apps -->
+      <div class="app-card" onclick="abrirPagina('notas.html')">
+        <img src="icons/notas.png" alt="Notas">
+        <span>Bloco de Notas</span>
+      </div>
 
+      <div class="app-card" onclick="abrirPagina('musica.html')">
+        <img src="icons/music.png" alt="Música">
+        <span>Player de Música</span>
+      </div>
+
+      <div class="app-card" onclick="abrirPagina('configs.html')">
+        <img src="icons/config.png" alt="Configurações">
+        <span>Configurações</span>
+      </div>
       <!-- Apps cards aqui (mantive seu conteúdo original) -->
-      <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('air.html')">
-        <img src="https://cdn-icons-png.flaticon.com/512/58/58900.png" alt="Air" />
-        <div>🌬️ Air</div>
-         </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('energy.html')">
-    <img src="https://cdn-icons-png.flaticon.com/512/3159/3159083.png" alt="Energy" />
-    <div>⚡ Energy</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('akiles.html')">
-    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Store" />
-    <div>🛒 Store</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('rabbit.html')">
-    <img src="https://cdn-icons-png.flaticon.com/512/616/616554.png" alt="Rabbit" />
-    <div>🐇 Meta Rabbit</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('configuracoes.html')">
-    <img src="https://cdn-icons-png.flaticon.com/512/2099/2099074.png" alt="Settings" />
-    <div>⚙️ Settings</div>
-  </div>
-
-  <!-- Utilitários -->
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://calendar.google.com', '_blank')">
-    <img src="https://calendar.google.com/googlecalendar/images/favicon.ico" alt="Agenda" />
-    <div>📅 Agenda</div>
-  </div>
-
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.evernote.com', '_blank')">
-    <img src="https://evernote.com/favicon.ico" alt="Evernote" />
-    <div>🧾 Evernote</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://todoist.com', '_blank')">
-    <img src="https://todoist.com/favicon.ico" alt="Todoist" />
-    <div>🗓️ Todoist</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://bitwarden.com', '_blank')">
-    <img src="https://bitwarden.com/favicon.ico" alt="Bitwarden" />
-    <div>🔑 Bitwarden</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.speedtest.net', '_blank')">
-    <img src="https://www.speedtest.net/favicon.ico" alt="Speedtest" />
-    <div>📡 Speedtest</div>
-  </div>
-
-  <!-- Arquivos & Backup -->
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://drive.google.com', '_blank')">
-    <img src="https://drive.google.com/favicon.ico" alt="Drive" />
-    <div>☁️ Drive</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://onedrive.live.com', '_blank')">
-    <img src="https://onedrive.live.com/favicon.ico" alt="OneDrive" />
-    <div>📁 OneDrive</div>
-  </div>
-  
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://wetransfer.com', '_blank')">
-    <img src="https://wetransfer.com/favicon.ico" alt="WeTransfer" />
-    <div>📤 WeTransfer</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://sync.com', '_blank')">
-    <img src="https://sync.com/favicon.ico" alt="Sync" />
-    <div>🔄 Sync.com</div>
-  </div>
-
-  <!-- Educação -->
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.edx.org', '_blank')">
-    <img src="https://www.edx.org/favicon.ico" alt="edX" />
-    <div>📘 edX</div>
-  </div>
- 
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.coursera.org', '_blank')">
-    <img src="https://www.coursera.org/favicon.ico" alt="Coursera" />
-    <div>🧠 Coursera</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://pt.khanacademy.org', '_blank')">
-    <img src="https://pt.khanacademy.org/favicon.ico" alt="Khan Academy" />
-    <div>📖 Khan Academy</div>
-  </div>
-
-  
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://codepen.io', '_blank')">
-    <img src="https://codepen.io/favicon.ico" alt="CodePen" />
-    <div>🧪 CodePen</div>
-  </div>
-  
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://devdocs.io', '_blank')">
-    <img src="https://devdocs.io/favicon.ico" alt="DevDocs" />
-    <div>🔍 DevDocs</div>
-  </div>
-
-  <!-- Desenvolvimento -->
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://github.com', '_blank')">
-    <img src="https://github.githubassets.com/favicons/favicon.png" alt="GitHub" />
-    <div>🐙 GitHub</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://idx.dev', '_blank')">
-    <img src="https://developers.google.com/_static/images/favicon.png" alt="Google IDX" />
-    <div>💻 Google IDX</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.cloudflare.com', '_blank')">
-    <img src="https://www.cloudflare.com/favicon.ico" alt="Cloudflare" />
-    <div>🛡️ Cloudflare</div>
-  </div>
-
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://vercel.com', '_blank')">
-    <img src="https://vercel.com/favicon.ico" alt="Vercel" />
-    <div>⚡ Vercel</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://netlify.com', '_blank')">
-    <img src="https://netlify.com/favicon.ico" alt="Netlify" />
-    <div>⚡ Netlify</div>
-  </div>
-
-
-  <!-- Mídia & Entretenimento -->
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.youtube.com', '_blank')">
-    <img src="https://www.youtube.com/favicon.ico" alt="YouTube" />
-    <div>🎥 YouTube</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://music.youtube.com', '_blank')">
-    <img src="https://music.youtube.com/favicon.ico" alt="YouTube Music" />
-    <div>🎵 YouTube Music</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://open.spotify.com', '_blank')">
-    <img src="https://open.spotify.com/favicon.ico" alt="Spotify" />
-    <div>🎶 Spotify</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.netflix.com', '_blank')">
-    <img src="https://www.netflix.com/favicon.ico" alt="Netflix" />
-    <div>🎬 Netflix</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.streamelements.com', '_blank')">
-    <img src="https://www.streamelements.com/favicon.ico" alt="StreamElements" />
-    <div>🎥 StreamElements</div>
-  </div>
-
-
-  <!-- Social & Comunicação -->
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://twitter.com', '_blank')">
-    <img src="https://twitter.com/favicon.ico" alt="Twitter" />
-    <div>🐦 Twitter</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.facebook.com', '_blank')">
-    <img src="https://facebook.com/favicon.ico" alt="Facebook" />
-    <div>👤 Facebook</div>
-  </div>
- 
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.pinterest.com', '_blank')">
-    <img src="https://www.pinterest.com/favicon.ico" alt="Pinterest" />
-    <div>📌 Pinterest</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.reddit.com', '_blank')">
-    <img src="https://www.reddit.com/favicon.ico" alt="Reddit" />
-    <div>📢 Reddit</div>
-  </div>
- 
-
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://chat.openai.com', '_blank')">
-    <img src="https://chat.openai.com/favicon.ico" alt="ChatGPT" />
-    <div>🤖 ChatGPT</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://play.google.com/store', '_blank')">
-    <img src="https://play.google.com/favicon.ico" alt="Play Store" />
-    <div>📱 Play Store</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://hub3.com.br', '_blank')">
-    <img src="https://hub3.com.br/favicon.ico" alt="Hub3" />
-    <div>🌐 Hub3</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.linkedin.com', '_blank')">
-    <img src="https://www.linkedin.com/favicon.ico" alt="LinkedIn" />
-    <div>📈 LinkedIn</div>
-  </div>
-
-  <!-- Finanças -->
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.paypal.com', '_blank')">
-    <img src="https://www.paypal.com/favicon.ico" alt="PayPal" />
-    <div>💰 PayPal</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://nubank.com.br', '_blank')">
-    <img src="https://nubank.com.br/favicon.ico" alt="Nubank" />
-    <div>💳 Nubank</div>
-  </div>
-  
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://inter.com.br', '_blank')">
-    <img src="https://inter.com.br/favicon.ico" alt="Banco Inter" />
-    <div>🏦 Banco Inter</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.tradingview.com', '_blank')">
-    <img src="https://www.tradingview.com/favicon.ico" alt="TradingView" />
-    <div>📈 TradingView</div>
-  </div>
-  <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.google.com/finance', '_blank')">
-    <img src="https://www.google.com/favicon.ico" alt="Google Finance" />
-    <div>📈 Google Finance</div>
-  </div>
-<!-- Viagens & Hospedagem -->
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.airbnb.com', '_blank')">
-  <img src="https://www.airbnb.com/favicon.ico" alt="Airbnb - Aluguéis por temporada" width="48" height="48" />
-  <div>🏡 Airbnb</div>
-</div>
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.trivago.com', '_blank')">
-  <img src="https://www.trivago.com/favicon.ico" alt="Trivago - Comparador de hotéis" width="48" height="48" />
-  <div>🏨 Trivago</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('air.html')">
+  <img src="https://cdn-icons-png.flaticon.com/512/58/58900.png" alt="Air" />
+  <div>🌬️ Air</div>
 </div>
 
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.kayak.com', '_blank')">
-  <img src="https://www.kayak.com/favicon.ico" alt="Kayak - Passagens e hotéis" width="48" height="48" />
-  <div>✈️ Kayak</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('energy.html')">
+  <img src="https://cdn-icons-png.flaticon.com/512/3159/3159083.png" alt="Energy" />
+  <div>⚡ Energy</div>
 </div>
 
-<!-- Carreiras & Empregos -->
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.glassdoor.com', '_blank')">
-  <img src="https://www.glassdoor.com/favicon.ico" alt="Glassdoor - Vagas e empresas" width="48" height="48" />
-  <div>💼 Glassdoor</div>
-</div>
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.indeed.com', '_blank')">
-  <img src="https://www.indeed.com/favicon.ico" alt="Indeed - Busca de empregos" width="48" height="48" />
-  <div>🔍 Indeed</div>
-</div>
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://remoteok.com', '_blank')">
-  <img src="https://remoteok.com/favicon.ico" alt="Remote OK - Trabalhos remotos" width="48" height="48" />
-  <div>🌍 Remote OK</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('akiles.html')">
+  <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Store" />
+  <div>🛒 Store</div>
 </div>
 
-<!-- Serviços & Utilidades -->
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.canva.com', '_blank')">
-  <img src="https://www.canva.com/favicon.ico" alt="Canva - Design gráfico online" width="48" height="48" />
-  <div>🎨 Canva</div>
-</div>
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.remove.bg', '_blank')">
-  <img src="https://www.remove.bg/favicon.ico" alt="RemoveBG - Remover fundo de imagem" width="48" height="48" />
-  <div>✂️ RemoveBG</div>
-</div>
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://pixabay.com', '_blank')">
-  <img src="https://pixabay.com/favicon.ico" alt="Pixabay - Banco de imagens gratuitas" width="48" height="48" />
-  <div>🖼️ Pixabay</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('rabbit.html')">
+  <img src="https://cdn-icons-png.flaticon.com/512/616/616554.png" alt="Rabbit" />
+  <div>🐇 Meta Rabbit</div>
 </div>
 
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://fontawesome.com', '_blank')">
-  <img src="https://fontawesome.com/favicon.ico" alt="Font Awesome - Ícones vetoriais" width="48" height="48" />
-  <div>⭐ Font Awesome</div>
-</div>
-      <!-- Produtividade Extra -->
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://workspace.google.com', '_blank')">
-  <img src="https://ssl.gstatic.com/docs/doclist/images/drive/2020/launcher_icons/docs_2020q4_512dp.png" alt="Google Docs" width="48" height="48" />
-  <div>📝 Google Docs</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="abrirPagina('configuracoes.html')">
+  <img src="https://cdn-icons-png.flaticon.com/512/2099/2099074.png" alt="Settings" />
+  <div>⚙️ Settings</div>
 </div>
 
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://workspace.google.com', '_blank')">
-  <img src="https://ssl.gstatic.com/docs/doclist/images/drive/2020/launcher_icons/sheets_2020q4_512dp.png" alt="Google Sheets" width="48" height="48" />
-  <div>📊 Google Sheets</div>
+<!-- Links externos & utilitários já existentes (Google, Evernote, Todoist, Bitwarden, etc.) -->
+
+<!-- Educação -->
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.edx.org', '_blank')">
+  <img src="https://www.edx.org/favicon.ico" alt="edX" />
+  <div>📘 edX</div>
+</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.coursera.org', '_blank')">
+  <img src="https://www.coursera.org/favicon.ico" alt="Coursera" />
+  <div>🧠 Coursera</div>
 </div>
 
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.notion.so', '_blank')">
-  <img src="https://www.notion.so/front-static/favicon.ico" alt="Notion" width="48" height="48" />
-  <div>📒 Notion</div>
-</div>
-
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://clickup.com', '_blank')">
-  <img src="https://clickup.com/favicon.ico" alt="ClickUp" width="48" height="48" />
-  <div>📌 ClickUp</div>
-</div>
-
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://zapier.com', '_blank')">
-  <img src="https://zapier.com/favicon.ico" alt="Zapier" width="48" height="48" />
-  <div>⚡ Zapier</div>
-</div>
-
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://miro.com', '_blank')">
-  <img src="https://miro.com/favicon.ico" alt="Miro" width="48" height="48" />
-  <div>🖼️ Miro</div>
-</div>
-
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.notioncalendar.com', '_blank')">
-  <img src="https://www.notion.so/front-static/favicon.ico" alt="Notion Calendar" width="48" height="48" />
-  <div>📅 Notion Calendar</div>
-</div>
-
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://clockify.me', '_blank')">
-  <img src="https://clockify.me/favicon.ico" alt="Clockify" width="48" height="48" />
-  <div>⏱️ Clockify</div>
-</div>
-
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.rescuetime.com', '_blank')">
-  <img src="https://www.rescuetime.com/favicon.ico" alt="RescueTime" width="48" height="48" />
-  <div>⏳ RescueTime</div>
-</div>
-
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://todo.microsoft.com', '_blank')">
-  <img src="https://todo.microsoft.com/favicon.ico" alt="Microsoft To Do" width="48" height="48" />
-  <div>📝 Microsoft To Do</div>
-</div>
-<!-- Produtividade -->
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://slack.com', '_blank')">
-  <img src="https://slack.com/favicon.ico" alt="Slack" width="48" height="48" />
-  <div>💬 Slack</div>
-</div>
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://notion.so', '_blank')">
-  <img src="https://notion.so/favicon.ico" alt="Notion" width="48" height="48" />
-  <div>📒 Notion</div>
-</div>
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://trello.com', '_blank')">
-  <img src="https://trello.com/favicon.ico" alt="Trello" width="48" height="48" />
-  <div>📋 Trello</div>
-</div>
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://monday.com', '_blank')">
-  <img src="https://monday.com/favicon.ico" alt="Monday.com" width="48" height="48" />
-  <div>📅 Monday</div>
-</div>
-<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://asana.com', '_blank')">
-  <img src="https://asana.com/favicon.ico" alt="Asana" width="48" height="48" />
-  <div>✅ Asana</div>
-</div>
-<!-- Jogos -->
+<!-- Jogos / Entretenimento -->
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://store.steampowered.com', '_blank')">
-  <img src="https://store.steampowered.com/favicon.ico" alt="Steam - Jogos para PC" width="48" height="48" />
+  <img src="https://store.steampowered.com/favicon.ico" alt="Steam" />
   <div>🎮 Steam</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://epicgames.com/store', '_blank')">
-  <img src="https://epicgames.com/favicon.ico" alt="Epic Games Store" width="48" height="48" />
+  <img src="https://epicgames.com/favicon.ico" alt="Epic Games" />
   <div>🕹️ Epic Games</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.riotgames.com', '_blank')">
-  <img src="https://www.riotgames.com/favicon.ico" alt="Riot Games" width="48" height="48" />
+  <img src="https://www.riotgames.com/favicon.ico" alt="Riot Games" />
   <div>⚔️ Riot Games</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.playstation.com', '_blank')">
-  <img src="https://www.playstation.com/favicon.ico" alt="PlayStation" width="48" height="48" />
+  <img src="https://www.playstation.com/favicon.ico" alt="PlayStation" />
   <div>🎮 PlayStation</div>
 </div>
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.xbox.com', '_blank')">
-  <img src="https://www.xbox.com/favicon.ico" alt="Xbox" width="48" height="48" />
+  <img src="https://www.xbox.com/favicon.ico" alt="Xbox" />
   <div>🎮 Xbox</div>
 </div>
 
-
-</section>
+    </section>
   </main>
 
-  <footer class="footer" role="contentinfo">
-    <p><strong>ORIS OS</strong> © 2025 — Desenvolvido por Lucas Januário</p>
+  <!-- Rodapé -->
+  <footer class="footer">
+    <p><strong>ORIS OS</strong> © 2025 — Desenvolvido por @Lucasjanuario14</p>
     <p>Contato: brncincholding@gmail.com</p>
-    <p>Versão 7.0 — Neon Genesiss UI</p>
+    <p>Versão 8.0 — Neon Genesis UI</p>
   </footer>
 
   <script>
     function abrirPagina(pagina) {
       window.location.href = pagina;
-    }
-
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-    }
-
-    function toggleReadingMode() {
-      document.body.classList.toggle('reading-mode');
     }
 
     function filtrarApps() {
@@ -680,19 +294,6 @@ body.light-mode {
         card.style.display = nomeApp.includes(input) ? "flex" : "none";
       });
     }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll('.app-card').forEach(card => {
-        const onClickAttr = card.getAttribute('onclick');
-        if (onClickAttr && onClickAttr.includes('window.open')) {
-          const match = onClickAttr.match(/'([^']+)'/);
-          if (match && match[1]) {
-            const originalUrl = match[1];
-            card.setAttribute('onclick', `abrirPagina('browser.html?url=${encodeURIComponent(originalUrl)}')`);
-          }
-        }
-      });
-    });
   </script>
 </body>
 </html>
