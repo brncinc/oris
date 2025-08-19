@@ -24,7 +24,9 @@
     --radius: 20px;
     --shadow: rgba(0, 0, 0, 0.8);
     --shadow-hover: rgba(0, 255, 102, 0.6);
-    --transition: all 0.3s ease;
+    --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --scrollbar-bg: rgba(255, 255, 255, 0.05);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.2);
   }
 
   /* ===================== */
@@ -44,6 +46,7 @@
     display: flex;
     flex-direction: row;
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
 
   /* ===================== */
@@ -64,6 +67,19 @@
     left: 0;
     overflow-y: auto;
     z-index: 100;
+  }
+
+  .sidebar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .sidebar::-webkit-scrollbar-track {
+    background: var(--scrollbar-bg);
+  }
+
+  .sidebar::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 8px;
   }
 
   .sidebar h2 {
@@ -106,6 +122,19 @@
     margin-left: 280px;
     padding: 40px 48px 100px;
     overflow-y: auto;
+  }
+
+  .main::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .main::-webkit-scrollbar-track {
+    background: var(--scrollbar-bg);
+  }
+
+  .main::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 8px;
   }
 
   /* ===================== */
@@ -166,13 +195,26 @@
     gap: 16px;
     box-shadow: 0 2px 16px var(--shadow);
     cursor: pointer;
+    position: relative;
+  }
+
+  .app-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0);
+    transition: var(--transition);
+  }
+
+  .app-card:hover::after {
+    box-shadow: 0 0 25px var(--primary);
   }
 
   .app-card:hover {
     background: var(--primary);
     color: var(--dark-bg);
-    transform: scale(1.07);
-    box-shadow: 0 0 25px var(--primary);
+    transform: scale(1.08);
     border-color: var(--primary);
   }
 
@@ -180,6 +222,11 @@
     width: 52px;
     height: 52px;
     filter: contrast(1.3) brightness(1.1);
+    transition: var(--transition);
+  }
+
+  .app-card div {
+    font-size: 1rem;
     transition: var(--transition);
   }
 
@@ -242,6 +289,14 @@
     .grid {
       gap: 20px;
     }
+  }
+
+  /* ===================== */
+  /* ACESSIBILIDADE */
+  /* ===================== */
+  .app-card:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
   }
 </style>
 
