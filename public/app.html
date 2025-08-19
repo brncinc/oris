@@ -13,21 +13,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
 
 :root {
-  --primary: #00ff66; /* verde mais vibrante */
-  --primary-light: #1eff85; /* verde claro mais forte */
-  --dark-bg: #000000; /* preto puro */
-  --text-light: #e6e6e6; /* cinza claro para melhor contraste */
-  --accent: #00ffb2;
-  --card-bg: rgba(255, 255, 255, 0.07); /* mais visível */
-  --border: rgba(255, 255, 255, 0.12); /* mais destacado */
-  --radius: 20px;
-  --shadow: rgba(0, 0, 0, 0.8);
-  --shadow-hover: rgba(0, 255, 102, 0.6);
-  --transition: all 0.3s ease;
+  --primary: #1db954;
+  --primary-light: #1ed760;
+  --dark-bg: #0e0e0e;
+  --card-bg: #1a1a1a;
+  --text-light: #f5f5f5;
+  --text-muted: #b3b3b3;
+  --danger: #e63946;
+  --warning: #ffb703;
+  --success: #4caf50;
+  --info: #219ebc;
+  --radius: 14px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* ===================== */
-/* RESET BÁSICO          */
+/* BASE                  */
 /* ===================== */
 * {
   margin: 0;
@@ -37,227 +38,123 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(145deg, #000000, #0d0d0d);
+  background: var(--dark-bg);
   color: var(--text-light);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: row;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  transition: background 0.3s ease;
+  line-height: 1.6;
+  padding: 20px;
 }
 
 /* ===================== */
-/* SIDEBAR               */
+/* NAVBAR                */
 /* ===================== */
-.sidebar {
-  width: 280px;
-  padding: 32px 26px;
-  background: rgba(5, 5, 5, 0.9);
-  backdrop-filter: blur(18px);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  overflow-y: auto;
-  z-index: 1000;
-}
-
-.sidebar h2 {
-  color: var(--primary);
-  font-size: 2rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-  margin-bottom: 30px;
-}
-
-.sidebar button {
-  background: transparent;
-  border: none;
-  color: var(--text-light);
-  padding: 14px 20px;
-  border-radius: var(--radius);
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: left;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.sidebar button.active,
-.sidebar button:hover {
-  background: var(--primary);
-  color: var(--dark-bg);
-  box-shadow: 0 0 14px var(--primary);
-  transform: translateX(6px);
-}
-
-/* ===================== */
-/* ÁREA PRINCIPAL        */
-/* ===================== */
-.main {
-  flex: 1;
-  margin-left: 280px;
-  padding: 40px 48px 100px;
-  overflow-y: auto;
-}
-
-/* ===================== */
-/* BARRA DE PESQUISA     */
-/* ===================== */
-.search-container {
-  margin-bottom: 32px;
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.search-container input {
-  flex-grow: 1;
-  min-width: 240px;
-  padding: 14px 24px;
-  border-radius: 40px;
-  border: 1.5px solid var(--border);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text-light);
-  font-size: 1.05rem;
-  font-weight: 500;
-  transition: var(--transition);
-}
-
-.search-container input::placeholder {
-  color: #aaa;
-  font-weight: 400;
-}
-
-.search-container input:focus {
-  outline: none;
-  border-color: var(--primary);
-  background: #0d0d0d;
-  box-shadow: 0 0 12px var(--primary);
-}
-
-.search-container button {
-  background: var(--primary);
-  border: none;
-  border-radius: 40px;
-  padding: 12px 24px;
-  color: var(--dark-bg);
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: var(--transition);
-  box-shadow: 0 4px 16px var(--shadow-hover);
-}
-
-.search-container button:hover {
-  background: var(--primary-light);
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px var(--shadow-hover);
-}
-
-/* ===================== */
-/* CARDS                 */
-/* ===================== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 32px;
-}
-
-.app-card {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 30px 20px;
-  text-align: center;
-  transition: var(--transition);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  box-shadow: 0 2px 16px var(--shadow);
-  cursor: pointer;
-}
-
-.app-card:hover {
-  background: var(--primary);
-  color: var(--dark-bg);
-  transform: scale(1.07);
-  box-shadow: 0 0 25px var(--primary);
-  border-color: var(--primary);
-}
-
-.app-card img {
-  width: 52px;
-  height: 52px;
-  filter: contrast(1.3) brightness(1.1) drop-shadow(0 0 4px rgba(0,0,0,0.6));
-  transition: var(--transition);
-}
-
-.app-card img:hover {
-  filter: contrast(1.5) brightness(1.2) drop-shadow(0 0 6px var(--primary));
-}
-
-/* ===================== */
-/* RODAPÉ                */
-/* ===================== */
-.footer {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.95);
-  padding: 18px 32px;
-  font-size: 14px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  color: var(--text-light);
-  z-index: 10000;
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--border);
+  background: var(--card-bg);
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+
+.navbar h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary-light);
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 18px;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: var(--text-light);
   font-weight: 500;
+  transition: color 0.2s ease;
 }
 
-.footer p {
-  margin: 0;
-  white-space: nowrap;
+.navbar ul li a:hover {
+  color: var(--primary);
+}
+
+/* ===================== */
+/* CARDS / APPS          */
+/* ===================== */
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, background 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  background: #222;
+}
+
+.card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--primary-light);
+}
+
+.card p {
   font-size: 0.95rem;
+  color: var(--text-muted);
 }
 
 /* ===================== */
-/* SCROLLBAR             */
+/* BOTÕES                */
 /* ===================== */
-.sidebar::-webkit-scrollbar {
-  width: 10px;
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
 }
 
-.sidebar::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
-  border-radius: 10px;
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
 }
 
-.sidebar::-webkit-scrollbar-track {
-  background: transparent;
+.btn-primary:hover {
+  background: var(--primary-light);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #c62828;
 }
 
 /* ===================== */
-/* MODO CLARO            */
+/* FOOTER                */
 /* ===================== */
-body.light-mode {
-  --dark-bg: #f2f2f2;
-  --text-light: #111;
-  --card-bg: rgba(0, 0, 0, 0.04);
-  --border: rgba(0, 0, 0, 0.08);
+footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
 }
 </style>
 
@@ -555,6 +452,98 @@ body.light-mode {
 <div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://fontawesome.com', '_blank')">
   <img src="https://fontawesome.com/favicon.ico" alt="Font Awesome - Ícones vetoriais" width="48" height="48" />
   <div>⭐ Font Awesome</div>
+</div>
+<!-- Jogos -->
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://store.steampowered.com', '_blank')">
+  <img src="https://store.steampowered.com/favicon.ico" alt="Steam - Jogos para PC" width="48" height="48" />
+  <div>🎮 Steam</div>
+</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://epicgames.com/store', '_blank')">
+  <img src="https://epicgames.com/favicon.ico" alt="Epic Games Store" width="48" height="48" />
+  <div>🕹️ Epic Games</div>
+</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.riotgames.com', '_blank')">
+  <img src="https://www.riotgames.com/favicon.ico" alt="Riot Games" width="48" height="48" />
+  <div>⚔️ Riot Games</div>
+</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.playstation.com', '_blank')">
+  <img src="https://www.playstation.com/favicon.ico" alt="PlayStation" width="48" height="48" />
+  <div>🎮 PlayStation</div>
+</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.xbox.com', '_blank')">
+  <img src="https://www.xbox.com/favicon.ico" alt="Xbox" width="48" height="48" />
+  <div>🎮 Xbox</div>
+</div>
+<!-- Produtividade -->
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://slack.com', '_blank')">
+  <img src="https://slack.com/favicon.ico" alt="Slack" width="48" height="48" />
+  <div>💬 Slack</div>
+</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://notion.so', '_blank')">
+  <img src="https://notion.so/favicon.ico" alt="Notion" width="48" height="48" />
+  <div>📒 Notion</div>
+</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://trello.com', '_blank')">
+  <img src="https://trello.com/favicon.ico" alt="Trello" width="48" height="48" />
+  <div>📋 Trello</div>
+</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://monday.com', '_blank')">
+  <img src="https://monday.com/favicon.ico" alt="Monday.com" width="48" height="48" />
+  <div>📅 Monday</div>
+</div>
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://asana.com', '_blank')">
+  <img src="https://asana.com/favicon.ico" alt="Asana" width="48" height="48" />
+  <div>✅ Asana</div>
+</div>
+<!-- Produtividade Extra -->
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://workspace.google.com', '_blank')">
+  <img src="https://ssl.gstatic.com/docs/doclist/images/drive/2020/launcher_icons/docs_2020q4_512dp.png" alt="Google Docs" width="48" height="48" />
+  <div>📝 Google Docs</div>
+</div>
+
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://workspace.google.com', '_blank')">
+  <img src="https://ssl.gstatic.com/docs/doclist/images/drive/2020/launcher_icons/sheets_2020q4_512dp.png" alt="Google Sheets" width="48" height="48" />
+  <div>📊 Google Sheets</div>
+</div>
+
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.notion.so', '_blank')">
+  <img src="https://www.notion.so/front-static/favicon.ico" alt="Notion" width="48" height="48" />
+  <div>📒 Notion</div>
+</div>
+
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://clickup.com', '_blank')">
+  <img src="https://clickup.com/favicon.ico" alt="ClickUp" width="48" height="48" />
+  <div>📌 ClickUp</div>
+</div>
+
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://zapier.com', '_blank')">
+  <img src="https://zapier.com/favicon.ico" alt="Zapier" width="48" height="48" />
+  <div>⚡ Zapier</div>
+</div>
+
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://miro.com', '_blank')">
+  <img src="https://miro.com/favicon.ico" alt="Miro" width="48" height="48" />
+  <div>🖼️ Miro</div>
+</div>
+
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.notioncalendar.com', '_blank')">
+  <img src="https://www.notion.so/front-static/favicon.ico" alt="Notion Calendar" width="48" height="48" />
+  <div>📅 Notion Calendar</div>
+</div>
+
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://clockify.me', '_blank')">
+  <img src="https://clockify.me/favicon.ico" alt="Clockify" width="48" height="48" />
+  <div>⏱️ Clockify</div>
+</div>
+
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://www.rescuetime.com', '_blank')">
+  <img src="https://www.rescuetime.com/favicon.ico" alt="RescueTime" width="48" height="48" />
+  <div>⏳ RescueTime</div>
+</div>
+
+<div class="app-card" role="listitem" tabindex="0" onclick="window.open('https://todo.microsoft.com', '_blank')">
+  <img src="https://todo.microsoft.com/favicon.ico" alt="Microsoft To Do" width="48" height="48" />
+  <div>📝 Microsoft To Do</div>
 </div>
 
 </section>
