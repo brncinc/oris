@@ -116,14 +116,20 @@
         qrContainer.appendChild(canvas);
       });
 
+      // cálculo com taxa
       const total = value * quantity;
-      balance += total; // Atualiza saldo localmente
+      const fee = 0.75; // taxa fixa
+      const finalAmount = total - fee;
+
+      balance += finalAmount; // Atualiza saldo com taxa descontada
       balanceBox.innerText = `Saldo: $${balance.toFixed(2)}`;
 
       output.innerText = `📲 QR Code Stripe gerado!
 💰 Valor total: $${total.toFixed(2)}
+💸 Taxa: $${fee.toFixed(2)}
+✅ Valor líquido: $${finalAmount.toFixed(2)}
 🔁 Ativo: ${assetSelect.value}
-🆔 TXID: ${data.txid || 'N/A'}`;
+🆔 TXID: ${data.txid || '0.75'}`;
 
     } catch (err) {
       console.error(err);
@@ -134,6 +140,7 @@
   generateBtn.addEventListener("click", generateQR);
 })();
 </script>
+
 
 <footer>Meta Rabbit © 2025 BY LUCAS JANUARIO</footer>
 </body>
