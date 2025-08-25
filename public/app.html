@@ -200,6 +200,42 @@
     backdrop-filter: blur(18px);
     box-shadow: 0 -2px 16px rgba(0, 255, 102, 0.2);
   }
+/* ===================== */
+/* FOOTER CYBERPUNK */
+/* ===================== */
+.footer {
+  width: 100%;
+  background: #ffea00; /* Amarelo vibrante */
+  padding: 8px 20px; /* Barra menor */
+  font-size: 14px;
+  position: fixed;
+  bottom: 0; left: 0;
+  color: #111; /* Texto preto */
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-top: 2px solid #ff003c; /* Vermelho neon */
+  font-weight: 600;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 -2px 20px rgba(255, 0, 60, 0.6); /* Glow vermelho cyberpunk */
+  font-family: 'Orbitron', sans-serif; /* Fonte futurista */
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Efeito neon vermelho nas letras */
+.footer span, 
+.footer a {
+  color: #111; /* Preto padrão */
+  text-shadow: 0 0 4px #ff003c, 0 0 8px #ff003c;
+  transition: 0.3s;
+}
+
+.footer a:hover {
+  color: #ff003c;
+  text-shadow: 0 0 6px #fff, 0 0 12px #ff003c;
+}
 
   /* ===================== */
   /* RESPONSIVIDADE */
