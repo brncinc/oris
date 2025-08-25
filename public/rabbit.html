@@ -23,95 +23,60 @@
   }
 
   /* ===================== */
-  /* FORM WALLET */
-  /* ===================== */
-  form.wallet {
-    background: #1a1a1a;
-    border-radius: 20px;
-    padding: 34px 26px;
-    width: 95%;
-    max-width: 520px;
-    margin: 32px 0;
-    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.9);
-    transition: all 0.35s ease;
-  }
-
-  form.wallet:hover {
-    box-shadow: 0 0 25px rgba(0, 255, 102, 0.35);
-    transform: translateY(-4px);
-  }
-
-  /* ===================== */
   /* HEADER */
   /* ===================== */
-  .header {
+  header {
+    padding: 28px 0 14px;
     text-align: center;
-    margin-bottom: 26px;
   }
 
-  .header h1 {
-    font-size: 2rem;
+  header h1 {
+    font-size: 2.2rem;
     color: #00ff66;
-    margin-bottom: 12px;
-    text-shadow: 0 0 14px rgba(0, 255, 102, 0.5);
-  }
-
-  .header img {
-    width: 84px;
-    height: 84px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(0, 255, 102, 0.3));
+    text-shadow: 0 0 16px rgba(0, 255, 102, 0.6);
+    margin: 0;
   }
 
   /* ===================== */
-  /* INPUTS & SELECT */
+  /* BALANCE */
   /* ===================== */
-  .input-box {
-    margin-bottom: 22px;
-  }
-
-  label {
+  #balance-box {
+    width: 92%;
+    max-width: 540px;
+    background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+    color: #00ff66;
+    padding: 28px;
+    border-radius: 18px;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.6rem;
     font-weight: bold;
-    color: #bbb;
-    display: block;
-    margin-bottom: 6px;
-  }
-
-  select,
-  input[type="number"] {
-    width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    background: #141414;
-    border: 2px solid #333;
-    color: #fff;
-    font-size: 1rem;
-    transition: all 0.25s ease;
-  }
-
-  select:focus,
-  input:focus {
-    outline: none;
-    border-color: #00ff66;
-    background: #0d0d0d;
-    box-shadow: 0 0 12px rgba(0, 255, 102, 0.5);
+    box-shadow: inset 0 0 16px rgba(0, 255, 102, 0.25);
   }
 
   /* ===================== */
-  /* BOTÃO */
+  /* ACTION BUTTONS */
   /* ===================== */
+  .actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
   .btn {
-    width: 100%;
+    flex: 1;
+    min-width: 120px;
     background: #00ff66;
     color: #000;
     border: none;
-    border-radius: 30px;
+    border-radius: 14px;
     padding: 14px;
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-bottom: 20px;
     box-shadow: 0 4px 14px rgba(0, 255, 102, 0.3);
   }
 
@@ -122,49 +87,43 @@
   }
 
   /* ===================== */
-  /* OUTPUT */
+  /* TRANSACTION LIST */
   /* ===================== */
-  #output {
-    background: #121212;
-    color: #cfcfcf;
-    font-family: monospace;
-    font-size: 0.95rem;
-    padding: 14px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    white-space: pre-wrap;
-    line-height: 1.5;
-    border: 1px solid #222;
+  .transactions {
+    width: 92%;
+    max-width: 540px;
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.8);
+    margin-bottom: 28px;
   }
 
-  /* ===================== */
-  /* QRCODE */
-  /* ===================== */
-  #qrcode-stripe {
-    margin: 18px auto;
-    width: 220px;
-    height: 220px;
-    background: #0d0d0d;
-    border-radius: 12px;
+  .transactions h2 {
+    font-size: 1.2rem;
+    color: #bbb;
+    margin-bottom: 16px;
+  }
+
+  .transaction {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 0 20px rgba(0, 255, 102, 0.2);
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #222;
+    font-size: 0.95rem;
   }
 
-  /* ===================== */
-  /* BALANCE BOX */
-  /* ===================== */
-  #balance-box {
-    background: #121212;
-    color: #00ff66;
-    padding: 14px;
-    border-radius: 14px;
-    text-align: center;
-    margin-bottom: 22px;
+  .transaction:last-child {
+    border-bottom: none;
+  }
+
+  .transaction span.amount {
     font-weight: bold;
-    font-size: 1.05rem;
-    box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.25);
+    color: #00ff66;
+  }
+
+  .transaction span.out {
+    color: #ff4444;
   }
 
   /* ===================== */
@@ -183,17 +142,22 @@
   /* RESPONSIVIDADE */
   /* ===================== */
   @media (max-width: 600px) {
-    form.wallet {
-      padding: 24px 18px;
+    header h1 {
+      font-size: 1.7rem;
     }
-    .header h1 {
-      font-size: 1.6rem;
+    #balance-box {
+      font-size: 1.3rem;
+      padding: 22px;
     }
     .btn {
-      padding: 12px;
       font-size: 0.95rem;
+      padding: 12px;
+    }
+    .transactions {
+      padding: 16px;
     }
   }
+
 </style>
 
 </head>
